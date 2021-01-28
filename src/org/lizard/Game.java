@@ -13,6 +13,10 @@ public class Game {
     Actions actions = new Actions(board, player);
 
     public void start() {
+        new Direction("north");
+        new Direction("south");
+        new Direction("east");
+        new Direction("west");
         gameDictionary.printNouns();
         while(true){
             String input = prompter.promptPlayer("What you wanna do?");

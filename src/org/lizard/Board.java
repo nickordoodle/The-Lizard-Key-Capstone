@@ -97,7 +97,7 @@ public class Board {
             System.out.println(currentRoom.getRoomDescription());
         }
         else{
-            System.out.println("Does not contain key");
+            System.out.println("That is not an exit.");
         }
 
     }

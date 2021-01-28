@@ -1,5 +1,8 @@
 package org.lizard;
 
+import java.awt.*;
+import java.util.List;
+
 public class Actions {
     private Board board;
     private Player player;
@@ -15,20 +18,21 @@ public class Actions {
                 grab(command.getNoun());
                 break;
             case 2:
-//                move(command.getNoun());
+                move(command.getNoun());
                 break;
         }
 
     }
 
-//    private void move(GameDictionary.Noun direction) {
-//        if(direction instanceof GameDictionary.Direction) {
-//            board.changeCurrentRoom(((GameDictionary.Direction) direction).getDirection());
-//        } else {
-//            System.out.println("What??? you can't go there.");
-//        }
-//
-//    }
+    private void move(GameDictionary.Noun direction) {
+        if(direction instanceof Direction) {
+            board.changeCurrentRoom(((Direction) direction).getDirection());
+        } else {
+            System.out.println("What??? you can't go there.");
+        }
+
+    }
+
 
     private void grab(GameDictionary.Noun noun) {
         if(noun == null) {
