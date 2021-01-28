@@ -38,14 +38,14 @@ public class Room extends GameDictionary.Noun {
    }
 
 
-   public Room goToRoom( String direction){
-       if(exits.containsKey(direction)){
-           return exits.get(direction);
-       }
-       else{
-           return null;
-       }
-    }
+//   public Room goToRoom( String direction){
+//       if(exits.containsKey(direction)){
+//           return exits.get(direction);
+//       }
+//       else{
+//           return null;
+//       }
+//    }
 
     //Accessor Methods
     public String getName() {

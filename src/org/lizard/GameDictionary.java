@@ -11,7 +11,7 @@ public class GameDictionary {
 
     private GameDictionary() {
         setVerbs();
-        setDirections();
+//        setDirections();
     }
 
     private void setVerbs() {
@@ -26,10 +26,10 @@ public class GameDictionary {
     }
 
     public void setDirections() {
-//        addNoun(new Direction("north"));
-//        addNoun(new Direction("south"));
-//        addNoun(new Direction("east"));
-//        addNoun(new Direction("west"));
+        new Direction("north");
+        new Direction("south");
+        new Direction("east");
+        new Direction("west");
     }
 
     public Integer checkVerb(String word) {
@@ -148,14 +148,4 @@ public class GameDictionary {
         return gameDictionary;
     }
 
-//    class Direction extends Noun {
-//
-//        public Direction(String direction) {
-//            super("north");
-//        }
-//
-//        public String getDirection() {
-//            return getName();
-//        }
-//    }
 }
