@@ -37,7 +37,8 @@ public class Board {
         living.setRoomDescription("This is the living room! You can see a sofa in the middle and a picture of mountains hanging on the wall!");
         bedroom.setRoomDescription("This is the bedroom! You can see bed and a bed-side table with a lamp on top of it!");
         closet.setRoomDescription("This is a closet! The room is messy with clothes lying all over the floor!");
-        riddleRoom.setRoomDescription("This is a riddle room. Look around if you can find some riddle questions to help you escape your situation!");
+        riddleRoom.setRoomDescription("This is a riddle room. You're exit is a treasure.");
+        kitchen.setRoomDescription("The kitchen is big and has nice marble top. You see an exit door. It has a lock on it.");
 
         living.createRoom("east",library);
         library.createRoom("west",living);
@@ -76,7 +77,7 @@ public class Board {
 
 
 
-        living.addItemToRoom(new Item("key"));
+        treasureRoom.addItemToRoom(new Item("key"));
 
 
         this.currentRoom = living;
