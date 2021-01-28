@@ -10,6 +10,9 @@ public class Player {
     public Player(String name) {
         this.name = name;
     }
+    public Inventory getInventory() {
+        return inventory;
+    }
 
     class Inventory extends Item {
         List<Item> inventory = new ArrayList<>();
@@ -29,6 +32,10 @@ public class Player {
             }
             System.out.println("That is not in your bag");
             return null;
+        }
+
+        public void printInventory() {
+            inventory.forEach(System.out::println);
         }
     }
 
