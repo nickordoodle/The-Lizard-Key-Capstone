@@ -13,14 +13,22 @@ public class Actions {
     }
 
     public void execute(Command command) {
-        switch(command.getVerb()) {
-            case 1:
-                grab(command.getNoun());
-                break;
-            case 2:
-                move(command.getNoun());
-                break;
+        System.out.println(command.getVerb());
+
+        if(command.getVerb() == null ){
+            System.out.println("Wrong command");
         }
+        else{
+            switch(command.getVerb()) {
+                case 1:
+                    grab(command.getNoun());
+                    break;
+                case 2:
+                    move(command.getNoun());
+                    break;
+            }
+        }
+
 
     }
 

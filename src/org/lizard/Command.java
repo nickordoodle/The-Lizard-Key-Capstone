@@ -9,7 +9,7 @@ class Command {
         this.noun = noun;
     }
 
-    public int getVerb() {
+    public Integer getVerb() {
         return verb;
     }
 
