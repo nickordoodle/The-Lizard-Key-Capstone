@@ -33,8 +33,13 @@ public class Actions {
     }
 
     private void move(GameDictionary.Noun direction) {
+
         if(direction instanceof Direction) {
             board.changeCurrentRoom(((Direction) direction).getDirection());
+            if(player.getHasKey() && board.getCurrentRoom().getName().equals("kitchen")) {
+                System.out.println("YOU WIN!!!!!!!!!!!!!!!!!!!!");
+                System.exit(1);
+            }
         } else {
             System.out.println("What??? you can't go there.");
         }
