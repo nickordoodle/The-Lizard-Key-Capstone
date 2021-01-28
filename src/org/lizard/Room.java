@@ -1,28 +1,30 @@
 package org.lizard;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-public class Room {
-
-    private String name;
-
-
+public class Room extends GameDictionary.Noun {
 
     private Map<String, Room> exits = new HashMap<String, Room>();
-    private int key = 0;
-
-
+    private List<Item> items = new ArrayList<>();
 
     public Room(String name){
-        this.name = name;
+        super(name);
+        this.setExaminable(true);
     }
 
+    public void addItemToRoom(Item item) {
+        items.add(item);
+    }
+
+    public Item grabItem() {
+        return items.remove(0);
+    }
 
    public void createRoom(String direction, Room newExit) {
-
        exits.put(direction, newExit);
-
    }
 
    public Room goToRoom( String direction){
@@ -34,16 +36,8 @@ public class Room {
        }
     }
 
-    public void addKey(){
-       key = 1;
-    }
-
     public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
+        return super.getName();
     }
 
     public Map<String, Room> getExits() {

@@ -25,6 +25,10 @@ public class Board {
         living.createRoom("south",kitchen);
         kitchen.createRoom("north",living);
 
+        living.addItemToRoom(new Item("key"));
+
+        System.out.println(living.grabItem().isGrabable());
+
         this.currentRoom = living;
 
 

@@ -1,21 +1,24 @@
 package org.lizard;
 
-import java.util.Map;
+import org.lizard.user.Prompter;
+
 import java.util.Scanner;
 
 public class Game {
+    GameDictionary gameDictionary = GameDictionary.getGameDictionary();
     Player player = new Player("Edgar");
-    TextParser parser = new TextParser(player);
-    Scanner playerInput = new Scanner(System.in);
+    TextParser parser = new TextParser(gameDictionary);
+    Prompter prompter = new Prompter(new Scanner(System.in));
+    Board board = new Board();
+    Actions actions = new Actions(board);
 
     public void start() {
-
+        gameDictionary.printNouns();
         while(true){
-
-            System.out.println("what do you wanna do?");
-            String input = playerInput.nextLine();
-            parser.parse(input);
-
+            String input = prompter.promptPlayer("What you wanna do?");
+            Command command = parser.parse(input);
+            actions.execute(command);
         }
     }
+
 }
