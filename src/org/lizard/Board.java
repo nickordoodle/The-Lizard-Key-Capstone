@@ -84,6 +84,10 @@ public class Board {
 
     }
 
+    public Room getCurrentRoom() {
+        return currentRoom;
+    }
+
     public void changeCurrentRoom(String direction){
         Map<String, Room> exits = currentRoom.getExits();
 

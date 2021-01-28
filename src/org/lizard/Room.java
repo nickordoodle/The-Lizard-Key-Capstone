@@ -21,8 +21,16 @@ public class Room extends GameDictionary.Noun {
         items.add(item);
     }
 
-    public Item grabItem() {
-        return items.remove(0);
+    public Item grabItem(Item item) {
+        int index = items.indexOf(item);
+        if(index != -1) {
+            Item returnedItem = items.get(index);
+            items.remove(item);
+            return returnedItem;
+        } else {
+            return null;
+        }
+
     }
 
    public void createRoom(String direction, Room newExit) {

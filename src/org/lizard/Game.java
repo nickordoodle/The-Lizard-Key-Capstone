@@ -10,7 +10,7 @@ public class Game {
     TextParser parser = new TextParser(gameDictionary);
     Prompter prompter = new Prompter(new Scanner(System.in));
     Board board = new Board();
-    Actions actions = new Actions(board);
+    Actions actions = new Actions(board, player);
 
     public void start() {
         gameDictionary.printNouns();
