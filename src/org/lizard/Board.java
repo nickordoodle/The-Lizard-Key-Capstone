@@ -76,6 +76,9 @@ public class Board {
 
 
 
+        living.addItemToRoom(new Item("key"));
+
+
         this.currentRoom = living;
 
 

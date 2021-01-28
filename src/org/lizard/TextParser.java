@@ -1,49 +1,32 @@
 package org.lizard;
 
-import java.util.*;
-
 public class TextParser {
-    HashMap<String, Integer> nouns = new HashMap<>();
-    HashMap<String, Integer> verbs = new HashMap<>();
-    Player player;
+    GameDictionary gameDictionary;
 
-    public TextParser(Player player) {
-        nouns.put("key", 1);
-        nouns.put("library", 2);
-        verbs.put("grab", 1);
-        verbs.put("go", 2);
-        this.player = player;
+    public TextParser(GameDictionary gameDictionary) {
+        this.gameDictionary = gameDictionary;
     }
 
-    public void parse(String userInput) {
-        List<String> words = Arrays.asList(userInput.split(" "));
-        Integer noun = null;
+    public Command parse(String userInput) {
+        String[] words = userInput.split(" ");
         Integer verb = null;
+        GameDictionary.Noun noun = null;
 
-        for(int i = 0; i < words.size(); i++) {
-            noun = nouns.get(words.get(i));
-            if(noun != null) {
-                words.remove(i);
+        for (String word : words) {
+            Integer possibleVerb = gameDictionary.checkVerb(word);
+            if (possibleVerb != null) {
+                verb = possibleVerb;
                 break;
             }
         }
 
-        for(int i = 0; i < words.size(); i++) {
-            verb = verbs.get(words.get(i));
-            if(verbs != null) {
-                words.remove(i);
+        for (String word : words) {
+            GameDictionary.Noun possibleNoun = gameDictionary.checkNoun(word);
+            if (possibleNoun != null) {
+                noun = possibleNoun;
                 break;
             }
         }
-
-        if(verb == null || noun == null) {
-            System.out.println("I don't understand");
-            return;
-        } else if(verb == 1 && noun == 1) {
-            player.addKeyToInventory();
-        } else if(verb == 2) {
-        }
-
-
+        return new Command(verb, noun);
     }
 }
