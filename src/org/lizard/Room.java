@@ -9,6 +9,8 @@ public class Room extends GameDictionary.Noun {
 
     private Map<String, Room> exits = new HashMap<String, Room>();
     private List<Item> items = new ArrayList<>();
+    private String roomDescription;
+
 
     public Room(String name){
         super(name);
@@ -27,6 +29,7 @@ public class Room extends GameDictionary.Noun {
        exits.put(direction, newExit);
    }
 
+
    public Room goToRoom( String direction){
        if(exits.containsKey(direction)){
            return exits.get(direction);
@@ -36,11 +39,19 @@ public class Room extends GameDictionary.Noun {
        }
     }
 
+    //Accessor Methods
     public String getName() {
         return super.getName();
     }
 
     public Map<String, Room> getExits() {
         return exits;
+    }
+
+    public String getRoomDescription() {
+        return roomDescription;
+    }
+    public void setRoomDescription(String roomDescription) {
+        this.roomDescription = roomDescription;
     }
 }
