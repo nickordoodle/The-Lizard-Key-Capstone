@@ -6,7 +6,8 @@ public class Main {
 	// write your code here
      Board board = new Board();
      board.changeCurrentRoom("west");
-     board.changeCurrentRoom("east");
+     board.changeCurrentRoom("south");
+     board.changeCurrentRoom("west");
 
     }
 }

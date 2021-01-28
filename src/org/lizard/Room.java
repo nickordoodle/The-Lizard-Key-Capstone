@@ -6,12 +6,9 @@ import java.util.Map;
 public class Room {
 
     private String name;
-
-
-
+    private String roomDescription;
     private Map<String, Room> exits = new HashMap<String, Room>();
     private int key = 0;
-
 
 
     public Room(String name){
@@ -24,6 +21,7 @@ public class Room {
        exits.put(direction, newExit);
 
    }
+
 
    public Room goToRoom( String direction){
        if(exits.containsKey(direction)){
@@ -38,6 +36,7 @@ public class Room {
        key = 1;
     }
 
+    //Accessor Methods
     public String getName() {
         return name;
     }
@@ -48,5 +47,12 @@ public class Room {
 
     public Map<String, Room> getExits() {
         return exits;
+    }
+
+    public String getRoomDescription() {
+        return roomDescription;
+    }
+    public void setRoomDescription(String roomDescription) {
+        this.roomDescription = roomDescription;
     }
 }
