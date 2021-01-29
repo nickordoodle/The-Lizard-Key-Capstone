@@ -20,6 +20,7 @@ public class GameDictionary {
         verbs.put("go", 2);
         verbs.put("move", 2);
         verbs.put("examine",3);
+        verbs.put("use", 4);
     }
 
     public void addNoun(Noun noun) {
@@ -41,6 +42,7 @@ public class GameDictionary {
     }
 
     public static class Noun {
+
         private boolean grabable = false;
         private boolean droppable = false;
         private boolean examinable = false;
@@ -50,6 +52,19 @@ public class GameDictionary {
         private boolean puttable = false;
         private boolean eatable = false;
         private boolean chatable = false;
+        public boolean isUseable() {
+            return useable;
+        }
+
+        public void setUseable(Lock lock) {
+            this.lock = lock;
+            useable = true;
+        }
+
+        private boolean useable = false;
+
+        private Lock lock = null;
+
         private String name;
 
 
@@ -57,6 +72,17 @@ public class GameDictionary {
 
         public Noun(String name) {
             this.name = name;
+            addToGameDictionary();
+        }
+
+        public Noun(String name, Lock lock) {
+            this.name = name;
+            setUseable(lock);
+            addToGameDictionary();
+        }
+        public Noun(String name, String description) {
+            this.name = name;
+            this.description = description;
             addToGameDictionary();
         }
 
@@ -147,6 +173,13 @@ public class GameDictionary {
 
         public String getName() {
             return name;
+        }
+
+        public Lock getLock() {
+            return lock;
+        }
+        public void deleteLock() {
+            lock = null;
         }
     }
 

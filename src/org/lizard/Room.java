@@ -7,7 +7,8 @@ import java.util.Map;
 
 public class Room extends GameDictionary.Noun {
 
-    private Map<String, Room> exits = new HashMap<String, Room>();
+    private Map<String, Room> exits = new HashMap<>();
+    private Map<String, Lock> locks = new HashMap<>();
     private List<Item> items = new ArrayList<>();
     private String roomDescription;
 
@@ -21,6 +22,10 @@ public class Room extends GameDictionary.Noun {
         items.add(item);
     }
 
+    public boolean has(Item item) {
+        return items.contains(item);
+    }
+
     public Item grabItem(Item item) {
         int index = items.indexOf(item);
         if(index != -1) {
@@ -32,20 +37,13 @@ public class Room extends GameDictionary.Noun {
         }
 
     }
+    public void addLock(String direction, Lock lock) {
+
+    }
 
    public void createRoom(String direction, Room newExit) {
        exits.put(direction, newExit);
    }
-
-
-//   public Room goToRoom( String direction){
-//       if(exits.containsKey(direction)){
-//           return exits.get(direction);
-//       }
-//       else{
-//           return null;
-//       }
-//    }
 
     //Accessor Methods
     public String getName() {

@@ -14,25 +14,25 @@ public class Board {
     public void createMap(){
 
         Room living = new Room("living");
-        Room library = new Room("library");
-        Room loudRoom = new Room("loud room");
+//        Room library = new Room("library");
+//        Room loudRoom = new Room("loud room");
         Room bedroom = new Room("bedroom");
         Room kitchen = new Room("kitchen");
-        Room creekyPath = new Room("creeky path");
-        Room coalMine = new Room("coal mine");
-        Room slideRoom = new Room("slide room");
+//        Room creekyPath = new Room("creeky path");
+//        Room coalMine = new Room("coal mine");
+//        Room slideRoom = new Room("slide room");
         Room secretPassage = new Room("secretPassage");
         Room torchRoom = new Room("torch room");
         Room treasureRoom = new Room("treasureRoom");
         Room riddleRoom = new Room("riddle room");
         Room whisperingPassage = new Room("whispering passage");
         Room closet = new Room("closet");
-        Room swingingStairs = new Room("swinging stairs");
-        Room egyptianRoom = new Room("egyptian Room");
-        Room landOfDead = new Room("land of dead room");
-        Room artRoom = new Room("art room");
-        Room engravingCave = new Room("engraving cave");
-        Room floatingRoom = new Room("floating room");
+//        Room swingingStairs = new Room("swinging stairs");
+//        Room egyptianRoom = new Room("egyptian Room");
+//        Room landOfDead = new Room("land of dead room");
+//        Room artRoom = new Room("art room");
+//        Room engravingCave = new Room("engraving cave");
+//        Room floatingRoom = new Room("floating room");
 
         living.setRoomDescription("\nHeat radiates from an oversized fireplace with stockings hanging dangerously too close to flames, likely causing the extra singed aroma.\n" +
                 "An old night stand features a stack of books that could compete with the Leaning Tower of Pisa.\n" +
@@ -59,30 +59,30 @@ public class Board {
                 "In the center of the room is an in-ground hot tub filled with lava, bubbling over the sides.");
         secretPassage.setRoomDescription("\nLong and narrow before you, an empty passage shows a single door at the opposite end.");
 
-        living.createRoom("east",library);
-        library.createRoom("west",living);
+//        living.createRoom("east",library);
+//        library.createRoom("west",living);
         living.createRoom("west",bedroom);
         bedroom.createRoom("east",living);
         living.createRoom("south",kitchen);
         kitchen.createRoom("north",living);
-        library.createRoom("south",creekyPath);
-        creekyPath.createRoom("north",library);
-        creekyPath.createRoom("east",coalMine);
-        coalMine.createRoom("west",creekyPath);
-        library.createRoom("north",loudRoom);
-        loudRoom.createRoom("south",library);
-        loudRoom.createRoom("east",engravingCave);
-        engravingCave.createRoom("west",loudRoom);
-        engravingCave.createRoom("north",floatingRoom);
-        floatingRoom.createRoom("west",landOfDead);
-        landOfDead.createRoom("west",egyptianRoom);
-        egyptianRoom.createRoom("east",landOfDead);
-        egyptianRoom.createRoom("west",artRoom);
-        artRoom.createRoom("east", egyptianRoom);
-        egyptianRoom.createRoom("south",swingingStairs);
-        swingingStairs.createRoom("north",egyptianRoom);
-        swingingStairs.createRoom("south",living);
-        living.createRoom("north",swingingStairs);
+//        library.createRoom("south",creekyPath);
+//        creekyPath.createRoom("north",library);
+//        creekyPath.createRoom("east",coalMine);
+//        coalMine.createRoom("west",creekyPath);
+//        library.createRoom("north",loudRoom);
+//        loudRoom.createRoom("south",library);
+//        loudRoom.createRoom("east",engravingCave);
+//        engravingCave.createRoom("west",loudRoom);
+//        engravingCave.createRoom("north",floatingRoom);
+//        floatingRoom.createRoom("west",landOfDead);
+//        landOfDead.createRoom("west",egyptianRoom);
+//        egyptianRoom.createRoom("east",landOfDead);
+//        egyptianRoom.createRoom("west",artRoom);
+//        artRoom.createRoom("east", egyptianRoom);
+//        egyptianRoom.createRoom("south",swingingStairs);
+//        swingingStairs.createRoom("north",egyptianRoom);
+//        swingingStairs.createRoom("south",living);
+//        living.createRoom("north",swingingStairs);
         bedroom.createRoom("south",closet);
         closet.createRoom("north",bedroom);
         closet.createRoom("west",riddleRoom);
@@ -95,7 +95,10 @@ public class Board {
 
 
 
-
+        Item match = new Item("match");
+        Item candle = new Item("candle", new Lock(match, "The candle has lit. You run west!", new Command(2, new Direction("west"))));
+        closet.addItemToRoom(match);
+        living.addItemToRoom(candle);
         treasureRoom.addItemToRoom(new Item("key"));
 
 
