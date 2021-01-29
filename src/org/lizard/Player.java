@@ -5,6 +5,7 @@ import java.util.List;
 
 public class Player {
     private String name;
+    private boolean hasKey = false;
     Inventory inventory = new Inventory();
 
     public Player(String name) {
@@ -12,6 +13,10 @@ public class Player {
     }
     public Inventory getInventory() {
         return inventory;
+    }
+
+    public boolean getHasKey() {
+        return hasKey;
     }
 
     class Inventory extends Item {
@@ -22,6 +27,9 @@ public class Player {
         }
 
         public void add(Item item) {
+            if(item.getName().equals("key")) {
+                hasKey = true;
+            }
             inventory.add(item);
         }
 

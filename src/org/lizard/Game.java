@@ -17,7 +17,7 @@ public class Game {
         new Direction("south");
         new Direction("east");
         new Direction("west");
-        gameDictionary.printNouns();
+        Story.introduction();
         while(true){
             String input = prompter.promptPlayer("What you wanna do?");
             Command command = parser.parse(input);

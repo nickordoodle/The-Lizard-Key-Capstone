@@ -13,8 +13,6 @@ public class Actions {
     }
 
     public void execute(Command command) {
-        System.out.println(command.getVerb());
-
         if(command.getVerb() == null ){
             System.out.println("Wrong command");
         }
@@ -36,8 +34,13 @@ public class Actions {
     }
 
     private void move(GameDictionary.Noun direction) {
+
         if(direction instanceof Direction) {
             board.changeCurrentRoom(((Direction) direction).getDirection());
+            if(player.getHasKey() && board.getCurrentRoom().getName().equals("kitchen")) {
+                System.out.println("YOU WIN!!!!!!!!!!!!!!!!!!!!");
+                System.exit(1);
+            }
         } else {
             System.out.println("What??? you can't go there.");
         }
@@ -65,10 +68,6 @@ public class Actions {
             } else {
                 System.out.println("You can't");
             }
-            //add it to player inventory
-            player.getInventory().printInventory();
-
-
         }
     }
 

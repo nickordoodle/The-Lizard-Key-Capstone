@@ -1,0 +1,395 @@
+<rooms>
+    <room>
+        <id>1</id>
+        <name>living</name>
+        <exits>
+            <north>
+                <name>swingingStairs</name>
+            </north>
+            <east>
+                <name>library</name>
+            </east>
+            <south>
+                <name>kitchen</name>
+            </south>
+            <west>
+                <name>bedroom</name>
+            </west>
+        </exits>
+        <items>
+            <item>1</item>
+            <item>2</item>
+            <item>3</item>
+        </items>
+        <roomDescription>
+            Heat radiates from an oversized fireplace with stockings hanging dangerously too close to flames, likely causing the extra singed aroma.
+            An old night stand features a stack of books that could compete with the Leaning Tower of Pisa.
+            Across the room, a portrait of a man with knotted hair, fractured glasses, and a twisted smile, stares in your direction.
+        </roomDescription>
+    </room>
+    <room>
+        <id>2</id>
+        <name>library</name>
+        <exits>
+            <north>
+                <name>loudRoom</name>
+            </north>
+            <south>
+                <name>creekyPath</name>
+            </south>
+            <west>
+                <name>living</name>
+            </west>
+        </exits>
+        <items>
+            <item>1</item>
+            <item>2</item>
+            <item>3</item>
+        </items>
+        <roomDescription>
+            With cobwebbed filled shelves, oversized portraits with headless bodies, and open skylights add an extra hill of mystery to the room.
+            Under the full moon night, a single locked chest is highlighted on the perfectly centered table.
+            Surrounding the table, a thin line of salt surrounds the only seemingly normal thing in the room.
+        </roomDescription>
+    </room>
+    <room>
+        <id>3</id>
+        <name>loudRoom</name>
+        <exits>
+            <east>
+                <name>engravingCave</name>
+            </east>
+            <south>
+                <name>library</name>
+            </south>
+        </exits>
+        <items>
+            <item>1</item>
+            <item>2</item>
+            <item>3</item>
+        </items>
+        <roomDescription>
+            As if you have entered a Kiss concert, music blares against your ears.
+            On all corners of the room, speakers climb the cathedral ceilings, vibrating waves through the room.
+            From atop of the farthest speaker, a shiny object glimmers in the changing colors of the neon lights.
+        </roomDescription>
+    </room>
+    <room>
+        <id>4</id>
+        <name>bedroom</name>
+        <exits>
+            <east>
+                <name>living</name>
+            </east>
+            <south>
+                <name>closet</name>
+            </south>
+        </exits>
+        <items>
+            <item>1</item>
+            <item>2</item>
+            <item>3</item>
+        </items>
+        <roomDescription>
+            An unmade child's bed sits in the center of the room, the foot of the bed facing the wall.
+            Several dolls with cracked and fractured faces, follow you as you move around the room.
+            From beneath the bed, a chill crawls up your legs, up your back, and around the sides of your neck.
+        </roomDescription>
+    </room>
+    <room>
+        <id>5</id>
+        <name>kitchen</name>
+        <exits>
+            <north>
+                <name>living</name>
+            </north>
+        </exits>
+        <items>
+            <item>1</item>
+            <item>2</item>
+            <item>3</item>
+        </items>
+        <roomDescription>
+            Like darts, knives hang from the vaulted ceiling in varying sizes.
+            Across the white marble island, an oven blasts heat in your direction, carrying the smell of blackened cookies.
+            As if the walls were made of paper, conversations can be heard in the other room.
+        </roomDescription>
+    </room>
+    <room>
+        <id>6</id>
+        <name>creekyPath</name>
+        <exits>
+            <north>
+                <name>library</name>
+            </north>
+            <east>
+                <name>coalMine</name>
+            </east>
+        </exits>
+        <items>
+            <item>1</item>
+            <item>2</item>
+            <item>3</item>
+        </items>
+        <roomDescription>
+            Above a bed of rocks with crashing waters, a wooden bridge cries in the wind.
+            Bundled in a wicker basket, rope is tangled around itself, rendering itself nearly useless.
+        </roomDescription>
+    </room>
+    <room>
+        <id>7</id>
+        <name>coalMine</name>
+        <exits>
+            <west>
+                <name>creekyPath</name>
+            </west>
+        </exits>
+        <items>
+            <item>1</item>
+            <item>2</item>
+            <item>3</item>
+        </items>
+        <roomDescription>
+            Dimly lit lamps, covered in soot, line the walls of the mine down a path cut short by tumbled rock.
+            An old pickaxe lays against the wall, next to a faded, yellow hat and a gas mask.
+        </roomDescription>
+    </room>
+    <room>
+        <id>8</id>
+        <name>secretPassage</name>
+        <exits>
+            <north>
+                <name>kitchen</name>
+            </north>
+        </exits>
+        <items>
+            <item>1</item>
+            <item>2</item>
+            <item>3</item>
+        </items>
+        <roomDescription>
+            Long and narrow before you, an empty passage shows a single door at the opposite end.
+        </roomDescription>
+    </room>
+    <room>
+        <id>9</id>
+        <name>torchRoom</name>
+        <exits>
+            <east>
+                <name>secretPassage</name>
+            </east>
+        </exits>
+        <items>
+            <item>1</item>
+            <item>2</item>
+            <item>3</item>
+        </items>
+        <roomDescription>
+            Tiki torches line a maze through the room.
+            In the center of the room is an in-ground hot tub filled with lava, bubbling over the sides.
+        </roomDescription>
+    </room>
+    <room>
+        <id>10</id>
+        <name>treasureRoom</name>
+        <exits>
+            <south>
+                <name>torchRoom</name>
+            </south>
+        </exits>
+        <items>
+            <item>1</item>
+            <item>2</item>
+            <item>3</item>
+        </items>
+        <roomDescription>
+            Piles upon piles of gold and gems climb to the top of the room, surrounding a platinum river flowing through the middle.
+            A single lizard shaped key stands on a single pedestal in the center of the river.
+        </roomDescription>
+    </room>
+    <room>
+        <id>11</id>
+        <name>riddleRoom</name>
+        <exits>
+            <east>
+                <name>closet</name>
+            </east>
+            <west>
+                <name>whisperingPassage</name>
+            </west>
+        </exits>
+        <items>
+            <item>1</item>
+            <item>2</item>
+            <item>3</item>
+        </items>
+        <roomDescription>
+            The empty room bares a tulip filled wallpaper with a single portion ripped away to reveal a riddle.
+            With gold shining high in the sky, a bird cannot soar if it cannot fly.
+            A stream that flows is a life to grow, a stream not of water may death undergo.
+            Unlocking a secret is not a forfeit, go forward with the lizard to be rewarded.
+        </roomDescription>
+    </room>
+    <room>
+        <id>12</id>
+        <name>whisperingPassage</name>
+        <exits>
+            <west>
+                <name>treasureRoom</name>
+            </west>
+        </exits>
+        <items>
+            <item>1</item>
+            <item>2</item>
+            <item>3</item>
+        </items>
+        <roomDescription>
+            With each step you take down the cobblestone path, a footstep behind you can be heard.
+            Whispers in your ear sound as if someone is right behind you, but upon turning around, no one is there.
+            In the center of the path is a rotted bench with fresh flowers and a photograph.
+        </roomDescription>
+    </room>
+    <room>
+        <id>13</id>
+        <name>closet</name>
+        <exits>
+            <north>
+                <name>bedroom</name>
+            </north>
+            <west>
+                <name>riddleRoom</name>
+            </west>
+        </exits>
+        <items>
+            <item>1</item>
+            <item>2</item>
+            <item>3</item>
+        </items>
+        <roomDescription>
+            A single light dimly guides you through a small space.
+            Packed tight with clothes from eras that don't make sense to one another, you struggle to push your way through.
+            Several shoe boxes lay atop the shelves, covered in dust.
+        </roomDescription>
+    </room>
+    <room>
+        <id>14</id>
+        <name>swingingStairs</name>
+        <exits>
+            <north>
+                <name>egyptianRoom</name>
+            </north>
+            <south>
+                <name>living</name>
+            </south>
+        </exits>
+        <items>
+            <item>1</item>
+            <item>2</item>
+            <item>3</item>
+        </items>
+        <roomDescription>
+            From left to right, staircases move around you, loud and reckless, clashing against walls like thunder.
+            Below seems to be an endless pit with cries and blazing heat lifting high in the room.
+        </roomDescription>
+    </room>
+    <room>
+        <id>15</id>
+        <name>egyptianRoom</name>
+        <exits>
+            <east>
+                <name>landOfDead</name>
+            </east>
+            <south>
+                <name>living</name>
+            </south>
+            <west>
+                <name>artRoom</name>
+            </west>
+        </exits>
+        <items>
+            <item>1</item>
+            <item>2</item>
+            <item>3</item>
+        </items>
+        <roomDescription>
+            As you step through the door, sand brushes across your face, forcing your eyes to veer to upward.
+            You are now in the desert with pyramids and camels before you.
+        </roomDescription>
+    </room>
+    <room>
+        <id>16</id>
+        <name>landOfDead</name>
+        <exits>
+            <west>
+                <name>egyptianRoom</name>
+            </west>
+        </exits>
+        <items>
+            <item>1</item>
+            <item>2</item>
+            <item>3</item>
+        </items>
+        <roomDescription>
+            With every step, your feet slush through murky water. Willow branches hang low above you, blocking clear sight of an exit.
+            Fog lifts from the top of the water, further blocking your view, the stinch of death seeping through your nose hairs.
+        </roomDescription>
+    </room>
+    <room>
+        <id>17</id>
+        <name>artRoom</name>
+        <exits>
+            <east>
+                <name>egyptianRoom</name>
+            </east>
+        </exits>
+        <items>
+            <item>1</item>
+            <item>2</item>
+            <item>3</item>
+        </items>
+        <roomDescription>
+            Fumes of alcohol fill the air as moisture drips down the paintings on easels, almost as if the subjects are crying themselves.
+            A red liquid covers the floor, not dry, nor wet.
+            In the center of the room, a sculpture is covered with a cloth, the same red liquid coming from the bottom.
+        </roomDescription>
+    </room>
+    <room>
+        <id>18</id>
+        <name>engravingCave</name>
+        <exits>
+            <north>
+                <name>floatingRoom</name>
+            </north>
+            <west>
+                <name>loudRoom</name>
+            </west>
+        </exits>
+        <items>
+            <item>1</item>
+            <item>2</item>
+            <item>3</item>
+        </items>
+        <roomDescription>
+            Musty air carries you through a tombstone filled cave, scratches covering the walls, random but deep.
+            A narrow passage sucks air from the cave, making it harder to breathe by the second.
+        </roomDescription>
+    </room>
+    <room>
+        <id>19</id>
+        <name>floatingRoom</name>
+        <exits>
+            <west>
+                <name>landOfDead</name>
+            </west>
+        </exits>
+        <items>
+            <item>1</item>
+            <item>2</item>
+            <item>3</item>
+        </items>
+        <roomDescription>
+            Heavy as a boulder, standing on a feather, your foot triggers a pressure plate on the floor.
+            Large bubbles burst of cotton candy around you, one of them surrounding you and lifting you to the ceiling.
+        </roomDescription>
+    </room>
+</rooms>

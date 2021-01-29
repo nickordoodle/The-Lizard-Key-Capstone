@@ -34,10 +34,30 @@ public class Board {
         Room engravingCave = new Room("engraving cave");
         Room floatingRoom = new Room("floating room");
 
-        living.setRoomDescription("This is the living room! You can see a sofa in the middle and a picture of mountains hanging on the wall!");
-        bedroom.setRoomDescription("This is the bedroom! You can see bed and a bed-side table with a lamp on top of it!");
-        closet.setRoomDescription("This is a closet! The room is messy with clothes lying all over the floor!");
-        riddleRoom.setRoomDescription("This is a riddle room. Look around if you can find some riddle questions to help you escape your situation!");
+        living.setRoomDescription("\nHeat radiates from an oversized fireplace with stockings hanging dangerously too close to flames, likely causing the extra singed aroma.\n" +
+                "An old night stand features a stack of books that could compete with the Leaning Tower of Pisa.\n" +
+                "Across the room, a portrait of a man with knotted hair, fractured glasses, and a twisted smile, stares in your direction.");
+        bedroom.setRoomDescription("\nAn unmade child's bed sits in the center of the room, the foot of the bed facing the wall.\n" +
+                "Several dolls with cracked and fractured faces, follow you as you move around the room.\n" +
+                "From beneath the bed, a chill crawls up your legs, up your back, and around the sides of your neck.");
+        closet.setRoomDescription("\nA single light dimly guides you through a small space.\n" +
+                "Packed tight with clothes from eras that don't make sense to one another, you struggle to push your way through.\n" +
+                "Several shoe boxes lay atop the shelves, covered in dust.");
+        riddleRoom.setRoomDescription("\nThe empty room bares a tulip filled wallpaper with a single portion ripped away to reveal a riddle.\n" +
+                "With gold shining high in the sky, a bird cannot soar if it cannot fly.\n" +
+                "A stream that flows is a life to grow, a stream not of water may death undergo.\n" +
+                "Unlocking a secret is not a forfeit, go forward with the lizard to be rewarded.");
+        kitchen.setRoomDescription("\nLike darts, knives hang from the vaulted ceiling in varying sizes.\n" +
+                "Across the white marble island, an oven blasts heat in your direction, carrying the smell of blackened cookies.\n" +
+                "As if the walls were made of paper, conversations can be heard in the other room.");
+        whisperingPassage.setRoomDescription("\nWith each step you take down the cobblestone path, a footstep behind you can be heard.\n" +
+                "Whispers in your ear sound as if someone is right behind you, but upon turning around, no one is there.\n" +
+                "In the center of the path is a rotted bench with fresh flowers and a photograph.");
+        treasureRoom.setRoomDescription("\nPiles upon piles of gold and gems climb to the top of the room, surrounding a platinum river flowing through the middle.\n" +
+                "A single lizard shaped key stands on a single pedestal in the center of the river.");
+        torchRoom.setRoomDescription("\nTiki torches line a maze through the room.\n" +
+                "In the center of the room is an in-ground hot tub filled with lava, bubbling over the sides.");
+        secretPassage.setRoomDescription("\nLong and narrow before you, an empty passage shows a single door at the opposite end.");
 
         living.createRoom("east",library);
         library.createRoom("west",living);
@@ -76,7 +96,7 @@ public class Board {
 
 
 
-        living.addItemToRoom(new Item("key"));
+        treasureRoom.addItemToRoom(new Item("key"));
 
 
         this.currentRoom = living;
