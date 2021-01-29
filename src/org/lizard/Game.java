@@ -22,6 +22,9 @@ public class Game {
         new Funsies("help", "examine something");
         new Funsies("where", "idk figure it out");
         new Funsies("what", "idk figure it out");
+
+        Story.introduction();
+
         while(true){
             String input = prompter.promptPlayer("What you wanna do?");
             Command command = parser.parse(input);

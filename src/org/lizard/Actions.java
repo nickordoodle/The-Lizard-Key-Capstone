@@ -14,6 +14,7 @@ public class Actions {
 
     public void execute(Command command) {
 
+
         if (command.getVerb() == null && command.getNoun() == null){
             System.out.println("Wrong command");
             return;
@@ -32,6 +33,9 @@ public class Actions {
                     break;
                 case 2:
                     move(command.getNoun());
+                    break;
+                case 3:
+                    examine(command.getNoun());
                     break;
                 case 4:
                     use(command.getNoun(), command.getTargetNoun());
@@ -75,7 +79,7 @@ public class Actions {
             } else {
                 System.out.println("You can't");
             }
-            //add it to player inventory
+
         }
     }
 
@@ -98,6 +102,24 @@ public class Actions {
             targetLock.printDescription();
             this.execute(targetLock.getCommand());
             targetNoun.deleteLock();
+
         }
+    }
+
+    private void examine(GameDictionary.Noun noun){
+       Room currentRoom = board.getCurrentRoom();
+        if(noun == null){
+            System.out.println("Examining room...");
+            //prints description of the current room
+            System.out.println(currentRoom.getRoomDescription());
+
+        }
+        else{
+            System.out.println(noun.getDescription());
+        }
+
+        //if noun, check if that noun is in the currentRoom
+        //if it is, get noun.getDescription
+
     }
 }
