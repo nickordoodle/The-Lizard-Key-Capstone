@@ -19,6 +19,7 @@ public class GameDictionary {
         verbs.put("take", 1);
         verbs.put("go", 2);
         verbs.put("move", 2);
+        verbs.put("examine",3);
     }
 
     public void addNoun(Noun noun) {
@@ -50,6 +51,9 @@ public class GameDictionary {
         private boolean eatable = false;
         private boolean chatable = false;
         private String name;
+
+
+        private String description = "hi, i am a noun";
 
         public Noun(String name) {
             this.name = name;
@@ -132,11 +136,20 @@ public class GameDictionary {
             gameDictionary.addNoun(this);
 
         }
+        public String getDescription() {
+            return description;
+        }
+
+        public void setDescription(String description) {
+            this.description = description;
+        }
+
 
         public String getName() {
             return name;
         }
     }
+
 
     public void printNouns() {
         gameDictionary.nouns.entrySet().forEach(set -> {
@@ -147,5 +160,6 @@ public class GameDictionary {
     public static GameDictionary getGameDictionary() {
         return gameDictionary;
     }
+
 
 }
