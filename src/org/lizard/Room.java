@@ -8,6 +8,7 @@ import java.util.Map;
 public class Room extends GameDictionary.Noun {
 
     private Map<String, Room> exits = new HashMap<>();
+    private Map<String, Lock> locks = new HashMap<>();
     private List<Item> items = new ArrayList<>();
     private String roomDescription;
 
@@ -34,6 +35,9 @@ public class Room extends GameDictionary.Noun {
         } else {
             return null;
         }
+
+    }
+    public void addLock(String direction, Lock lock) {
 
     }
 
