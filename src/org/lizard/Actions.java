@@ -13,8 +13,6 @@ public class Actions {
     }
 
     public void execute(Command command) {
-        System.out.println(command.getVerb());
-
         if(command.getVerb() == null ){
             System.out.println("Wrong command");
         }
@@ -67,10 +65,6 @@ public class Actions {
             } else {
                 System.out.println("You can't");
             }
-            //add it to player inventory
-            player.getInventory().printInventory();
-
-
         }
     }
 
