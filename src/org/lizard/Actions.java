@@ -24,6 +24,9 @@ public class Actions {
                 case 2:
                     move(command.getNoun());
                     break;
+                case 3:
+                    examine(command.getNoun());
+                    break;
             }
         }
 
@@ -66,6 +69,22 @@ public class Actions {
                 System.out.println("You can't");
             }
         }
+    }
+
+    private void examine(GameDictionary.Noun noun){
+       Room currentRoom = board.getCurrentRoom();
+        if(noun == null){
+            System.out.println("Examining room...");
+            //prints description of the current room
+            System.out.println(currentRoom.getRoomDescription());
+        }
+        else{
+            System.out.println(noun.getDescription());
+        }
+
+        //if noun, check if that noun is in the currentRoom
+        //if it is, get noun.getDescription
+
     }
 
 }
