@@ -76,8 +76,10 @@ public class Board {
 
 
 
-
-        treasureRoom.addItemToRoom(new Item("key"));
+        Item match = new Item("match");
+        Item candle = new Item("candle", new Lock(match, "The candle has lit. You run west!", new Command(2, new Direction("west"))));
+        swingingStairs.addItemToRoom(match);
+        living.addItemToRoom(candle);
 
 
         this.currentRoom = living;

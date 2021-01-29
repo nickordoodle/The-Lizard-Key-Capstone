@@ -12,7 +12,7 @@ public class Prompter {
 
     // Universal method that can print any input message, get a response from the player and send it back to the requester
     public String promptPlayer(String message) {
-        System.out.print(message);
+        System.out.print(message+"\n > ");
         String response = input.nextLine();
         return response;
     }

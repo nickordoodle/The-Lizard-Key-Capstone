@@ -41,6 +41,9 @@ public class Player {
             System.out.println("That is not in your bag");
             return null;
         }
+        public boolean has(Item item) {
+            return inventory.contains(item);
+        }
 
         public void printInventory() {
             inventory.forEach(System.out::println);

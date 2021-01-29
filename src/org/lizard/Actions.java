@@ -13,10 +13,17 @@ public class Actions {
     }
 
     public void execute(Command command) {
-        System.out.println(command.getVerb());
 
-        if(command.getVerb() == null ){
+        if (command.getVerb() == null && command.getNoun() == null){
             System.out.println("Wrong command");
+            return;
+        }
+        if(command.getVerb() == null && command.getNoun() != null) {
+            System.out.println(command.getNoun().getDescription());
+            return;
+        }
+        if(command.getTargetNoun() != null && command.getVerb() != 4) {
+            System.out.println("You tried to use a " + command.getVerb() + " with 2 nouns? What you trying to break my code or something?");
         }
         else{
             switch(command.getVerb()) {
@@ -26,10 +33,11 @@ public class Actions {
                 case 2:
                     move(command.getNoun());
                     break;
+                case 4:
+                    use(command.getNoun(), command.getTargetNoun());
+                    break;
             }
         }
-
-
     }
 
     private void move(GameDictionary.Noun direction) {
@@ -68,10 +76,28 @@ public class Actions {
                 System.out.println("You can't");
             }
             //add it to player inventory
-            player.getInventory().printInventory();
-
-
         }
     }
 
+    public void use(GameDictionary.Noun noun, GameDictionary.Noun targetNoun) {
+        Lock targetLock = targetNoun.getLock();
+
+        if(targetLock == null) {
+            System.out.println("Thats not how this works.");
+            return;
+        }
+        if(!player.getInventory().has((Item) noun)) {
+            System.out.println("You don't have a " + noun.getName() + " in your inventory.");
+            return;
+        }
+        if(!board.getCurrentRoom().has((Item) targetNoun) && !player.getInventory().has((Item) targetNoun)) {
+            System.out.println("There isn't a " + targetNoun.getName() + " here.");
+            return;
+        }
+        if(targetLock.getNoun() == noun) {
+            targetLock.printDescription();
+            this.execute(targetLock.getCommand());
+            targetNoun.deleteLock();
+        }
+    }
 }

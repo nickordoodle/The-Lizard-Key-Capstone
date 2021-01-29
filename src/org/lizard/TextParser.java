@@ -11,6 +11,7 @@ public class TextParser {
         String[] words = userInput.split(" ");
         Integer verb = null;
         GameDictionary.Noun noun = null;
+        GameDictionary.Noun targetNoun = null;
 
         for (String word : words) {
             Integer possibleVerb = gameDictionary.checkVerb(word);
@@ -20,12 +21,25 @@ public class TextParser {
             }
         }
 
+        for (int i = 0; i < words.length; i++ ) {
+            GameDictionary.Noun possibleNoun = gameDictionary.checkNoun(words[i]);
+            if (possibleNoun != null) {
+                noun = possibleNoun;
+                words[i] = "";
+                break;
+            }
+        }
+
         for (String word : words) {
             GameDictionary.Noun possibleNoun = gameDictionary.checkNoun(word);
             if (possibleNoun != null) {
-                noun = possibleNoun;
+                targetNoun = possibleNoun;
                 break;
             }
+        }
+
+        if(targetNoun != null) {
+            return new Command(verb, noun, targetNoun);
         }
         return new Command(verb, noun);
     }
