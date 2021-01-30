@@ -40,6 +40,9 @@ public class Actions {
                 case 4:
                     use(command.getNoun(), command.getTargetNoun());
                     break;
+                case 5:
+                    drop(command.getNoun());
+                    break;
             }
         }
     }
@@ -84,6 +87,10 @@ public class Actions {
     }
 
     public void use(GameDictionary.Noun noun, GameDictionary.Noun targetNoun) {
+        if(targetNoun instanceof Direction) {
+            unlockExit(((Direction) targetNoun).getDirection(), noun);
+            return;
+        }
         Lock targetLock = targetNoun.getLock();
 
         if(targetLock == null) {
@@ -105,6 +112,18 @@ public class Actions {
 
         }
     }
+    public void unlockExit(String direction, GameDictionary.Noun noun) {
+        if(!player.getInventory().has((Item) noun)) {
+            System.out.println("You don't have that on your person");
+            return;
+        }
+        Lock lock = board.getCurrentRoom().getLock(direction);
+        if(lock.getNoun().equals(noun)) {
+            lock.printDescription();
+            board.getCurrentRoom().removeLock(direction);
+            this.execute(lock.getCommand());
+        }
+    }
 
     private void examine(GameDictionary.Noun noun){
        Room currentRoom = board.getCurrentRoom();
@@ -120,6 +139,17 @@ public class Actions {
 
         //if noun, check if that noun is in the currentRoom
         //if it is, get noun.getDescription
+
+    }
+
+    public void drop(GameDictionary.Noun noun) {
+        Item droppedItem = player.getInventory().drop((Item) noun);
+        if(droppedItem == null) {
+            System.out.println(player.getName() + " how are you gonna drop something you don't have? How?");
+        } else {
+            board.getCurrentRoom().addItemToRoom(droppedItem);
+            System.out.println("You dropped the " + droppedItem.getName() + " in the " + board.getCurrentRoom().getName());
+        }
 
     }
 }

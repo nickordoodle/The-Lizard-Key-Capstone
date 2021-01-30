@@ -20,7 +20,9 @@ public class GameDictionary {
         verbs.put("go", 2);
         verbs.put("move", 2);
         verbs.put("examine",3);
+        verbs.put("look", 3);
         verbs.put("use", 4);
+        verbs.put("drop", 5);
     }
 
     public void addNoun(Noun noun) {

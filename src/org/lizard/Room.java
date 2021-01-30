@@ -37,8 +37,14 @@ public class Room extends GameDictionary.Noun {
         }
 
     }
+    public Lock getLock(String direction) {
+        return locks.get(direction);
+    }
     public void addLock(String direction, Lock lock) {
-
+        locks.put(direction, lock);
+    }
+    public Lock removeLock(String direction) {
+        return locks.remove(direction);
     }
 
    public void createRoom(String direction, Room newExit) {
@@ -55,6 +61,15 @@ public class Room extends GameDictionary.Noun {
     }
 
     public String getRoomDescription() {
+        if(items.size() > 0) {
+            StringBuilder roomSB = new StringBuilder();
+            roomSB.append(roomDescription + "\n");
+            roomSB.append("\nYou look for items in this room.\n");
+            for (Item item : items) {
+                roomSB.append("Oh it's a " + item.getName() + ". " + item.getDescription() + "\n");
+            }
+            return roomSB.toString();
+        }
         return roomDescription;
     }
     public void setRoomDescription(String roomDescription) {

@@ -18,12 +18,15 @@ public class Player {
     public boolean getHasKey() {
         return hasKey;
     }
+    public String getName() {
+        return name;
+    }
 
     class Inventory extends Item {
         List<Item> inventory = new ArrayList<>();
 
         public Inventory() {
-            super("Inventory");
+            super("inventory");
         }
 
         public void add(Item item) {
@@ -45,9 +48,12 @@ public class Player {
             return inventory.contains(item);
         }
 
-        public void printInventory() {
-            inventory.forEach(System.out::println);
+        public String getDescription() {
+            StringBuilder inventoryDescription = new StringBuilder();
+            inventory.forEach(item -> inventoryDescription.append(item.getName() + "\n"));
+            return inventoryDescription.toString().equals("") ? "You have nothing in your inventory": inventoryDescription.toString();
         }
+
     }
 
 }

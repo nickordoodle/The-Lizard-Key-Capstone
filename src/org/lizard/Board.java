@@ -97,6 +97,9 @@ public class Board {
 
         Item match = new Item("match");
         Item candle = new Item("candle", new Lock(match, "The candle has lit. You run west!", new Command(2, new Direction("west"))));
+        Item libraryKey = new Item("libraryKey");
+        living.addLock("south", new Lock(libraryKey, "You unlocked the door", new Command(2, new Direction("south"))));
+        living.addItemToRoom(libraryKey);
         closet.addItemToRoom(match);
         living.addItemToRoom(candle);
         treasureRoom.addItemToRoom(new Item("key"));
@@ -113,7 +116,12 @@ public class Board {
 
     public void changeCurrentRoom(String direction){
         Map<String, Room> exits = currentRoom.getExits();
+        Lock lock = currentRoom.getLock(direction);
 
+        if(lock != null) {
+            System.out.println("Seems to be locked.");
+            return;
+        }
         if(exits.containsKey(direction)){
             currentRoom = exits.get(direction);
             System.out.println("current room is "+ currentRoom.getName());
