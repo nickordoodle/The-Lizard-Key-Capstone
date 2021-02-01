@@ -1,21 +1,25 @@
 <rooms>
     <room>
         <id>1</id>
-        <name>living</name>
-        <exits>
-            <north>
-                <name>swingingStairs</name>
-            </north>
-            <east>
-                <name>library</name>
-            </east>
-            <south>
-                <name>kitchen</name>
-            </south>
-            <west>
-                <name>bedroom</name>
-            </west>
-        </exits>
+        <roomName>living</roomName>
+        <roomExits>
+            <exit>
+                <path>north</path>
+                <pathName>swingingStairs</pathName>
+            </exit>
+            <exit>
+                <path>east</path>
+                <pathName>library</pathName>
+            </exit>
+            <exit>
+                <path>south</path>
+                <pathName>kitchen</pathName>
+            </exit>
+            <exit>
+                <path>west</path>
+                <pathName>bedroom</pathName>
+            </exit>
+        </roomExits>
         <items>
             <item>1</item>
             <item>2</item>
@@ -24,23 +28,26 @@
         <roomDescription>
             Heat radiates from an oversized fireplace with stockings hanging dangerously too close to flames, likely causing the extra singed aroma.
             An old night stand features a stack of books that could compete with the Leaning Tower of Pisa.
-            Across the room, a portrait of a man with knotted hair, fractured glasses, and a twisted smile, stares in your direction.
+            Across the room, a portrait of a man with knotted hair, fractured glasses, and a twisted smile, stares in your exit.
         </roomDescription>
     </room>
     <room>
         <id>2</id>
-        <name>library</name>
-        <exits>
-            <north>
-                <name>loudRoom</name>
-            </north>
-            <south>
-                <name>creekyPath</name>
-            </south>
-            <west>
-                <name>living</name>
-            </west>
-        </exits>
+        <roomName>library</roomName>
+        <roomExits>
+            <exit>
+                <path>north</path>
+                <pathName>loudRoom</pathName>
+            </exit>
+            <exit>
+                <path>south</path>
+                <pathName>creekyPath</pathName>
+            </exit>
+            <exit>
+                <path>west</path>
+                <pathName>living</pathName>
+            </exit>
+        </roomExits>
         <items>
             <item>1</item>
             <item>2</item>
@@ -54,15 +61,17 @@
     </room>
     <room>
         <id>3</id>
-        <name>loudRoom</name>
-        <exits>
-            <east>
-                <name>engravingCave</name>
-            </east>
-            <south>
-                <name>library</name>
-            </south>
-        </exits>
+        <roomName>loudRoom</roomName>
+        <roomExits>
+            <exit>
+                <path>east</path>
+                <pathName>engravingCave</pathName>
+            </exit>
+            <exit>
+                <path>south</path>
+                <pathName>library</pathName>
+            </exit>
+        </roomExits>
         <items>
             <item>1</item>
             <item>2</item>
@@ -76,15 +85,17 @@
     </room>
     <room>
         <id>4</id>
-        <name>bedroom</name>
-        <exits>
-            <east>
-                <name>living</name>
-            </east>
-            <south>
-                <name>closet</name>
-            </south>
-        </exits>
+        <roomName>bedroom</roomName>
+        <roomExits>
+            <exit>
+                <path>east</path>
+                <pathName>living</pathName>
+            </exit>
+            <exit>
+                <path>south</path>
+                <pathName>closet</pathName>
+            </exit>
+        </roomExits>
         <items>
             <item>1</item>
             <item>2</item>
@@ -98,12 +109,13 @@
     </room>
     <room>
         <id>5</id>
-        <name>kitchen</name>
-        <exits>
-            <north>
-                <name>living</name>
-            </north>
-        </exits>
+        <roomName>kitchen</roomName>
+        <roomExits>
+            <exit>
+                <path>north</path>
+                <pathName>living</pathName>
+            </exit>
+        </roomExits>
         <items>
             <item>1</item>
             <item>2</item>
@@ -111,21 +123,23 @@
         </items>
         <roomDescription>
             Like darts, knives hang from the vaulted ceiling in varying sizes.
-            Across the white marble island, an oven blasts heat in your direction, carrying the smell of blackened cookies.
+            Across the white marble island, an oven blasts heat in your exit, carrying the smell of blackened cookies.
             As if the walls were made of paper, conversations can be heard in the other room.
         </roomDescription>
     </room>
     <room>
         <id>6</id>
-        <name>creekyPath</name>
-        <exits>
-            <north>
-                <name>library</name>
-            </north>
-            <east>
-                <name>coalMine</name>
-            </east>
-        </exits>
+        <roomName>creekyPath</roomName>
+        <roomExits>
+            <exit>
+                <path>north</path>
+                <pathName>library</pathName>
+            </exit>
+            <exit>
+                <path>east</path>
+                <pathName>coalMine</pathName>
+            </exit>
+        </roomExits>
         <items>
             <item>1</item>
             <item>2</item>
@@ -138,12 +152,13 @@
     </room>
     <room>
         <id>7</id>
-        <name>coalMine</name>
-        <exits>
-            <west>
-                <name>creekyPath</name>
-            </west>
-        </exits>
+        <roomName>coalMine</roomName>
+        <roomExits>
+            <exit>
+                <path>west</path>
+                <pathName>creekyPath</pathName>
+            </exit>
+        </roomExits>
         <items>
             <item>1</item>
             <item>2</item>
@@ -156,12 +171,13 @@
     </room>
     <room>
         <id>8</id>
-        <name>secretPassage</name>
-        <exits>
-            <north>
-                <name>kitchen</name>
-            </north>
-        </exits>
+        <roomName>secretPassage</roomName>
+        <roomExits>
+            <exit>
+                <path>north</path>
+                <pathName>kitchen</pathName>
+            </exit>
+        </roomExits>
         <items>
             <item>1</item>
             <item>2</item>
@@ -173,12 +189,13 @@
     </room>
     <room>
         <id>9</id>
-        <name>torchRoom</name>
-        <exits>
-            <east>
-                <name>secretPassage</name>
-            </east>
-        </exits>
+        <roomName>torchRoom</roomName>
+        <roomExits>
+            <exit>
+                <path>east</path>
+                <pathName>secretPassage</pathName>
+            </exit>
+        </roomExits>
         <items>
             <item>1</item>
             <item>2</item>
@@ -191,12 +208,13 @@
     </room>
     <room>
         <id>10</id>
-        <name>treasureRoom</name>
-        <exits>
-            <south>
-                <name>torchRoom</name>
-            </south>
-        </exits>
+        <roomName>treasureRoom</roomName>
+        <roomExits>
+            <exit>
+                <path>south</path>
+                <pathName>torchRoom</pathName>
+            </exit>
+        </roomExits>
         <items>
             <item>1</item>
             <item>2</item>
@@ -209,15 +227,17 @@
     </room>
     <room>
         <id>11</id>
-        <name>riddleRoom</name>
-        <exits>
-            <east>
-                <name>closet</name>
-            </east>
-            <west>
-                <name>whisperingPassage</name>
-            </west>
-        </exits>
+        <roomName>riddleRoom</roomName>
+        <roomExits>
+            <exit>
+                <path>east</path>
+                <pathName>closet</pathName>
+            </exit>
+            <exit>
+                <path>west</path>
+                <pathName>whisperingPassage</pathName>
+            </exit>
+        </roomExits>
         <items>
             <item>1</item>
             <item>2</item>
@@ -232,12 +252,13 @@
     </room>
     <room>
         <id>12</id>
-        <name>whisperingPassage</name>
-        <exits>
-            <west>
-                <name>treasureRoom</name>
-            </west>
-        </exits>
+        <roomName>whisperingPassage</roomName>
+        <roomExits>
+            <exit>
+                <path>west</path>
+                <pathName>treasureRoom</pathName>
+            </exit>
+        </roomExits>
         <items>
             <item>1</item>
             <item>2</item>
@@ -251,15 +272,17 @@
     </room>
     <room>
         <id>13</id>
-        <name>closet</name>
-        <exits>
-            <north>
-                <name>bedroom</name>
-            </north>
-            <west>
-                <name>riddleRoom</name>
-            </west>
-        </exits>
+        <roomName>closet</roomName>
+        <roomExits>
+            <exit>
+                <path>north</path>
+                <pathName>bedroom</pathName>
+            </exit>
+            <exit>
+                <path>west</path>
+                <pathName>riddleRoom</pathName>
+            </exit>
+        </roomExits>
         <items>
             <item>1</item>
             <item>2</item>
@@ -273,15 +296,17 @@
     </room>
     <room>
         <id>14</id>
-        <name>swingingStairs</name>
-        <exits>
-            <north>
-                <name>egyptianRoom</name>
-            </north>
-            <south>
-                <name>living</name>
-            </south>
-        </exits>
+        <roomName>swingingStairs</roomName>
+        <roomExits>
+            <exit>
+                <path>north</path>
+                <pathName>egyptianRoom</pathName>
+            </exit>
+            <exit>
+                <path>south</path>
+                <pathName>living</pathName>
+            </exit>
+        </roomExits>
         <items>
             <item>1</item>
             <item>2</item>
@@ -294,18 +319,21 @@
     </room>
     <room>
         <id>15</id>
-        <name>egyptianRoom</name>
-        <exits>
-            <east>
-                <name>landOfDead</name>
-            </east>
-            <south>
-                <name>living</name>
-            </south>
-            <west>
-                <name>artRoom</name>
-            </west>
-        </exits>
+        <roomName>egyptianRoom</roomName>
+        <roomExits>
+            <exit>
+                <path>east</path>
+                <pathName>landOfDead</pathName>
+            </exit>
+            <exit>
+                <path>south</path>
+                <pathName>living</pathName>
+            </exit>
+            <exit>
+                <path>west</path>
+                <pathName>artRoom</pathName>
+            </exit>
+        </roomExits>
         <items>
             <item>1</item>
             <item>2</item>
@@ -318,12 +346,13 @@
     </room>
     <room>
         <id>16</id>
-        <name>landOfDead</name>
-        <exits>
-            <west>
-                <name>egyptianRoom</name>
-            </west>
-        </exits>
+        <roomName>landOfDead</roomName>
+        <roomExits>
+            <exit>
+                <path>west</path>
+                <pathName>egyptianRoom</pathName>
+            </exit>
+        </roomExits>
         <items>
             <item>1</item>
             <item>2</item>
@@ -336,12 +365,13 @@
     </room>
     <room>
         <id>17</id>
-        <name>artRoom</name>
-        <exits>
-            <east>
-                <name>egyptianRoom</name>
-            </east>
-        </exits>
+        <roomName>artRoom</roomName>
+        <roomExits>
+            <exit>
+                <path>east</path>
+                <pathName>egyptianRoom</pathName>
+            </exit>
+        </roomExits>
         <items>
             <item>1</item>
             <item>2</item>
@@ -355,15 +385,17 @@
     </room>
     <room>
         <id>18</id>
-        <name>engravingCave</name>
-        <exits>
-            <north>
-                <name>floatingRoom</name>
-            </north>
-            <west>
-                <name>loudRoom</name>
-            </west>
-        </exits>
+        <roomName>engravingCave</roomName>
+        <roomExits>
+            <exit>
+                <path>north</path>
+                <pathName>floatingRoom</pathName>
+            </exit>
+            <exit>
+                <path>west</path>
+                <pathName>loudRoom</pathName>
+            </exit>
+        </roomExits>
         <items>
             <item>1</item>
             <item>2</item>
@@ -376,12 +408,13 @@
     </room>
     <room>
         <id>19</id>
-        <name>floatingRoom</name>
-        <exits>
-            <west>
-                <name>landOfDead</name>
-            </west>
-        </exits>
+        <roomName>floatingRoom</roomName>
+        <roomExits>
+            <exit>
+                <path>west</path>
+                <pathName>landOfDead</pathName>
+            </exit>
+        </roomExits>
         <items>
             <item>1</item>
             <item>2</item>
