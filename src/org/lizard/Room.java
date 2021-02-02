@@ -13,7 +13,7 @@ public class Room extends GameDictionary.Noun {
     private String roomDescription;
 
 
-    public Room(String name){
+    public Room(String name) {
         super(name);
         this.setExaminable(true);
     }
@@ -32,14 +32,31 @@ public class Room extends GameDictionary.Noun {
             GameDictionary.Noun returnedItem = items.get(index);
             items.remove(item);
             return returnedItem;
-        } else {
-            return null;
+
         }
+        return null;
 
     }
+
+
     public Lock getLock(String direction) {
         return locks.get(direction);
     }
+
+    public String printItemsInRoom() {
+        StringBuilder itemsInRoom = new StringBuilder();
+
+        for (GameDictionary.Noun item : items) {
+            itemsInRoom.append(item.getName() + ", ");
+        }
+        if (itemsInRoom.length() > 2) {
+            itemsInRoom.setLength(itemsInRoom.length() - 2);
+        } else {
+            return "There are no items present in the room! ";
+        }
+        return itemsInRoom.toString();
+    }
+
     public void addLock(String direction, Lock lock) {
         locks.put(direction, lock);
     }
@@ -48,9 +65,9 @@ public class Room extends GameDictionary.Noun {
         return locks.remove(direction);
     }
 
-   public void createRoom(String direction, Room newExit) {
-       exits.put(direction, newExit);
-   }
+    public void createRoom(String direction, Room newExit) {
+        exits.put(direction, newExit);
+    }
 
     //Accessor Methods
     public String getName() {
@@ -76,6 +93,7 @@ public class Room extends GameDictionary.Noun {
     public List<GameDictionary.Noun> getItems() {
         return items;
     }
+
     public void setRoomDescription(String roomDescription) {
         this.roomDescription = roomDescription;
     }

@@ -54,26 +54,28 @@ public class TextParser {
             }
 
         }
+
         ids = null;
         for(int i = 0; i < userInputWords.size(); i++) {
             Set<GameDictionary.Noun> nounSet = knownWords.get(userInputWords.get(i));
-            if(nounSet == null) {
+            if (nounSet == null) {
                 continue;
             }
-            if(ids == null) {
+            if (ids == null) {
                 ids = nounSet;
             }
             ids.retainAll(nounSet);
-            if(ids.size() == 1) {
+            if (ids.size() == 1) {
                 targetNounCandidates = new GameDictionary.Noun[ids.size()];
                 targetNounCandidates = ids.toArray(targetNounCandidates);
             }
-            if(i == userInputWords.size() - 1 && ids.size() > 1) {
+            if (i == userInputWords.size() - 1 && ids.size() > 1) {
                 targetNounCandidates = new GameDictionary.Noun[ids.size()];
                 ids.toArray(targetNounCandidates);
             }
-
         }
+
+
         if(targetNounCandidates != null) {
             return new Command(verbCandidate, nounCandidates, targetNounCandidates);
         } else {

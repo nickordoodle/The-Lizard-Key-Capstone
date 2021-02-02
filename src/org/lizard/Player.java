@@ -4,12 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Player {
-    private String name;
     Inventory inventory = new Inventory();
+    private String name;
+
 
     public Player(String name) {
         this.name = name;
     }
+
     public Inventory getInventory() {
         return inventory;
     }
@@ -21,17 +23,18 @@ public class Player {
     class Inventory extends Item {
         List<GameDictionary.Noun> inventory = new ArrayList<>();
 
+
         public Inventory() {
             super("inventory");
         }
 
-        public void add(GameDictionary.Noun item) {
+        public String add(GameDictionary.Noun item) {
             if(inventory.size() == 5) {
-                System.out.println("You are holding too many items.");
+                return "You are holding too many items.";
             } else {
                 inventory.add(item);
+                return"Added to inventory";
             }
-
         }
         public List<GameDictionary.Noun> getItems() {
             return inventory;
@@ -39,7 +42,7 @@ public class Player {
 
         public GameDictionary.Noun drop(GameDictionary.Noun item) {
             int index = inventory.indexOf(item);
-            if(index != -1) {
+            if (index != -1) {
                 return inventory.remove(index);
             }
             System.out.println("That is not in your bag");

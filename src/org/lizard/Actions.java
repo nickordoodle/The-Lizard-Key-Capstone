@@ -13,156 +13,152 @@ public class Actions {
         this.player = player;
     }
 
-    public void execute(Command command) {
-        GameDictionary.Noun noun;
-        GameDictionary.Noun targetNoun;
-        Integer verb;
-        if(command.isAmbiguous()) {
-            disambiguate(command);
-            return;
-        }
 
+    public String execute(Command command) {
+            GameDictionary.Noun noun;
+            GameDictionary.Noun targetNoun = null;
+            Integer verb;
+            if(command.isAmbiguous()) {
+                return disambiguate(command);
+            }
         verb = command.getVerb();
         noun = command.getNoun() == null ? null : command.getNoun()[0];
-        targetNoun = null;
+
         if(command.getTargetNoun() != null) {
             targetNoun = command.getTargetNoun()[0];
-
         }
 
+        if (verb == null && noun == null) {
+            return "Wrong command";
 
-        if (verb == null && noun == null){
-            System.out.println("Wrong command");
-            return;
         }
-        if(verb == null) {
-            System.out.println(noun.getDescription());
-            return;
+        if (verb == null) {
+            return (noun.getDescription());
+
         }
-        if(targetNoun != null && verb != 4) {
-            System.out.println("You tried to use a " + verb + " with 2 nouns? What you trying to break my code or something?");
-        }
-        else{
-            switch(verb) {
+        if (targetNoun != null && verb != 4) {
+            return ("You tried to use a " + verb + " with 2 nouns? What you trying to break my code or something?");
+        } else {
+            switch (verb) {
                 case 1:
-                    grab(noun);
-                    break;
+                    return grab(noun);
+
                 case 2:
-                    move(noun);
-                    break;
+                    return move(noun);
+
                 case 3:
-                    examine(noun);
-                    break;
+                    return examine(noun);
+
                 case 4:
-                    use(noun, targetNoun);
-                    break;
+                    return use(noun, targetNoun);
                 case 5:
                     drop(noun);
                     break;
+
             }
         }
+        return null;
     }
 
-    private void move(GameDictionary.Noun direction) {
 
+
+    private String move(GameDictionary.Noun direction) {
+        System.out.println(direction + "ABCDSSSSS");
         if(direction instanceof Directions.Direction) {
-            board.changeCurrentRoom(((Directions.Direction) direction).getDirection());
+           return board.changeCurrentRoom(((Directions.Direction) direction).getDirection());
         } else {
-            System.out.println("What??? you can't go there.");
+            return ("What??? you can't go there.");
         }
 
     }
 
 
-    private void grab(GameDictionary.Noun noun) {
 
-        if(noun == null) {
-            System.out.println("That doesn't exist");
-        }
-        else if(!noun.isGrabable()) {
-            System.out.println("You can't even grab a " + noun.getName());
-        } else if(player.getInventory().has(noun)){
-            System.out.println("You already have that in your inventory");
+    private String grab(GameDictionary.Noun noun) {
+        if (noun == null) {
+            return ("That doesn't exist");
+
+        } else if (!noun.isGrabable()) {
+            return ("You can't even grab a " + noun.getName());
+        } else if(player.getInventory().has(noun)) {
+           return "You already have that in your inventory";
         } else {
             //get current room
             Room currentRoom = board.getCurrentRoom();
             //check if the room has the item else return fail
             GameDictionary.Noun grabbedItem = currentRoom.grabItem((Item) noun);
             //if it does exist pop it off room item list
-            if(grabbedItem != null) {
+            if (grabbedItem != null) {
                 player.getInventory().add(grabbedItem);
-                System.out.println("You grabbed the " + noun.getName());
+                return ("You grabbed the " + noun.getName());
             } else {
-                System.out.println("You can't");
+                return ("You can't");
             }
 
         }
     }
 
-    public void use(GameDictionary.Noun noun, GameDictionary.Noun targetNoun) {
-        if(targetNoun instanceof Directions.Direction) {
-            unlockExit(((Directions.Direction) targetNoun).getDirection(), noun);
-            return;
-        }
-        if(targetNoun == null) {
-            System.out.println("Use it on what?");
-            return;
-        }
+    public String use(GameDictionary.Noun noun, GameDictionary.Noun targetNoun) {
         Lock targetLock = targetNoun.getLock();
 
-        if(targetLock == null) {
-            System.out.println("Thats not how this works.");
-            return;
+        if (targetLock == null) {
+            return ("Thats not how this works.");
+
         }
-        if(!player.getInventory().has((Item) noun)) {
-            System.out.println("You don't have a " + noun.getName() + " in your inventory.");
-            return;
+        if (!player.getInventory().has((Item) noun)) {
+            return ("You don't have a " + noun.getName() + " in your inventory.");
+
         }
-        if(!board.getCurrentRoom().has((Item) targetNoun) && !player.getInventory().has((Item) targetNoun)) {
-            System.out.println("There isn't a " + targetNoun.getName() + " here.");
-            return;
+        if (!board.getCurrentRoom().has((Item) targetNoun) && !player.getInventory().has((Item) targetNoun)) {
+            return ("There isn't a " + targetNoun.getName() + " here.");
+
         }
-        if(targetLock.getNoun() == noun) {
+        if (targetLock.getNoun() == noun) {
             targetLock.printDescription();
             this.execute(targetLock.getCommand());
             targetNoun.deleteLock();
 
         }
+//        if(targetNoun instanceof Directions.Direction) {
+//            unlockExit(((Directions.Direction) targetNoun).getDirection(), noun);
+//            return;
+//        }
+        return null;
     }
-    public void unlockExit(String direction, GameDictionary.Noun noun) {
+    public String unlockExit(String direction, GameDictionary.Noun noun) {
         if(!player.getInventory().has(noun)) {
-            System.out.println("You don't have that on your person");
-            return;
+            return "You don't have that on your person";
         }
         Lock lock = board.getCurrentRoom().getLock(direction);
         if(lock.getNoun().equals(noun)) {
             lock.printDescription();
             board.getCurrentRoom().removeLock(direction);
-            this.execute(lock.getCommand());
+            return this.execute(lock.getCommand());
         } else {
-            System.out.println("What did you think that would even accomplish?");
+            return "What did you think that would even accomplish?";
         }
     }
 
-    private void examine(GameDictionary.Noun noun){
-       Room currentRoom = board.getCurrentRoom();
+    private String examine(GameDictionary.Noun noun){
+        Room currentRoom = board.getCurrentRoom();
+        if (noun == null) { //examine
+            return ("Examining room...\n " + currentRoom.getRoomDescription());
 
-        if(noun == null){
-            System.out.println("Examining room...");
-            //prints description of the current room
-            System.out.println(currentRoom.getRoomDescription());
-            return;
-        }
-        if(noun.getName().equals("inventory")) {
-            System.out.println(player.getInventory().getDescription());
-            return;
-        }
-        if(!player.getInventory().has(noun) && !currentRoom.has(noun)) {
-            System.out.println("You can examine what's not there");
-        } else{
-            System.out.println(noun.getDescription());
-        }
 
+        } else if (!noun.isExaminable()) {
+            return ("You can't examine " + noun.getName());
+        } else {
+            if (noun.getName().equals("items")) { //examine items
+
+                return ("Items presnet in the " + currentRoom.getName() + " are: " + currentRoom.printItemsInRoom());
+            } else if (currentRoom.has((Item) noun)) { //examine candle
+                return ("Hi, I am a " + noun.getName());
+            } else {
+
+                return (noun.getName() + " is not present in the  " + currentRoom.getName());
+            }
+
+        }
 
 
     }
@@ -178,7 +174,7 @@ public class Actions {
 
     }
 
-    private void disambiguate(Command command) {
+    private String disambiguate(Command command) {
         GameDictionary.Noun[] noun = command.getNoun();
         GameDictionary.Noun[] targetNoun = command.getTargetNoun();
 
@@ -193,8 +189,8 @@ public class Actions {
             noun = new GameDictionary.Noun[]{nounSet.iterator().next()};
         } else if(nounSet.size() > 1) {
             Iterator<GameDictionary.Noun> iterator = nounSet.iterator();
-            iterator.next();
-            noun = specifyNoun(nounSet);
+            noun = new GameDictionary.Noun[]{iterator.next()};
+//            noun = specifyNoun(nounSet);
         } else {
             noun = null;
         }
@@ -207,41 +203,41 @@ public class Actions {
                 targetNoun = new GameDictionary.Noun[]{targetNounSet.iterator().next()};
             } else if(targetNounSet.size() > 1) {
                 Iterator<GameDictionary.Noun> iterator = targetNounSet.iterator();
-                iterator.next();
-                noun = specifyNoun(targetNounSet);
+                noun = new GameDictionary.Noun[]{iterator.next()};
+//                noun = specifyNoun(targetNounSet);
             }
 
         }
 
         if(targetNoun != null && targetNoun.length == 1) {
-            execute(new Command(command.getVerb(), noun, targetNoun));
+            return execute(new Command(command.getVerb(), noun, targetNoun));
         } else {
-            execute(new Command(command.getVerb(), noun));
+            return execute(new Command(command.getVerb(), noun));
         }
 
     }
-    public GameDictionary.Noun[] specifyNoun(Set<GameDictionary.Noun> nounSet) {
-        List<GameDictionary.Noun> nounList = new ArrayList<>(nounSet);
+//    public GameDictionary.Noun[] specifyNoun(Set<GameDictionary.Noun> nounSet) {
+//        List<GameDictionary.Noun> nounList = new ArrayList<>(nounSet);
+//
+//        while (true) {
+//            nounList.forEach(noun -> {
+//                System.out.println("You see a " + noun.getName());
+//            });
+//            String userInput = Game.prompter.promptPlayer("Which one?");
+//            List<GameDictionary.Noun> validNoun = new ArrayList<>();
+//            int i = 0;
+//            for (int j = 0; j < nounList.size(); j++) {
+//                if (nounList.get(j).getName().contains(userInput)) {
+//                    validNoun.add(nounList.get(j));
+//                }
+//            }
+//
+//            if (validNoun.size() == 1) {
+//                return validNoun.toArray(new GameDictionary.Noun[1]);
+//            } else {
+//                System.out.println("Can you read? Pick one.");
+//            }
+//        }
+//    }
 
-        while(true) {
-            nounList.forEach(noun -> {
-                System.out.println("You see a "+ noun.getName());
-            });
-            String userInput = Game.prompter.promptPlayer("Which one?");
-            List<GameDictionary.Noun> validNoun = new ArrayList<>();
-            int i = 0;
-            for(int j = 0; j < nounList.size(); j++) {
-                if(nounList.get(j).getName().contains(userInput)) {
-                    validNoun.add(nounList.get(j));
-                }
-            }
-
-            if(validNoun.size() == 1) {
-                return validNoun.toArray(new GameDictionary.Noun[1]);
-            } else {
-                System.out.println("Can you read? Pick one.");
-            }
-
-        }
-    }
 }

@@ -9,6 +9,7 @@ class Command {
         this.verb = verb;
         this.noun = noun;
     }
+
     public Command(Integer verb, GameDictionary.Noun[] noun, GameDictionary.Noun[] targetNoun) {
         this(verb, noun);
         this.targetNoun = targetNoun;
@@ -23,6 +24,7 @@ class Command {
     }
 
     public  GameDictionary.Noun[] getTargetNoun() {
+
         return targetNoun;
     }
 
