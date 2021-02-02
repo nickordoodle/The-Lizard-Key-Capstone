@@ -3,12 +3,12 @@ package org.lizard;
 public class Lock {
     GameDictionary.Noun noun;
     String description;
-    Command command;
+    Command event;
 
-    public Lock(GameDictionary.Noun noun, String description, Command command) {
+    public Lock(GameDictionary.Noun noun, String description, Event event) {
         this.noun = noun;
         this.description = description;
-        this.command = command;
+        this.event= event;
     }
 
     public GameDictionary.Noun getNoun() {
@@ -20,6 +20,6 @@ public class Lock {
     }
 
     public Command getCommand() {
-        return command;
+        return event;
     }
 }

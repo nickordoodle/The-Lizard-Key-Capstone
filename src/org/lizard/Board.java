@@ -5,8 +5,8 @@ import java.util.Map;
 
 public class Board {
     private Room currentRoom;
-    private Map<String, Room> rooms = new HashMap<>();
-
+    private final Map<String, Room> rooms = new HashMap<>();
+    private final Directions directions = new Directions();
     public Board(){
         createMap();
     }
@@ -96,13 +96,17 @@ public class Board {
 
 
         Item match = new Item("match");
-        Item candle = new Item("candle", new Lock(match, "The candle has lit. You run west!", new Command(2, new Direction("west"))));
-        Item libraryKey = new Item("libraryKey");
-        living.addLock("south", new Lock(libraryKey, "You unlocked the door", new Command(2, new Direction("south"))));
+        Item blackCandle = new Item("black candle", new Lock(match, "The candle has lit. You run west!", new Event(2, directions.getWest())));
+
+        Item libraryKey = new Item("library key");
+        Item kitchenKey = new Item("kitchen key");
+        living.addLock("south", new Lock(libraryKey, "You unlocked the door", new Event(2, directions.getSouth())));
         living.addItemToRoom(libraryKey);
-        closet.addItemToRoom(match);
-        living.addItemToRoom(candle);
-        treasureRoom.addItemToRoom(new Item("key"));
+        living.addItemToRoom(kitchenKey);
+        living.addItemToRoom(match);
+//        living.addItemToRoom(candle);
+        living.addItemToRoom(blackCandle);
+        treasureRoom.addItemToRoom(new Item("lizard key"));
 
 
         this.currentRoom = living;

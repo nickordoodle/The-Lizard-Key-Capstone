@@ -23,20 +23,23 @@ public class Player {
     }
 
     class Inventory extends Item {
-        List<Item> inventory = new ArrayList<>();
+        List<GameDictionary.Noun> inventory = new ArrayList<>();
 
         public Inventory() {
             super("inventory");
         }
 
-        public void add(Item item) {
+        public void add(GameDictionary.Noun item) {
             if(item.getName().equals("key")) {
                 hasKey = true;
             }
             inventory.add(item);
         }
+        public List<GameDictionary.Noun> getItems() {
+            return inventory;
+        }
 
-        public Item drop(Item item) {
+        public GameDictionary.Noun drop(GameDictionary.Noun item) {
             int index = inventory.indexOf(item);
             if(index != -1) {
                 return inventory.remove(index);
@@ -44,13 +47,13 @@ public class Player {
             System.out.println("That is not in your bag");
             return null;
         }
-        public boolean has(Item item) {
+        public boolean has(GameDictionary.Noun item) {
             return inventory.contains(item);
         }
 
         public String getDescription() {
             StringBuilder inventoryDescription = new StringBuilder();
-            inventory.forEach(item -> inventoryDescription.append(item.getName() + "\n"));
+            inventory.forEach(item -> inventoryDescription.append(item.getName()).append("\n"));
             return inventoryDescription.toString().equals("") ? "You have nothing in your inventory": inventoryDescription.toString();
         }
 

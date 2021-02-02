@@ -1,17 +1,17 @@
 package org.lizard;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class GameDictionary {
     private static final GameDictionary gameDictionary = new GameDictionary();
 
-    private Map<String, Integer> verbs = new HashMap<>();
-    private Map<String, Noun> nouns = new HashMap<>();
+    private final Map<String, Integer> verbs = new HashMap<>();
+//    private final Map<Integer, Noun> nouns = new HashMap<>();
+    public final Map<String, Set<Noun>> knownWords = new HashMap<>();
 
     private GameDictionary() {
         setVerbs();
-//        setDirections();
     }
 
     private void setVerbs() {
@@ -25,26 +25,24 @@ public class GameDictionary {
         verbs.put("drop", 5);
     }
 
-    public void addNoun(Noun noun) {
-        nouns.put(noun.getName(), noun);
+//    public void addNoun(Noun noun) {
+//        nouns.put(noun.getId(), noun);
+//    }
+
+    public Map<String, Set<Noun>> getKnownWords() {
+        return knownWords;
     }
 
-    public void setDirections() {
-        new Direction("north");
-        new Direction("south");
-        new Direction("east");
-        new Direction("west");
-    }
-
-    public Integer checkVerb(String word) {
+    public Integer getVerbCategory(String word) {
         return verbs.get(word);
     }
-    public Noun checkNoun(String word) {
-        return nouns.get(word);
-    }
+//    public Noun checkNoun(Integer id) {
+//        return nouns.get(id);
+//    }
 
     public static class Noun {
-
+        private static final AtomicInteger count = new AtomicInteger(0);
+        private final int id;
         private boolean grabable = false;
         private boolean droppable = false;
         private boolean examinable = false;
@@ -54,6 +52,7 @@ public class GameDictionary {
         private boolean puttable = false;
         private boolean eatable = false;
         private boolean chatable = false;
+
         public boolean isUseable() {
             return useable;
         }
@@ -69,23 +68,24 @@ public class GameDictionary {
 
         private String name;
 
-
         private String description = "hi, i am a noun";
 
         public Noun(String name) {
             this.name = name;
-            addToGameDictionary();
+            id = count.incrementAndGet();
+            Arrays.stream(name.split(" ")).forEach(word -> {
+                addKnownWord(this, word);
+            });
         }
 
         public Noun(String name, Lock lock) {
-            this.name = name;
+            this(name);
             setUseable(lock);
-            addToGameDictionary();
         }
         public Noun(String name, String description) {
-            this.name = name;
+            this(name);
             this.description = description;
-            addToGameDictionary();
+
         }
 
         public boolean isGrabable() {
@@ -160,10 +160,11 @@ public class GameDictionary {
             this.chatable = chatable;
         }
 
-        private void addToGameDictionary() {
-            gameDictionary.addNoun(this);
+//        private void addToGameDictionary() {
+//            gameDictionary.addNoun(this);
+//
+//        }
 
-        }
         public String getDescription() {
             return description;
         }
@@ -183,14 +184,27 @@ public class GameDictionary {
         public void deleteLock() {
             lock = null;
         }
+        public int getId() {
+            return id;
+        }
+
+        public void addKnownWord(Noun noun, String word) {
+            Set<Noun> knownWord = gameDictionary.knownWords.get(word);
+            if(knownWord == null) {
+                gameDictionary.knownWords.put(word, new HashSet<>());
+                knownWord = gameDictionary.knownWords.get(word);
+
+            }
+            knownWord.add(noun);
+        }
     }
 
 
-    public void printNouns() {
-        gameDictionary.nouns.entrySet().forEach(set -> {
-            System.out.println(set.getKey() + " is in dictionary");
-        });
-    }
+//    public void printNouns() {
+//        gameDictionary.nouns.entrySet().forEach(set -> {
+//            System.out.println(set.getValue().getName() + " id is " + set.getKey());
+//        });
+//    }
 
     public static GameDictionary getGameDictionary() {
         return gameDictionary;
