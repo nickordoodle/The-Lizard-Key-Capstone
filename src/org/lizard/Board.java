@@ -155,13 +155,22 @@ public class Board {
                 // Make the node an element to gain access to text content
                 Element itemElement = (Element) node;
 
-                System.out.println(itemElement.getElementsByTagName("id").item(0).getTextContent());
-                System.out.println(itemElement.getElementsByTagName("name").item(0).getTextContent());
-                System.out.println(itemElement.getElementsByTagName("description").item(0).getTextContent());
-//                Item newItem = new Item(roomItem);
-//                room.addItemToRoom(newItem);
-                
+//                System.out.println(itemElement.getElementsByTagName("id").item(0).getTextContent());
+//                System.out.println(itemElement.getElementsByTagName("name").item(0).getTextContent());
+//                System.out.println(itemElement.getElementsByTagName("roomName").item(0).getTextContent());
+//                System.out.println(itemElement.getElementsByTagName("description").item(0).getTextContent());
+                // Save values of item
+                String itemId = itemElement.getElementsByTagName("id").item(0).getTextContent();
+                String itemName = itemElement.getElementsByTagName("name").item(0).getTextContent();
+                String roomName = itemElement.getElementsByTagName("roomName").item(0).getTextContent();
+                String itemDescription = itemElement.getElementsByTagName("description").item(0).getTextContent();
 
+                // Create new instance of the item
+                Item roomItem = new Item(itemName);
+
+                // Add newly created item to its respective room
+                allRooms.get(roomName).addItemToRoom(roomItem);
+                System.out.println(allRooms.get(roomName).getItems());
             }
         }
     }
