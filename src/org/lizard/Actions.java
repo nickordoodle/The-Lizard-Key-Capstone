@@ -1,5 +1,6 @@
 package org.lizard;
 
+import javax.swing.*;
 import java.lang.reflect.Array;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -7,10 +8,12 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class Actions {
     private final Board board;
     private final Player player;
+    private final MyJFrame frame;
 
-    public Actions(Board board, Player player) {
+    public Actions(Board board, Player player, MyJFrame frame) {
         this.board = board;
         this.player = player;
+        this.frame = frame;
     }
 
 
@@ -63,8 +66,10 @@ public class Actions {
 
 
     private String move(GameDictionary.Noun direction) {
-        System.out.println(direction + "ABCDSSSSS");
         if(direction instanceof Directions.Direction) {
+            if(player.hasWinningKey && board.getCurrentRoom().getName().equals("living")) {
+                return "You used the key in the living room. You teleport and wake up from your dream. You notice its 7:30 am. time to go to work.";
+            }
            return board.changeCurrentRoom(((Directions.Direction) direction).getDirection());
         } else {
             return ("What??? you can't go there.");
@@ -100,7 +105,6 @@ public class Actions {
 
     public String use(GameDictionary.Noun noun, GameDictionary.Noun targetNoun) {
         Lock targetLock = targetNoun.getLock();
-
         if (targetLock == null) {
             return ("Thats not how this works.");
 
@@ -113,16 +117,18 @@ public class Actions {
             return ("There isn't a " + targetNoun.getName() + " here.");
 
         }
-        if (targetLock.getNoun() == noun) {
-            targetLock.printDescription();
-            this.execute(targetLock.getCommand());
-            targetNoun.deleteLock();
+        if(targetNoun instanceof Directions.Direction) {
+            return unlockExit(((Directions.Direction) targetNoun).getDirection(), noun);
 
         }
-//        if(targetNoun instanceof Directions.Direction) {
-//            unlockExit(((Directions.Direction) targetNoun).getDirection(), noun);
-//            return;
-//        }
+        if (targetLock.getNoun() == noun) {
+
+            this.execute(targetLock.getCommand());
+            targetNoun.deleteLock();
+            return targetLock.printDescription();
+
+        }
+
         return null;
     }
     public String unlockExit(String direction, GameDictionary.Noun noun) {
@@ -163,13 +169,13 @@ public class Actions {
 
     }
 
-    public void drop(GameDictionary.Noun noun) {
+    public String drop(GameDictionary.Noun noun) {
         GameDictionary.Noun droppedItem = player.getInventory().drop(noun);
         if(droppedItem == null) {
-            System.out.println(player.getName() + " how are you gonna drop something you don't have? How?");
+            return player.getName() + " how are you gonna drop something you don't have? How?";
         } else {
             board.getCurrentRoom().addItemToRoom(droppedItem);
-            System.out.println("You dropped the " + droppedItem.getName() + " in the " + board.getCurrentRoom().getName());
+            return "You dropped the " + droppedItem.getName() + " in the " + board.getCurrentRoom().getName();
         }
 
     }
@@ -221,9 +227,10 @@ public class Actions {
 //
 //        while (true) {
 //            nounList.forEach(noun -> {
-//                System.out.println("You see a " + noun.getName());
+//                return "You see a " + noun.getName();
 //            });
-//            String userInput = Game.prompter.promptPlayer("Which one?");
+////            String userInput = Game.prompter.promptPlayer("Which one?");
+//            String userInput = frame.decision();
 //            List<GameDictionary.Noun> validNoun = new ArrayList<>();
 //            int i = 0;
 //            for (int j = 0; j < nounList.size(); j++) {

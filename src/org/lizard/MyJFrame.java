@@ -10,11 +10,13 @@ public class MyJFrame extends JPanel {
 
     Board board = new Board();
     Player player = new Player("Edgar");
-    Actions actions = new Actions(board, player);
+    Actions actions = new Actions(board, player, this);
     GameDictionary gameDictionary = GameDictionary.getGameDictionary();
     TextParser parser = new TextParser(gameDictionary);
 
     String result;
+    JLabel inputFromUser = new JLabel();
+    JTextField textField = new JTextField();
 
     MyJFrame() {
 //        new Direction("north");
@@ -81,11 +83,10 @@ public class MyJFrame extends JPanel {
                 scrollPane.setPreferredSize(new Dimension(500,300));
                 scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 
-                JLabel inputFromUser = new JLabel();
+
                 inputFromUser.setText("What do you want to do?");
 
 
-                JTextField textField = new JTextField();
                 textField.setPreferredSize(new Dimension(500,100));
                 textField.setFont(new Font("Consolas", Font.CENTER_BASELINE, 12));
                 textField.setForeground(Color.white);
@@ -128,6 +129,10 @@ public class MyJFrame extends JPanel {
         });
 
 
+    }
+    public String decision() {
+        inputFromUser.setText("What do you want to do?");
+        return textField.getText();
     }
 
 }

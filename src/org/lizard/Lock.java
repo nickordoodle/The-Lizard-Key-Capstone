@@ -15,8 +15,8 @@ public class Lock {
         return noun;
     }
 
-    public void printDescription() {
-        System.out.println(description);
+    public String printDescription() {
+        return description;
     }
 
     public Command getCommand() {

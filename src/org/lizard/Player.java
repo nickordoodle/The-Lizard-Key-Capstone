@@ -6,7 +6,7 @@ import java.util.List;
 public class Player {
     Inventory inventory = new Inventory();
     private String name;
-
+    boolean hasWinningKey = false;
 
     public Player(String name) {
         this.name = name;
@@ -29,9 +29,13 @@ public class Player {
         }
 
         public String add(GameDictionary.Noun item) {
+
             if(inventory.size() == 5) {
                 return "You are holding too many items.";
             } else {
+                if(item.getName().equals("key")) {
+                    hasWinningKey = true;
+                }
                 inventory.add(item);
                 return"Added to inventory";
             }
