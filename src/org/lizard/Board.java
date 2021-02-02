@@ -7,11 +7,11 @@ public class Board {
     private Room currentRoom;
     private Map<String, Room> rooms = new HashMap<>();
 
-    public Board(){
+    public Board() {
         createMap();
     }
 
-    public void createMap(){
+    public void createMap() {
 
         Room living = new Room("living");
 //        Room library = new Room("library");
@@ -61,10 +61,10 @@ public class Board {
 
 //        living.createRoom("east",library);
 //        library.createRoom("west",living);
-        living.createRoom("west",bedroom);
-        bedroom.createRoom("east",living);
-        living.createRoom("south",kitchen);
-        kitchen.createRoom("north",living);
+        living.createRoom("west", bedroom);
+        bedroom.createRoom("east", living);
+        living.createRoom("south", kitchen);
+        kitchen.createRoom("north", living);
 //        library.createRoom("south",creekyPath);
 //        creekyPath.createRoom("north",library);
 //        creekyPath.createRoom("east",coalMine);
@@ -83,44 +83,50 @@ public class Board {
 //        swingingStairs.createRoom("north",egyptianRoom);
 //        swingingStairs.createRoom("south",living);
 //        living.createRoom("north",swingingStairs);
-        bedroom.createRoom("south",closet);
-        closet.createRoom("north",bedroom);
-        closet.createRoom("west",riddleRoom);
-        riddleRoom.createRoom("east",closet);
-        riddleRoom.createRoom("west",whisperingPassage);
-        whisperingPassage.createRoom("west",treasureRoom);
-        treasureRoom.createRoom("south",torchRoom);
-        torchRoom.createRoom("east",secretPassage);
-        secretPassage.createRoom("north",kitchen);
-
+        bedroom.createRoom("south", closet);
+        closet.createRoom("north", bedroom);
+        closet.createRoom("west", riddleRoom);
+        riddleRoom.createRoom("east", closet);
+        riddleRoom.createRoom("west", whisperingPassage);
+        whisperingPassage.createRoom("west", treasureRoom);
+        treasureRoom.createRoom("south", torchRoom);
+        torchRoom.createRoom("east", secretPassage);
+        secretPassage.createRoom("north", kitchen);
 
 
         Item match = new Item("match");
         Item candle = new Item("candle", new Lock(match, "The candle has lit. You run west!", new Command(2, new Direction("west"))));
+        Item mirror = new Item("mirror");
         closet.addItemToRoom(match);
         living.addItemToRoom(candle);
+        living.addItemToRoom(mirror);
         treasureRoom.addItemToRoom(new Item("key"));
 
 
         this.currentRoom = living;
 
+        new Item("items");
 
+
+    }
+
+    public void itemsNounCreator() {
+        new Item("items");
     }
 
     public Room getCurrentRoom() {
         return currentRoom;
     }
 
-    public void changeCurrentRoom(String direction){
+    public String changeCurrentRoom(String direction) {
         Map<String, Room> exits = currentRoom.getExits();
 
-        if(exits.containsKey(direction)){
+        if (exits.containsKey(direction)) {
             currentRoom = exits.get(direction);
-            System.out.println("current room is "+ currentRoom.getName());
-            System.out.println(currentRoom.getRoomDescription());
-        }
-        else{
-            System.out.println("That is not an exit.");
+            return ("current room is " + currentRoom.getName() + "\n" + currentRoom.getRoomDescription());
+
+        } else {
+            return ("That is not an exit.");
         }
 
     }
