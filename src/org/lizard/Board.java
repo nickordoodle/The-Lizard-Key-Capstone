@@ -12,9 +12,12 @@ import java.util.*;
 
 public class Board {
     private Room currentRoom;
+    private final Directions directions = new Directions();
     private Map<String, Room> allRooms = new HashMap<>();
     private Map<String, Map<String, String>> allExits = new HashMap<>();
     private Map<String, Item> allItems = new HashMap<>();
+    private Map<Room, List<Map<String, String>>> roomLocks = new HashMap<>();
+
 
     public Board() {
         createMap();
@@ -42,11 +45,32 @@ public class Board {
                 // Add description to Room class object
                 room.setRoomDescription(roomDescription);
 
+                List<Map<String, String>> locks  = new ArrayList<>();
+
+
                 // Gain all exits for this particular room and save them in exits
                 for (int itr2 = 0; itr2 < eElement.getElementsByTagName("exit").getLength(); itr2++) {
+                    Map<String, String> holder = new HashMap<>();
                     // Create an object with all of the directions and the corresponding rooms for this particular Room class object
                     exits.put(eElement.getElementsByTagName("path").item(itr2).getTextContent(), eElement.getElementsByTagName("pathName").item(itr2).getTextContent());
+                    if(eElement.getElementsByTagName("lockKey").item(itr2) != null) {
+                        String lockKey = eElement.getElementsByTagName("lockKey").item(itr2).getTextContent();
+                        String lockMessage = eElement.getElementsByTagName("lockMessage").item(itr2).getTextContent();
+                        String commandInt = eElement.getElementsByTagName("commandInt").item(itr2).getTextContent();
+                        String commandDirection = eElement.getElementsByTagName("path").item(itr2).getTextContent();
+
+
+
+                        holder.put("commandDirection", commandDirection);
+                        holder.put("lockKey", lockKey);
+                        holder.put("lockMessage", lockMessage);
+                        holder.put("commandInt", commandInt);
+                        locks.add(holder);
+
+                    }
                 }
+                roomLocks.put(room, locks);
+
 
                 // Add the new exits Map object with the corresponding room name to allExits in order to build the Room class object exits later
                 allExits.put(roomName, exits);
@@ -60,6 +84,8 @@ public class Board {
         addExitsToRooms();
         // Add all items to their respective rooms
         addItemsToRooms();
+        // Add locks to rooms
+        addLocksToRooms();
 
         // Set starting room.
         this.currentRoom = allRooms.get("living");
@@ -71,8 +97,12 @@ public class Board {
 
     public String changeCurrentRoom(String direction) {
         Map<String, Room> exits = currentRoom.getExits();
+        Lock lock = currentRoom.getLock(direction);
 
-        if (exits.containsKey(direction)) {
+        if(lock != null) {
+            return "Seems to be locked.";
+        }
+        if(exits.containsKey(direction)){
             currentRoom = exits.get(direction);
             return ("current room is " + currentRoom.getName() + "\n" + currentRoom.getRoomDescription());
 
@@ -146,7 +176,6 @@ public class Board {
                 String commandDirection = itemElement.getElementsByTagName("commandDirection").item(0).getTextContent();
                 String itemDescription = itemElement.getElementsByTagName("description").item(0).getTextContent();
 
-
                 // Create new instance of the item
                 if (lockKey.equals("none")) {
                     Item roomItem = new Item(itemName);
@@ -155,7 +184,7 @@ public class Board {
                     allRooms.get(roomName).addItemToRoom(roomItem);
                 } else {
                     System.out.println("Item Name: " + itemName + " Item: " + allItems.get(lockKey) + " Lock Message: " + lockMessage + " Command Int: " + commandInt + " Command Direction: " + commandDirection);
-                    Item roomItem = new Item(itemName, new Lock(allItems.get(lockKey), lockMessage, new Command(Integer.parseInt(commandInt), new Direction(commandDirection))));
+                    Item roomItem = new Item(itemName, new Lock(allItems.get(lockKey), lockMessage, new Event(Integer.parseInt(commandInt), directions.getDirection(commandDirection))));
 
                     // Add newly created item to its respective room
                     allRooms.get(roomName).addItemToRoom(roomItem);
@@ -163,4 +192,16 @@ public class Board {
             }
         }
     }
+    public void addLocksToRooms() {
+        for(Map.Entry<Room, List<Map<String, String>>> locksEntrySet: roomLocks.entrySet()) {
+            Room room = locksEntrySet.getKey();
+            for(int i = 0; i < locksEntrySet.getValue().size(); i++) {
+                Map<String, String> lockMap = locksEntrySet.getValue().get(i);
+                room.addLock(lockMap.get("commandDirection") ,new Lock(allItems.get(lockMap.get("lockKey")), lockMap.get("lockMessage"), new Event(Integer.parseInt(lockMap.get("commandInt")), directions.getDirection(lockMap.get("commandDirection")))));
+            }
+            System.out.println(room.getLock("north") + "LDSALLDAS");
+        }
+    }
 }
+
+

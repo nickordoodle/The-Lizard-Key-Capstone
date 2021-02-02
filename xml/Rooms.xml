@@ -6,6 +6,9 @@
             <exit>
                 <path>north</path>
                 <pathName>swingingStairs</pathName>
+                <lockKey>library key</lockKey>
+                <lockMessage>You have unlocked the room</lockMessage>
+                <commandInt>2</commandInt>
             </exit>
             <exit>
                 <path>east</path>
