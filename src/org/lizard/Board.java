@@ -170,7 +170,7 @@ public class Board {
 
                 // Add newly created item to its respective room
                 allRooms.get(roomName).addItemToRoom(roomItem);
-                System.out.println(allRooms.get(roomName).getItems());
+//                System.out.println(allRooms.get(roomName).getItems());
             }
         }
     }
