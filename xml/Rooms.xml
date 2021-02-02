@@ -1,25 +1,28 @@
 <rooms>
     <room>
         <id>1</id>
-        <name>living</name>
-        <exits>
-            <north>
-                <name>swingingStairs</name>
-            </north>
-            <east>
-                <name>library</name>
-            </east>
-            <south>
-                <name>kitchen</name>
-            </south>
-            <west>
-                <name>bedroom</name>
-            </west>
-        </exits>
+        <roomName>living</roomName>
+        <roomExits>
+            <exit>
+                <path>north</path>
+                <pathName>swingingStairs</pathName>
+            </exit>
+            <exit>
+                <path>east</path>
+                <pathName>library</pathName>
+            </exit>
+            <exit>
+                <path>south</path>
+                <pathName>kitchen</pathName>
+            </exit>
+            <exit>
+                <path>west</path>
+                <pathName>bedroom</pathName>
+            </exit>
+        </roomExits>
         <items>
-            <item>1</item>
-            <item>2</item>
-            <item>3</item>
+            <item>candle</item>
+            <item>test</item>
         </items>
         <roomDescription>
             Heat radiates from an oversized fireplace with stockings hanging dangerously too close to flames, likely
@@ -31,22 +34,22 @@
     </room>
     <room>
         <id>2</id>
-        <name>library</name>
-        <exits>
-            <north>
-                <name>loudRoom</name>
-            </north>
-            <south>
-                <name>creekyPath</name>
-            </south>
-            <west>
-                <name>living</name>
-            </west>
-        </exits>
+        <roomName>library</roomName>
+        <roomExits>
+            <exit>
+                <path>north</path>
+                <pathName>loudRoom</pathName>
+            </exit>
+            <exit>
+                <path>south</path>
+                <pathName>creekyPath</pathName>
+            </exit>
+            <exit>
+                <path>west</path>
+                <pathName>living</pathName>
+            </exit>
+        </roomExits>
         <items>
-            <item>1</item>
-            <item>2</item>
-            <item>3</item>
         </items>
         <roomDescription>
             With cobwebbed filled shelves, oversized portraits with headless bodies, and open skylights add an extra
@@ -57,19 +60,18 @@
     </room>
     <room>
         <id>3</id>
-        <name>loudRoom</name>
-        <exits>
-            <east>
-                <name>engravingCave</name>
-            </east>
-            <south>
-                <name>library</name>
-            </south>
-        </exits>
+        <roomName>loudRoom</roomName>
+        <roomExits>
+            <exit>
+                <path>east</path>
+                <pathName>engravingCave</pathName>
+            </exit>
+            <exit>
+                <path>south</path>
+                <pathName>library</pathName>
+            </exit>
+        </roomExits>
         <items>
-            <item>1</item>
-            <item>2</item>
-            <item>3</item>
         </items>
         <roomDescription>
             As if you have entered a Kiss concert, music blares against your ears.
@@ -79,19 +81,18 @@
     </room>
     <room>
         <id>4</id>
-        <name>bedroom</name>
-        <exits>
-            <east>
-                <name>living</name>
-            </east>
-            <south>
-                <name>closet</name>
-            </south>
-        </exits>
+        <roomName>bedroom</roomName>
+        <roomExits>
+            <exit>
+                <path>east</path>
+                <pathName>living</pathName>
+            </exit>
+            <exit>
+                <path>south</path>
+                <pathName>closet</pathName>
+            </exit>
+        </roomExits>
         <items>
-            <item>1</item>
-            <item>2</item>
-            <item>3</item>
         </items>
         <roomDescription>
             An unmade child's bed sits in the center of the room, the foot of the bed facing the wall.
@@ -101,16 +102,14 @@
     </room>
     <room>
         <id>5</id>
-        <name>kitchen</name>
-        <exits>
-            <north>
-                <name>living</name>
-            </north>
-        </exits>
+        <roomName>kitchen</roomName>
+        <roomExits>
+            <exit>
+                <path>north</path>
+                <pathName>living</pathName>
+            </exit>
+        </roomExits>
         <items>
-            <item>1</item>
-            <item>2</item>
-            <item>3</item>
         </items>
         <roomDescription>
             Like darts, knives hang from the vaulted ceiling in varying sizes.
@@ -121,19 +120,18 @@
     </room>
     <room>
         <id>6</id>
-        <name>creekyPath</name>
-        <exits>
-            <north>
-                <name>library</name>
-            </north>
-            <east>
-                <name>coalMine</name>
-            </east>
-        </exits>
+        <roomName>creekyPath</roomName>
+        <roomExits>
+            <exit>
+                <path>north</path>
+                <pathName>library</pathName>
+            </exit>
+            <exit>
+                <path>east</path>
+                <pathName>coalMine</pathName>
+            </exit>
+        </roomExits>
         <items>
-            <item>1</item>
-            <item>2</item>
-            <item>3</item>
         </items>
         <roomDescription>
             Above a bed of rocks with crashing waters, a wooden bridge cries in the wind.
@@ -142,16 +140,14 @@
     </room>
     <room>
         <id>7</id>
-        <name>coalMine</name>
-        <exits>
-            <west>
-                <name>creekyPath</name>
-            </west>
-        </exits>
+        <roomName>coalMine</roomName>
+        <roomExits>
+            <exit>
+                <path>west</path>
+                <pathName>creekyPath</pathName>
+            </exit>
+        </roomExits>
         <items>
-            <item>1</item>
-            <item>2</item>
-            <item>3</item>
         </items>
         <roomDescription>
             Dimly lit lamps, covered in soot, line the walls of the mine down a path cut short by tumbled rock.
@@ -160,16 +156,14 @@
     </room>
     <room>
         <id>8</id>
-        <name>secretPassage</name>
-        <exits>
-            <north>
-                <name>kitchen</name>
-            </north>
-        </exits>
+        <roomName>secretPassage</roomName>
+        <roomExits>
+            <exit>
+                <path>north</path>
+                <pathName>kitchen</pathName>
+            </exit>
+        </roomExits>
         <items>
-            <item>1</item>
-            <item>2</item>
-            <item>3</item>
         </items>
         <roomDescription>
             Long and narrow before you, an empty passage shows a single door at the opposite end.
@@ -177,16 +171,14 @@
     </room>
     <room>
         <id>9</id>
-        <name>torchRoom</name>
-        <exits>
-            <east>
-                <name>secretPassage</name>
-            </east>
-        </exits>
+        <roomName>torchRoom</roomName>
+        <roomExits>
+            <exit>
+                <path>east</path>
+                <pathName>secretPassage</pathName>
+            </exit>
+        </roomExits>
         <items>
-            <item>1</item>
-            <item>2</item>
-            <item>3</item>
         </items>
         <roomDescription>
             Tiki torches line a maze through the room.
@@ -195,16 +187,15 @@
     </room>
     <room>
         <id>10</id>
-        <name>treasureRoom</name>
-        <exits>
-            <south>
-                <name>torchRoom</name>
-            </south>
-        </exits>
+        <roomName>treasureRoom</roomName>
+        <roomExits>
+            <exit>
+                <path>south</path>
+                <pathName>torchRoom</pathName>
+            </exit>
+        </roomExits>
         <items>
-            <item>1</item>
-            <item>2</item>
-            <item>3</item>
+            <item>key</item>
         </items>
         <roomDescription>
             Piles upon piles of gold and gems climb to the top of the room, surrounding a platinum river flowing through
@@ -214,19 +205,18 @@
     </room>
     <room>
         <id>11</id>
-        <name>riddleRoom</name>
-        <exits>
-            <east>
-                <name>closet</name>
-            </east>
-            <west>
-                <name>whisperingPassage</name>
-            </west>
-        </exits>
+        <roomName>riddleRoom</roomName>
+        <roomExits>
+            <exit>
+                <path>east</path>
+                <pathName>closet</pathName>
+            </exit>
+            <exit>
+                <path>west</path>
+                <pathName>whisperingPassage</pathName>
+            </exit>
+        </roomExits>
         <items>
-            <item>1</item>
-            <item>2</item>
-            <item>3</item>
         </items>
         <roomDescription>
             The empty room bares a tulip filled wallpaper with a single portion ripped away to reveal a riddle.
@@ -237,16 +227,14 @@
     </room>
     <room>
         <id>12</id>
-        <name>whisperingPassage</name>
-        <exits>
-            <west>
-                <name>treasureRoom</name>
-            </west>
-        </exits>
+        <roomName>whisperingPassage</roomName>
+        <roomExits>
+            <exit>
+                <path>west</path>
+                <pathName>treasureRoom</pathName>
+            </exit>
+        </roomExits>
         <items>
-            <item>1</item>
-            <item>2</item>
-            <item>3</item>
         </items>
         <roomDescription>
             With each step you take down the cobblestone path, a footstep behind you can be heard.
@@ -256,19 +244,19 @@
     </room>
     <room>
         <id>13</id>
-        <name>closet</name>
-        <exits>
-            <north>
-                <name>bedroom</name>
-            </north>
-            <west>
-                <name>riddleRoom</name>
-            </west>
-        </exits>
+        <roomName>closet</roomName>
+        <roomExits>
+            <exit>
+                <path>north</path>
+                <pathName>bedroom</pathName>
+            </exit>
+            <exit>
+                <path>west</path>
+                <pathName>riddleRoom</pathName>
+            </exit>
+        </roomExits>
         <items>
-            <item>1</item>
-            <item>2</item>
-            <item>3</item>
+            <item>match</item>
         </items>
         <roomDescription>
             A single light dimly guides you through a small space.
@@ -279,19 +267,18 @@
     </room>
     <room>
         <id>14</id>
-        <name>swingingStairs</name>
-        <exits>
-            <north>
-                <name>egyptianRoom</name>
-            </north>
-            <south>
-                <name>living</name>
-            </south>
-        </exits>
+        <roomName>swingingStairs</roomName>
+        <roomExits>
+            <exit>
+                <path>north</path>
+                <pathName>egyptianRoom</pathName>
+            </exit>
+            <exit>
+                <path>south</path>
+                <pathName>living</pathName>
+            </exit>
+        </roomExits>
         <items>
-            <item>1</item>
-            <item>2</item>
-            <item>3</item>
         </items>
         <roomDescription>
             From left to right, staircases move around you, loud and reckless, clashing against walls like thunder.
@@ -300,22 +287,22 @@
     </room>
     <room>
         <id>15</id>
-        <name>egyptianRoom</name>
-        <exits>
-            <east>
-                <name>landOfDead</name>
-            </east>
-            <south>
-                <name>living</name>
-            </south>
-            <west>
-                <name>artRoom</name>
-            </west>
-        </exits>
+        <roomName>egyptianRoom</roomName>
+        <roomExits>
+            <exit>
+                <path>east</path>
+                <pathName>landOfDead</pathName>
+            </exit>
+            <exit>
+                <path>south</path>
+                <pathName>living</pathName>
+            </exit>
+            <exit>
+                <path>west</path>
+                <pathName>artRoom</pathName>
+            </exit>
+        </roomExits>
         <items>
-            <item>1</item>
-            <item>2</item>
-            <item>3</item>
         </items>
         <roomDescription>
             As you step through the door, sand brushes across your face, forcing your eyes to veer to upward.
@@ -324,16 +311,14 @@
     </room>
     <room>
         <id>16</id>
-        <name>landOfDead</name>
-        <exits>
-            <west>
-                <name>egyptianRoom</name>
-            </west>
-        </exits>
+        <roomName>landOfDead</roomName>
+        <roomExits>
+            <exit>
+                <path>west</path>
+                <pathName>egyptianRoom</pathName>
+            </exit>
+        </roomExits>
         <items>
-            <item>1</item>
-            <item>2</item>
-            <item>3</item>
         </items>
         <roomDescription>
             With every step, your feet slush through murky water. Willow branches hang low above you, blocking clear
@@ -344,16 +329,14 @@
     </room>
     <room>
         <id>17</id>
-        <name>artRoom</name>
-        <exits>
-            <east>
-                <name>egyptianRoom</name>
-            </east>
-        </exits>
+        <roomName>artRoom</roomName>
+        <roomExits>
+            <exit>
+                <path>east</path>
+                <pathName>egyptianRoom</pathName>
+            </exit>
+        </roomExits>
         <items>
-            <item>1</item>
-            <item>2</item>
-            <item>3</item>
         </items>
         <roomDescription>
             Fumes of alcohol fill the air as moisture drips down the paintings on easels, almost as if the subjects are
@@ -364,19 +347,18 @@
     </room>
     <room>
         <id>18</id>
-        <name>engravingCave</name>
-        <exits>
-            <north>
-                <name>floatingRoom</name>
-            </north>
-            <west>
-                <name>loudRoom</name>
-            </west>
-        </exits>
+        <roomName>engravingCave</roomName>
+        <roomExits>
+            <exit>
+                <path>north</path>
+                <pathName>floatingRoom</pathName>
+            </exit>
+            <exit>
+                <path>west</path>
+                <pathName>loudRoom</pathName>
+            </exit>
+        </roomExits>
         <items>
-            <item>1</item>
-            <item>2</item>
-            <item>3</item>
         </items>
         <roomDescription>
             Musty air carries you through a tombstone filled cave, scratches covering the walls, random but deep.
@@ -385,16 +367,14 @@
     </room>
     <room>
         <id>19</id>
-        <name>floatingRoom</name>
-        <exits>
-            <west>
-                <name>landOfDead</name>
-            </west>
-        </exits>
+        <roomName>floatingRoom</roomName>
+        <roomExits>
+            <exit>
+                <path>west</path>
+                <pathName>landOfDead</pathName>
+            </exit>
+        </roomExits>
         <items>
-            <item>1</item>
-            <item>2</item>
-            <item>3</item>
         </items>
         <roomDescription>
             Heavy as a boulder, standing on a feather, your foot triggers a pressure plate on the floor.
