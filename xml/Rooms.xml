@@ -22,6 +22,7 @@
         </roomExits>
         <items>
             <item>candle</item>
+            <item>test</item>
         </items>
         <roomDescription>
             Heat radiates from an oversized fireplace with stockings hanging dangerously too close to flames, likely causing the extra singed aroma.
@@ -47,7 +48,6 @@
             </exit>
         </roomExits>
         <items>
-            <item>none</item>
         </items>
         <roomDescription>
             With cobwebbed filled shelves, oversized portraits with headless bodies, and open skylights add an extra hill of mystery to the room.
@@ -69,7 +69,6 @@
             </exit>
         </roomExits>
         <items>
-            <item>none</item>
         </items>
         <roomDescription>
             As if you have entered a Kiss concert, music blares against your ears.
@@ -91,7 +90,6 @@
             </exit>
         </roomExits>
         <items>
-            <item>none</item>
         </items>
         <roomDescription>
             An unmade child's bed sits in the center of the room, the foot of the bed facing the wall.
@@ -109,7 +107,6 @@
             </exit>
         </roomExits>
         <items>
-            <item>none</item>
         </items>
         <roomDescription>
             Like darts, knives hang from the vaulted ceiling in varying sizes.
@@ -131,7 +128,6 @@
             </exit>
         </roomExits>
         <items>
-            <item>none</item>
         </items>
         <roomDescription>
             Above a bed of rocks with crashing waters, a wooden bridge cries in the wind.
@@ -148,7 +144,6 @@
             </exit>
         </roomExits>
         <items>
-            <item>none</item>
         </items>
         <roomDescription>
             Dimly lit lamps, covered in soot, line the walls of the mine down a path cut short by tumbled rock.
@@ -165,7 +160,6 @@
             </exit>
         </roomExits>
         <items>
-            <item>none</item>
         </items>
         <roomDescription>
             Long and narrow before you, an empty passage shows a single door at the opposite end.
@@ -181,7 +175,6 @@
             </exit>
         </roomExits>
         <items>
-            <item>none</item>
         </items>
         <roomDescription>
             Tiki torches line a maze through the room.
@@ -219,7 +212,6 @@
             </exit>
         </roomExits>
         <items>
-            <item>none</item>
         </items>
         <roomDescription>
             The empty room bares a tulip filled wallpaper with a single portion ripped away to reveal a riddle.
@@ -238,7 +230,6 @@
             </exit>
         </roomExits>
         <items>
-            <item>none</item>
         </items>
         <roomDescription>
             With each step you take down the cobblestone path, a footstep behind you can be heard.
@@ -282,7 +273,6 @@
             </exit>
         </roomExits>
         <items>
-            <item>none</item>
         </items>
         <roomDescription>
             From left to right, staircases move around you, loud and reckless, clashing against walls like thunder.
@@ -307,7 +297,6 @@
             </exit>
         </roomExits>
         <items>
-            <item>none</item>
         </items>
         <roomDescription>
             As you step through the door, sand brushes across your face, forcing your eyes to veer to upward.
@@ -324,7 +313,6 @@
             </exit>
         </roomExits>
         <items>
-            <item>none</item>
         </items>
         <roomDescription>
             With every step, your feet slush through murky water. Willow branches hang low above you, blocking clear sight of an exit.
@@ -341,7 +329,6 @@
             </exit>
         </roomExits>
         <items>
-            <item>none</item>
         </items>
         <roomDescription>
             Fumes of alcohol fill the air as moisture drips down the paintings on easels, almost as if the subjects are crying themselves.
@@ -363,7 +350,6 @@
             </exit>
         </roomExits>
         <items>
-            <item>none</item>
         </items>
         <roomDescription>
             Musty air carries you through a tombstone filled cave, scratches covering the walls, random but deep.
@@ -380,7 +366,6 @@
             </exit>
         </roomExits>
         <items>
-            <item>none</item>
         </items>
         <roomDescription>
             Heavy as a boulder, standing on a feather, your foot triggers a pressure plate on the floor.
