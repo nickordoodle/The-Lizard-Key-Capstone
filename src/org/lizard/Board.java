@@ -16,7 +16,7 @@ public class Board {
     private Map<String, Map<String, String>> allExits = new HashMap<>();
     private Map<String, Item> allItems = new HashMap<>();
 
-    public Board(){
+    public Board() {
         createMap();
     }
 
@@ -69,16 +69,15 @@ public class Board {
         return currentRoom;
     }
 
-    public void changeCurrentRoom(String direction){
+    public String changeCurrentRoom(String direction) {
         Map<String, Room> exits = currentRoom.getExits();
 
-        if(exits.containsKey(direction)){
+        if (exits.containsKey(direction)) {
             currentRoom = exits.get(direction);
-            System.out.println("current room is "+ currentRoom.getName());
-            System.out.println(currentRoom.getRoomDescription());
-        }
-        else{
-            System.out.println("That is not an exit.");
+            return ("current room is " + currentRoom.getName() + "\n" + currentRoom.getRoomDescription());
+
+        } else {
+            return ("That is not an exit.");
         }
 
     }

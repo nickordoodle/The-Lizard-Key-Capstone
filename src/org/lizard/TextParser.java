@@ -21,7 +21,7 @@ public class TextParser {
             }
         }
 
-        for (int i = 0; i < words.length; i++ ) {
+        for (int i = 0; i < words.length; i++) {
             GameDictionary.Noun possibleNoun = gameDictionary.checkNoun(words[i]);
             if (possibleNoun != null) {
                 noun = possibleNoun;
@@ -38,7 +38,7 @@ public class TextParser {
             }
         }
 
-        if(targetNoun != null) {
+        if (targetNoun != null) {
             return new Command(verb, noun, targetNoun);
         }
         return new Command(verb, noun);

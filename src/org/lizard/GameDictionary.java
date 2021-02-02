@@ -14,12 +14,16 @@ public class GameDictionary {
 //        setDirections();
     }
 
+    public static GameDictionary getGameDictionary() {
+        return gameDictionary;
+    }
+
     private void setVerbs() {
         verbs.put("grab", 1);
         verbs.put("take", 1);
         verbs.put("go", 2);
         verbs.put("move", 2);
-        verbs.put("examine",3);
+        verbs.put("examine", 3);
         verbs.put("use", 4);
     }
 
@@ -37,8 +41,15 @@ public class GameDictionary {
     public Integer checkVerb(String word) {
         return verbs.get(word);
     }
+
     public Noun checkNoun(String word) {
         return nouns.get(word);
+    }
+
+    public void printNouns() {
+        gameDictionary.nouns.entrySet().forEach(set -> {
+            System.out.println(set.getKey() + " is in dictionary");
+        });
     }
 
     public static class Noun {
@@ -52,22 +63,9 @@ public class GameDictionary {
         private boolean puttable = false;
         private boolean eatable = false;
         private boolean chatable = false;
-        public boolean isUseable() {
-            return useable;
-        }
-
-        public void setUseable(Lock lock) {
-            this.lock = lock;
-            useable = true;
-        }
-
         private boolean useable = false;
-
         private Lock lock = null;
-
         private String name;
-
-
         private String description = "hi, i am a noun";
 
         public Noun(String name) {
@@ -75,15 +73,26 @@ public class GameDictionary {
             addToGameDictionary();
         }
 
+
         public Noun(String name, Lock lock) {
             this.name = name;
             setUseable(lock);
             addToGameDictionary();
         }
+
         public Noun(String name, String description) {
             this.name = name;
             this.description = description;
             addToGameDictionary();
+        }
+
+        public boolean isUseable() {
+            return useable;
+        }
+
+        public void setUseable(Lock lock) {
+            this.lock = lock;
+            useable = true;
         }
 
         public boolean isGrabable() {
@@ -162,6 +171,7 @@ public class GameDictionary {
             gameDictionary.addNoun(this);
 
         }
+
         public String getDescription() {
             return description;
         }
@@ -178,20 +188,10 @@ public class GameDictionary {
         public Lock getLock() {
             return lock;
         }
+
         public void deleteLock() {
             lock = null;
         }
-    }
-
-
-    public void printNouns() {
-        gameDictionary.nouns.entrySet().forEach(set -> {
-            System.out.println(set.getKey() + " is in dictionary");
-        });
-    }
-
-    public static GameDictionary getGameDictionary() {
-        return gameDictionary;
     }
 
 

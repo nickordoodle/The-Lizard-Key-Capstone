@@ -1,70 +1,69 @@
 package org.lizard;
 
-import java.awt.*;
-import java.util.List;
-
 public class Actions {
     private Board board;
     private Player player;
+    private Room room;
+    private GameDictionary gameDictionary;
 
     public Actions(Board board, Player player) {
         this.board = board;
         this.player = player;
     }
 
-    public void execute(Command command) {
+    public String execute(Command command) {
 
 
-        if (command.getVerb() == null && command.getNoun() == null){
-            System.out.println("Wrong command");
-            return;
-        }
-        if(command.getVerb() == null && command.getNoun() != null) {
-            System.out.println(command.getNoun().getDescription());
-            return;
-        }
-        if(command.getTargetNoun() != null && command.getVerb() != 4) {
-            System.out.println("You tried to use a " + command.getVerb() + " with 2 nouns? What you trying to break my code or something?");
-        }
-        else{
-            switch(command.getVerb()) {
-                case 1:
-                    grab(command.getNoun());
-                    break;
-                case 2:
-                    move(command.getNoun());
-                    break;
-                case 3:
-                    examine(command.getNoun());
-                    break;
-                case 4:
-                    use(command.getNoun(), command.getTargetNoun());
-                    break;
-            }
-        }
-    }
+        if (command.getVerb() == null && command.getNoun() == null) {
+            return "Wrong command";
 
-    private void move(GameDictionary.Noun direction) {
+        }
+        if (command.getVerb() == null && command.getNoun() != null) {
+            return (command.getNoun().getDescription());
 
-        if(direction instanceof Direction) {
-            board.changeCurrentRoom(((Direction) direction).getDirection());
-            if(player.getHasKey() && board.getCurrentRoom().getName().equals("kitchen")) {
-                System.out.println("YOU WIN!!!!!!!!!!!!!!!!!!!!");
-                System.exit(1);
-            }
+        }
+        if (command.getTargetNoun() != null && command.getVerb() != 4) {
+            return ("You tried to use a " + command.getVerb() + " with 2 nouns? What you trying to break my code or something?");
         } else {
-            System.out.println("What??? you can't go there.");
+            switch (command.getVerb()) {
+                case 1:
+                    return grab(command.getNoun());
+
+                case 2:
+                    return move(command.getNoun());
+
+                case 3:
+                    return examine(command.getNoun());
+
+                case 4:
+                    return use(command.getNoun(), command.getTargetNoun());
+
+            }
+        }
+        return null;
+    }
+
+
+    private String move(GameDictionary.Noun direction) {
+
+        if (direction instanceof Direction) {
+            return (board.changeCurrentRoom(((Direction) direction).getDirection()));
+//            if(player.getHasKey() && board.getCurrentRoom().getName().equals("kitchen")) {
+//                return ("YOU WIN!!!!!!!!!!!!!!!!!!!!");
+//
+//            }
+        } else {
+            return ("What??? you can't go there.");
         }
 
     }
 
 
-    private void grab(GameDictionary.Noun noun) {
-        if(noun == null) {
-            System.out.println("That doesn't exist");
-        }
-        else if(!noun.isGrabable()) {
-            System.out.println("You can't even grab a " + noun.getName());
+    private String grab(GameDictionary.Noun noun) {
+        if (noun == null) {
+            return ("That doesn't exist");
+        } else if (!noun.isGrabable()) {
+            return ("You can't even grab a " + noun.getName());
         } else {
 
             //TODO grab item logic
@@ -73,53 +72,61 @@ public class Actions {
             //check if the room has the item else return fail
             Item grabbedItem = currentRoom.grabItem((Item) noun);
             //if it does exist pop it off room item list
-            if(grabbedItem != null) {
+            if (grabbedItem != null) {
                 player.getInventory().add(grabbedItem);
-                System.out.println("You grabbed the " + noun.getName());
+                return ("You grabbed the " + noun.getName());
             } else {
-                System.out.println("You can't");
+                return ("You can't");
             }
 
         }
     }
 
-    public void use(GameDictionary.Noun noun, GameDictionary.Noun targetNoun) {
+    public String use(GameDictionary.Noun noun, GameDictionary.Noun targetNoun) {
         Lock targetLock = targetNoun.getLock();
 
-        if(targetLock == null) {
-            System.out.println("Thats not how this works.");
-            return;
+        if (targetLock == null) {
+            return ("Thats not how this works.");
+
         }
-        if(!player.getInventory().has((Item) noun)) {
-            System.out.println("You don't have a " + noun.getName() + " in your inventory.");
-            return;
+        if (!player.getInventory().has((Item) noun)) {
+            return ("You don't have a " + noun.getName() + " in your inventory.");
+
         }
-        if(!board.getCurrentRoom().has((Item) targetNoun) && !player.getInventory().has((Item) targetNoun)) {
-            System.out.println("There isn't a " + targetNoun.getName() + " here.");
-            return;
+        if (!board.getCurrentRoom().has((Item) targetNoun) && !player.getInventory().has((Item) targetNoun)) {
+            return ("There isn't a " + targetNoun.getName() + " here.");
+
         }
-        if(targetLock.getNoun() == noun) {
+        if (targetLock.getNoun() == noun) {
             targetLock.printDescription();
             this.execute(targetLock.getCommand());
             targetNoun.deleteLock();
 
         }
+        return null;
     }
 
-    private void examine(GameDictionary.Noun noun){
-       Room currentRoom = board.getCurrentRoom();
-        if(noun == null){
-            System.out.println("Examining room...");
-            //prints description of the current room
-            System.out.println(currentRoom.getRoomDescription());
+    private String examine(GameDictionary.Noun noun) {
+
+
+        Room currentRoom = board.getCurrentRoom();
+        if (noun == null) { //examine
+            return ("Examining room...\n " + currentRoom.getRoomDescription());
+
+
+        } else if (!noun.isExaminable()) {
+            return ("You can't examine " + noun.getName());
+        } else {
+            if (noun.getName().equals("items")) { //examine items
+
+                return ("Items presnet in the " + currentRoom.getName() + " are: " + currentRoom.printItemsInRoom());
+            } else if (currentRoom.has((Item) noun)) { //examine candle
+                return ("Hi, I am a " + noun.getName());
+            } else {
+
+                return (noun.getName() + " is not present in the  " + currentRoom.getName());
+            }
 
         }
-        else{
-            System.out.println(noun.getDescription());
-        }
-
-        //if noun, check if that noun is in the currentRoom
-        //if it is, get noun.getDescription
-
     }
 }

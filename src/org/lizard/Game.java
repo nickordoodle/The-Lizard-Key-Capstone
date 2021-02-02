@@ -11,8 +11,10 @@ public class Game {
     Prompter prompter = new Prompter(new Scanner(System.in));
     Board board = new Board();
     Actions actions = new Actions(board, player);
+    MyJFrame frame;
 
     public void start() {
+
         new Direction("north");
         new Direction("south");
         new Direction("east");
@@ -22,14 +24,18 @@ public class Game {
         new Funsies("help", "examine something");
         new Funsies("where", "idk figure it out");
         new Funsies("what", "idk figure it out");
+        new MyJFrame();
 
-        Story.introduction();
 
-        while(true){
-            String input = prompter.promptPlayer("What you wanna do?");
-            Command command = parser.parse(input);
-            actions.execute(command);
-        }
+//        Story.introduction();
+//        gameDictionary.printNouns();
+
+//        while(true){
+////            String input = prompter.promptPlayer("What you wanna do?");
+////
+//            Command command = parser.parse(input);
+//            actions.execute(command);
+//        }
     }
 
 }
