@@ -67,10 +67,6 @@ public class Actions {
 
         if(direction instanceof Directions.Direction) {
             board.changeCurrentRoom(((Directions.Direction) direction).getDirection());
-            if(player.getHasKey() && board.getCurrentRoom().getName().equals("kitchen")) {
-                System.out.println("YOU WIN!!!!!!!!!!!!!!!!!!!!");
-                System.exit(1);
-            }
         } else {
             System.out.println("What??? you can't go there.");
         }

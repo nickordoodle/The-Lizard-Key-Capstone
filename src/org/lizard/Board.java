@@ -13,7 +13,7 @@ public class Board {
 
     public void createMap(){
 
-        Room living = new Room("living");
+        Room living = new Room("living room");
 //        Room library = new Room("library");
 //        Room loudRoom = new Room("loud room");
         Room bedroom = new Room("bedroom");
@@ -21,7 +21,7 @@ public class Board {
 //        Room creekyPath = new Room("creeky path");
 //        Room coalMine = new Room("coal mine");
 //        Room slideRoom = new Room("slide room");
-        Room secretPassage = new Room("secretPassage");
+        Room secretPassage = new Room("secret passage");
         Room torchRoom = new Room("torch room");
         Room treasureRoom = new Room("treasureRoom");
         Room riddleRoom = new Room("riddle room");
