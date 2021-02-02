@@ -1,0 +1,17 @@
+<items>
+    <item>
+        <id>1</id>
+        <name>match</name>
+        <description>This is a match.</description>
+    </item>
+    <item>
+        <id>2</id>
+        <name>candle</name>
+        <description>This is a candle.</description>
+    </item>
+    <item>
+        <id>3</id>
+        <name>key</name>
+        <description>This is a key.</description>
+    </item>
+</items>
