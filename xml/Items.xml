@@ -3,24 +3,40 @@
         <id>1</id>
         <name>match</name>
         <roomName>closet</roomName>
+        <lockKey>none</lockKey>
+        <lockMessage></lockMessage>
+        <commandInt></commandInt>
+        <commandDirection></commandDirection>
         <description>This is a match.</description>
     </item>
     <item>
         <id>2</id>
         <name>candle</name>
         <roomName>living</roomName>
+        <lockKey>match</lockKey>
+        <lockMessage>The candle has lit. You run west!</lockMessage>
+        <commandInt>2</commandInt>
+        <commandDirection>west</commandDirection>
         <description>This is a candle.</description>
     </item>
     <item>
         <id>3</id>
         <name>key</name>
         <roomName>treasureRoom</roomName>
+        <lockKey>none</lockKey>
+        <lockMessage></lockMessage>
+        <commandInt></commandInt>
+        <commandDirection></commandDirection>
         <description>This is a key.</description>
     </item>
     <item>
         <id>4</id>
         <name>test</name>
         <roomName>living</roomName>
+        <lockKey>none</lockKey>
+        <lockMessage></lockMessage>
+        <commandInt></commandInt>
+        <commandDirection></commandDirection>
         <description>This is a test object.</description>
     </item>
 </items>
