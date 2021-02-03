@@ -1,0 +1,9 @@
+<rooms>
+    <room>
+        <roomName>library</roomName>
+        <path>north</path>
+        <lockKey>library key</lockKey>
+        <lockMessage>You have Unlocked the room.</lockMessage>
+        <commandInt>2</commandInt>
+    </room>
+</rooms>

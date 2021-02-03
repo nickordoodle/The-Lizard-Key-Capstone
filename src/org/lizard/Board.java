@@ -199,6 +199,35 @@ public class Board {
                 room.addLock(lockMap.get("commandDirection") ,new Lock(allItems.get(lockMap.get("lockKey")), lockMap.get("lockMessage"), new Event(Integer.parseInt(lockMap.get("commandInt")), directions.getDirection(lockMap.get("commandDirection")))));
             }
         }
+
+
+//        NodeList nodeList = XMLParser("xml/RoomLocks.xml", "room");
+//        // Iterate over each rooms
+//        for (int itr = 0; itr < nodeList.getLength(); itr++) {
+//            // Make a node from nodeList at the current index
+//            Node node = nodeList.item(itr);
+//            if (node.getNodeType() == Node.ELEMENT_NODE) {
+//
+//                // Make the node an element to gain access to text content
+//                Element itemElement = (Element) node;
+//
+//                // Save values of the lock
+//                String roomName = itemElement.getElementsByTagName("roomName").item(0).getTextContent();
+//                String commandDirection = itemElement.getElementsByTagName("path").item(0).getTextContent();
+//                String lockKey = itemElement.getElementsByTagName("lockKey").item(0).getTextContent();
+//                String lockMessage = itemElement.getElementsByTagName("lockMessage").item(0).getTextContent();
+//                String commandInt = itemElement.getElementsByTagName("commandInt").item(0).getTextContent();
+//
+//                System.out.println(allItems.get(lockKey).getName());
+//                // Create new instance of the lock in its respective room
+//                allRooms.get(roomName)
+//                        .addLock(commandDirection,
+//                                new Lock(allItems.get(lockKey),
+//                                        lockMessage,
+//                                        new Event(Integer.parseInt(commandInt),
+//                                                directions.getDirection(commandDirection))));
+//            }
+//        }
     }
 }
 
