@@ -66,6 +66,10 @@ public class Actions {
 
 
     private String move(GameDictionary.Noun direction) {
+        if(board.getCurrentRoom().getName() == "swingingStairs"){
+            Combat combat = new Combat();
+            combat.startCombat(player, new Enemy("Goblin"));
+        }
         if(direction instanceof Directions.Direction) {
             if(player.hasWinningKey && board.getCurrentRoom().getName().equals("living")) {
                 return "You used the key in the living room. You teleport and wake up from your dream. You notice its 7:30 am. time to go to work.";
