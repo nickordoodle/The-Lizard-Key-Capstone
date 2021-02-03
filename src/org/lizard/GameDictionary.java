@@ -53,7 +53,7 @@ public class GameDictionary {
         private boolean useable = false;
         private Lock lock = null;
         private String name;
-        private String description = "hi, i am a noun";
+        private String description;
 
         public Noun(String name) {
             this.name = name;
