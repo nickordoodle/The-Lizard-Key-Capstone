@@ -33,7 +33,7 @@ public class Player {
             if(inventory.size() == 5) {
                 return "You are holding too many items.";
             } else {
-                if(item.getName().equals("key")) {
+                if(item.getName().equals("lizard key")) {
                     hasWinningKey = true;
                 }
                 inventory.add(item);
