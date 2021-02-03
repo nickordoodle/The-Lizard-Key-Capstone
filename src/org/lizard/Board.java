@@ -199,7 +199,6 @@ public class Board {
                 Map<String, String> lockMap = locksEntrySet.getValue().get(i);
                 room.addLock(lockMap.get("commandDirection") ,new Lock(allItems.get(lockMap.get("lockKey")), lockMap.get("lockMessage"), new Event(Integer.parseInt(lockMap.get("commandInt")), directions.getDirection(lockMap.get("commandDirection")))));
             }
-            System.out.println(room.getLock("north") + "LDSALLDAS");
         }
     }
 }
