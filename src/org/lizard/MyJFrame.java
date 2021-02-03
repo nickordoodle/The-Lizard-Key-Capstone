@@ -19,10 +19,6 @@ public class MyJFrame extends JPanel {
     JTextField textField = new JTextField();
 
     MyJFrame() {
-//        new Direction("north");
-//        new Direction("south");
-//        new Direction("east");
-//        new Direction("west");
         System.out.println(gameDictionary.getKnownWords());
         new Funsies("jump", "Good for you");
         new Funsies("hello", "hi");
