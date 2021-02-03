@@ -9,11 +9,13 @@ public class Actions {
     private final Board board;
     private final Player player;
     private final MyJFrame frame;
+    private List<Room> roomsVisited = new ArrayList<>();
 
     public Actions(Board board, Player player, MyJFrame frame) {
         this.board = board;
         this.player = player;
         this.frame = frame;
+        roomsVisited.add(board.getCurrentRoom());
     }
 
 
@@ -73,6 +75,9 @@ public class Actions {
         if(direction instanceof Directions.Direction) {
             if(player.hasWinningKey && board.getCurrentRoom().getName().equals("living")) {
                 return "You used the key in the living room. You teleport and wake up from your dream. You notice its 7:30 am. time to go to work.";
+            }
+            if (!roomsVisited.contains(board.getCurrentRoom())) {
+                roomsVisited.add(board.getCurrentRoom());
             }
            return board.changeCurrentRoom(((Directions.Direction) direction).getDirection());
         } else {
@@ -154,9 +159,23 @@ public class Actions {
 
     private String examine(GameDictionary.Noun noun){
         Room currentRoom = board.getCurrentRoom();
+        Map<String, String> displayRooms = new HashMap<>();
         if (noun == null) { //examine
-            return ("Examining room...\n " + currentRoom.getRoomDescription());
-
+            System.out.println(currentRoom.getExits());
+            for (Map.Entry<String, Room> entry: currentRoom.getExits().entrySet()) {
+                System.out.println(entry.getValue());
+                if (roomsVisited.contains(entry.getValue())) {
+                    displayRooms.put(entry.getKey(), entry.getValue().getName());
+                } else {
+                    displayRooms.put(entry.getKey(), "?");
+                }
+            }
+            String paths = "\nAvailable Paths: ";
+            for (Map.Entry<String, String> entry : displayRooms.entrySet()) {
+                paths = paths.concat(entry.getKey() + ": " + entry.getValue() + "\n");
+            }
+            System.out.println(paths);
+            return ("Examining room...\n " + currentRoom.getRoomDescription()) + paths;
 
         } else if (!noun.isExaminable()) {
             return ("You can't examine " + noun.getName());
@@ -171,8 +190,6 @@ public class Actions {
             }
 
         }
-
-
     }
 
     public String drop(GameDictionary.Noun noun) {
