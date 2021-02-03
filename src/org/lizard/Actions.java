@@ -39,8 +39,11 @@ public class Actions {
             return (noun.getDescription());
 
         }
-        if (targetNoun != null && verb != 4) {
-            return ("You tried to use a " + verb + " with 2 nouns? What you trying to break my code or something?");
+        if(noun == null) {
+            return "WTF";
+        }
+        if (targetNoun == null && verb == 4) {
+            return "Nah dawg";
         } else {
             switch (verb) {
                 case 1:
@@ -104,7 +107,13 @@ public class Actions {
     }
 
     public String use(GameDictionary.Noun noun, GameDictionary.Noun targetNoun) {
+        if(targetNoun instanceof Directions.Direction) {
+            return unlockExit(((Directions.Direction) targetNoun).getDirection(), noun);
+
+        }
+
         Lock targetLock = targetNoun.getLock();
+
         if (targetLock == null) {
             return ("Thats not how this works.");
 
@@ -117,10 +126,7 @@ public class Actions {
             return ("There isn't a " + targetNoun.getName() + " here.");
 
         }
-        if(targetNoun instanceof Directions.Direction) {
-            return unlockExit(((Directions.Direction) targetNoun).getDirection(), noun);
 
-        }
         if (targetLock.getNoun() == noun) {
 
             this.execute(targetLock.getCommand());

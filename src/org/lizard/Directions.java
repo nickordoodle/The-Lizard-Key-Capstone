@@ -9,8 +9,15 @@ class Directions {
     public Directions() { }
 
     public Direction getDirection(String direction) {
-        if(direction.equals("west")) {
-            return west;
+        switch (direction) {
+            case "west":
+                return west;
+            case "north":
+                return north;
+            case "south":
+                return south;
+            case "east":
+                return east;
         }
         return null;
     }
