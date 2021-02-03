@@ -1,124 +1,206 @@
 package org.lizard;
 
-import java.util.HashMap;
-import java.util.Map;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import java.io.File;
+import java.util.*;
 
 public class Board {
     private Room currentRoom;
-    private Map<String, Room> rooms = new HashMap<>();
+    private final Directions directions = new Directions();
+    private Map<String, Room> allRooms = new HashMap<>();
+    private Map<String, Map<String, String>> allExits = new HashMap<>();
+    private Map<String, Item> allItems = new HashMap<>();
+    private Map<Room, List<Map<String, String>>> roomLocks = new HashMap<>();
 
-    public Board(){
+
+    public Board() {
         createMap();
     }
 
     public void createMap(){
+        // Call XMLParser to gain access to a nodeList of all the rooms in the XML file
+        NodeList nodeList = XMLParser("xml/Rooms.xml", "room");
+        // Create a for loop to go the length of the nodeList
+        for (int itr = 0; itr < nodeList.getLength(); itr++) {
+            Node node = nodeList.item(itr);
+            if (node.getNodeType() == Node.ELEMENT_NODE) {
+                // Create a way to hold the exits for each room before placing them in allExits
+                Map<String,String> exits = new HashMap<>();
+                Element eElement = (Element) node;
 
-        Room living = new Room("living");
-        Room library = new Room("library");
-        Room loudRoom = new Room("loud room");
-        Room bedroom = new Room("bedroom");
-        Room kitchen = new Room("kitchen");
-        Room creekyPath = new Room("creeky path");
-        Room coalMine = new Room("coal mine");
-        Room slideRoom = new Room("slide room");
-        Room secretPassage = new Room("secretPassage");
-        Room torchRoom = new Room("torch room");
-        Room treasureRoom = new Room("treasureRoom");
-        Room riddleRoom = new Room("riddle room");
-        Room whisperingPassage = new Room("whispering passage");
-        Room closet = new Room("closet");
-        Room swingingStairs = new Room("swinging stairs");
-        Room egyptianRoom = new Room("egyptian Room");
-        Room landOfDead = new Room("land of dead room");
-        Room artRoom = new Room("art room");
-        Room engravingCave = new Room("engraving cave");
-        Room floatingRoom = new Room("floating room");
+                // Gain and save all relevant information needed to create a Room class object
+                String roomId = eElement.getElementsByTagName("id").item(0).getTextContent();
 
-        living.setRoomDescription("\nHeat radiates from an oversized fireplace with stockings hanging dangerously too close to flames, likely causing the extra singed aroma.\n" +
-                "An old night stand features a stack of books that could compete with the Leaning Tower of Pisa.\n" +
-                "Across the room, a portrait of a man with knotted hair, fractured glasses, and a twisted smile, stares in your direction.");
-        bedroom.setRoomDescription("\nAn unmade child's bed sits in the center of the room, the foot of the bed facing the wall.\n" +
-                "Several dolls with cracked and fractured faces, follow you as you move around the room.\n" +
-                "From beneath the bed, a chill crawls up your legs, up your back, and around the sides of your neck.");
-        closet.setRoomDescription("\nA single light dimly guides you through a small space.\n" +
-                "Packed tight with clothes from eras that don't make sense to one another, you struggle to push your way through.\n" +
-                "Several shoe boxes lay atop the shelves, covered in dust.");
-        riddleRoom.setRoomDescription("\nThe empty room bares a tulip filled wallpaper with a single portion ripped away to reveal a riddle.\n" +
-                "With gold shining high in the sky, a bird cannot soar if it cannot fly.\n" +
-                "A stream that flows is a life to grow, a stream not of water may death undergo.\n" +
-                "Unlocking a secret is not a forfeit, go forward with the lizard to be rewarded.");
-        kitchen.setRoomDescription("\nLike darts, knives hang from the vaulted ceiling in varying sizes.\n" +
-                "Across the white marble island, an oven blasts heat in your direction, carrying the smell of blackened cookies.\n" +
-                "As if the walls were made of paper, conversations can be heard in the other room.");
-        whisperingPassage.setRoomDescription("\nWith each step you take down the cobblestone path, a footstep behind you can be heard.\n" +
-                "Whispers in your ear sound as if someone is right behind you, but upon turning around, no one is there.\n" +
-                "In the center of the path is a rotted bench with fresh flowers and a photograph.");
-        treasureRoom.setRoomDescription("\nPiles upon piles of gold and gems climb to the top of the room, surrounding a platinum river flowing through the middle.\n" +
-                "A single lizard shaped key stands on a single pedestal in the center of the river.");
-        torchRoom.setRoomDescription("\nTiki torches line a maze through the room.\n" +
-                "In the center of the room is an in-ground hot tub filled with lava, bubbling over the sides.");
-        secretPassage.setRoomDescription("\nLong and narrow before you, an empty passage shows a single door at the opposite end.");
+                // Get roomName and create a new Room class object
+                String roomName = eElement.getElementsByTagName("roomName").item(0).getTextContent();
+                Room room = new Room(roomName);
 
-        living.createRoom("east",library);
-        library.createRoom("west",living);
-        living.createRoom("west",bedroom);
-        bedroom.createRoom("east",living);
-        living.createRoom("south",kitchen);
-        kitchen.createRoom("north",living);
-        library.createRoom("south",creekyPath);
-        creekyPath.createRoom("north",library);
-        creekyPath.createRoom("east",coalMine);
-        coalMine.createRoom("west",creekyPath);
-        library.createRoom("north",loudRoom);
-        loudRoom.createRoom("south",library);
-        loudRoom.createRoom("east",engravingCave);
-        engravingCave.createRoom("west",loudRoom);
-        engravingCave.createRoom("north",floatingRoom);
-        floatingRoom.createRoom("west",landOfDead);
-        landOfDead.createRoom("west",egyptianRoom);
-        egyptianRoom.createRoom("east",landOfDead);
-        egyptianRoom.createRoom("west",artRoom);
-        artRoom.createRoom("east", egyptianRoom);
-        egyptianRoom.createRoom("south",swingingStairs);
-        swingingStairs.createRoom("north",egyptianRoom);
-        swingingStairs.createRoom("south",living);
-        living.createRoom("north",swingingStairs);
-        bedroom.createRoom("south",closet);
-        closet.createRoom("north",bedroom);
-        closet.createRoom("west",riddleRoom);
-        riddleRoom.createRoom("east",closet);
-        riddleRoom.createRoom("west",whisperingPassage);
-        whisperingPassage.createRoom("west",treasureRoom);
-        treasureRoom.createRoom("south",torchRoom);
-        torchRoom.createRoom("east",secretPassage);
-        secretPassage.createRoom("north",kitchen);
+                String roomDescription = eElement.getElementsByTagName("roomDescription").item(0).getTextContent();
+                // Add description to Room class object
+                room.setRoomDescription(roomDescription);
+
+                List<Map<String, String>> locks  = new ArrayList<>();
+
+
+                // Gain all exits for this particular room and save them in exits
+                for (int itr2 = 0; itr2 < eElement.getElementsByTagName("exit").getLength(); itr2++) {
+                    Map<String, String> holder = new HashMap<>();
+                    // Create an object with all of the directions and the corresponding rooms for this particular Room class object
+                    exits.put(eElement.getElementsByTagName("path").item(itr2).getTextContent(), eElement.getElementsByTagName("pathName").item(itr2).getTextContent());
+                    if(eElement.getElementsByTagName("lockKey").item(itr2) != null) {
+                        String lockKey = eElement.getElementsByTagName("lockKey").item(itr2).getTextContent();
+                        String lockMessage = eElement.getElementsByTagName("lockMessage").item(itr2).getTextContent();
+                        String commandInt = eElement.getElementsByTagName("commandInt").item(itr2).getTextContent();
+                        String commandDirection = eElement.getElementsByTagName("path").item(itr2).getTextContent();
 
 
 
+                        holder.put("commandDirection", commandDirection);
+                        holder.put("lockKey", lockKey);
+                        holder.put("lockMessage", lockMessage);
+                        holder.put("commandInt", commandInt);
+                        locks.add(holder);
 
-        treasureRoom.addItemToRoom(new Item("key"));
+                    }
+                }
+                roomLocks.put(room, locks);
 
 
-        this.currentRoom = living;
+                // Add the new exits Map object with the corresponding room name to allExits in order to build the Room class object exits later
+                allExits.put(roomName, exits);
 
+                // Add the new Room to allRooms, so after all rooms and exits have been put together, exits can be assigned to the correct rooms
+                allRooms.put(roomName, room);
+            }
+        }
 
+        // Add all exits to their respective rooms
+        addExitsToRooms();
+        // Add all items to their respective rooms
+        addItemsToRooms();
+        // Add locks to rooms
+        addLocksToRooms();
+
+        // Set starting room.
+        this.currentRoom = allRooms.get("living");
     }
 
     public Room getCurrentRoom() {
         return currentRoom;
     }
 
-    public void changeCurrentRoom(String direction){
+    public String changeCurrentRoom(String direction) {
         Map<String, Room> exits = currentRoom.getExits();
+        Lock lock = currentRoom.getLock(direction);
 
+        if(lock != null) {
+            return "Seems to be locked.";
+        }
         if(exits.containsKey(direction)){
             currentRoom = exits.get(direction);
-            System.out.println("current room is "+ currentRoom.getName());
-            System.out.println(currentRoom.getRoomDescription());
-        }
-        else{
-            System.out.println("That is not an exit.");
+            return ("current room is " + currentRoom.getName() + "\n" + currentRoom.getRoomDescription());
+
+        } else {
+            return ("That is not an exit.");
         }
 
     }
+
+    private NodeList XMLParser (String pathName, String tagName) {
+        NodeList nodeList;
+        try {
+            // Creating a constructor of file class and parsing an XML file
+            File file = new File(pathName);
+            // An instance of factory that gives a document builder
+            DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+            // An instance of builder to parse the specified xml file
+            DocumentBuilder db = dbf.newDocumentBuilder();
+            Document doc = db.parse(file);
+            doc.getDocumentElement().normalize();
+            nodeList = doc.getElementsByTagName(tagName);
+            return nodeList;
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+
+    private void addExitsToRooms() {
+        // Iterate over the nested Map objects in order to add all exits to their respective room
+        Iterator<Map.Entry<String, Map<String, String>>> iterator = allExits.entrySet().iterator();
+        while (iterator.hasNext()) {
+            // When calling entry.getKey(), you will get the String room name from allExits
+            // When calling entry.getValue(), you will get the Map<String, String> of the respective rooms exits
+            Map.Entry<String, Map<String, String>> entry = iterator.next();
+
+            // Create a second iterator for the inner Map
+            Iterator<Map.Entry<String, String>> iterator2 = entry.getValue().entrySet().iterator();
+            while (iterator2.hasNext()) {
+                // entry2.getKey() will return the String direction ("west", "north", etc)
+                // entry2.getValue() will return the String room ("library", "kitchen", etc)
+                Map.Entry<String, String> entry2 = iterator2.next();
+                // Get the Room class object from allRooms to create a new exit with the proper room exit
+                allRooms.get(entry.getKey()).createRoom(entry2.getKey(), allRooms.get(entry2.getValue()));
+            }
+        }
+    }
+
+
+    private void addItemsToRooms () {
+
+        NodeList nodeList = XMLParser("xml/Items.xml", "item");
+        // Iterate over each item
+        for (int itr = 0; itr < nodeList.getLength(); itr++) {
+            // Make a node from nodeList at the current index
+            Node node = nodeList.item(itr);
+            if (node.getNodeType() == Node.ELEMENT_NODE) {
+
+                // Make the node an element to gain access to text content
+                Element itemElement = (Element) node;
+
+                // Save values of item
+                String itemId = itemElement.getElementsByTagName("id").item(0).getTextContent();
+                String itemName = itemElement.getElementsByTagName("name").item(0).getTextContent();
+                String roomName = itemElement.getElementsByTagName("roomName").item(0).getTextContent();
+                String lockKey = itemElement.getElementsByTagName("lockKey").item(0).getTextContent();
+                String lockMessage = itemElement.getElementsByTagName("lockMessage").item(0).getTextContent();
+                String commandInt = itemElement.getElementsByTagName("commandInt").item(0).getTextContent();
+                String commandDirection = itemElement.getElementsByTagName("commandDirection").item(0).getTextContent();
+                String itemDescription = itemElement.getElementsByTagName("description").item(0).getTextContent();
+
+                // Create new instance of the item
+                if (lockKey.equals("none")) {
+                    Item roomItem = new Item(itemName);
+                    allItems.put(itemName, roomItem);
+                    // Add newly created item to its respective room
+                    allRooms.get(roomName).addItemToRoom(roomItem);
+                } else {
+                    System.out.println("Item Name: " + itemName + " Item: " + allItems.get(lockKey) + " Lock Message: " + lockMessage + " Command Int: " + commandInt + " Command Direction: " + commandDirection);
+                    Item roomItem = new Item(itemName, new Lock(allItems.get(lockKey), lockMessage, new Event(Integer.parseInt(commandInt), directions.getDirection(commandDirection))));
+
+                    // Add newly created item to its respective room
+                    allRooms.get(roomName).addItemToRoom(roomItem);
+                }
+            }
+        }
+    }
+    public void addLocksToRooms() {
+        for(Map.Entry<Room, List<Map<String, String>>> locksEntrySet: roomLocks.entrySet()) {
+            Room room = locksEntrySet.getKey();
+            for(int i = 0; i < locksEntrySet.getValue().size(); i++) {
+                Map<String, String> lockMap = locksEntrySet.getValue().get(i);
+                room.addLock(lockMap.get("commandDirection") ,new Lock(allItems.get(lockMap.get("lockKey")), lockMap.get("lockMessage"), new Event(Integer.parseInt(lockMap.get("commandInt")), directions.getDirection(lockMap.get("commandDirection")))));
+            }
+        }
+    }
 }
+
+

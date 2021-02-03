@@ -21,5 +21,5 @@ public class PrompterTest {
         String choice = prompter.promptPlayer("What would you like to do?");
         assertEquals("go east", choice);
     }
-    
+
 }

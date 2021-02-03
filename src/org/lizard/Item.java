@@ -11,6 +11,15 @@ public class Item extends GameDictionary.Noun {
         this.setPuttable(true);
     }
 
+    public Item(String name, Lock lock) {
+        super(name, lock);
+        this.setExaminable(true);
+        this.setDroppable(true);
+        this.setGrabable(true);
+        this.setMovable(true);
+        this.setPuttable(true);
+    }
+
     public String getName() {
         return super.getName();
     }
