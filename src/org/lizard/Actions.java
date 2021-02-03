@@ -164,7 +164,7 @@ public class Actions {
             if (noun.getName().equals("items")) { //examine items
                 return ("Items presnet in the " + currentRoom.getName() + " are: " + currentRoom.printItemsInRoom());
             } else if (currentRoom.has((Item) noun)) { //examine candle
-                return ("Hi, I am a " + noun.getName());
+                return noun.getDescription();
             } else {
 
                 return (noun.getName() + " is not present in the  " + currentRoom.getName());
