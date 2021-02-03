@@ -103,7 +103,7 @@ public class Board {
         }
         if(exits.containsKey(direction)){
             currentRoom = exits.get(direction);
-            return ("current room is " + currentRoom.getName() + "\n" + currentRoom.getRoomDescription());
+            return ("You have entered the " + currentRoom.getName() + "\n" + currentRoom.getRoomDescription());
 
         } else {
             return ("That is not an exit.");
