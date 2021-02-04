@@ -7,7 +7,7 @@
                 <path>east</path>
                 <pathName>library</pathName>
                 <lockKey>library key</lockKey>
-                <lockMessage>You have unlocked the room</lockMessage>
+                <lockMessage>You unlock the door to the library and enter.</lockMessage>
                 <commandInt>2</commandInt>
             </exit>
             <exit>
@@ -263,6 +263,9 @@ Below seems to be an endless pit with cries and blazing heat lifting high in the
             <exit>
                 <path>east</path>
                 <pathName>landOfDead</pathName>
+                <lockKey>skeleton key</lockKey>
+                <lockMessage>You use the skeleton key to unlock the door to the land of the dead.</lockMessage>
+                <commandInt>2</commandInt>
             </exit>
             <exit>
                 <path>south</path>
