@@ -20,13 +20,9 @@
             </exit>
             <exit>
                 <path>west</path>
-                <pathName>bedroom</pathName>
+                <pathName>psychWard</pathName>
             </exit>
         </roomExits>
-        <items>
-            <item>candle</item>
-            <item>test</item>
-        </items>
         <roomDescription>
 Four bare walls keep you as a prisoner to an overly bright room with no windows.
 Shelves with millions of keys in varying sizes, shapes, and colors line the floors like passageways to four doors around you.
@@ -52,10 +48,8 @@ The keys you touch are as real as the keys to your home, varying in shapes and s
                 <pathName>keyRoom</pathName>
             </exit>
         </roomExits>
-        <items>
-        </items>
         <roomDescription>
-With cobwebbed filled shelves, oversized portraits with headless bodies, and open skylights add an extra hill of mystery to the room.
+An overlty large room with cobwebbed filled shelves, oversized portraits with headless bodies, and open skylights.
 Under the full moon night, a single locked chest is highlighted on the perfectly centered table.
 Surrounding the table, a thin line of salt surrounds the only seemingly normal thing in the room.
         </roomDescription>
@@ -73,17 +67,14 @@ Surrounding the table, a thin line of salt surrounds the only seemingly normal t
                 <pathName>library</pathName>
             </exit>
         </roomExits>
-        <items>
-        </items>
         <roomDescription>
 As if you have entered a Kiss concert, music blares against your ears.
 On all corners of the room, speakers climb the cathedral ceilings, vibrating waves through the room.
-From atop of the farthest speaker, a shiny object glimmers in the changing colors of the neon lights.
         </roomDescription>
     </room>
     <room>
         <id>4</id>
-        <roomName>bedroom</roomName>
+        <roomName>psychWard</roomName>
         <roomExits>
             <exit>
                 <path>east</path>
@@ -94,12 +85,10 @@ From atop of the farthest speaker, a shiny object glimmers in the changing color
                 <pathName>closet</pathName>
             </exit>
         </roomExits>
-        <items>
-        </items>
         <roomDescription>
-An unmade child's bed sits in the center of the room, the foot of the bed facing the wall.
-Several dolls with cracked and fractured faces, follow you as you move around the room.
-From beneath the bed, a chill crawls up your legs, up your back, and around the sides of your neck.
+Lined along the walls are metal framed beds, plain with white sheets and drapes hanging over them.
+Dolls with cracked and fractured faces sit at the end of each bed, following you as you move around the room.
+From beneath the beds, a chill crawls up your legs, up your back, and around the sides of your neck.
         </roomDescription>
     </room>
     <room>
@@ -111,8 +100,6 @@ From beneath the bed, a chill crawls up your legs, up your back, and around the 
                 <pathName>keyRoom</pathName>
             </exit>
         </roomExits>
-        <items>
-        </items>
         <roomDescription>
 Like darts, knives hang from the vaulted ceiling in varying sizes.
 Across the white marble island, an oven blasts heat in your direction, carrying the smell of blackened cookies.
@@ -132,8 +119,6 @@ As if the walls were made of paper, conversations can be heard in the other room
                 <pathName>coalMine</pathName>
             </exit>
         </roomExits>
-        <items>
-        </items>
         <roomDescription>
 Above a bed of rocks with crashing waters, a wooden bridge cries in the wind.
 Bundled in a wicker basket, rope is tangled around itself, rendering itself nearly useless.
@@ -148,11 +133,9 @@ Bundled in a wicker basket, rope is tangled around itself, rendering itself near
                 <pathName>creekyPath</pathName>
             </exit>
         </roomExits>
-        <items>
-        </items>
         <roomDescription>
 Dimly lit lamps, covered in soot, line the walls of the mine down a path cut short by tumbled rock.
-An old pickaxe lays against the wall, next to a faded, yellow hat and a gas mask.
+An old pickaxe lays against the wall, next to a faded, brown miners hat and a gas mask.
         </roomDescription>
     </room>
     <room>
@@ -164,26 +147,22 @@ An old pickaxe lays against the wall, next to a faded, yellow hat and a gas mask
                 <pathName>kitchen</pathName>
             </exit>
         </roomExits>
-        <items>
-        </items>
         <roomDescription>
 Long and narrow before you, an empty passage shows a single door at the opposite end.
         </roomDescription>
     </room>
     <room>
         <id>9</id>
-        <roomName>torchRoom</roomName>
+        <roomName>volcano</roomName>
         <roomExits>
             <exit>
                 <path>east</path>
                 <pathName>secretPassage</pathName>
             </exit>
         </roomExits>
-        <items>
-        </items>
         <roomDescription>
-Tiki torches line a maze through the room.
-In the center of the room is an in-ground hot tub filled with lava, bubbling over the sides.
+Spewing lava from it's top, a volcano destroys everything near it.
+A random, small door stands alone at the edge of the treeline, only twenty feet from a lava river.
         </roomDescription>
     </room>
     <room>
@@ -191,17 +170,21 @@ In the center of the room is an in-ground hot tub filled with lava, bubbling ove
         <roomName>treasureRoom</roomName>
         <roomExits>
             <exit>
+                <path>west</path>
+                <pathName>river</pathName>
+                <lockKey>magic cape</lockKey>
+                <lockMessage>With your magic cape, you carry yourself through the air, west across the river.</lockMessage>
+                <commandInt>2</commandInt>
+            </exit>
+            <exit>
                 <path>south</path>
-                <pathName>torchRoom</pathName>
+                <pathName>volcano</pathName>
             </exit>
         </roomExits>
-        <items>
-            <item>key</item>
-        </items>
         <roomDescription>
 Piles upon piles of gold and gems climb to the sky, high where birds fly.
-A platinum river flows through the middle of a reflective meadow.
-Atop a pedestal in the middle of the platinum river is a a single lizard key.
+A platinum river, boiling at over 3,000 degrees, flows through the middle of a reflective meadow.
+For miles west, the river appears to never end.
         </roomDescription>
     </room>
     <room>
@@ -217,13 +200,8 @@ Atop a pedestal in the middle of the platinum river is a a single lizard key.
                 <pathName>whisperingPassage</pathName>
             </exit>
         </roomExits>
-        <items>
-        </items>
         <roomDescription>
 The empty room bares a tulip filled wallpaper with a single portion ripped away to reveal a riddle.
-With gold shining high in the sky, a bird cannot soar if it cannot fly.
-A stream that flows is a life to grow, a stream not of water may death undergo.
-Unlocking a secret is not a forfeit, go forward with the lizard to be rewarded.
         </roomDescription>
     </room>
     <room>
@@ -235,8 +213,6 @@ Unlocking a secret is not a forfeit, go forward with the lizard to be rewarded.
                 <pathName>treasureRoom</pathName>
             </exit>
         </roomExits>
-        <items>
-        </items>
         <roomDescription>
 With each step you take down the cobblestone path, a footstep behind you can be heard.
 Whispers in your ear sound as if someone is right behind you, but upon turning around, no one is there.
@@ -249,21 +225,17 @@ In the center of the path is a rotted bench with fresh flowers and a photograph.
         <roomExits>
             <exit>
                 <path>north</path>
-                <pathName>bedroom</pathName>
+                <pathName>psychWard</pathName>
             </exit>
             <exit>
                 <path>west</path>
                 <pathName>riddleRoom</pathName>
             </exit>
         </roomExits>
-        <items>
-            <item>match</item>
-        </items>
         <roomDescription>
 A single light dimly guides you through a small space.
 Packed tight with clothes from eras that don't make sense to one another, you struggle to push your way through.
-Several shoe boxes lay atop the shelves, covered in dust.
-Your foot hits a small box on the floor, stopping you in your path.
+Several boxes lay atop the shelves, covered in dust.
         </roomDescription>
     </room>
     <room>
@@ -279,8 +251,6 @@ Your foot hits a small box on the floor, stopping you in your path.
                 <pathName>keyRoom</pathName>
             </exit>
         </roomExits>
-        <items>
-        </items>
         <roomDescription>
 From left to right, staircases move around you, loud and reckless, clashing against walls like thunder.
 Below seems to be an endless pit with cries and blazing heat lifting high in the room.
@@ -303,11 +273,10 @@ Below seems to be an endless pit with cries and blazing heat lifting high in the
                 <pathName>artRoom</pathName>
             </exit>
         </roomExits>
-        <items>
-        </items>
         <roomDescription>
 As you step through the door, sand brushes across your face, forcing your eyes to veer to upward.
 You are now in the desert with pyramids and camels before you.
+Like the door behind you, there are two other doors that are situated in the middle of the dessert, attached to nothing.
         </roomDescription>
     </room>
     <room>
@@ -319,8 +288,6 @@ You are now in the desert with pyramids and camels before you.
                 <pathName>egyptianRoom</pathName>
             </exit>
         </roomExits>
-        <items>
-        </items>
         <roomDescription>
 With every step, your feet slush through murky water. Willow branches hang low above you, blocking clear sight of an exit.
 Fog lifts from the top of the water, further blocking your view, the stinch of death seeping through your nose hairs.
@@ -335,8 +302,6 @@ Fog lifts from the top of the water, further blocking your view, the stinch of d
                 <pathName>egyptianRoom</pathName>
             </exit>
         </roomExits>
-        <items>
-        </items>
         <roomDescription>
 Fumes of alcohol fill the air as moisture drips down the paintings on easels, almost as if the subjects are crying themselves.
 A red liquid covers the floor, not dry, nor wet.
@@ -356,8 +321,6 @@ In the center of the room, a sculpture is covered with a cloth, the same red liq
                 <pathName>loudRoom</pathName>
             </exit>
         </roomExits>
-        <items>
-        </items>
         <roomDescription>
 Musty air carries you through a tombstone filled cave, scratches covering the walls, random but deep.
 A narrow passage sucks air from the cave, making it harder to breathe by the second.
@@ -372,11 +335,27 @@ A narrow passage sucks air from the cave, making it harder to breathe by the sec
                 <pathName>landOfDead</pathName>
             </exit>
         </roomExits>
-        <items>
-        </items>
         <roomDescription>
 Heavy as a boulder, standing on a feather, your foot triggers a pressure plate on the floor.
 Large bubbles burst of cotton candy around you, one of them surrounding you and lifting you to the ceiling.
+        </roomDescription>
+    </room>
+    <room>
+        <id>20</id>
+        <roomName>river</roomName>
+        <roomExits>
+            <exit>
+                <path>east</path>
+                <pathName>treasureRoom</pathName>
+                <lockKey>magic cape</lockKey>
+                <lockMessage>With your magic cape, you carry yourself through the air, east across the river.</lockMessage>
+                <commandInt>2</commandInt>
+            </exit>
+        </roomExits>
+        <roomDescription>
+Miles upon miles of darkness and emptiness surrounds a platinum river with a shine that could light an entire city.
+Bubbles burst around you at high temperatures as you fly with your magic cape.
+The sight of a single pedestal stops you from going farther.
         </roomDescription>
     </room>
 </rooms>
