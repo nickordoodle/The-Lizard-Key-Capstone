@@ -1,38 +1,54 @@
 <items>
     <item>
         <id>1</id>
-        <name>match</name>
+        <name>matches</name>
+        <canGrab>true</canGrab>
         <roomName>closet</roomName>
         <lockKey>none</lockKey>
         <lockMessage></lockMessage>
         <commandInt></commandInt>
         <commandDirection></commandDirection>
-        <description>This is a match.</description>
+        <description>
+A box, appearing as any other box of matches you are accustomed to from your world.
+On the front, the box shows a warning, but the meaning isn't quite clear.
+The picture shows an all black match lighting a candle, a plus sign, and circular lines that appear to be wind.
+        </description>
     </item>
     <item>
         <id>2</id>
         <name>candle</name>
-        <roomName>living</roomName>
-        <lockKey>match</lockKey>
-        <lockMessage>The candle has lit. You run west!</lockMessage>
+        <canGrab>true</canGrab>
+        <roomName>keyRoom</roomName>
+        <lockKey>matches</lockKey>
+        <lockMessage>
+You strike a match, setting the candle aflame.
+Like a hurricane, wind gusts around you, lifting your feet from the ground.
+With just a blink, you have moved to a new room, barely catching your footing as the wind disappears.
+        </lockMessage>
         <commandInt>2</commandInt>
         <commandDirection>west</commandDirection>
         <description>This is a candle.</description>
     </item>
     <item>
         <id>3</id>
-        <name>key</name>
+        <name>lizard key</name>
+        <canGrab>true</canGrab>
         <roomName>treasureRoom</roomName>
         <lockKey>none</lockKey>
         <lockMessage></lockMessage>
         <commandInt></commandInt>
         <commandDirection></commandDirection>
-        <description>This is a key.</description>
+        <description>
+Long and heavy, rusted on a lizard's belly.
+A key of this shape must be used for an escape.
+Find your own entry, the alternative could be deadly.
+        </description>
     </item>
     <item>
         <id>4</id>
         <name>test</name>
-        <roomName>living</roomName>
+        <canGrab>false</canGrab>
+        <roomName>keyRoom</roomName>
         <lockKey>none</lockKey>
         <lockMessage></lockMessage>
         <commandInt></commandInt>
@@ -41,18 +57,9 @@
     </item>
     <item>
         <id>5</id>
-        <name>lizard key</name>
-        <roomName>living</roomName>
-        <lockKey>none</lockKey>
-        <lockMessage></lockMessage>
-        <commandInt></commandInt>
-        <commandDirection></commandDirection>
-        <description>This is a test object.</description>
-    </item>
-    <item>
-        <id>6</id>
         <name>library key</name>
-        <roomName>living</roomName>
+        <canGrab>true</canGrab>
+        <roomName>keyRoom</roomName>
         <lockKey>none</lockKey>
         <lockMessage></lockMessage>
         <commandInt></commandInt>
