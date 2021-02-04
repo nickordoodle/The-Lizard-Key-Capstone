@@ -73,8 +73,8 @@ public class Actions {
 
     private String move(GameDictionary.Noun direction) {
         if(direction instanceof Directions.Direction) {
-            if(player.hasWinningKey && board.getCurrentRoom().getName().equals("living")) {
-                return "You used the key in the living room. You teleport and wake up from your dream. You notice its 7:30 am. time to go to work.";
+            if(player.hasWinningKey && board.getCurrentRoom().getName().equals("keyRoom")) {
+                return "You used the key in the key room. You teleport and wake up from your dream. You notice its 7:30 am. time to go to work.";
             }
             if (!roomsVisited.contains(board.getCurrentRoom())) {
                 roomsVisited.add(board.getCurrentRoom());
@@ -161,9 +161,7 @@ public class Actions {
         Room currentRoom = board.getCurrentRoom();
         Map<String, String> displayRooms = new HashMap<>();
         if (noun == null) { //examine
-            System.out.println(currentRoom.getExits());
             for (Map.Entry<String, Room> entry: currentRoom.getExits().entrySet()) {
-                System.out.println(entry.getValue());
                 if (roomsVisited.contains(entry.getValue())) {
                     displayRooms.put(entry.getKey(), entry.getValue().getName());
                 } else {
@@ -174,7 +172,6 @@ public class Actions {
             for (Map.Entry<String, String> entry : displayRooms.entrySet()) {
                 paths = paths.concat(entry.getKey() + ": " + entry.getValue() + "\n");
             }
-            System.out.println(paths);
             return ("Examining room...\n " + currentRoom.getRoomDescription()) + paths;
 
         } else if (!noun.isExaminable()) {
@@ -251,7 +248,7 @@ public class Actions {
 
         while (true) {
             nounList.forEach(noun -> {
-                System.out.println("You see a " + noun.getName());;
+                System.out.println("You see a " + noun.getName());
             });
 //            String userInput = Game.prompter.promptPlayer("Which one?");
             String userInput = frame.decision();
