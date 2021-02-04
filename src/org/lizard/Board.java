@@ -87,7 +87,7 @@ public class Board {
         addLocksToRooms();
 
         // Set starting room.
-        this.currentRoom = allRooms.get("living");
+        this.currentRoom = allRooms.get("keyRoom");
     }
 
     public Room getCurrentRoom() {
