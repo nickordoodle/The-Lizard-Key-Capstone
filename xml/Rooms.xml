@@ -4,15 +4,15 @@
         <roomName>keyRoom</roomName>
         <roomExits>
             <exit>
-                <path>north</path>
-                <pathName>swingingStairs</pathName>
+                <path>east</path>
+                <pathName>library</pathName>
                 <lockKey>library key</lockKey>
                 <lockMessage>You have unlocked the room</lockMessage>
                 <commandInt>2</commandInt>
             </exit>
             <exit>
-                <path>east</path>
-                <pathName>library</pathName>
+                <path>north</path>
+                <pathName>swingingStairs</pathName>
             </exit>
             <exit>
                 <path>south</path>
@@ -31,6 +31,7 @@
 Four bare walls keep you as a prisoner to an overly bright room with no windows.
 Shelves with millions of keys in varying sizes, shapes, and colors line the floors like passageways to four doors around you.
 What lies behind each door is unknown to you, but your options are limited.
+Faded, and somewhat unclear to read above the east side door reads "libra".
 The keys you touch are as real as the keys to your home, varying in shapes and sizes.
         </roomDescription>
     </room>
