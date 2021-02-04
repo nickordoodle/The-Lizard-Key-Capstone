@@ -46,14 +46,16 @@ Find your own entry, the alternative could be deadly.
     </item>
     <item>
         <id>4</id>
-        <name>test</name>
-        <canGrab>false</canGrab>
+        <name>skeleton key</name>
+        <canGrab>true</canGrab>
         <roomName>keyRoom</roomName>
         <lockKey>none</lockKey>
         <lockMessage></lockMessage>
         <commandInt></commandInt>
         <commandDirection></commandDirection>
-        <description>This is a test object.</description>
+        <description>
+Made of bone, stained with age, the key is long.
+        </description>
     </item>
     <item>
         <id>5</id>
@@ -64,7 +66,9 @@ Find your own entry, the alternative could be deadly.
         <lockMessage></lockMessage>
         <commandInt></commandInt>
         <commandDirection></commandDirection>
-        <description>This is a test object.</description>
+        <description>
+Long like a dagger, the key features a book at the pommel and small teeth at the point.
+        </description>
     </item>
     <item>
         <id>6</id>
