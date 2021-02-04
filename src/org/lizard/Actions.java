@@ -74,7 +74,11 @@ public class Actions {
     private String move(GameDictionary.Noun direction) {
         if(direction instanceof Directions.Direction) {
             if(player.hasWinningKey && board.getCurrentRoom().getName().equals("keyRoom")) {
-                return "You used the key in the key room. You teleport and wake up from your dream. You notice its 7:30 am. time to go to work.";
+                return "You use the lizard key on the door to exit.\n" +
+                        "Darkness surrounds you and wind presses against you back as if the ground is being pulled beneath you.\n" +
+                        "You close your eyes to avoid sickness, only for the movement around you to stop.\n" +
+                        "Upon opening your eyes, you are staring out a small window with people in white scrubs passing in a hall.\n" +
+                        "You turn around to see padded walls, only to realize that you have escaped Rex Verwirrtheit's for now.";
             }
             if (!roomsVisited.contains(board.getCurrentRoom())) {
                 roomsVisited.add(board.getCurrentRoom());
@@ -168,17 +172,21 @@ public class Actions {
                     displayRooms.put(entry.getKey(), "?");
                 }
             }
+            System.out.println(currentRoom.getItems());
+
             String paths = "\nAvailable Paths: ";
             for (Map.Entry<String, String> entry : displayRooms.entrySet()) {
                 paths = paths.concat(entry.getKey() + ": " + entry.getValue() + "\n");
             }
-            return ("Examining room...\n " + currentRoom.getRoomDescription()) + paths;
+            return ("Examining room...\n " + currentRoom.getRoomDescription()) +
+                    "\nItems present in the " + currentRoom.getName() + " are: " + currentRoom.printItemsInRoom() + "\n" +
+                    paths;
 
         } else if (!noun.isExaminable()) {
             return ("You can't examine " + noun.getName());
         } else {
             if (noun.getName().equals("items")) { //examine items
-                return ("Items presnet in the " + currentRoom.getName() + " are: " + currentRoom.printItemsInRoom());
+                return ("Items present in the " + currentRoom.getName() + " are: " + currentRoom.printItemsInRoom());
             } else if (currentRoom.has((Item) noun)) { //examine candle
                 return noun.getDescription();
             } else {
