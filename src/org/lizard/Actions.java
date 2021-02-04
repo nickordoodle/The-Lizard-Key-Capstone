@@ -39,25 +39,29 @@ public class Actions {
             return (noun.getDescription());
 
         }
-        if (targetNoun != null && verb != 4) {
-            return ("You tried to use a " + verb + " with 2 nouns? What you trying to break my code or something?");
+//        if(noun == null) {
+//            return "WTF";
+//        }
+        if (targetNoun == null && verb == 4) {
+            return "Nah dawg";
         } else {
             switch (verb) {
                 case 1:
                     return grab(noun);
-
                 case 2:
                     return move(noun);
-
                 case 3:
                     return examine(noun);
-
                 case 4:
                     return use(noun, targetNoun);
                 case 5:
-                    drop(noun);
-                    break;
-
+                    return drop(noun);
+                case 6:
+//                    return delete(noun);
+                case 7:
+//                    return create(noun);
+                case 8:
+//                    return changeDescription();
             }
         }
         return null;
@@ -66,10 +70,7 @@ public class Actions {
 
 
     private String move(GameDictionary.Noun direction) {
-        if(board.getCurrentRoom().getName() == "swingingStairs"){
-            Combat combat = new Combat();
-            combat.startCombat(player, new Enemy("Goblin"));
-        }
+
         if(direction instanceof Directions.Direction) {
             if(player.hasWinningKey && board.getCurrentRoom().getName().equals("living")) {
                 return "You used the key in the living room. You teleport and wake up from your dream. You notice its 7:30 am. time to go to work.";
@@ -108,7 +109,13 @@ public class Actions {
     }
 
     public String use(GameDictionary.Noun noun, GameDictionary.Noun targetNoun) {
+        if(targetNoun instanceof Directions.Direction) {
+            return unlockExit(((Directions.Direction) targetNoun).getDirection(), noun);
+
+        }
+
         Lock targetLock = targetNoun.getLock();
+
         if (targetLock == null) {
             return ("Thats not how this works.");
 
@@ -121,10 +128,7 @@ public class Actions {
             return ("There isn't a " + targetNoun.getName() + " here.");
 
         }
-        if(targetNoun instanceof Directions.Direction) {
-            return unlockExit(((Directions.Direction) targetNoun).getDirection(), noun);
 
-        }
         if (targetLock.getNoun() == noun) {
 
             this.execute(targetLock.getCommand());
@@ -159,10 +163,9 @@ public class Actions {
             return ("You can't examine " + noun.getName());
         } else {
             if (noun.getName().equals("items")) { //examine items
-
                 return ("Items presnet in the " + currentRoom.getName() + " are: " + currentRoom.printItemsInRoom());
             } else if (currentRoom.has((Item) noun)) { //examine candle
-                return ("Hi, I am a " + noun.getName());
+                return noun.getDescription();
             } else {
 
                 return (noun.getName() + " is not present in the  " + currentRoom.getName());
@@ -226,29 +229,32 @@ public class Actions {
         }
 
     }
-//    public GameDictionary.Noun[] specifyNoun(Set<GameDictionary.Noun> nounSet) {
-//        List<GameDictionary.Noun> nounList = new ArrayList<>(nounSet);
-//
-//        while (true) {
-//            nounList.forEach(noun -> {
-//                return "You see a " + noun.getName();
-//            });
-////            String userInput = Game.prompter.promptPlayer("Which one?");
-//            String userInput = frame.decision();
-//            List<GameDictionary.Noun> validNoun = new ArrayList<>();
-//            int i = 0;
-//            for (int j = 0; j < nounList.size(); j++) {
-//                if (nounList.get(j).getName().contains(userInput)) {
-//                    validNoun.add(nounList.get(j));
-//                }
-//            }
-//
-//            if (validNoun.size() == 1) {
-//                return validNoun.toArray(new GameDictionary.Noun[1]);
-//            } else {
-//                System.out.println("Can you read? Pick one.");
-//            }
-//        }
-//    }
+
+    public GameDictionary.Noun[] specifyNoun(Set<GameDictionary.Noun> nounSet) {
+        List<GameDictionary.Noun> nounList = new ArrayList<>(nounSet);
+
+        while (true) {
+            nounList.forEach(noun -> {
+                System.out.println("You see a " + noun.getName());;
+            });
+//            String userInput = Game.prompter.promptPlayer("Which one?");
+            String userInput = frame.decision();
+            List<GameDictionary.Noun> validNoun = new ArrayList<>();
+
+            int i = 0;
+
+            for (int j = 0; j < nounList.size(); j++) {
+                if (nounList.get(j).getName().contains(userInput)) {
+                    validNoun.add(nounList.get(j));
+                }
+            }
+
+            if (validNoun.size() == 1) {
+                return validNoun.toArray(new GameDictionary.Noun[1]);
+            } else {
+                System.out.println("Can you read? Pick one.");
+            }
+        }
+    }
 
 }

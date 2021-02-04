@@ -4,113 +4,78 @@ import java.util.Random;
 
 public class Combat {
     Random rand;
+    MyJFrame frame;
+    int enemyHP;
+    int playerHP;
+    Player player;
+    Enemy enemy;
 
     final int ROCK = 1;
     final int PAPER = 2;
     final int SCISS0R = 3;
 
-    public void startCombat(Player player, Enemy enemy){
-        int playerHP = player.getPlayerHP();
-        int enemyHP = enemy.getEnemyHP();
-
-        while(true){
-
-            Random rand = new Random();
-            int randPlayer = rand.nextInt(3)+1;
-            int randEnemy = rand.nextInt(3)+1;
-
-
-            if(randPlayer == ROCK){
-                System.out.println(player.getName() + " got ROCK");
-                if(randEnemy == ROCK){
-                    System.out.println(enemy.getEnemyName() + " got ROCK");
-                    System.out.println("It is a tie!");
-
-                    System.out.println(player.getName() + "HP: " + playerHP);
-                    System.out.println(enemy.getEnemyName() + "HP: " +enemyHP);
-                }
-                else if(randEnemy == PAPER){
-                    System.out.println(enemy.getEnemyName() + " got PAPER");
-                    playerHP -= 10;
-
-                    System.out.println(player.getName() + "HP: " + playerHP);
-                    System.out.println(enemy.getEnemyName() + "HP: " +enemyHP);
-                }
-                else if(randEnemy == SCISS0R){
-                    System.out.println(enemy.getEnemyName() + " got SCISSOR");
-                    enemyHP -= 10;
-                    System.out.println(player.getName() + "HP: " + playerHP);
-                    System.out.println(enemy.getEnemyName() + "HP: " +enemyHP);
-
-                }
-            }
-            else if(randPlayer == PAPER){
-                System.out.println(player.getName() + " got PAPER");
-                if(randEnemy == ROCK){
-                    System.out.println(enemy.getEnemyName() + " got ROCK");
-                    System.out.println(player.getName() + "won!");
-                    enemyHP -= 10;
-
-                    System.out.println(player.getName() + "HP: " + playerHP);
-                    System.out.println(enemy.getEnemyName() + "HP: " +enemyHP);
-                }
-                else if(randEnemy == PAPER){
-                    System.out.println(enemy.getEnemyName() + " got PAPER");
-                    System.out.println("It's a tie!");
-
-                    System.out.println(player.getName() + "HP: " + playerHP);
-                    System.out.println(enemy.getEnemyName() + "HP: " +enemyHP);
-                }
-                else if(randEnemy == SCISS0R){
-                    System.out.println(enemy.getEnemyName() + " got SCISSOR");
-                    System.out.println(player.getName() + "lost! ");
-                    playerHP -= 10;
-                    System.out.println(player.getName() + "HP: " + playerHP);
-                    System.out.println(enemy.getEnemyName() + "HP: " +enemyHP);
-
-                }
-            }
-            else if(randPlayer == SCISS0R){
-                System.out.println(player.getName() + " got SCISSOR");
-                if(randEnemy == ROCK){
-                    System.out.println(enemy.getEnemyName() + " got ROCK");
-                    System.out.println(player.getName() + "lost!");
-                    playerHP -= 10;
-                    System.out.println(player.getName() + "HP: " + playerHP);
-                    System.out.println(enemy.getEnemyName() + "HP: " +enemyHP);
-                }
-                else if(randEnemy == PAPER){
-                    System.out.println(enemy.getEnemyName() + " got PAPER");
-                    System.out.println(player.getName() + "won!");
-                    enemyHP -= 10;
-                    System.out.println(player.getName() + "HP: " + playerHP);
-                    System.out.println(enemy.getEnemyName() + "HP: " +enemyHP);
-                }
-                else if(randEnemy == SCISS0R){
-                    System.out.println(enemy.getEnemyName() + " got SCISSOR");
-                    System.out.println("It's a tie!");
-
-                    System.out.println(player.getName() + "HP: " + playerHP);
-                    System.out.println(enemy.getEnemyName() + "HP: " +enemyHP);
-
-                }
-            }
-
-            if(playerHP == 0){
-                System.out.println(player.getName() + "lost");
-                break;
-            }
-            if(enemyHP == 0){
-                System.out.println(enemy.getEnemyName() + "lost");
-                break;
-            }
-
-
+    public String checkGameEndingStatus(){
+        if(playerHP==0){
+            return "Enemy won";
         }
-
-
+        else if(enemyHP==0){
+            return "Player won";
+        }
+        else{
+            return "Nobody won";
+        }
     }
 
 
+    public String playerTakesTurn(int randPlayer) {
+        Random rand = new Random();
+        int randEnemy = rand.nextInt(3) + 1;
 
+        if (randPlayer == ROCK) {
+
+            if (randEnemy == ROCK) {
+                return (player.getName() + " got ROCK.\n\n"+enemy.getEnemyName() + " got ROCK.\n\nIt's a tie!"+"\n\n"+player.getName() + "HP: " + playerHP + "\n"+enemy.getEnemyName() + "HP: " +enemyHP);
+            } else if (randEnemy == PAPER) {
+                playerHP -= 10;
+                return (player.getName() + " got ROCK.\n\n"+enemy.getEnemyName() + " got PAPER."+"\n\n" + enemy.getEnemyName()+" won! \n\n"+player.getName() + "HP: " + playerHP + "\n"+enemy.getEnemyName() + "HP: " +enemyHP);
+
+            } else if (randEnemy == SCISS0R) {
+                enemyHP -= 10;
+                return (player.getName() + " got ROCK.\n\n"+enemy.getEnemyName() + " got SCISSOR."+"\n\n"+player.getName()+ " won!"+player.getName() + "HP: " + playerHP + "\n"+enemy.getEnemyName() + "HP: " +enemyHP);
+            }
+
+        } else if (randPlayer == PAPER) {
+
+            if (randEnemy == ROCK) {
+                enemyHP -= 10;
+                return (player.getName() + " got PAPER.\n\n" +enemy.getEnemyName() + " got ROCK.\n\n" + player.getName() + " won!"+"\n\n"+player.getName() + "HP: " + playerHP + "\n"+enemy.getEnemyName() + "HP: " +enemyHP);
+            } else if (randEnemy == PAPER) {
+                return (player.getName() + " got PAPER.\n\n"+enemy.getEnemyName() + " got PAPER.\n\nIt's a tie!"+"\n\n"+player.getName() + "HP: " + playerHP + "\n"+enemy.getEnemyName() + "HP: " +enemyHP);
+            } else if (randEnemy == SCISS0R) {
+                playerHP -= 10;
+                return (player.getName() + " got PAPER.\n\n"+enemy.getEnemyName() + " got SCISSOR.\n\n" + enemy.getEnemyName() + " won! "+"\n\n"+player.getName() + "HP: " + playerHP + "\n"+enemy.getEnemyName() + "HP: " +enemyHP);
+            }
+
+        } else if (randPlayer == SCISS0R) {
+
+            if (randEnemy == ROCK) {
+                playerHP -= 10;
+                return (player.getName() + " got SCISSOR.\n\n"+enemy.getEnemyName() + " got ROCK.\n\n" + enemy.getEnemyName() + " won!"+"\n\n"+player.getName() + "HP: " + playerHP + "\n"+enemy.getEnemyName() + "HP: " +enemyHP);
+            } else if (randEnemy == PAPER) {
+                enemyHP -= 10;
+                return (player.getName() + " got SCISSOR.\n\n"+enemy.getEnemyName() + " got PAPER.\n\n" + player.getName() + " won!"+"\n\n"+player.getName() + "HP: " + playerHP + "\n"+enemy.getEnemyName() + "HP: " +enemyHP);
+            } else if (randEnemy == SCISS0R) {
+                return (player.getName() + " got SCISSOR.\n\n"+enemy.getEnemyName() + " got SCISSOR.\n\nIt's a tie!"+"\n\n"+player.getName() + "HP: " + playerHP + "\n"+enemy.getEnemyName() + "HP: " +enemyHP);
+            }
+        }
+        return null;
+    }
+
+    public void startCombat(Player player, Enemy enemy){
+        this.player = player;
+        this.enemy = enemy;
+
+        playerHP = player.getPlayerHP();
+        enemyHP = enemy.getEnemyHP();
+    }
 }

@@ -10,6 +10,7 @@ public class TextParser {
     }
 
     public Command parse(String userInput) {
+
         List<String> userInputWords = new ArrayList<>(Arrays.asList(userInput.split(" ")));
         Integer verbCandidate = null;
         GameDictionary.Noun[] nounCandidates = null;
@@ -65,15 +66,17 @@ public class TextParser {
                 ids = nounSet;
             }
             ids.retainAll(nounSet);
+
             if (ids.size() == 1) {
                 targetNounCandidates = new GameDictionary.Noun[ids.size()];
                 targetNounCandidates = ids.toArray(targetNounCandidates);
             }
             if (i == userInputWords.size() - 1 && ids.size() > 1) {
                 targetNounCandidates = new GameDictionary.Noun[ids.size()];
-                ids.toArray(targetNounCandidates);
+                targetNounCandidates = ids.toArray(targetNounCandidates);
             }
         }
+
 
 
         if(targetNounCandidates != null) {

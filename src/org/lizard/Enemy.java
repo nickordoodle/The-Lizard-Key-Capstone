@@ -3,7 +3,7 @@ package org.lizard;
 public class Enemy {
 
     String enemyName;
-    int enemyHP = 50;
+    int enemyHP = 250;
 
     Enemy(String enemyName){
         this.enemyName = enemyName;
