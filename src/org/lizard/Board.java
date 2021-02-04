@@ -174,15 +174,16 @@ public class Board {
                 String commandInt = itemElement.getElementsByTagName("commandInt").item(0).getTextContent();
                 String commandDirection = itemElement.getElementsByTagName("commandDirection").item(0).getTextContent();
                 String itemDescription = itemElement.getElementsByTagName("description").item(0).getTextContent();
+                String canGrab = itemElement.getElementsByTagName("canGrab").item(0).getTextContent();
 
                 // Create new instance of the item
                 if (lockKey.equals("none")) {
-                    Item roomItem = new Item(itemName, itemDescription);
+                    Item roomItem = new Item(itemName, itemDescription, Boolean.parseBoolean(canGrab));
                     allItems.put(itemName, roomItem);
                     // Add newly created item to its respective room
                     allRooms.get(roomName).addItemToRoom(roomItem);
                 } else {
-                    Item roomItem = new Item(itemName, new Lock(allItems.get(lockKey), lockMessage, new Event(Integer.parseInt(commandInt), directions.getDirection(commandDirection))), itemDescription);
+                    Item roomItem = new Item(itemName, new Lock(allItems.get(lockKey), lockMessage, new Event(Integer.parseInt(commandInt), directions.getDirection(commandDirection))), itemDescription, Boolean.parseBoolean(canGrab));
 
                     // Add newly created item to its respective room
                     allRooms.get(roomName).addItemToRoom(roomItem);
