@@ -8,6 +8,9 @@ public class Player {
     private String name;
     boolean hasWinningKey = false;
 
+
+    int playerHP = 50;
+
     public Player(String name) {
         this.name = name;
     }
@@ -62,6 +65,10 @@ public class Player {
             return inventoryDescription.toString().equals("") ? "You have nothing in your inventory": inventoryDescription.toString();
         }
 
+    }
+
+    public int getPlayerHP() {
+        return playerHP;
     }
 
 }

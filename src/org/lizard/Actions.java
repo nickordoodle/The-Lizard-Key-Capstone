@@ -72,6 +72,7 @@ public class Actions {
 
 
     private String move(GameDictionary.Noun direction) {
+
         if(direction instanceof Directions.Direction) {
             if(player.hasWinningKey && board.getCurrentRoom().getName().equals("keyRoom")) {
                 return "You use the lizard key on the door to exit.\n" +
