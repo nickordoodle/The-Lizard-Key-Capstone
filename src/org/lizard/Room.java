@@ -82,14 +82,16 @@ public class Room extends GameDictionary.Noun {
         if(items.size() > 0) {
             StringBuilder roomSB = new StringBuilder();
             roomSB.append(roomDescription + "\n");
-            roomSB.append("\nYou look for items in this room.\n");
-            for (GameDictionary.Noun item : items) {
-                roomSB.append("Oh it's a " + item.getName() + ". " + item.getDescription() + "\n");
-            }
+//            roomSB.append("\nYou look for items in this room.\n");
+//            for (GameDictionary.Noun item : items) {
+//                roomSB.append("Oh it's a " + item.getName() + ". " + item.getDescription() + "\n");
+//            }
             return roomSB.toString();
         }
         return roomDescription;
     }
+
+
     public List<GameDictionary.Noun> getItems() {
         return items;
     }
