@@ -87,7 +87,7 @@ public class Board {
         addLocksToRooms();
 
         // Set starting room.
-        this.currentRoom = allRooms.get("living");
+        this.currentRoom = allRooms.get("keyRoom");
     }
 
     public Room getCurrentRoom() {
@@ -103,7 +103,7 @@ public class Board {
         }
         if(exits.containsKey(direction)){
             currentRoom = exits.get(direction);
-            return ("current room is " + currentRoom.getName() + "\n" + currentRoom.getRoomDescription());
+            return ("You have entered the " + currentRoom.getName() + "\n" + currentRoom.getRoomDescription());
 
         } else {
             return ("That is not an exit.");
@@ -174,15 +174,16 @@ public class Board {
                 String commandInt = itemElement.getElementsByTagName("commandInt").item(0).getTextContent();
                 String commandDirection = itemElement.getElementsByTagName("commandDirection").item(0).getTextContent();
                 String itemDescription = itemElement.getElementsByTagName("description").item(0).getTextContent();
+                String canGrab = itemElement.getElementsByTagName("canGrab").item(0).getTextContent();
 
                 // Create new instance of the item
                 if (lockKey.equals("none")) {
-                    Item roomItem = new Item(itemName, itemDescription);
+                    Item roomItem = new Item(itemName, itemDescription, Boolean.parseBoolean(canGrab));
                     allItems.put(itemName, roomItem);
                     // Add newly created item to its respective room
                     allRooms.get(roomName).addItemToRoom(roomItem);
                 } else {
-                    Item roomItem = new Item(itemName, new Lock(allItems.get(lockKey), lockMessage, new Event(Integer.parseInt(commandInt), directions.getDirection(commandDirection))), itemDescription);
+                    Item roomItem = new Item(itemName, new Lock(allItems.get(lockKey), lockMessage, new Event(Integer.parseInt(commandInt), directions.getDirection(commandDirection))), itemDescription, Boolean.parseBoolean(canGrab));
 
                     // Add newly created item to its respective room
                     allRooms.get(roomName).addItemToRoom(roomItem);
@@ -199,6 +200,35 @@ public class Board {
                 room.addLock(lockMap.get("commandDirection") ,new Lock(allItems.get(lockMap.get("lockKey")), lockMap.get("lockMessage"), new Event(Integer.parseInt(lockMap.get("commandInt")), directions.getDirection(lockMap.get("commandDirection")))));
             }
         }
+
+
+//        NodeList nodeList = XMLParser("xml/RoomLocks.xml", "room");
+//        // Iterate over each rooms
+//        for (int itr = 0; itr < nodeList.getLength(); itr++) {
+//            // Make a node from nodeList at the current index
+//            Node node = nodeList.item(itr);
+//            if (node.getNodeType() == Node.ELEMENT_NODE) {
+//
+//                // Make the node an element to gain access to text content
+//                Element itemElement = (Element) node;
+//
+//                // Save values of the lock
+//                String roomName = itemElement.getElementsByTagName("roomName").item(0).getTextContent();
+//                String commandDirection = itemElement.getElementsByTagName("path").item(0).getTextContent();
+//                String lockKey = itemElement.getElementsByTagName("lockKey").item(0).getTextContent();
+//                String lockMessage = itemElement.getElementsByTagName("lockMessage").item(0).getTextContent();
+//                String commandInt = itemElement.getElementsByTagName("commandInt").item(0).getTextContent();
+//
+//                System.out.println(allItems.get(lockKey).getName());
+//                // Create new instance of the lock in its respective room
+//                allRooms.get(roomName)
+//                        .addLock(commandDirection,
+//                                new Lock(allItems.get(lockKey),
+//                                        lockMessage,
+//                                        new Event(Integer.parseInt(commandInt),
+//                                                directions.getDirection(commandDirection))));
+//            }
+//        }
     }
 }
 

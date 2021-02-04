@@ -9,11 +9,13 @@ public class Actions {
     private final Board board;
     private final Player player;
     private final MyJFrame frame;
+    private List<Room> roomsVisited = new ArrayList<>();
 
     public Actions(Board board, Player player, MyJFrame frame) {
         this.board = board;
         this.player = player;
         this.frame = frame;
+        roomsVisited.add(board.getCurrentRoom());
     }
 
 
@@ -72,8 +74,15 @@ public class Actions {
     private String move(GameDictionary.Noun direction) {
 
         if(direction instanceof Directions.Direction) {
-            if(player.hasWinningKey && board.getCurrentRoom().getName().equals("living")) {
-                return "You used the key in the living room. You teleport and wake up from your dream. You notice its 7:30 am. time to go to work.";
+            if(player.hasWinningKey && board.getCurrentRoom().getName().equals("keyRoom")) {
+                return "You use the lizard key on the door to exit.\n" +
+                        "Darkness surrounds you and wind presses against you back as if the ground is being pulled beneath you.\n" +
+                        "You close your eyes to avoid sickness, only for the movement around you to stop.\n" +
+                        "Upon opening your eyes, you are staring out a small window with people in white scrubs passing in a hall.\n" +
+                        "You turn around to see padded walls, only to realize that you have escaped Rex Verwirrtheit's for now.";
+            }
+            if (!roomsVisited.contains(board.getCurrentRoom())) {
+                roomsVisited.add(board.getCurrentRoom());
             }
            return board.changeCurrentRoom(((Directions.Direction) direction).getDirection());
         } else {
@@ -155,15 +164,30 @@ public class Actions {
 
     private String examine(GameDictionary.Noun noun){
         Room currentRoom = board.getCurrentRoom();
+        Map<String, String> displayRooms = new HashMap<>();
         if (noun == null) { //examine
-            return ("Examining room...\n " + currentRoom.getRoomDescription());
+            for (Map.Entry<String, Room> entry: currentRoom.getExits().entrySet()) {
+                if (roomsVisited.contains(entry.getValue())) {
+                    displayRooms.put(entry.getKey(), entry.getValue().getName());
+                } else {
+                    displayRooms.put(entry.getKey(), "?");
+                }
+            }
+            System.out.println(currentRoom.getItems());
 
+            String paths = "\nAvailable Paths: ";
+            for (Map.Entry<String, String> entry : displayRooms.entrySet()) {
+                paths = paths.concat(entry.getKey() + ": " + entry.getValue() + "\n");
+            }
+            return ("Examining room...\n " + currentRoom.getRoomDescription()) +
+                    "\nItems present in the " + currentRoom.getName() + " are: " + currentRoom.printItemsInRoom() + "\n" +
+                    paths;
 
         } else if (!noun.isExaminable()) {
             return ("You can't examine " + noun.getName());
         } else {
             if (noun.getName().equals("items")) { //examine items
-                return ("Items presnet in the " + currentRoom.getName() + " are: " + currentRoom.printItemsInRoom());
+                return ("Items present in the " + currentRoom.getName() + " are: " + currentRoom.printItemsInRoom());
             } else if (currentRoom.has((Item) noun)) { //examine candle
                 return noun.getDescription();
             } else {
@@ -172,8 +196,6 @@ public class Actions {
             }
 
         }
-
-
     }
 
     public String drop(GameDictionary.Noun noun) {
@@ -235,7 +257,7 @@ public class Actions {
 
         while (true) {
             nounList.forEach(noun -> {
-                System.out.println("You see a " + noun.getName());;
+                System.out.println("You see a " + noun.getName());
             });
 //            String userInput = Game.prompter.promptPlayer("Which one?");
             String userInput = frame.decision();
