@@ -11,21 +11,21 @@ public class Item extends GameDictionary.Noun {
         this.setPuttable(true);
     }
 
-    public Item(String name, String description) {
+    public Item(String name, String description, boolean canGrab) {
         super(name, description);
         this.setExaminable(true);
         this.setDroppable(true);
-        this.setGrabable(true);
+        this.setGrabable(canGrab);
         this.setMovable(true);
         this.setPuttable(true);
     }
 
-    public Item(String name, Lock lock, String description) {
+    public Item(String name, Lock lock, String description, boolean canGrab) {
         super(name, lock);
         this.setDescription(description);
         this.setExaminable(true);
         this.setDroppable(true);
-        this.setGrabable(true);
+        this.setGrabable(canGrab);
         this.setMovable(true);
         this.setPuttable(true);
     }
