@@ -94,7 +94,7 @@ public class MyJFrame extends JFrame implements ActionListener {
             label1.setForeground(Color.black);
             label1.setText(actions.execute(command));
 
-            if(label1.getText().contains("swingingStairs")){
+            if(board.getCurrentRoom().getEnemy() != null){
                 frame.remove(top);
                 frame.remove(center1);
                 displayCombat();
@@ -230,7 +230,7 @@ public class MyJFrame extends JFrame implements ActionListener {
         frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
         frame.setVisible(true);
 
-        combat.startCombat(player, new Enemy("Goblin"));
+        combat.startCombat(player, board.getCurrentRoom());
         numInput.addActionListener(this);
 
     }

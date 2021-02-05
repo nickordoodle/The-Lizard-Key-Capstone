@@ -22,7 +22,7 @@ public class Board {
 
     public Board() {
         createMap();
-//        addToVisitedRooms(currentRoom.getName());
+        addToVisitedRooms("keyRoom");
     }
     public void addToVisitedRooms(String roomNombre) {
 //        rooms[7][0] = "Floating Room";
@@ -311,9 +311,6 @@ public class Board {
                 // Make the node an element to gain access to text content
                 Element monsterElement = (Element) node;
 
-                System.out.println(monsterElement.getElementsByTagName("name").item(0).getTextContent());
-                System.out.println(monsterElement.getElementsByTagName("hp").item(0).getTextContent());
-                System.out.println(monsterElement.getElementsByTagName("roomName").item(0).getTextContent());
                 String enemyName = monsterElement.getElementsByTagName("name").item(0).getTextContent();
                 String enemyHP = monsterElement.getElementsByTagName("hp").item(0).getTextContent();
                 String roomName = monsterElement.getElementsByTagName("roomName").item(0).getTextContent();
@@ -322,6 +319,7 @@ public class Board {
                 Enemy enemy = new Enemy(enemyName, Integer.parseInt(enemyHP));
 
                 // Add enemy to respective room
+                allRooms.get(roomName).setEnemy(enemy);
             }
         }
     }
