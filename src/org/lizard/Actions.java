@@ -153,7 +153,7 @@ public class Actions {
             return "You don't have that on your person";
         }
         Lock lock = board.getCurrentRoom().getLock(direction);
-        if(lock.getNoun().equals(noun)) {
+        if(lock != null && lock.getNoun().equals(noun)) {
             lock.printDescription();
             board.getCurrentRoom().removeLock(direction);
             return this.execute(lock.getCommand());
