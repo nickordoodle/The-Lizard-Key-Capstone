@@ -268,12 +268,15 @@ Below seems to be an endless pit with cries and blazing heat lifting high in the
                 <commandInt>2</commandInt>
             </exit>
             <exit>
-                <path>south</path>
-                <pathName>swingingStairs</pathName>
-            </exit>
-            <exit>
                 <path>west</path>
                 <pathName>artRoom</pathName>
+                <lockKey>Boss-Key</lockKey>
+                <lockMessage>With defeating this monster, dark energy starts to spew from the art room.</lockMessage>
+                <commandInt>2</commandInt>
+            </exit>
+            <exit>
+                <path>south</path>
+                <pathName>swingingStairs</pathName>
             </exit>
         </roomExits>
         <roomDescription>
