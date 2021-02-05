@@ -42,6 +42,9 @@ public class Combat {
 
             } else if (randEnemy == SCISS0R) {
                 enemyHP -= 10;
+                if(enemyHP == 0) {
+                    battleRoom.setEnemy(null);
+                }
                 return (player.getName() + " got ROCK.\n\n"+enemy.getEnemyName() + " got SCISSOR."+"\n\n"+player.getName()+ " won!"+player.getName() + "HP: " + playerHP + "\n"+enemy.getEnemyName() + "HP: " +enemyHP);
             }
 
@@ -49,6 +52,9 @@ public class Combat {
 
             if (randEnemy == ROCK) {
                 enemyHP -= 10;
+                if(enemyHP == 0) {
+                    battleRoom.setEnemy(null);
+                }
                 return (player.getName() + " got PAPER.\n\n" +enemy.getEnemyName() + " got ROCK.\n\n" + player.getName() + " won!"+"\n\n"+player.getName() + "HP: " + playerHP + "\n"+enemy.getEnemyName() + "HP: " +enemyHP);
             } else if (randEnemy == PAPER) {
                 return (player.getName() + " got PAPER.\n\n"+enemy.getEnemyName() + " got PAPER.\n\nIt's a tie!"+"\n\n"+player.getName() + "HP: " + playerHP + "\n"+enemy.getEnemyName() + "HP: " +enemyHP);
@@ -64,14 +70,15 @@ public class Combat {
                 return (player.getName() + " got SCISSOR.\n\n"+enemy.getEnemyName() + " got ROCK.\n\n" + enemy.getEnemyName() + " won!"+"\n\n"+player.getName() + "HP: " + playerHP + "\n"+enemy.getEnemyName() + "HP: " +enemyHP);
             } else if (randEnemy == PAPER) {
                 enemyHP -= 10;
+                if(enemyHP == 0) {
+                    battleRoom.setEnemy(null);
+                }
                 return (player.getName() + " got SCISSOR.\n\n"+enemy.getEnemyName() + " got PAPER.\n\n" + player.getName() + " won!"+"\n\n"+player.getName() + "HP: " + playerHP + "\n"+enemy.getEnemyName() + "HP: " +enemyHP);
             } else if (randEnemy == SCISS0R) {
                 return (player.getName() + " got SCISSOR.\n\n"+enemy.getEnemyName() + " got SCISSOR.\n\nIt's a tie!"+"\n\n"+player.getName() + "HP: " + playerHP + "\n"+enemy.getEnemyName() + "HP: " +enemyHP);
             }
         }
-        if(enemyHP == 0) {
-            battleRoom.setEnemy(null);
-        }
+
         return null;
     }
 
