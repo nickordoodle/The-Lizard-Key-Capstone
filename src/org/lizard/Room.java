@@ -44,6 +44,7 @@ public class Room extends GameDictionary.Noun {
     }
 
 
+
     public Lock getLock(String direction) {
         return locks.get(direction);
     }

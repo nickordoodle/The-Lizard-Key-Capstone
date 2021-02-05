@@ -13,12 +13,12 @@ import java.util.*;
 public class Board {
     private Room currentRoom;
     private final Directions directions = new Directions();
-    private Map<String, Room> allRooms = new HashMap<>();
+    Map<String, Room> allRooms = new HashMap<>();
     private Map<String, Map<String, String>> allExits = new HashMap<>();
-    private Map<String, Item> allItems = new HashMap<>();
+    Map<String, Item> allItems = new HashMap<>();
     private Map<Room, List<Map<String, String>>> roomLocks = new HashMap<>();
     String[][] rooms = new String[8][8];
-
+    int totalEnemies = 0;
 
     public Board() {
         createMap();
@@ -320,8 +320,13 @@ public class Board {
 
                 // Add enemy to respective room
                 allRooms.get(roomName).setEnemy(enemy);
+                totalEnemies++;
             }
         }
+    }
+    public boolean enemyDied() {
+        totalEnemies--;
+        return totalEnemies == 1;
     }
 
     private void addLocksToRooms() {

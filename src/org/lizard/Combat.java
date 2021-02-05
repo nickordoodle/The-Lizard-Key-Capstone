@@ -10,7 +10,8 @@ public class Combat {
     Player player;
     Room battleRoom;
     Enemy enemy;
-
+    Board board;
+    boolean bossTime = false;
     final int ROCK = 1;
     final int PAPER = 2;
     final int SCISS0R = 3;
@@ -44,6 +45,7 @@ public class Combat {
                 enemyHP -= 10;
                 if(enemyHP == 0) {
                     battleRoom.setEnemy(null);
+                    bossTime = board.enemyDied();
                 }
                 return (player.getName() + " got ROCK.\n\n"+enemy.getEnemyName() + " got SCISSOR."+"\n\n"+player.getName()+ " won!"+player.getName() + "HP: " + playerHP + "\n"+enemy.getEnemyName() + "HP: " +enemyHP);
             }
@@ -54,6 +56,8 @@ public class Combat {
                 enemyHP -= 10;
                 if(enemyHP == 0) {
                     battleRoom.setEnemy(null);
+                    bossTime = board.enemyDied();
+
                 }
                 return (player.getName() + " got PAPER.\n\n" +enemy.getEnemyName() + " got ROCK.\n\n" + player.getName() + " won!"+"\n\n"+player.getName() + "HP: " + playerHP + "\n"+enemy.getEnemyName() + "HP: " +enemyHP);
             } else if (randEnemy == PAPER) {
@@ -72,6 +76,8 @@ public class Combat {
                 enemyHP -= 10;
                 if(enemyHP == 0) {
                     battleRoom.setEnemy(null);
+                    bossTime = board.enemyDied();
+
                 }
                 return (player.getName() + " got SCISSOR.\n\n"+enemy.getEnemyName() + " got PAPER.\n\n" + player.getName() + " won!"+"\n\n"+player.getName() + "HP: " + playerHP + "\n"+enemy.getEnemyName() + "HP: " +enemyHP);
             } else if (randEnemy == SCISS0R) {
@@ -82,10 +88,11 @@ public class Combat {
         return null;
     }
 
-    public void startCombat(Player player, Room battleRoom){
+    public void startCombat(Player player, Room battleRoom, Board board){
         this.player = player;
         this.enemy = battleRoom.getEnemy();
         this.battleRoom = battleRoom;
+        this.board = board;
         playerHP = player.getPlayerHP();
         enemyHP = enemy.getEnemyHP();
     }
