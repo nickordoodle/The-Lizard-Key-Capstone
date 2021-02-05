@@ -17,6 +17,7 @@ public class MyJFrame extends JFrame implements ActionListener {
     JTextArea rpsGame;
     JPanel promptPanel;
     JScrollPane scrollPane;
+    MapView mapView;
 
     String result;
     JLabel inputFromUser = new JLabel();
@@ -79,6 +80,15 @@ public class MyJFrame extends JFrame implements ActionListener {
         if(e.getSource()==textField){
 
             result = textField.getText();
+            if(result.contains("map")) {
+                JFrame frame = new JFrame();
+                frame.setSize(1000,800);
+                frame.getContentPane().add(new MapView(board.rooms, board.getCurrentRoom().getName()));
+                frame.setLocationRelativeTo(null);
+                frame.setBackground(Color.BLACK);
+//                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                frame.setVisible(true);
+            }
             Command command = parser.parse(result);
             label1.setFont(new Font("Consolas", Font.CENTER_BASELINE, 15));
             label1.setForeground(Color.black);
@@ -170,10 +180,12 @@ public class MyJFrame extends JFrame implements ActionListener {
         if (!calledOnce) {
             textField.addActionListener(this);
             calledOnce = true;
+
         }
 
         frame.setVisible(true);
     }
+
 
 
     private void displayCombat(){

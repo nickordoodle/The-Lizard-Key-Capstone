@@ -2,41 +2,19 @@ package org.lizard;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Arrays;
 
 public class MapView extends JPanel {
     int rows = 8;
     int cols = 8;
     int size = 100;
-    String currentRoom = "Library";
+    String currentRoom = null;
     String[][] rooms = new String[rows][cols];
 
-    MapView() {
-//        rooms[7][0] = "Floating Room";
-//        rooms[6][0] = "Land of the Dead";
-//        rooms[5][0] = "Egyptian Room";
-//        rooms[4][0] = "Art Room";
-//        rooms[7][1] = "Engraving Room";
-//        rooms[6][1] = "Loud Room";
-        rooms[5][1] = "Swinging Stairs";
-        rooms[6][2] = "Library";
-        rooms[5][2] = "Key Room";
-//        rooms[4][2] = "Psych Ward";
-//        rooms[7][3] = "Coal Mine";
-//        rooms[6][3] = "Creaky Path";
-//        rooms[5][3] = "Kitchen";
-//        rooms[4][3] = "Closet";
-//        rooms[3][3] = "Riddle Room";
-//        rooms[2][3] = "Whispering Room";
-//        rooms[1][3] = "Treasure Room";
-//        rooms[0][3] = "River";
-//        rooms[1][4] = "Volcano";
-//        rooms[2][4] = "Secret Passage";
-//        rooms[3][4] = "Secret Passage";
-//        rooms[4][4] = "Secret Passage";
-//        rooms[5][4] = "Secret Passage";
-
-
-    }
+   MapView(String[][] rooms, String currentRoom) {
+       this.rooms = rooms;
+       this.currentRoom = currentRoom;
+   }
     public void paint(Graphics g){
 
 
@@ -56,8 +34,22 @@ public class MapView extends JPanel {
                 g.fillRect(i * size,j * size, size, size);
                 g.setColor(Color.BLACK);
                 g.drawRect(i * size,j * size, size, size);
+                String joined = null;
+                if(rooms[i][j] != null) {
+                    String[] nameSplit = rooms[i][j].split(" ");
 
-                if(rooms[i][j] != null && rooms[i][j].equals(currentRoom)) {
+                    for(int v = 0; v < nameSplit.length; v++) {
+                        if(v == 0) {
+                            nameSplit[v] = String.valueOf(nameSplit[v].charAt(0)).toLowerCase() + nameSplit[v].substring(1);
+                        } else {
+                            nameSplit[v] = String.valueOf(nameSplit[v].charAt(0)).toUpperCase()+ nameSplit[v].substring(1);
+                        }
+                    }
+                    joined = String.join("", Arrays.asList(nameSplit));
+                }
+
+
+                if(rooms[i][j] != null && joined != null && joined.equals(currentRoom)) {
                     g.setColor(Color.ORANGE);
                     g.fillOval(i * size+ size/2, j * size + 10 , 20, 20);
                 }
@@ -75,13 +67,13 @@ public class MapView extends JPanel {
         }
 
     }
-    public static void main(String[] args){
-        JFrame frame = new JFrame();
-        frame.setSize(1000,800);
-        frame.getContentPane().add(new MapView());
-        frame.setLocationRelativeTo(null);
-        frame.setBackground(Color.BLACK);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setVisible(true);
-    }
+//    public static void main(String[] args){
+//        JFrame frame = new JFrame();
+//        frame.setSize(1000,800);
+//        frame.getContentPane().add(new MapView());
+//        frame.setLocationRelativeTo(null);
+//        frame.setBackground(Color.BLACK);
+//        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//        frame.setVisible(true);
+//    }
 }
