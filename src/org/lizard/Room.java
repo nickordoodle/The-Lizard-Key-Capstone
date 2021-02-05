@@ -11,11 +11,16 @@ public class Room extends GameDictionary.Noun {
     private final Map<String, Lock> locks = new HashMap<>();
     private final List<GameDictionary.Noun> items = new ArrayList<>();
     private String roomDescription;
-
+    private Enemy enemy = null;
 
     public Room(String name) {
         super(name);
         this.setExaminable(true);
+    }
+
+    public Room(String name, Enemy enemy) {
+        this(name);
+        this.enemy = enemy;
     }
 
     public void addItemToRoom(GameDictionary.Noun item) {
@@ -89,6 +94,14 @@ public class Room extends GameDictionary.Noun {
             return roomSB.toString();
         }
         return roomDescription;
+    }
+    public Enemy getEnemy() {
+        return enemy;
+    }
+
+    public boolean setEnemy(Enemy enemy) {
+        this.enemy = enemy;
+        return enemy == null;
     }
 
 

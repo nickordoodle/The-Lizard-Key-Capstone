@@ -8,6 +8,7 @@ public class Combat {
     int enemyHP;
     int playerHP;
     Player player;
+    Room battleRoom;
     Enemy enemy;
 
     final int ROCK = 1;
@@ -68,13 +69,16 @@ public class Combat {
                 return (player.getName() + " got SCISSOR.\n\n"+enemy.getEnemyName() + " got SCISSOR.\n\nIt's a tie!"+"\n\n"+player.getName() + "HP: " + playerHP + "\n"+enemy.getEnemyName() + "HP: " +enemyHP);
             }
         }
+        if(enemyHP == 0) {
+            battleRoom.setEnemy(null);
+        }
         return null;
     }
 
-    public void startCombat(Player player, Enemy enemy){
+    public void startCombat(Player player, Room battleRoom){
         this.player = player;
-        this.enemy = enemy;
-
+        this.enemy = battleRoom.getEnemy();
+        this.battleRoom = battleRoom;
         playerHP = player.getPlayerHP();
         enemyHP = enemy.getEnemyHP();
     }

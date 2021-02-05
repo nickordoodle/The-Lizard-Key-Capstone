@@ -22,7 +22,7 @@ public class Board {
 
     public Board() {
         createMap();
-//        addToVisitedRooms(currentRoom.getName());
+        addToVisitedRooms("keyRoom");
     }
     public void addToVisitedRooms(String roomNombre) {
 //        rooms[7][0] = "Floating Room";
