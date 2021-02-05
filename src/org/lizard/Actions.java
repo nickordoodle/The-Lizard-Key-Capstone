@@ -72,6 +72,7 @@ public class Actions {
 
 
     private String move(GameDictionary.Noun direction) {
+
         if(direction instanceof Directions.Direction) {
             if(player.hasWinningKey && board.getCurrentRoom().getName().equals("keyRoom")) {
                 return "You use the lizard key on the door to exit.\n" +
@@ -152,7 +153,7 @@ public class Actions {
             return "You don't have that on your person";
         }
         Lock lock = board.getCurrentRoom().getLock(direction);
-        if(lock.getNoun().equals(noun)) {
+        if(lock != null && lock.getNoun().equals(noun)) {
             lock.printDescription();
             board.getCurrentRoom().removeLock(direction);
             return this.execute(lock.getCommand());

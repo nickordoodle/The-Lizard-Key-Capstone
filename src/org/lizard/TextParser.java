@@ -10,6 +10,7 @@ public class TextParser {
     }
 
     public Command parse(String userInput) {
+
         List<String> userInputWords = new ArrayList<>(Arrays.asList(userInput.split(" ")));
         Integer verbCandidate = null;
         GameDictionary.Noun[] nounCandidates = null;
