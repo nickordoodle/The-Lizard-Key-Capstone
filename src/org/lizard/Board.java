@@ -128,7 +128,7 @@ public class Board {
                 rooms[5][4] = "Secret Passage";
         }
     }
-    public void createMap(){
+    private void createMap(){
         // Call XMLParser to gain access to a nodeList of all the rooms in the XML file
         NodeList nodeList = XMLParser("xml/Rooms.xml", "room");
         // Create a for loop to go the length of the nodeList
@@ -190,6 +190,8 @@ public class Board {
         addItemsToRooms();
         // Add locks to rooms
         addLocksToRooms();
+        // Add all monsters/enemies to board
+        addMonstersToBoard();
 
         // Set starting room.
         this.currentRoom = allRooms.get("keyRoom");
@@ -297,7 +299,34 @@ public class Board {
         }
     }
 
-    public void addLocksToRooms() {
+    private void addMonstersToBoard() {
+
+        NodeList nodeList = XMLParser("xml/Enemies.xml", "enemy");
+        // Iterate over each item
+        for (int itr = 0; itr < nodeList.getLength(); itr++) {
+            // Make a node from nodeList at the current index
+            Node node = nodeList.item(itr);
+            if (node.getNodeType() == Node.ELEMENT_NODE) {
+
+                // Make the node an element to gain access to text content
+                Element monsterElement = (Element) node;
+
+                System.out.println(monsterElement.getElementsByTagName("name").item(0).getTextContent());
+                System.out.println(monsterElement.getElementsByTagName("hp").item(0).getTextContent());
+                System.out.println(monsterElement.getElementsByTagName("roomName").item(0).getTextContent());
+                String enemyName = monsterElement.getElementsByTagName("name").item(0).getTextContent();
+                String enemyHP = monsterElement.getElementsByTagName("hp").item(0).getTextContent();
+                String roomName = monsterElement.getElementsByTagName("roomName").item(0).getTextContent();
+
+                // Create enemy
+                Enemy enemy = new Enemy(enemyName, Integer.parseInt(enemyHP));
+
+                // Add enemy to respective room
+            }
+        }
+    }
+
+    private void addLocksToRooms() {
         for(Map.Entry<Room, List<Map<String, String>>> locksEntrySet: roomLocks.entrySet()) {
             Room room = locksEntrySet.getKey();
             for(int i = 0; i < locksEntrySet.getValue().size(); i++) {
