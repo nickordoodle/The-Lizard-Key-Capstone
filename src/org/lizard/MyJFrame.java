@@ -97,7 +97,9 @@ public class MyJFrame extends JFrame implements ActionListener {
             panel5.setVisible(true);
             frame.setVisible(true);
 
+
             if(board.getCurrentRoom().getEnemy() != null){
+
                 frame.remove(panel1);
                 frame.remove(panel2);
                 frame.remove(panel3);
