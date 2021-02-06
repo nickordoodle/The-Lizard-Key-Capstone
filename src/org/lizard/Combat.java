@@ -4,7 +4,7 @@ import java.util.Random;
 
 public class Combat {
     Random rand;
-//    MyJFrame frame;
+    MyJFrame frame;
     int enemyHP;
     int playerHP;
     Player player;

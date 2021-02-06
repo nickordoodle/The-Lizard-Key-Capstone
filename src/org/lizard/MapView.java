@@ -7,7 +7,7 @@ import java.util.Arrays;
 public class MapView extends JPanel {
     int rows = 8;
     int cols = 8;
-    int size = 80;
+    int size = 100;
     String currentRoom = null;
     String[][] rooms = new String[rows][cols];
 
@@ -31,9 +31,9 @@ public class MapView extends JPanel {
                     current = rooms[i][j];
 
                 }
-                g.fillRect(i * size+350,j * size+430, size, size);
+                g.fillRect(i * size,j * size, size, size);
                 g.setColor(Color.BLACK);
-                g.drawRect(i * size+350,j * size+430, size, size);
+                g.drawRect(i * size,j * size, size, size);
                 String joined = null;
                 if(rooms[i][j] != null) {
                     String[] nameSplit = rooms[i][j].split(" ");
@@ -50,25 +50,30 @@ public class MapView extends JPanel {
 
 
                 if(rooms[i][j] != null && joined != null && joined.equals(currentRoom)) {
-                    if(!((i==3 || i==4 || i==2)&&j==4)){
-                        g.setColor(Color.ORANGE);
-                        g.fillOval(i * size+ size/2+350, j * size + 440 , 20, 20);
-                    }
-
+                    g.setColor(Color.ORANGE);
+                    g.fillOval(i * size+ size/2, j * size + 10 , 20, 20);
                 }
 
                 g.setColor(Color.GREEN);
-                Font font = new Font("Arial", Font.BOLD, 10);
+                Font font = new Font("Arial", Font.BOLD, 12);
                 g.setFont(font);
                 FontMetrics fm = g.getFontMetrics();
                 int x = ((size - fm.stringWidth(current)) / 2);
                 int y = ((size - fm.getHeight()) / 2) + fm.getAscent();
 
-                g.drawString(current, i * size + x+350, j * size + (size/2)+430);
+                g.drawString(current, i * size + x, j * size + (size/2));
 
             }
         }
 
     }
-
+//    public static void main(String[] args){
+//        JFrame frame = new JFrame();
+//        frame.setSize(1000,800);
+//        frame.getContentPane().add(new MapView());
+//        frame.setLocationRelativeTo(null);
+//        frame.setBackground(Color.BLACK);
+//        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//        frame.setVisible(true);
+//    }
 }

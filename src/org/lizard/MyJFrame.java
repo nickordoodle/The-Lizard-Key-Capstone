@@ -1,6 +1,7 @@
 package org.lizard;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -24,13 +25,10 @@ public class MyJFrame extends JFrame implements ActionListener {
     JTextField textField = new JTextField();
     JButton enterGame;
     JFrame frame;
-    JPanel panel0;
-    JTextArea textDisplay;
-    JPanel panel1;
     JPanel panel2;
-    JPanel panel3;
-    JPanel panel4;
-    JPanel panel5;
+    JTextArea label1;
+    JPanel top;
+    JPanel center1;
     JTextField numInput;
     String numFromUser;
     boolean calledOnce=false;
@@ -46,8 +44,8 @@ public class MyJFrame extends JFrame implements ActionListener {
         frame.setTitle("Lizard Game");
         frame.setSize(600,400);
 
-        panel0 = new JPanel();
-        panel0.setBackground(new Color(7, 87, 91));
+        panel2 = new JPanel();
+        panel2.setBackground(new Color(7, 87, 91));
 
         enterGame = new JButton("Enter Game");
         enterGame.setBounds(10,150,100,300);
@@ -57,10 +55,13 @@ public class MyJFrame extends JFrame implements ActionListener {
         welcome.setFont(new Font("IronWood", Font.BOLD, 30));
         welcome.setForeground(new Color(196, 223, 230));
 
-        panel0.add(welcome,BorderLayout.NORTH);
-        panel0.add(enterGame);
 
-        frame.add(panel0);
+
+        panel2.add(welcome,BorderLayout.NORTH);
+        panel2.add(enterGame);
+//        Border buttonBorder = BorderFactory.createLineBorder(Color.black, 3);
+
+        frame.add(panel2);
 
         frame.setVisible(true);
         enterGame.addActionListener(this);
@@ -74,36 +75,29 @@ public class MyJFrame extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource()==enterGame){
-            frame.remove(panel0);
+            frame.remove(panel2);
             gameScreen(Story.introduction());
         }
         if(e.getSource()==textField){
 
             result = textField.getText();
-
+            if(result.contains("map")) {
+                JFrame frame = new JFrame();
+                frame.setSize(1000,800);
+                frame.getContentPane().add(new MapView(board.rooms, board.getCurrentRoom().getName()));
+                frame.setLocationRelativeTo(null);
+                frame.setBackground(Color.BLACK);
+//                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                frame.setVisible(true);
+            }
             Command command = parser.parse(result);
+            label1.setFont(new Font("Consolas", Font.CENTER_BASELINE, 15));
+            label1.setForeground(Color.black);
+            label1.setText(actions.execute(command));
 
-
-            textDisplay.setFont(new Font("Consolas", Font.CENTER_BASELINE, 15));
-            textDisplay.setForeground(Color.black);
-            textDisplay.setText(actions.execute(command));
-
-            frame.remove(panel5);
-
-            panel5 = new MapView(board.rooms, board.getCurrentRoom().getName());
-            panel5.setBounds(0,750,1500,550);
-
-            frame.add(panel5);
-            frame.setBackground(Color.black);
-            panel5.setVisible(true);
-            frame.setVisible(true);
-
-            if(board.getCurrentRoom().getEnemy() != null)){
-                frame.remove(panel1);
-                frame.remove(panel2);
-                frame.remove(panel3);
-                frame.remove(panel4);
-                frame.remove(panel5);
+            if(board.getCurrentRoom().getEnemy() != null){
+                frame.remove(top);
+                frame.remove(center1);
                 displayCombat();
 
             }
@@ -123,7 +117,6 @@ public class MyJFrame extends JFrame implements ActionListener {
 
                 }
                 else if(combat.checkGameEndingStatus()=="Player won"){
-
                     if(combat.bossTime) {
                         combat.bossTime = false;
                         board.totalEnemies = -1;
@@ -140,7 +133,6 @@ public class MyJFrame extends JFrame implements ActionListener {
                     }
 
 
-
                 }
 
                 numInput.setText("");
@@ -154,23 +146,23 @@ public class MyJFrame extends JFrame implements ActionListener {
         frame.getContentPane().setBackground(new Color(200,200,200));
         frame.setSize(600,400);
 
-        textDisplay = new JTextArea();
-        textDisplay.setText(initialPrint);
-        textDisplay.setLineWrap(true);
-        textDisplay.setWrapStyleWord(true);
-        textDisplay.setBorder(BorderFactory.createBevelBorder(1));
-        textDisplay.setForeground(new Color(0, 60, 70));
-        textDisplay.setFont(new Font("Comic Sans",Font.BOLD, 15));
-        textDisplay.setEditable(false);
-        textDisplay.setBackground(new Color(196, 223, 230));
+        label1 = new JTextArea();
+        label1.setText(initialPrint);
+        label1.setLineWrap(true);
+        label1.setBounds(50,50,100,100);
+        label1.setWrapStyleWord(true);
+        label1.setBorder(BorderFactory.createBevelBorder(1));
+        label1.setForeground(new Color(0, 60, 70));
+        label1.setFont(new Font("Comic Sans",Font.BOLD, 12));
+        label1.setEditable(false);
+        label1.setBackground(new Color(196, 223, 230));
 
-        JScrollPane scrollPane = new JScrollPane(textDisplay);
-        scrollPane.setPreferredSize(new Dimension(700,250));
+
+        JScrollPane scrollPane = new JScrollPane(label1);
+        scrollPane.setPreferredSize(new Dimension(500,300));
         scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 
-
         inputFromUser.setText("What do you want to do?");
-        inputFromUser.setBounds(0,300,2,150);
         inputFromUser.setFont(new Font("Consolas", Font.CENTER_BASELINE, 20));
 
         textField.setPreferredSize(new Dimension(500,100));
@@ -179,40 +171,25 @@ public class MyJFrame extends JFrame implements ActionListener {
         textField.setBackground(new Color(196, 223, 230));
         textField.setCaretColor(Color.BLACK);
 
+        top = new JPanel();
+        top.setBounds(0,0,1200,700);
+        top.setBackground(new Color(102, 165, 173));
 
-        panel1 = new JPanel();
-        panel1.setBackground(new Color(102, 165, 173));
-        panel1.setBounds(0,0,1500,300);
+        center1 = new JPanel();
+        center1.setBackground(new Color(102, 165, 173));
 
-        panel2 = new JPanel();
-        panel2.setBackground(new Color(102, 165, 173));
-        panel2.setBounds(0,300,500,125);
+        JPanel bottom = new JPanel();
 
+        top.add(scrollPane);
+        center1.add(inputFromUser);
+        center1.add(textField);
 
-        panel3 = new JPanel();
-        panel3.setBackground(new Color(102, 165, 173));
-        panel3.setBounds(500,300,1000,125);
-
-        panel4 = new JPanel();
-        panel4.setBackground(Color.black);
-        panel4.setBounds(0,450,1500,550);
-
-        panel1.add(scrollPane);
-        panel2.add(inputFromUser);
-        panel3.add(textField);
-
-        panel5 = new MapView(board.rooms, board.getCurrentRoom().getName());
-        panel5.setBounds(0,750,1500,550);
-        panel5.setBackground(Color.black);
-
-
-        frame.add(panel1);
-        frame.add(panel2);
-        frame.add(panel3);
-        frame.add(panel5);
-        frame.setBackground(Color.black);
+        frame.add(top,BorderLayout.NORTH);
+        frame.add(center1);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(1500,1000);
+        frame.setSize(900,500);
+        frame.setResizable(false);
+//        frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
         if (!calledOnce) {
             textField.addActionListener(this);
             calledOnce = true;
@@ -272,8 +249,8 @@ public class MyJFrame extends JFrame implements ActionListener {
     }
 
     public void gameOverScreen(){
-        frame.remove(panel1);
-        frame.remove(panel2);
+        frame.remove(top);
+        frame.remove(center1);
 
         ImageIcon lost = new ImageIcon(getClass().getResource("over.png"));
 
