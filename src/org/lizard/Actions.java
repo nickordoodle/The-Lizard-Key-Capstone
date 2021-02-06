@@ -9,17 +9,20 @@ public class Actions {
     private final Board board;
     private final Player player;
     private final MyJFrame frame;
+    private Combat combat;
     private List<Room> roomsVisited = new ArrayList<>();
 
-    public Actions(Board board, Player player, MyJFrame frame) {
+    public Actions(Board board, Player player, MyJFrame frame, Combat combat) {
         this.board = board;
         this.player = player;
         this.frame = frame;
+        this.combat = combat;
         roomsVisited.add(board.getCurrentRoom());
     }
 
 
     public String execute(Command command) {
+
             GameDictionary.Noun noun;
             GameDictionary.Noun targetNoun = null;
             Integer verb;
@@ -41,6 +44,7 @@ public class Actions {
             return (noun.getDescription());
 
         }
+
 //        if(noun == null) {
 //            return "WTF";
 //        }
@@ -64,6 +68,8 @@ public class Actions {
 //                    return create(noun);
                 case 8:
 //                    return changeDescription();
+                case 99:
+                    return bossAvailable("west", noun);
             }
         }
         return null;
@@ -72,7 +78,6 @@ public class Actions {
 
 
     private String move(GameDictionary.Noun direction) {
-
         if(direction instanceof Directions.Direction) {
             if(player.hasWinningKey && board.getCurrentRoom().getName().equals("keyRoom")) {
                 return "You use the lizard key on the door to exit.\n" +
@@ -157,6 +162,16 @@ public class Actions {
             lock.printDescription();
             board.getCurrentRoom().removeLock(direction);
             return this.execute(lock.getCommand());
+        } else {
+            return "What did you think that would even accomplish?";
+        }
+    }
+    public String bossAvailable(String direction, GameDictionary.Noun noun) {
+        Lock lock = board.allRooms.get("egyptianRoom").getLock(direction);
+        if(lock != null && lock.getNoun().equals(noun)) {
+            board.allRooms.get("egyptianRoom").removeLock(direction);
+            System.out.println(lock.printDescription());
+            return lock.printDescription();
         } else {
             return "What did you think that would even accomplish?";
         }

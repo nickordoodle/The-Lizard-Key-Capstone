@@ -329,5 +329,17 @@ A tombstone with your name reads, "RIP to you. You're never escaping this world!
 A cape has a message sewn into the collar, "Fly high, fly fast, fly free, fly just".
         </description>
     </item>
+    <item>
+        <id>24</id>
+        <name>Boss-Key</name>
+        <canGrab>false</canGrab>
+        <roomName>artRoom</roomName>
+        <lockKey>none</lockKey>
+        <lockMessage></lockMessage>
+        <commandInt></commandInt>
+        <commandDirection></commandDirection>
+        <description>if you can see this. you found a bug
+        </description>
+    </item>
 </items>
 
