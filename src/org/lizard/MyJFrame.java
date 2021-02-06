@@ -9,10 +9,11 @@ public class MyJFrame extends JFrame implements ActionListener {
 
     Board board = new Board();
     Player player = new Player("Edgar");
-    Actions actions = new Actions(board, player, this);
+    Combat combat = new Combat();
+    Actions actions = new Actions(board, player, this, combat);
     GameDictionary gameDictionary = GameDictionary.getGameDictionary();
     TextParser parser = new TextParser(gameDictionary);
-    Combat combat = new Combat();
+
     JTextArea rpsGame;
     JPanel promptPanel;
     JScrollPane scrollPane;
@@ -96,12 +97,13 @@ public class MyJFrame extends JFrame implements ActionListener {
             panel5.setVisible(true);
             frame.setVisible(true);
 
-            if(textDisplay.getText().contains("swingingStairs")){
+            if(board.getCurrentRoom().getEnemy() != null){
                 frame.remove(panel1);
                 frame.remove(panel2);
                 frame.remove(panel3);
                 frame.remove(panel4);
                 frame.remove(panel5);
+
                 displayCombat();
 
             }
@@ -121,13 +123,24 @@ public class MyJFrame extends JFrame implements ActionListener {
 
                 }
                 else if(combat.checkGameEndingStatus()=="Player won"){
-                    frame.remove(promptPanel);
-                    frame.remove(scrollPane);
 
-                    gameScreen("Player won");
-                    frame.setVisible(true);
+                    if(combat.bossTime) {
+                        combat.bossTime = false;
+                        board.totalEnemies = -1;
+                        frame.remove(promptPanel);
+                        frame.remove(scrollPane);
+                        gameScreen(actions.execute(new Event(99, board.allItems.get("Boss-Key"))));
+                        frame.setVisible(true);
+
+                    } else {
+                        frame.remove(promptPanel);
+                        frame.remove(scrollPane);
+                        gameScreen("Player won");
+                        frame.setVisible(true);
+                    }
 
                 }
+
                 numInput.setText("");
 
         }
@@ -251,7 +264,7 @@ public class MyJFrame extends JFrame implements ActionListener {
         frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
         frame.setVisible(true);
 
-        combat.startCombat(player, new Enemy("Goblin"));
+        combat.startCombat(player, board.getCurrentRoom(), board);
         numInput.addActionListener(this);
 
     }
