@@ -84,7 +84,7 @@ public class Actions {
                         "Darkness surrounds you and wind presses against you back as if the ground is being pulled beneath you.\n" +
                         "You close your eyes to avoid sickness, only for the movement around you to stop.\n" +
                         "Upon opening your eyes, you are staring out a small window with people in white scrubs passing in a hall.\n" +
-                        "You turn around to see padded walls, only to realize that you have escaped Rex Verwirrtheit's for now.";
+                        "You turn around to see padded walls, only to realize that you have escaped Copernicus Rex Verwirrtheit Theodore's for now.";
             }
             if (!roomsVisited.contains(board.getCurrentRoom())) {
                 roomsVisited.add(board.getCurrentRoom());
