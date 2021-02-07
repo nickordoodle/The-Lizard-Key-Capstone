@@ -1,9 +1,12 @@
 package org.lizard;
 
+import javax.sound.sampled.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
 
 public class MyJFrame extends JFrame implements ActionListener {
 
@@ -13,7 +16,8 @@ public class MyJFrame extends JFrame implements ActionListener {
     Actions actions = new Actions(board, player, this, combat);
     GameDictionary gameDictionary = GameDictionary.getGameDictionary();
     TextParser parser = new TextParser(gameDictionary);
-
+    String soundName = "princeofdarkness.wav";
+    Clip clip = null;
     JTextArea rpsGame;
     JPanel promptPanel;
     JScrollPane scrollPane;
@@ -32,6 +36,7 @@ public class MyJFrame extends JFrame implements ActionListener {
     JPanel panel4;
     JPanel panel5;
     JTextField numInput;
+
     String numFromUser;
     boolean calledOnce=false;
 
@@ -109,7 +114,28 @@ public class MyJFrame extends JFrame implements ActionListener {
                 displayCombat();
 
             }
+
             if(response.equals("BOSS")) {
+                AudioInputStream audioInputStream = null;
+                try {
+                    audioInputStream = AudioSystem.getAudioInputStream(new File(soundName).getAbsoluteFile());
+                } catch (UnsupportedAudioFileException | IOException unsupportedAudioFileException) {
+                    unsupportedAudioFileException.printStackTrace();
+                }
+
+                try {
+                    clip = AudioSystem.getClip();
+                } catch (LineUnavailableException lineUnavailableException) {
+                    lineUnavailableException.printStackTrace();
+                }
+                try {
+                    assert clip != null;
+                    clip.open(audioInputStream);
+                } catch (LineUnavailableException | IOException lineUnavailableException) {
+                    lineUnavailableException.printStackTrace();
+                }
+
+                clip.start();
                 frame.remove(panel1);
                 frame.remove(panel2);
                 frame.remove(panel3);
@@ -147,6 +173,9 @@ public class MyJFrame extends JFrame implements ActionListener {
                         frame.remove(scrollPane);
                         gameScreen("Player won");
                         frame.setVisible(true);
+                        if(clip != null) {
+                            clip.stop();
+                        }
                     }
 
 
