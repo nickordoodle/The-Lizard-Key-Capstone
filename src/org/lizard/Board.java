@@ -18,7 +18,7 @@ public class Board {
     Map<String, Item> allItems = new HashMap<>();
     private Map<Room, List<Map<String, String>>> roomLocks = new HashMap<>();
     String[][] rooms = new String[8][8];
-    int totalEnemies = 0;
+    int totalEnemies = 3;
 
     public Board() {
         createMap();
@@ -290,8 +290,13 @@ public class Board {
                     // Add newly created item to its respective room
                     allRooms.get(roomName).addItemToRoom(roomItem);
                 } else {
-                    Item roomItem = new Item(itemName, new Lock(allItems.get(lockKey), lockMessage, new Event(Integer.parseInt(commandInt), directions.getDirection(commandDirection))), itemDescription, Boolean.parseBoolean(canGrab));
-
+                    GameDictionary.Noun noun;
+                    if(commandDirection == "") {
+                        noun = allItems.get(lockKey);
+                    } else {
+                        noun = directions.getDirection(commandDirection);
+                    }
+                    Item roomItem = new Item(itemName, new Lock(allItems.get(lockKey), lockMessage, new Event(Integer.parseInt(commandInt), noun)), itemDescription, Boolean.parseBoolean(canGrab));
                     // Add newly created item to its respective room
                     allRooms.get(roomName).addItemToRoom(roomItem);
                 }
@@ -320,7 +325,6 @@ public class Board {
 
                 // Add enemy to respective room
                 allRooms.get(roomName).setEnemy(enemy);
-                totalEnemies++;
             }
         }
     }

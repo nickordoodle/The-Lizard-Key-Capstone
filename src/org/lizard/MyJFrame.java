@@ -100,7 +100,7 @@ public class MyJFrame extends JFrame implements ActionListener {
             panel5.setVisible(true);
             frame.setVisible(true);
 
-            if(board.getCurrentRoom().getEnemy() != null && !board.getCurrentRoom().getEnemy().enemyName.equals("Rex Verwirrtheit") ){
+            if(board.getCurrentRoom().getEnemy() != null && !board.getCurrentRoom().getEnemy().enemyName.equals("Copernicus Rex Verwirrtheit Theodore") ){
                 frame.remove(panel1);
                 frame.remove(panel2);
                 frame.remove(panel3);
