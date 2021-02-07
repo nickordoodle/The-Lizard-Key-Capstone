@@ -33,15 +33,11 @@ public class Player {
 
         public String add(GameDictionary.Noun item) {
 
-            if(inventory.size() == 5) {
-                return "You are holding too many items.";
-            } else {
-                if(item.getName().equals("lizard key")) {
-                    hasWinningKey = true;
-                }
-                inventory.add(item);
-                return"Added to inventory";
+            if(item.getName().equals("lizard key")) {
+                hasWinningKey = true;
             }
+            inventory.add(item);
+            return"Added to inventory";
         }
         public List<GameDictionary.Noun> getItems() {
             return inventory;

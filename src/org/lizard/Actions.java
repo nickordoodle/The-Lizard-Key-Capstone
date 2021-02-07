@@ -200,7 +200,6 @@ public class Actions {
                     displayRooms.put(entry.getKey(), "?");
                 }
             }
-
             String paths = "\nAvailable Paths: ";
             for (Map.Entry<String, String> entry : displayRooms.entrySet()) {
                 paths = paths.concat(entry.getKey() + ": " + entry.getValue() + "\n");
@@ -212,9 +211,19 @@ public class Actions {
         } else if (!noun.isExaminable()) {
             return ("You can't examine " + noun.getName());
         } else {
+            if(noun instanceof Room) {
+                if(noun == board.getCurrentRoom()) {
+                    return board.getCurrentRoom().getRoomDescription();
+                } else {
+                    return "Your not in the " + noun.getName();
+                }
+            }
+            if(noun.getName().equals("inventory")) {
+                return player.getInventory().getDescription();
+            }
             if (noun.getName().equals("items")) { //examine items
                 return ("Items present in the " + currentRoom.getName() + " are: " + currentRoom.printItemsInRoom());
-            } else if (currentRoom.has((Item) noun)) { //examine candle
+            } else if (currentRoom.has(noun) || player.getInventory().has(noun)) { //examine candle
                 return noun.getDescription();
             } else {
 
