@@ -170,7 +170,6 @@ public class Actions {
         Lock lock = board.allRooms.get("egyptianRoom").getLock(direction);
         if(lock != null && lock.getNoun().equals(noun)) {
             board.allRooms.get("egyptianRoom").removeLock(direction);
-            board.allRooms.get("artRoom").removeItemFromRoom(lock.getNoun());
             return lock.printDescription();
         } else {
             return "What did you think that would even accomplish?";
@@ -180,6 +179,8 @@ public class Actions {
     private String examine(GameDictionary.Noun noun){
         Room currentRoom = board.getCurrentRoom();
         Map<String, String> displayRooms = new HashMap<>();
+
+        // If Rex/Boss was
         if (noun == null) { //examine
             for (Map.Entry<String, Room> entry: currentRoom.getExits().entrySet()) {
                 if (roomsVisited.contains(entry.getValue())) {
