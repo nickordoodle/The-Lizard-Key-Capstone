@@ -34,7 +34,6 @@ public class MyJFrame extends JFrame implements ActionListener {
     JPanel panel2;
     JPanel panel3;
     JPanel panel4;
-    JPanel panel5;
     JTextField numInput;
 
     String numFromUser;
@@ -94,23 +93,29 @@ public class MyJFrame extends JFrame implements ActionListener {
 
             textDisplay.setText(response);
 
-            frame.remove(panel5);
+            frame.remove(panel4);
 
-            panel5 = new MapView(board.rooms, board.getCurrentRoom().getName());
-            panel5.setBounds(0,750,1500,550);
+            panel4 = new MapView(board.rooms, board.getCurrentRoom().getName());
+            panel4.setBounds(0,750,1500,550);
 
-            frame.add(panel5);
+            frame.add(panel4);
             frame.setBackground(Color.black);
-            panel5.setVisible(true);
+            panel4.setVisible(true);
             frame.setVisible(true);
 
+            if(player.hasWinningKey && board.getCurrentRoom().getName().equals("keyRoom")){
+                frame.remove(panel1);
+                frame.remove(panel2);
+                frame.remove(panel3);
+                frame.remove(panel4);
+                winScreen();
+            }
 
             if(board.getCurrentRoom().getEnemy() != null && !board.getCurrentRoom().getEnemy().enemyName.equals("Copernicus Rex Verwirrtheit Theodore") ){
                 frame.remove(panel1);
                 frame.remove(panel2);
                 frame.remove(panel3);
                 frame.remove(panel4);
-                frame.remove(panel5);
 
                 displayCombat();
             }
@@ -118,9 +123,9 @@ public class MyJFrame extends JFrame implements ActionListener {
             if(response.equals("BOSS")) {
                 frame.remove(panel1);
                 frame.remove(panel2);
+//                frame.remove(panel3);
                 frame.remove(panel3);
                 frame.remove(panel4);
-                frame.remove(panel5);
                 displayCombat();
             }
             textField.setText("");
@@ -203,30 +208,25 @@ public class MyJFrame extends JFrame implements ActionListener {
 
         panel2 = new JPanel();
         panel2.setBackground(new Color(102, 165, 173));
-        panel2.setBounds(0,300,500,125);
-
+        panel2.setBounds(0,300,1500,125);
 
         panel3 = new JPanel();
-        panel3.setBackground(new Color(102, 165, 173));
-        panel3.setBounds(500,300,1000,125);
-
-        panel4 = new JPanel();
-        panel4.setBackground(Color.black);
-        panel4.setBounds(0,450,1500,550);
+        panel3.setBackground(Color.black);
+        panel3.setBounds(0,450,1500,550);
 
         panel1.add(scrollPane);
         panel2.add(inputFromUser);
-        panel3.add(textField);
+        panel2.add(textField);
 
-        panel5 = new MapView(board.rooms, board.getCurrentRoom().getName());
-        panel5.setBounds(0,750,1500,550);
-        panel5.setBackground(Color.black);
+        panel4 = new MapView(board.rooms, board.getCurrentRoom().getName());
+        panel4.setBounds(0,750,1500,550);
+        panel4.setBackground(Color.black);
 
 
         frame.add(panel1);
         frame.add(panel2);
-        frame.add(panel3);
-        frame.add(panel5);
+//        frame.add(panel3);
+        frame.add(panel4);
         frame.setBackground(Color.black);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(1500,1000);
@@ -275,7 +275,8 @@ public class MyJFrame extends JFrame implements ActionListener {
         rpsGame.setLineWrap(true);
         rpsGame.setWrapStyleWord(true);
         rpsGame.setBorder(BorderFactory.createBevelBorder(1));
-        rpsGame.setForeground(new Color(246, 41, 0));
+        rpsGame.setForeground(Color.black);
+        rpsGame.setBackground(new Color(80, 196, 131));
         rpsGame.setEditable(false);
 
 
@@ -284,7 +285,7 @@ public class MyJFrame extends JFrame implements ActionListener {
         numInput.setBackground(new Color(241, 243, 206));
 
         scrollPane = new JScrollPane(rpsGame);
-        scrollPane.setPreferredSize(new Dimension(500,300));
+        scrollPane.setPreferredSize(new Dimension(500,250));
         scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 
         JPanel panel = new JPanel();
@@ -293,14 +294,18 @@ public class MyJFrame extends JFrame implements ActionListener {
 
         JLabel promptLabel = new JLabel();
         promptLabel.setText("What number do you choose?");
+        promptLabel.setFont(new Font("Consolas", Font.CENTER_BASELINE, 20));
+        promptLabel.setForeground(Color.white);
         promptPanel = new JPanel();
         promptPanel.add(promptLabel, BorderLayout.CENTER);
         promptPanel.add(numInput);
+        promptPanel.setBackground(new Color(1,11,12));
 
         frame.add(scrollPane, BorderLayout.NORTH);
         frame.add(promptPanel);
-        frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
         frame.setVisible(true);
+        frame.setSize(700,500);
+        frame.setResizable(false);
 
         combat.startCombat(player, board.getCurrentRoom(), board);
         numInput.addActionListener(this);
@@ -319,6 +324,34 @@ public class MyJFrame extends JFrame implements ActionListener {
         frame.add(imgLabel);
         frame.setVisible(true);
 
+    }
+
+    public void winScreen(){
+        JTextArea winTextArea = new JTextArea("You use the lizard key on the door to exit." +
+                "\nDarkness surrounds you and wind presses against you back as if the ground is being pulled beneath you." +
+                "                                                                                                                         " +
+                "\nYou close your eyes to avoid sickness, only for the movement around you to stop." +
+                "                                                                                                                         " +
+                "\nUpon opening your eyes, you are staring out a small window with people in white scrubs passing in a hall." +
+                "                                                                                                                         " +
+                "You turn around to see padded walls, only to realize that you have escaped Copernicus Rex Verwirrtheit Theodore's for now.");
+        winTextArea.setEditable(false);
+        winTextArea.setLineWrap(true);
+        winTextArea.setWrapStyleWord(true);
+        winTextArea.setBorder(BorderFactory.createSoftBevelBorder(2));
+        winTextArea.setForeground(Color.black);
+        winTextArea.setFont(new Font("Broadway",Font.ITALIC, 17));
+        winTextArea.setBackground(new Color(242,92,0));
+        winTextArea.setPreferredSize(new Dimension(500,285));
+
+        JPanel pane = new JPanel();
+        pane.add(winTextArea,BorderLayout.CENTER);
+        pane.setBackground(new Color(175,68,37));
+
+        frame.add(pane);
+        frame.setSize(700,600);
+        frame.setVisible(true);
+        frame.setResizable(false);
     }
 
 }
