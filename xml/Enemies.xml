@@ -12,6 +12,6 @@
     <enemy>
         <name>Zombies</name>
         <hp>60</hp>
-        <roomName>landOfDead</roomName>
+        <roomName>landOfTheDead</roomName>
     </enemy>
 </enemies>

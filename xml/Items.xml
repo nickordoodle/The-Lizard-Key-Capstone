@@ -171,7 +171,7 @@ Sharp and pointy, ready for cutting, chopping, or even stabbing.
         <id>13</id>
         <name>rope</name>
         <canGrab>false</canGrab>
-        <roomName>creekyPath</roomName>
+        <roomName>creakyPath</roomName>
         <lockKey>none</lockKey>
         <lockMessage></lockMessage>
         <commandInt></commandInt>
@@ -299,9 +299,7 @@ Just beyond the fence of the yard, the outline of a man can be seen, his face co
         <lockMessage></lockMessage>
         <commandInt></commandInt>
         <commandDirection></commandDirection>
-        <description>
-Pulling back the drapes, the sculpture is revealed to be of a man with red liquid streaming out of his eyes.
-        </description>
+        <description>BOSS</description>
     </item>
     <item>
         <id>23</id>
@@ -327,18 +325,6 @@ A tombstone with your name reads, "RIP to you. You're never escaping this world!
         <commandDirection></commandDirection>
         <description>
 A cape has a message sewn into the collar, "Fly high, fly fast, fly free, fly just".
-        </description>
-    </item>
-    <item>
-        <id>24</id>
-        <name>Boss-Key</name>
-        <canGrab>false</canGrab>
-        <roomName>artRoom</roomName>
-        <lockKey>none</lockKey>
-        <lockMessage></lockMessage>
-        <commandInt></commandInt>
-        <commandDirection></commandDirection>
-        <description>if you can see this. you found a bug
         </description>
     </item>
 </items>
