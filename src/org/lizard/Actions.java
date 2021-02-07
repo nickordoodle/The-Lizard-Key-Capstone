@@ -11,6 +11,7 @@ public class Actions {
     private final MyJFrame frame;
     private Combat combat;
     private List<Room> roomsVisited = new ArrayList<>();
+    private boolean capeAdded = false;
 
     public Actions(Board board, Player player, MyJFrame frame, Combat combat) {
         this.board = board;
@@ -180,7 +181,13 @@ public class Actions {
         Room currentRoom = board.getCurrentRoom();
         Map<String, String> displayRooms = new HashMap<>();
 
-        // If Rex/Boss was
+        // If Rex/Boss was defeated, add the magic room to artRoom
+        if (board.totalEnemies < 1 && !capeAdded) {
+            Item magicCape = board.allItems.get("magic cape");
+            // Add magic cape to artRoom and remove it from river
+            board.allRooms.get("artRoom").addItemToRoom(magicCape);
+            board.allRooms.get("river").removeItemFromRoom(magicCape);
+        }
         if (noun == null) { //examine
             for (Map.Entry<String, Room> entry: currentRoom.getExits().entrySet()) {
                 if (roomsVisited.contains(entry.getValue())) {
