@@ -116,26 +116,6 @@ public class MyJFrame extends JFrame implements ActionListener {
             }
 
             if(response.equals("BOSS")) {
-                AudioInputStream audioInputStream = null;
-                try {
-                    audioInputStream = AudioSystem.getAudioInputStream(new File(soundName).getAbsoluteFile());
-                } catch (UnsupportedAudioFileException | IOException unsupportedAudioFileException) {
-                    unsupportedAudioFileException.printStackTrace();
-                }
-
-                try {
-                    clip = AudioSystem.getClip();
-                } catch (LineUnavailableException lineUnavailableException) {
-                    lineUnavailableException.printStackTrace();
-                }
-                try {
-                    assert clip != null;
-                    clip.open(audioInputStream);
-                } catch (LineUnavailableException | IOException lineUnavailableException) {
-                    lineUnavailableException.printStackTrace();
-                }
-
-                clip.start();
                 frame.remove(panel1);
                 frame.remove(panel2);
                 frame.remove(panel3);
@@ -264,7 +244,26 @@ public class MyJFrame extends JFrame implements ActionListener {
 
 
     private void displayCombat(){
+        AudioInputStream audioInputStream = null;
+        try {
+            audioInputStream = AudioSystem.getAudioInputStream(new File(soundName).getAbsoluteFile());
+        } catch (UnsupportedAudioFileException | IOException unsupportedAudioFileException) {
+            unsupportedAudioFileException.printStackTrace();
+        }
 
+        try {
+            clip = AudioSystem.getClip();
+        } catch (LineUnavailableException lineUnavailableException) {
+            lineUnavailableException.printStackTrace();
+        }
+        try {
+            assert clip != null;
+            clip.open(audioInputStream);
+        } catch (LineUnavailableException | IOException lineUnavailableException) {
+            lineUnavailableException.printStackTrace();
+        }
+
+        clip.start();
         rpsGame = new JTextArea();
         rpsGame.setText("You have encountered MONSTER GOBLIN! " +
                 "The only way to win MONSTER GOBLIN is to win 5 games of ROCK-PAPER-SCISSOR." +
