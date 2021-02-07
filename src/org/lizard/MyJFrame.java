@@ -48,7 +48,7 @@ public class MyJFrame extends JFrame implements ActionListener {
         new Funsies("what", "idk figure it out");
 
         frame = new JFrame();
-        frame.setTitle("Lizard Game");
+        frame.setTitle("Lizard Key");
         frame.setSize(600,400);
 
         panel0 = new JPanel();
@@ -58,7 +58,7 @@ public class MyJFrame extends JFrame implements ActionListener {
         enterGame.setBounds(10,150,100,300);
 
 
-        JLabel welcome = new JLabel("Welcome to the Lizard Game!");
+        JLabel welcome = new JLabel("Welcome to the Lizard Key!");
         welcome.setFont(new Font("IronWood", Font.BOLD, 30));
         welcome.setForeground(new Color(196, 223, 230));
 
