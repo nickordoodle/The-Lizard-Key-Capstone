@@ -37,6 +37,7 @@ public class Actions {
             targetNoun = command.getTargetNoun()[0];
         }
 
+
         if (verb == null && noun == null) {
             return "Wrong command";
 
@@ -71,6 +72,8 @@ public class Actions {
 //                    return changeDescription();
                 case 99:
                     return bossAvailable("west", noun);
+                case 2424:
+                    return demonUnleashed();
             }
         }
         return null;
@@ -143,7 +146,6 @@ public class Actions {
             return ("There isn't a " + targetNoun.getName() + " here.");
 
         }
-
         if (targetLock.getNoun() == noun) {
 
             this.execute(targetLock.getCommand());
@@ -300,6 +302,13 @@ public class Actions {
                 System.out.println("Can you read? Pick one.");
             }
         }
+
+    }
+    private String demonUnleashed() {
+        Enemy demon = new Enemy("Demon");
+        demon.setEnemyHP(30);
+        board.allRooms.get("whisperingPassage").setEnemy(demon);
+        return "You hear whispers loud whispers coming from the west.";
     }
 
 }
