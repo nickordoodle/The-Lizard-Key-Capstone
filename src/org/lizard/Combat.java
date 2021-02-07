@@ -21,7 +21,7 @@ public class Combat {
             return "Enemy won";
         }
         else if(enemyHP==0){
-            return "Player won";
+            return "You defeated the monster!";
         }
         else{
             return "Nobody won";

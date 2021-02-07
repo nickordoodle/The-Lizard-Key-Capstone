@@ -138,7 +138,7 @@ public class MyJFrame extends JFrame implements ActionListener {
                     gameOverScreen();
 
                 }
-                else if(combat.checkGameEndingStatus()=="Player won"){
+                else if(combat.checkGameEndingStatus()=="You defeated the monster!"){
 
                     if(combat.bossTime) {
                         combat.bossTime = false;
@@ -151,7 +151,11 @@ public class MyJFrame extends JFrame implements ActionListener {
                     } else {
                         frame.remove(promptPanel);
                         frame.remove(scrollPane);
-                        gameScreen("Player won");
+                        if (board.totalEnemies < 0) {
+                            gameScreen("Copernicus Rex Verwirrtheit Theodore has fallen in his own world! His magic cape has fallen with him, and you are one step closer to freedom!");
+                        } else {
+                            gameScreen("You defeated the monster!");
+                        }
                         frame.setVisible(true);
                         if(clip != null) {
                             clip.stop();

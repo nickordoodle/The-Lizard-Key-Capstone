@@ -184,11 +184,13 @@ public class Actions {
         Map<String, String> displayRooms = new HashMap<>();
 
         // If Rex/Boss was defeated, add the magic room to artRoom
-        if (board.totalEnemies < 1 && !capeAdded) {
+        if (board.totalEnemies < -1 && !capeAdded) {
             Item magicCape = board.allItems.get("magic cape");
             // Add magic cape to artRoom and remove it from river
             board.allRooms.get("artRoom").addItemToRoom(magicCape);
             board.allRooms.get("river").removeItemFromRoom(magicCape);
+            // Set cape added to true so only one cape gets added
+            capeAdded = true;
         }
         if (noun == null) { //examine
             for (Map.Entry<String, Room> entry: currentRoom.getExits().entrySet()) {
