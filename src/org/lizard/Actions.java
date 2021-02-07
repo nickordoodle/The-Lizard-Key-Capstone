@@ -11,6 +11,7 @@ public class Actions {
     private final MyJFrame frame;
     private Combat combat;
     private List<Room> roomsVisited = new ArrayList<>();
+    private boolean capeAdded = false;
 
     public Actions(Board board, Player player, MyJFrame frame, Combat combat) {
         this.board = board;
@@ -36,6 +37,7 @@ public class Actions {
             targetNoun = command.getTargetNoun()[0];
         }
 
+
         if (verb == null && noun == null) {
             return "Wrong command";
 
@@ -49,7 +51,7 @@ public class Actions {
 //            return "WTF";
 //        }
         if (targetNoun == null && verb == 4) {
-            return "Nah dawg";
+            return "Can't do that!";
         } else {
             switch (verb) {
                 case 1:
@@ -70,6 +72,8 @@ public class Actions {
 //                    return changeDescription();
                 case 99:
                     return bossAvailable("west", noun);
+                case 2424:
+                    return demonUnleashed();
             }
         }
         return null;
@@ -84,7 +88,7 @@ public class Actions {
                         "Darkness surrounds you and wind presses against you back as if the ground is being pulled beneath you.\n" +
                         "You close your eyes to avoid sickness, only for the movement around you to stop.\n" +
                         "Upon opening your eyes, you are staring out a small window with people in white scrubs passing in a hall.\n" +
-                        "You turn around to see padded walls, only to realize that you have escaped Rex Verwirrtheit's for now.";
+                        "You turn around to see padded walls, only to realize that you have escaped Copernicus Rex Verwirrtheit Theodore's for now.";
             }
             if (!roomsVisited.contains(board.getCurrentRoom())) {
                 roomsVisited.add(board.getCurrentRoom());
@@ -142,7 +146,6 @@ public class Actions {
             return ("There isn't a " + targetNoun.getName() + " here.");
 
         }
-
         if (targetLock.getNoun() == noun) {
 
             this.execute(targetLock.getCommand());
@@ -170,7 +173,6 @@ public class Actions {
         Lock lock = board.allRooms.get("egyptianRoom").getLock(direction);
         if(lock != null && lock.getNoun().equals(noun)) {
             board.allRooms.get("egyptianRoom").removeLock(direction);
-            System.out.println(lock.printDescription());
             return lock.printDescription();
         } else {
             return "What did you think that would even accomplish?";
@@ -180,6 +182,16 @@ public class Actions {
     private String examine(GameDictionary.Noun noun){
         Room currentRoom = board.getCurrentRoom();
         Map<String, String> displayRooms = new HashMap<>();
+
+        // If Rex/Boss was defeated, add the magic room to artRoom
+        if (board.totalEnemies < -1 && !capeAdded) {
+            Item magicCape = board.allItems.get("magic cape");
+            // Add magic cape to artRoom and remove it from river
+            board.allRooms.get("artRoom").addItemToRoom(magicCape);
+            board.allRooms.get("river").removeItemFromRoom(magicCape);
+            // Set cape added to true so only one cape gets added
+            capeAdded = true;
+        }
         if (noun == null) { //examine
             for (Map.Entry<String, Room> entry: currentRoom.getExits().entrySet()) {
                 if (roomsVisited.contains(entry.getValue())) {
@@ -292,6 +304,13 @@ public class Actions {
                 System.out.println("Can you read? Pick one.");
             }
         }
+
+    }
+    private String demonUnleashed() {
+        Enemy demon = new Enemy("Demon");
+        demon.setEnemyHP(30);
+        board.allRooms.get("whisperingPassage").setEnemy(demon);
+        return "You hear whispers, loud whispers coming from the west.";
     }
 
 }

@@ -1,19 +1,23 @@
 package org.lizard;
 
+import javax.sound.sampled.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
 
 public class MyJFrame extends JFrame implements ActionListener {
 
     Board board = new Board();
-    Player player = new Player("Edgar");
+    Player player = new Player("Player");
     Combat combat = new Combat();
     Actions actions = new Actions(board, player, this, combat);
     GameDictionary gameDictionary = GameDictionary.getGameDictionary();
     TextParser parser = new TextParser(gameDictionary);
-
+    String soundName = "princeofdarkness.wav";
+    Clip clip = null;
     JTextArea rpsGame;
     JPanel promptPanel;
     JScrollPane scrollPane;
@@ -32,6 +36,7 @@ public class MyJFrame extends JFrame implements ActionListener {
     JPanel panel4;
     JPanel panel5;
     JTextField numInput;
+
     String numFromUser;
     boolean calledOnce=false;
 
@@ -85,7 +90,9 @@ public class MyJFrame extends JFrame implements ActionListener {
 
             textDisplay.setFont(new Font("Consolas", Font.CENTER_BASELINE, 15));
             textDisplay.setForeground(Color.black);
-            textDisplay.setText(actions.execute(command));
+            String response = actions.execute(command);
+
+            textDisplay.setText(response);
 
             frame.remove(panel5);
 
@@ -98,8 +105,7 @@ public class MyJFrame extends JFrame implements ActionListener {
             frame.setVisible(true);
 
 
-            if(board.getCurrentRoom().getEnemy() != null){
-
+            if(board.getCurrentRoom().getEnemy() != null && !board.getCurrentRoom().getEnemy().enemyName.equals("Copernicus Rex Verwirrtheit Theodore") ){
                 frame.remove(panel1);
                 frame.remove(panel2);
                 frame.remove(panel3);
@@ -107,7 +113,15 @@ public class MyJFrame extends JFrame implements ActionListener {
                 frame.remove(panel5);
 
                 displayCombat();
+            }
 
+            if(response.equals("BOSS")) {
+                frame.remove(panel1);
+                frame.remove(panel2);
+                frame.remove(panel3);
+                frame.remove(panel4);
+                frame.remove(panel5);
+                displayCombat();
             }
             textField.setText("");
         }
@@ -122,31 +136,34 @@ public class MyJFrame extends JFrame implements ActionListener {
                     frame.remove(scrollPane);
                     frame.setVisible(true);
                     gameOverScreen();
-
                 }
-                else if(combat.checkGameEndingStatus()=="Player won"){
+                else if(combat.checkGameEndingStatus()=="You defeated the monster!"){
 
                     if(combat.bossTime) {
                         combat.bossTime = false;
                         board.totalEnemies = -1;
                         frame.remove(promptPanel);
                         frame.remove(scrollPane);
-                        gameScreen(actions.execute(new Event(99, board.allItems.get("Boss-Key"))));
+                        gameScreen(actions.execute(new Event(99, board.allItems.get("sculpture"))));
                         frame.setVisible(true);
 
                     } else {
                         frame.remove(promptPanel);
                         frame.remove(scrollPane);
-                        gameScreen("Player won");
+                        if (board.totalEnemies < 0) {
+                            gameScreen("Copernicus Rex Verwirrtheit Theodore has fallen in his own world! His magic cape has fallen with him, and you are one step closer to freedom!");
+                        } else {
+                            gameScreen("You defeated the monster!");
+                        }
                         frame.setVisible(true);
+                        if(clip != null) {
+                            clip.stop();
+                        }
                     }
 
                 }
-
                 numInput.setText("");
-
         }
-
     }
 
 
@@ -225,10 +242,29 @@ public class MyJFrame extends JFrame implements ActionListener {
 
 
     private void displayCombat(){
+        AudioInputStream audioInputStream = null;
+        try {
+            audioInputStream = AudioSystem.getAudioInputStream(new File(soundName).getAbsoluteFile());
+        } catch (UnsupportedAudioFileException | IOException unsupportedAudioFileException) {
+            unsupportedAudioFileException.printStackTrace();
+        }
 
+        try {
+            clip = AudioSystem.getClip();
+        } catch (LineUnavailableException lineUnavailableException) {
+            lineUnavailableException.printStackTrace();
+        }
+        try {
+            assert clip != null;
+            clip.open(audioInputStream);
+        } catch (LineUnavailableException | IOException lineUnavailableException) {
+            lineUnavailableException.printStackTrace();
+        }
+
+        clip.start();
         rpsGame = new JTextArea();
-        rpsGame.setText("You have encountered MONSTER GOBLIN! " +
-                "The only way to win MONSTER GOBLIN is to win 5 games of ROCK-PAPER-SCISSOR." +
+        rpsGame.setText("You have come face to face with a monster!" +
+                "To defeat it, you must win in combat... or rock, paper, scissors." +
                 "\nPlease choose from the following numbers:" +
                 "\n1: ROCK" +
                 "\n2: PAPER" +

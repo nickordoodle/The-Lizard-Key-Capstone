@@ -41,7 +41,7 @@ The keys you touch are as real as the keys to your home, varying in shapes and s
             </exit>
             <exit>
                 <path>south</path>
-                <pathName>creekyPath</pathName>
+                <pathName>creakyPath</pathName>
             </exit>
             <exit>
                 <path>west</path>
@@ -108,7 +108,7 @@ As if the walls were made of paper, conversations can be heard in the other room
     </room>
     <room>
         <id>6</id>
-        <roomName>creekyPath</roomName>
+        <roomName>creakyPath</roomName>
         <roomExits>
             <exit>
                 <path>north</path>
@@ -130,7 +130,7 @@ Bundled in a wicker basket, rope is tangled around itself, rendering itself near
         <roomExits>
             <exit>
                 <path>west</path>
-                <pathName>creekyPath</pathName>
+                <pathName>creakyPath</pathName>
             </exit>
         </roomExits>
         <roomDescription>
@@ -262,7 +262,7 @@ Below seems to be an endless pit with cries and blazing heat lifting high in the
         <roomExits>
             <exit>
                 <path>east</path>
-                <pathName>landOfDead</pathName>
+                <pathName>landOfTheDead</pathName>
                 <lockKey>skeleton key</lockKey>
                 <lockMessage>You use the skeleton key to unlock the door to the land of the dead.</lockMessage>
                 <commandInt>2</commandInt>
@@ -270,7 +270,7 @@ Below seems to be an endless pit with cries and blazing heat lifting high in the
             <exit>
                 <path>west</path>
                 <pathName>artRoom</pathName>
-                <lockKey>Boss-Key</lockKey>
+                <lockKey>sculpture</lockKey>
                 <lockMessage>With defeating this monster, dark energy starts to spew from the art room.</lockMessage>
                 <commandInt>2</commandInt>
             </exit>
@@ -287,7 +287,7 @@ Like the door behind you, there are two other doors that are situated in the mid
     </room>
     <room>
         <id>16</id>
-        <roomName>landOfDead</roomName>
+        <roomName>landOfTheDead</roomName>
         <roomExits>
             <exit>
                 <path>west</path>
@@ -338,7 +338,7 @@ A narrow passage sucks air from the cave, making it harder to breathe by the sec
         <roomExits>
             <exit>
                 <path>west</path>
-                <pathName>landOfDead</pathName>
+                <pathName>landOfTheDead</pathName>
             </exit>
         </roomExits>
         <roomDescription>

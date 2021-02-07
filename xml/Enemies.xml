@@ -1,17 +1,12 @@
 <enemies>
     <enemy>
-        <name>Rex Verwirrtheit</name>
+        <name>Copernicus Rex Verwirrtheit Theodore</name>
         <hp>100</hp>
         <roomName>artRoom</roomName>
     </enemy>
     <enemy>
-        <name>Demon</name>
-        <hp>30</hp>
-        <roomName>whisperingPassage</roomName>
-    </enemy>
-    <enemy>
         <name>Zombies</name>
         <hp>60</hp>
-        <roomName>landOfDead</roomName>
+        <roomName>landOfTheDead</roomName>
     </enemy>
 </enemies>

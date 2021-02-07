@@ -18,7 +18,7 @@ public class Board {
     Map<String, Item> allItems = new HashMap<>();
     private Map<Room, List<Map<String, String>>> roomLocks = new HashMap<>();
     String[][] rooms = new String[8][8];
-    int totalEnemies = 0;
+    int totalEnemies = 3;
 
     public Board() {
         createMap();
@@ -61,8 +61,8 @@ public class Board {
             case "artRoom":
                 rooms[4][0] = "Art Room";
                 break;
-            case "engravingRoom":
-                rooms[7][1] = "Engraving Room";
+            case "engravingCave":
+                rooms[7][1] = "Engraving Cave";
                 break;
 
             case "loudRoom":
@@ -89,7 +89,7 @@ public class Board {
                 rooms[7][3] = "Coal Mine";
                 break;
 
-            case "creekyPath":
+            case "creakyPath":
                 rooms[6][3] = "Creaky Path";
                 break;
 
@@ -105,8 +105,8 @@ public class Board {
                 rooms[3][3] = "Riddle Room";
                 break;
 
-            case "whisperingRoom":
-                rooms[2][3] = "Whispering Room";
+            case "whisperingPassage":
+                rooms[2][3] = "Whispering Passage";
                 break;
 
             case "treasureRoom":
@@ -290,8 +290,13 @@ public class Board {
                     // Add newly created item to its respective room
                     allRooms.get(roomName).addItemToRoom(roomItem);
                 } else {
-                    Item roomItem = new Item(itemName, new Lock(allItems.get(lockKey), lockMessage, new Event(Integer.parseInt(commandInt), directions.getDirection(commandDirection))), itemDescription, Boolean.parseBoolean(canGrab));
-
+                    GameDictionary.Noun noun;
+                    if(commandDirection == "") {
+                        noun = allItems.get(lockKey);
+                    } else {
+                        noun = directions.getDirection(commandDirection);
+                    }
+                    Item roomItem = new Item(itemName, new Lock(allItems.get(lockKey), lockMessage, new Event(Integer.parseInt(commandInt), noun)), itemDescription, Boolean.parseBoolean(canGrab));
                     // Add newly created item to its respective room
                     allRooms.get(roomName).addItemToRoom(roomItem);
                 }
@@ -320,7 +325,6 @@ public class Board {
 
                 // Add enemy to respective room
                 allRooms.get(roomName).setEnemy(enemy);
-                totalEnemies++;
             }
         }
     }

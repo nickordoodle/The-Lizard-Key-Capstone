@@ -126,14 +126,27 @@ A thick line of salt circles the table, not a break in sight.
         </description>
     </item>
     <item>
+        <id>23</id>
+        <name>chest key</name>
+        <canGrab>true</canGrab>
+        <roomName>coalMine</roomName>
+        <lockKey>none</lockKey>
+        <lockMessage></lockMessage>
+        <commandInt></commandInt>
+        <commandDirection></commandDirection>
+        <description>
+            the key is covered in black ash.".
+        </description>
+    </item>
+    <item>
         <id>10</id>
         <name>locked chest</name>
         <canGrab>false</canGrab>
         <roomName>library</roomName>
 <!--        Eventually this item will need a lock that can be opened with a key to release a monster-->
-        <lockKey>none</lockKey>
-        <lockMessage></lockMessage>
-        <commandInt></commandInt>
+        <lockKey>chest key</lockKey>
+        <lockMessage>You hear whispering coming from the west. better go see what it is.</lockMessage>
+        <commandInt>2424</commandInt>
         <commandDirection></commandDirection>
         <description>
 Clunky and large, a metal chest with weird symbols rests on top of the table.
@@ -171,7 +184,7 @@ Sharp and pointy, ready for cutting, chopping, or even stabbing.
         <id>13</id>
         <name>rope</name>
         <canGrab>false</canGrab>
-        <roomName>creekyPath</roomName>
+        <roomName>creakyPath</roomName>
         <lockKey>none</lockKey>
         <lockMessage></lockMessage>
         <commandInt></commandInt>
@@ -299,9 +312,7 @@ Just beyond the fence of the yard, the outline of a man can be seen, his face co
         <lockMessage></lockMessage>
         <commandInt></commandInt>
         <commandDirection></commandDirection>
-        <description>
-Pulling back the drapes, the sculpture is revealed to be of a man with red liquid streaming out of his eyes.
-        </description>
+        <description>BOSS</description>
     </item>
     <item>
         <id>23</id>
@@ -320,7 +331,7 @@ A tombstone with your name reads, "RIP to you. You're never escaping this world!
         <id>23</id>
         <name>magic cape</name>
         <canGrab>true</canGrab>
-        <roomName>whisperingPassage</roomName>
+        <roomName>river</roomName>
         <lockKey>none</lockKey>
         <lockMessage></lockMessage>
         <commandInt></commandInt>
@@ -329,17 +340,6 @@ A tombstone with your name reads, "RIP to you. You're never escaping this world!
 A cape has a message sewn into the collar, "Fly high, fly fast, fly free, fly just".
         </description>
     </item>
-    <item>
-        <id>24</id>
-        <name>Boss-Key</name>
-        <canGrab>false</canGrab>
-        <roomName>artRoom</roomName>
-        <lockKey>none</lockKey>
-        <lockMessage></lockMessage>
-        <commandInt></commandInt>
-        <commandDirection></commandDirection>
-        <description>if you can see this. you found a bug
-        </description>
-    </item>
+
 </items>
 
