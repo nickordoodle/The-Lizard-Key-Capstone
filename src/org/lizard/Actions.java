@@ -200,7 +200,6 @@ public class Actions {
                     displayRooms.put(entry.getKey(), "?");
                 }
             }
-            System.out.println(currentRoom.getItems());
 
             String paths = "\nAvailable Paths: ";
             for (Map.Entry<String, String> entry : displayRooms.entrySet()) {
