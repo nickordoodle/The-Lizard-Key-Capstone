@@ -21,8 +21,7 @@ public class MyJFrame extends JFrame implements ActionListener {
     JTextArea rpsGame;
     JPanel promptPanel;
     JScrollPane scrollPane;
-    MapView mapView;
-
+    boolean bossDead = false;
     String result;
     JLabel inputFromUser = new JLabel();
     JTextField textField = new JTextField();
@@ -36,7 +35,6 @@ public class MyJFrame extends JFrame implements ActionListener {
     JPanel panel4;
     JTextField numInput;
 
-    String numFromUser;
     boolean calledOnce=false;
 
     MyJFrame() {
@@ -120,20 +118,19 @@ public class MyJFrame extends JFrame implements ActionListener {
                 displayCombat();
             }
 
-            if(response.equals("BOSS")) {
+            if(response.equals("It's just a normal sculpture") && !bossDead) {
                 frame.remove(panel1);
                 frame.remove(panel2);
 //                frame.remove(panel3);
                 frame.remove(panel3);
                 frame.remove(panel4);
                 displayCombat();
+                bossDead = true;
             }
             textField.setText("");
         }
 
         if(e.getSource()==numInput){
-
-            boolean combatEnded = false;
 
                 rpsGame.setText(combat.playerTakesTurn(Integer.parseInt(numInput.getText())));
                 if(combat.checkGameEndingStatus()=="Enemy won") {
@@ -141,6 +138,9 @@ public class MyJFrame extends JFrame implements ActionListener {
                     frame.remove(scrollPane);
                     frame.setVisible(true);
                     gameOverScreen();
+                    if(clip != null) {
+                        clip.stop();
+                    }
                 }
                 else if(combat.checkGameEndingStatus()=="You defeated the monster!"){
 
@@ -151,6 +151,9 @@ public class MyJFrame extends JFrame implements ActionListener {
                         frame.remove(scrollPane);
                         gameScreen(actions.execute(new Event(99, board.allItems.get("sculpture"))));
                         frame.setVisible(true);
+                        if(clip != null) {
+                            clip.stop();
+                        }
 
                     } else {
                         frame.remove(promptPanel);
@@ -278,8 +281,6 @@ public class MyJFrame extends JFrame implements ActionListener {
         rpsGame.setForeground(Color.black);
         rpsGame.setBackground(new Color(80, 196, 131));
         rpsGame.setEditable(false);
-
-
         numInput = new JTextField();
         numInput.setPreferredSize(new Dimension(500,100));
         numInput.setBackground(new Color(241, 243, 206));
@@ -308,7 +309,10 @@ public class MyJFrame extends JFrame implements ActionListener {
         frame.setResizable(false);
 
         combat.startCombat(player, board.getCurrentRoom(), board);
+
         numInput.addActionListener(this);
+
+
 
     }
 
