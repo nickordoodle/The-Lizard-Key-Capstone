@@ -51,7 +51,7 @@ public class Actions {
 //            return "WTF";
 //        }
         if (targetNoun == null && verb == 4) {
-            return "Nah dawg";
+            return "Can't do that!";
         } else {
             switch (verb) {
                 case 1:
@@ -310,7 +310,7 @@ public class Actions {
         Enemy demon = new Enemy("Demon");
         demon.setEnemyHP(30);
         board.allRooms.get("whisperingPassage").setEnemy(demon);
-        return "You hear whispers loud whispers coming from the west.";
+        return "You hear whispers, loud whispers coming from the west.";
     }
 
 }
