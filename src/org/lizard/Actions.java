@@ -170,7 +170,7 @@ public class Actions {
         Lock lock = board.allRooms.get("egyptianRoom").getLock(direction);
         if(lock != null && lock.getNoun().equals(noun)) {
             board.allRooms.get("egyptianRoom").removeLock(direction);
-            System.out.println(lock.printDescription());
+            board.allRooms.get("artRoom").removeItemFromRoom(lock.getNoun());
             return lock.printDescription();
         } else {
             return "What did you think that would even accomplish?";
