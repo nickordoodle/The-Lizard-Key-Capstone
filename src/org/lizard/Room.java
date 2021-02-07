@@ -105,6 +105,10 @@ public class Room extends GameDictionary.Noun {
         return enemy == null;
     }
 
+    public void removeItemFromRoom(GameDictionary.Noun noun) {
+        items.remove(noun);
+    }
+
 
     public List<GameDictionary.Noun> getItems() {
         return items;
