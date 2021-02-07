@@ -11,7 +11,7 @@ import java.io.IOException;
 public class MyJFrame extends JFrame implements ActionListener {
 
     Board board = new Board();
-    Player player = new Player("Edgar");
+    Player player = new Player("Player");
     Combat combat = new Combat();
     Actions actions = new Actions(board, player, this, combat);
     GameDictionary gameDictionary = GameDictionary.getGameDictionary();
@@ -112,7 +112,6 @@ public class MyJFrame extends JFrame implements ActionListener {
                 frame.remove(panel4);
                 frame.remove(panel5);
                 displayCombat();
-
             }
 
             if(response.equals("BOSS")) {
@@ -136,7 +135,6 @@ public class MyJFrame extends JFrame implements ActionListener {
                     frame.remove(scrollPane);
                     frame.setVisible(true);
                     gameOverScreen();
-
                 }
                 else if(combat.checkGameEndingStatus()=="You defeated the monster!"){
 
@@ -161,15 +159,9 @@ public class MyJFrame extends JFrame implements ActionListener {
                             clip.stop();
                         }
                     }
-
-
-
                 }
-
                 numInput.setText("");
-
         }
-
     }
 
 
@@ -269,8 +261,8 @@ public class MyJFrame extends JFrame implements ActionListener {
 
         clip.start();
         rpsGame = new JTextArea();
-        rpsGame.setText("You have encountered MONSTER GOBLIN! " +
-                "The only way to win MONSTER GOBLIN is to win 5 games of ROCK-PAPER-SCISSOR." +
+        rpsGame.setText("You have come face to face with a monster!" +
+                "To defeat it, you must win in combat... or rock, paper, scissors." +
                 "\nPlease choose from the following numbers:" +
                 "\n1: ROCK" +
                 "\n2: PAPER" +
