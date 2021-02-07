@@ -331,7 +331,7 @@ A tombstone with your name reads, "RIP to you. You're never escaping this world!
         <id>23</id>
         <name>magic cape</name>
         <canGrab>true</canGrab>
-        <roomName>whisperingPassage</roomName>
+        <roomName>river</roomName>
         <lockKey>none</lockKey>
         <lockMessage></lockMessage>
         <commandInt></commandInt>
