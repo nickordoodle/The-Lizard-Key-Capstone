@@ -61,8 +61,8 @@ public class Board {
             case "artRoom":
                 rooms[4][0] = "Art Room";
                 break;
-            case "engravingRoom":
-                rooms[7][1] = "Engraving Room";
+            case "engravingCave":
+                rooms[7][1] = "Engraving Cave";
                 break;
 
             case "loudRoom":
@@ -89,7 +89,7 @@ public class Board {
                 rooms[7][3] = "Coal Mine";
                 break;
 
-            case "creekyPath":
+            case "creakyPath":
                 rooms[6][3] = "Creaky Path";
                 break;
 
@@ -105,8 +105,8 @@ public class Board {
                 rooms[3][3] = "Riddle Room";
                 break;
 
-            case "whisperingRoom":
-                rooms[2][3] = "Whispering Room";
+            case "whisperingPassage":
+                rooms[2][3] = "Whispering Passage";
                 break;
 
             case "treasureRoom":
