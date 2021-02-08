@@ -2,6 +2,7 @@ package org.lizard;
 
 import javax.sound.sampled.*;
 import javax.swing.*;
+import javax.swing.text.DefaultCaret;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -70,6 +71,9 @@ public class MyJFrame extends JFrame implements ActionListener {
         welcome.setForeground(new Color(196, 223, 230));
 
         textDisplay = new JTextArea();
+        DefaultCaret caret = (DefaultCaret) textDisplay.getCaret();
+        caret.setUpdatePolicy(DefaultCaret.NEVER_UPDATE);
+        textDisplay.setCaretPosition(0);
         textDisplay.setText(Story.howToPlay());
         textDisplay.setLineWrap(true);
         textDisplay.setWrapStyleWord(true);
@@ -253,6 +257,9 @@ public class MyJFrame extends JFrame implements ActionListener {
         frame.setSize(1500,1525);
 
         textDisplay = new JTextArea();
+        DefaultCaret caret = (DefaultCaret) textDisplay.getCaret();
+        caret.setUpdatePolicy(DefaultCaret.NEVER_UPDATE);
+        textDisplay.setCaretPosition(0);
         textDisplay.setText(initialPrint);
         textDisplay.setLineWrap(true);
         textDisplay.setWrapStyleWord(true);
