@@ -206,7 +206,7 @@ public class Board {
         Lock lock = currentRoom.getLock(direction);
         if(lock != null) {
             if((currentRoom.getName().equals("treasureRoom") && direction.equals("west"))||currentRoom.getName().equals("river") && direction.equals("east")) {
-                return "you cant get across the river";
+                return "You'll die if you try to cross the river like that.";
             }
             return "Seems to be locked.";
         }
