@@ -307,13 +307,8 @@ public class MyJFrame extends JFrame implements ActionListener {
         frame.setVisible(true);
         frame.setSize(700,500);
         frame.setResizable(false);
-
         combat.startCombat(player, board.getCurrentRoom(), board);
-
         numInput.addActionListener(this);
-
-
-
     }
 
     public void gameOverScreen(){
