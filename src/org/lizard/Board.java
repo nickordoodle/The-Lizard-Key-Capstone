@@ -16,7 +16,6 @@ public class Board {
     Map<String, Room> allRooms = new HashMap<>();
     private Map<String, Map<String, String>> allExits = new HashMap<>();
     Map<String, Item> allItems = new HashMap<>();
-//    private Map<Room, List<Map<String, String>>> roomLocks = new HashMap<>();
     String[][] rooms = new String[8][8];
     int totalEnemies = 3;
 
@@ -25,29 +24,6 @@ public class Board {
         addToVisitedRooms("keyRoom");
     }
     public void addToVisitedRooms(String roomNombre) {
-//        rooms[7][0] = "Floating Room";
-//        rooms[6][0] = "Land of the Dead";
-//        rooms[5][0] = "Egyptian Room";
-//        rooms[4][0] = "Art Room";
-//        rooms[7][1] = "Engraving Room";
-//        rooms[6][1] = "Loud Room";
-//        rooms[5][1] = "Swinging Stairs";
-//        rooms[6][2] = "Library";
-//        rooms[5][2] = "Key Room";
-//        rooms[4][2] = "Psych Ward";
-//        rooms[7][3] = "Coal Mine";
-//        rooms[6][3] = "Creaky Path";
-//        rooms[5][3] = "Kitchen";
-//        rooms[4][3] = "Closet";
-//        rooms[3][3] = "Riddle Room";
-//        rooms[2][3] = "Whispering Room";
-//        rooms[1][3] = "Treasure Room";
-//        rooms[0][3] = "River";
-//        rooms[1][4] = "Volcano";
-//        rooms[2][4] = "Secret Passage";
-//        rooms[3][4] = "Secret Passage";
-//        rooms[4][4] = "Secret Passage";
-//        rooms[5][4] = "Secret Passage";
         switch (roomNombre) {
             case "floatingRoom":
                 rooms[7][0] = "Floating Room";
@@ -156,26 +132,10 @@ public class Board {
 
                 // Gain all exits for this particular room and save them in exits
                 for (int itr2 = 0; itr2 < eElement.getElementsByTagName("exit").getLength(); itr2++) {
-//                    Map<String, String> locksHolder = new HashMap<>();
                     // Create an object with all of the directions and the corresponding rooms for this particular Room class object
                     exits.put(eElement.getElementsByTagName("path").item(itr2).getTextContent(), eElement.getElementsByTagName("pathName").item(itr2).getTextContent());
 
-//                    // If an exit has a lock, grab all the relevant information and store it in locksHolder before adding it to the locks List
-//                    if (eElement.getElementsByTagName("lockKey").item(itr2) != null) {
-//                        String lockKey = eElement.getElementsByTagName("lockKey").item(itr2).getTextContent();
-//                        String lockMessage = eElement.getElementsByTagName("lockMessage").item(itr2).getTextContent();
-//                        String commandInt = eElement.getElementsByTagName("commandInt").item(itr2).getTextContent();
-//                        String commandDirection = eElement.getElementsByTagName("path").item(itr2).getTextContent();
-//
-//                        locksHolder.put("commandDirection", commandDirection);
-//                        locksHolder.put("lockKey", lockKey);
-//                        locksHolder.put("lockMessage", lockMessage);
-//                        locksHolder.put("commandInt", commandInt);
-//                        locks.add(locksHolder);
-//                    }
                 }
-//                // Add locks to roomLocks holder Map to use later
-//                roomLocks.put(room, locks);
 
                 // Add the new exits Map object with the corresponding room name to allExits in order to build the Room class object exits later
                 allExits.put(roomName, exits);
@@ -337,17 +297,6 @@ public class Board {
     }
 
     private void addLocksToRooms() {
-//        for(Map.Entry<Room, List<Map<String, String>>> locksEntrySet: roomLocks.entrySet()) {
-//            Room room = locksEntrySet.getKey();
-//
-//            for(int i = 0; i < locksEntrySet.getValue().size(); i++) {
-//                System.out.println(room.getName());
-//                Map<String, String> lockMap = locksEntrySet.getValue().get(i);
-//                room.addLock(lockMap.get("commandDirection") ,new Lock(allItems.get(lockMap.get("lockKey")), lockMap.get("lockMessage"), new Event(Integer.parseInt(lockMap.get("commandInt")), directions.getDirection(lockMap.get("commandDirection")))));
-//            }
-//        }
-
-
         NodeList nodeList = XMLParser("xml/RoomLocks.xml", "room");
         // Iterate over each rooms
         for (int itr = 0; itr < nodeList.getLength(); itr++) {
