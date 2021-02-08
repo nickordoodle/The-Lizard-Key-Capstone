@@ -329,7 +329,7 @@ A tombstone with your name reads, "RIP to you. You're never escaping this world!
         </description>
     </item>
     <item>
-        <id>23</id>
+        <id>24</id>
         <name>magic cape</name>
         <canGrab>true</canGrab>
         <roomName>river</roomName>
@@ -339,6 +339,19 @@ A tombstone with your name reads, "RIP to you. You're never escaping this world!
         <commandDirection></commandDirection>
         <description>
 A cape has a message sewn into the collar, "Fly high, fly fast, fly free, fly just".
+        </description>
+    </item>
+    <item>
+        <id>25</id>
+        <name>healing brownies</name>
+        <canGrab>true</canGrab>
+        <roomName>kitchen</roomName>
+        <lockKey>none</lockKey>
+        <lockMessage></lockMessage>
+        <commandInt></commandInt>
+        <commandDirection></commandDirection>
+        <description>
+The fresh aroma of chocolate seeps into your nose, enticing you to eat them.
         </description>
     </item>
 
