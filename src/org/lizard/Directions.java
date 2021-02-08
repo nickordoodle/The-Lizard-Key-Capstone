@@ -21,21 +21,6 @@ class Directions {
         }
         return null;
     }
-//    public Direction getNorth() {
-//        return north;
-//    }
-//
-//    public Direction getSouth() {
-//        return south;
-//    }
-//
-//    public Direction getEast() {
-//        return east;
-//    }
-//
-//    public Direction getWest() {
-//        return west;
-//    }
 
     static class Direction extends GameDictionary.Noun {
 

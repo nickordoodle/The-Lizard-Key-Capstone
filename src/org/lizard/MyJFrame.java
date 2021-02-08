@@ -308,7 +308,6 @@ public class MyJFrame extends JFrame implements ActionListener {
 
         frame.add(panel1);
         frame.add(panel2);
-//        frame.add(panel3);
         frame.add(panel4);
         frame.setBackground(Color.black);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

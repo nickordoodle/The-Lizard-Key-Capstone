@@ -6,10 +6,6 @@ import java.util.Scanner;
 
 public class Game {
 
-//    Player player = new Player("Edgar");
-//    Prompter prompter = new Prompter(new Scanner(System.in));
-//    Board board = new Board();
-//    Actions actions = new Actions(board, player);
     MyJFrame frame;
 
     public void start() {
@@ -21,20 +17,6 @@ public class Game {
         new Funsies("what", "idk figure it out");
         new MyJFrame();
 
-
-//        Story.introduction();
-
-//        gameDictionary.printNouns();
-
-
-//        gameDictionary.printNouns();
-
-//        while(true){
-////            String input = prompter.promptPlayer("What you wanna do?");
-////
-//            Command command = parser.parse(input);
-//            actions.execute(command);
-//        }
     }
 
 }
