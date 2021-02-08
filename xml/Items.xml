@@ -135,7 +135,8 @@ A thick line of salt circles the table, not a break in sight.
         <commandInt></commandInt>
         <commandDirection></commandDirection>
         <description>
-            the key is covered in black ash.".
+At the pommel is a chest with chains and a lock.
+The point appears to be freshly cut with sharp teeth.
         </description>
     </item>
     <item>
@@ -312,7 +313,7 @@ Just beyond the fence of the yard, the outline of a man can be seen, his face co
         <lockMessage></lockMessage>
         <commandInt></commandInt>
         <commandDirection></commandDirection>
-        <description>It's just a normal sculpture</description>
+        <description>The sculpture, as you now know, was just Copernicus Rex Verwirrtheit Theodore. The same red liquid from the floor streams from his eyes.</description>
     </item>
     <item>
         <id>23</id>
