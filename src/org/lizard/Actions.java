@@ -327,6 +327,9 @@ public class Actions {
     }
 
     private String consumeHealingItem(GameDictionary.Noun noun) {
+        if (!noun.getName().equals("healing brownies")) {
+            return "You can't eat that!";
+        }
         player.playerHP += 100;
         player.inventory.consumeItem(noun);
         return "Consumed " + noun.getName() + "! Your health has increased to " + player.playerHP + "!";
