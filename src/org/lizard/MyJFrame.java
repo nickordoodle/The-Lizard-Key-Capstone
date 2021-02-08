@@ -191,7 +191,7 @@ public class MyJFrame extends JFrame implements ActionListener {
                 displayCombat();
             }
 
-            if(response.equals("It's just a normal sculpture") && !bossDead) {
+            if(response.equals("The sculpture, as you now know, was just Copernicus Rex Verwirrtheit Theodore. The same red liquid from the floor streams from his eyes.") && !bossDead) {
                 frame.remove(panel1);
                 frame.remove(panel2);
 //                frame.remove(panel3);
@@ -250,7 +250,7 @@ public class MyJFrame extends JFrame implements ActionListener {
 
     private void gameScreen(String initialPrint) {
         frame.getContentPane().setBackground(new Color(200,200,200));
-        frame.setSize(1500,1000);
+        frame.setSize(1500,1525);
 
         textDisplay = new JTextArea();
         textDisplay.setText(initialPrint);
@@ -340,12 +340,23 @@ public class MyJFrame extends JFrame implements ActionListener {
 
         clip.start();
         rpsGame = new JTextArea();
-        rpsGame.setText("You have come face to face with a monster!" +
-                "To defeat it, you must win in combat... or rock, paper, scissors." +
-                "\nPlease choose from the following numbers:" +
-                "\n1: ROCK" +
-                "\n2: PAPER" +
-                "\n3: SCISSOR");
+        if (board.totalEnemies < 1) {
+            rpsGame.setText("You have finally come face to face with Copernicus Rex Verwirrtheit Theodore!" +
+                    "This is your chance to finally defeat your captor and gain the flight to the final key to escaping." +
+                    "To defeat him, you must win in combat... or rock, paper, scissors." +
+                    "\nPlease choose from the following numbers:" +
+                    "\n1: ROCK" +
+                    "\n2: PAPER" +
+                    "\n3: SCISSOR");
+        } else {
+            rpsGame.setText("You have come face to face with a monster!" +
+                    "To defeat it, you must win in combat... or rock, paper, scissors." +
+                    "\nPlease choose from the following numbers:" +
+                    "\n1: ROCK" +
+                    "\n2: PAPER" +
+                    "\n3: SCISSOR");
+        }
+
         rpsGame.setPreferredSize(new Dimension(500,100));
         rpsGame.setBounds(50,50,100,100);
         rpsGame.setFont(new Font("Sans Script", Font.BOLD, 15 ));
@@ -407,7 +418,7 @@ public class MyJFrame extends JFrame implements ActionListener {
                 "                                                                                                                         " +
                 "\nUpon opening your eyes, you are staring out a small window with people in white scrubs passing in a hall." +
                 "                                                                                                                         " +
-                "You turn around to see padded walls, only to realize that you have escaped Copernicus Rex Verwirrtheit Theodore's for now.");
+                "You turn around to see padded walls, only to realize that you have escaped Copernicus Rex Verwirrtheit Theodore for now.");
         winTextArea.setEditable(false);
         winTextArea.setLineWrap(true);
         winTextArea.setWrapStyleWord(true);
