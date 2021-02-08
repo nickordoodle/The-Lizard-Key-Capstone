@@ -34,4 +34,12 @@ class Command {
         }
         return false;
     }
+
+    public void setNoun(GameDictionary.Noun[] noun) {
+        this.noun = noun;
+    }
+
+    public void setTargetNoun(GameDictionary.Noun[] targetNoun) {
+        this.targetNoun = targetNoun;
+    }
 }

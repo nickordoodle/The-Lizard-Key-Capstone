@@ -37,8 +37,11 @@ public class TextParser {
             if(ids == null) {
                 ids = nounSet;
             }
+            if(ids.size() > 0 && !Collections.disjoint(ids, nounSet)) {
+                ids.retainAll(nounSet);
+            }
 
-            ids.retainAll(nounSet);
+
             if(ids.size() == 1) {
                 nounCandidates = new GameDictionary.Noun[ids.size()];
                 nounCandidates = ids.toArray(nounCandidates);
@@ -55,17 +58,20 @@ public class TextParser {
             }
 
         }
-
         ids = null;
+
         for(int i = 0; i < userInputWords.size(); i++) {
             Set<GameDictionary.Noun> nounSet = knownWords.get(userInputWords.get(i));
+
             if (nounSet == null) {
                 continue;
             }
             if (ids == null) {
                 ids = nounSet;
             }
-            ids.retainAll(nounSet);
+            if(ids.size() > 0 && !Collections.disjoint(ids, nounSet)) {
+                ids.retainAll(nounSet);
+            }
 
             if (ids.size() == 1) {
                 targetNounCandidates = new GameDictionary.Noun[ids.size()];
@@ -76,7 +82,6 @@ public class TextParser {
                 targetNounCandidates = ids.toArray(targetNounCandidates);
             }
         }
-
 
 
         if(targetNounCandidates != null) {
