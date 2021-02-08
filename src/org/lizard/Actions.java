@@ -72,6 +72,8 @@ public class Actions {
 //                    return changeDescription();
                 case 99:
                     return bossAvailable("west", noun);
+                case 1000:
+                    return Story.howToPlay();
                 case 2424:
                     return demonUnleashed();
             }

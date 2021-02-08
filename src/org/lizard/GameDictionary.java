@@ -26,6 +26,7 @@ public class GameDictionary {
         verbs.put("examine", 3);
         verbs.put("use", 4);
         verbs.put("drop", 5);
+        verbs.put("instructions", 1000);
     }
 
 

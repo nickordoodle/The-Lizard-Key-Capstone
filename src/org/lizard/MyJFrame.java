@@ -48,10 +48,15 @@ public class MyJFrame extends JFrame implements ActionListener {
 
         frame = new JFrame();
         frame.setTitle("Lizard Key");
-        frame.setSize(600,400);
+        frame.setSize(1500,1525);
 
         panel0 = new JPanel();
         panel0.setBackground(new Color(7, 87, 91));
+        panel0.setBounds(0, 0, 1500, 100);
+        panel1 = new JPanel();
+        panel1.setBackground(new Color(7, 87, 91));
+        panel1.setBounds(100,100,1500,1325);
+        panel1.setLayout(new BorderLayout());
 
         enterGame = new JButton("Enter Game");
         enterGame.setBounds(10,150,100,300);
@@ -61,10 +66,22 @@ public class MyJFrame extends JFrame implements ActionListener {
         welcome.setFont(new Font("IronWood", Font.BOLD, 30));
         welcome.setForeground(new Color(196, 223, 230));
 
-        panel0.add(welcome,BorderLayout.NORTH);
+        textDisplay = new JTextArea();
+        textDisplay.setText(Story.howToPlay());
+        textDisplay.setLineWrap(true);
+        textDisplay.setWrapStyleWord(true);
+        textDisplay.setBorder(BorderFactory.createBevelBorder(1));
+        textDisplay.setForeground(new Color(0, 60, 70));
+        textDisplay.setFont(new Font("Comic Sans",Font.BOLD, 15));
+        textDisplay.setEditable(false);
+        textDisplay.setBackground(new Color(196, 223, 230));
+
+        panel0.add(welcome,BorderLayout.CENTER);
         panel0.add(enterGame);
+        panel1.add(textDisplay);
 
         frame.add(panel0);
+        frame.add(panel1);
 
         frame.setVisible(true);
         enterGame.addActionListener(this);
@@ -79,6 +96,7 @@ public class MyJFrame extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if(e.getSource()==enterGame){
             frame.remove(panel0);
+            frame.remove(panel1);
             gameScreen(Story.introduction());
         }
         if(e.getSource()==textField){
