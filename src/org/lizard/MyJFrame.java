@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 public class MyJFrame extends JFrame implements ActionListener {
 
@@ -29,6 +30,10 @@ public class MyJFrame extends JFrame implements ActionListener {
     JFrame frame;
     JPanel panel0;
     JTextArea textDisplay;
+    JTextField desicionField = new JTextField();
+    List<GameDictionary.Noun> nounList = null;
+    boolean decisionListener = false;
+    Command command = null;
     JPanel panel1;
     JPanel panel2;
     JPanel panel3;
@@ -68,9 +73,31 @@ public class MyJFrame extends JFrame implements ActionListener {
         enterGame.addActionListener(this);
             }
 
-    public String decision() {
-        inputFromUser.setText("What do you want to do? ");
-        return inputFromUser.getText();
+    public String decision(List<GameDictionary.Noun> nounList, Command command) {
+        desicionField.setPreferredSize(new Dimension(500,100));
+        desicionField.setFont(new Font("Consolas", Font.CENTER_BASELINE, 15));
+        desicionField.setForeground(Color.black);
+        desicionField.setBackground(new Color(196, 223, 230));
+        desicionField.setCaretColor(Color.BLACK);
+        panel2.remove(textField);
+        panel2.add(desicionField);
+        desicionField.requestFocusInWindow();
+        if(!decisionListener) {
+            desicionField.addActionListener(this);
+            decisionListener = true;
+        }
+        this.nounList = nounList;
+        this.command = command;
+
+        StringBuilder choices = new StringBuilder();
+        for(int i = 0; i < nounList.size(); i++) {
+            if(i == nounList.size() - 1) {
+                choices.append(nounList.get(i).getName());
+            } else {
+                choices.append(nounList.get(i).getName()).append(" or ");
+            }
+        }
+        return choices.toString();
     }
 
     @Override
@@ -78,6 +105,34 @@ public class MyJFrame extends JFrame implements ActionListener {
         if(e.getSource()==enterGame){
             frame.remove(panel0);
             gameScreen(Story.introduction());
+        }
+        if(e.getSource()==desicionField) {
+            result = desicionField.getText();
+
+            desicionField.setText("");
+            for(int i = 0; i < nounList.size(); i++) {
+                if(nounList.get(i).getName().equals(result)) {
+                    if(command.getNoun().length <= 1) {
+                        command.setTargetNoun(new GameDictionary.Noun[]{nounList.get(i)});
+                    } else {
+                        command.setNoun(new GameDictionary.Noun[]{nounList.get(i)});
+                    }
+
+                    frame.remove(panel1);
+                    frame.remove(panel2);
+                    frame.remove(panel3);
+                    frame.remove(panel4);
+                    gameScreen(actions.execute(command));
+                    frame.setVisible(true);
+                    return;
+                }
+            }
+            frame.remove(panel1);
+            frame.remove(panel2);
+            frame.remove(panel3);
+            frame.remove(panel4);
+            gameScreen("you gotta be specific.");
+            frame.setVisible(true);
         }
         if(e.getSource()==textField){
 
@@ -177,7 +232,7 @@ public class MyJFrame extends JFrame implements ActionListener {
 
     private void gameScreen(String initialPrint) {
         frame.getContentPane().setBackground(new Color(200,200,200));
-        frame.setSize(600,400);
+        frame.setSize(1500,1000);
 
         textDisplay = new JTextArea();
         textDisplay.setText(initialPrint);
@@ -238,6 +293,7 @@ public class MyJFrame extends JFrame implements ActionListener {
             calledOnce = true;
 
         }
+        textField.requestFocusInWindow();
 
         frame.setVisible(true);
     }
