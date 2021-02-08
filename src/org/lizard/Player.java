@@ -61,7 +61,12 @@ public class Player {
             return inventoryDescription.toString().equals("") ? "You have nothing in your inventory": inventoryDescription.toString();
         }
 
+        public void consumeItem(GameDictionary.Noun item) {
+            inventory.remove(item);
+        }
+
     }
+
 
     public int getPlayerHP() {
         return playerHP;

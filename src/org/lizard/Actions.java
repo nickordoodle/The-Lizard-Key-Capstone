@@ -68,6 +68,8 @@ public class Actions {
 //                    return create(noun);
                 case 8:
 //                    return changeDescription();
+                case 9:
+                    return consumeHealingItem(noun);
                 case 99:
                     return bossAvailable("west", noun);
                 case 1000:
@@ -322,6 +324,12 @@ public class Actions {
         demon.setEnemyHP(30);
         board.allRooms.get("whisperingPassage").setEnemy(demon);
         return "You hear whispers, loud whispers coming from the west.";
+    }
+
+    private String consumeHealingItem(GameDictionary.Noun noun) {
+        player.playerHP += 100;
+        player.inventory.consumeItem(noun);
+        return "Consumed " + noun.getName() + "! Your health has increased to " + player.playerHP + "!";
     }
 
 }
