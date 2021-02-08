@@ -33,7 +33,7 @@ public class Actions {
         verb = command.getVerb();
         noun = command.getNoun() == null ? null : command.getNoun()[0];
 
-        if(command.getTargetNoun() != null) {
+        if(command.getTargetNoun() != null && command.getTargetNoun().length == 1) {
             targetNoun = command.getTargetNoun()[0];
         }
 
@@ -47,9 +47,7 @@ public class Actions {
 
         }
 
-//        if(noun == null) {
-//            return "WTF";
-//        }
+
         if (targetNoun == null && verb == 4) {
             return "Can't do that!";
         } else {
@@ -105,9 +103,9 @@ public class Actions {
 
 
     private String grab(GameDictionary.Noun noun) {
+
         if (noun == null) {
             return ("That doesn't exist");
-
         } else if (!noun.isGrabable()) {
             return ("You can't even grab a " + noun.getName());
         } else if(player.getInventory().has(noun)) {
@@ -131,13 +129,12 @@ public class Actions {
     public String use(GameDictionary.Noun noun, GameDictionary.Noun targetNoun) {
         if(targetNoun instanceof Directions.Direction) {
             return unlockExit(((Directions.Direction) targetNoun).getDirection(), noun);
-
         }
 
         Lock targetLock = targetNoun.getLock();
 
         if (targetLock == null) {
-            return ("Thats not how this works.");
+            return ("That's not how this works.");
 
         }
         if (!player.getInventory().has((Item) noun)) {
@@ -202,8 +199,6 @@ public class Actions {
                     displayRooms.put(entry.getKey(), "?");
                 }
             }
-            System.out.println(currentRoom.getItems());
-
             String paths = "\nAvailable Paths: ";
             for (Map.Entry<String, String> entry : displayRooms.entrySet()) {
                 paths = paths.concat(entry.getKey() + ": " + entry.getValue() + "\n");
@@ -215,9 +210,19 @@ public class Actions {
         } else if (!noun.isExaminable()) {
             return ("You can't examine " + noun.getName());
         } else {
+            if(noun instanceof Room) {
+                if(noun == board.getCurrentRoom()) {
+                    return board.getCurrentRoom().getRoomDescription();
+                } else {
+                    return "Your not in the " + noun.getName();
+                }
+            }
+            if(noun.getName().equals("inventory")) {
+                return player.getInventory().getDescription();
+            }
             if (noun.getName().equals("items")) { //examine items
                 return ("Items present in the " + currentRoom.getName() + " are: " + currentRoom.printItemsInRoom());
-            } else if (currentRoom.has((Item) noun)) { //examine candle
+            } else if (currentRoom.has(noun) || player.getInventory().has(noun)) { //examine candle
                 return noun.getDescription();
             } else {
 
@@ -253,13 +258,16 @@ public class Actions {
             noun = new GameDictionary.Noun[]{nounSet.iterator().next()};
         } else if(nounSet.size() > 1) {
             Iterator<GameDictionary.Noun> iterator = nounSet.iterator();
-            noun = new GameDictionary.Noun[]{iterator.next()};
+//            noun = new GameDictionary.Noun[]{iterator.next()};
 //            noun = specifyNoun(nounSet);
+            return frame.decision(new ArrayList<>(nounSet), command);
+
         } else {
             noun = null;
         }
 
         if(targetNoun != null) {
+            System.out.println(Arrays.toString(targetNoun));
             Set<GameDictionary.Noun> targetNounSet = new HashSet<>(Arrays.asList(targetNoun));
             targetNounSet.retainAll(availableNouns);
 
@@ -267,8 +275,9 @@ public class Actions {
                 targetNoun = new GameDictionary.Noun[]{targetNounSet.iterator().next()};
             } else if(targetNounSet.size() > 1) {
                 Iterator<GameDictionary.Noun> iterator = targetNounSet.iterator();
-                noun = new GameDictionary.Noun[]{iterator.next()};
+//                noun = new GameDictionary.Noun[]{iterator.next()};
 //                noun = specifyNoun(targetNounSet);
+                return frame.decision(new ArrayList<>(targetNounSet), command);
             }
 
         }
@@ -281,33 +290,33 @@ public class Actions {
 
     }
 
-    public GameDictionary.Noun[] specifyNoun(Set<GameDictionary.Noun> nounSet) {
-        List<GameDictionary.Noun> nounList = new ArrayList<>(nounSet);
-
-        while (true) {
-            nounList.forEach(noun -> {
-                System.out.println("You see a " + noun.getName());
-            });
-//            String userInput = Game.prompter.promptPlayer("Which one?");
-            String userInput = frame.decision();
-            List<GameDictionary.Noun> validNoun = new ArrayList<>();
-
-            int i = 0;
-
-            for (int j = 0; j < nounList.size(); j++) {
-                if (nounList.get(j).getName().contains(userInput)) {
-                    validNoun.add(nounList.get(j));
-                }
-            }
-
-            if (validNoun.size() == 1) {
-                return validNoun.toArray(new GameDictionary.Noun[1]);
-            } else {
-                System.out.println("Can you read? Pick one.");
-            }
-        }
-
-    }
+//    public GameDictionary.Noun[] specifyNoun(Set<GameDictionary.Noun> nounSet) {
+//        List<GameDictionary.Noun> nounList = new ArrayList<>(nounSet);
+//
+//        while (true) {
+//            nounList.forEach(noun -> {
+//                System.out.println("You see a " + noun.getName());
+//            });
+////            String userInput = Game.prompter.promptPlayer("Which one?");
+////            String userInput = frame.decision();
+//            List<GameDictionary.Noun> validNoun = new ArrayList<>();
+//
+//            int i = 0;
+//
+//            for (int j = 0; j < nounList.size(); j++) {
+//                if (nounList.get(j).getName().contains(userInput)) {
+//                    validNoun.add(nounList.get(j));
+//                }
+//            }
+//
+//            if (validNoun.size() == 1) {
+//                return validNoun.toArray(new GameDictionary.Noun[1]);
+//            } else {
+//                System.out.println("Can you read? Pick one.");
+//            }
+//        }
+//
+//    }
     private String demonUnleashed() {
         Enemy demon = new Enemy("Demon");
         demon.setEnemyHP(30);

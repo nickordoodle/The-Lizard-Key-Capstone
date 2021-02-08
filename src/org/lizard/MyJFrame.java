@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 public class MyJFrame extends JFrame implements ActionListener {
 
@@ -21,8 +22,7 @@ public class MyJFrame extends JFrame implements ActionListener {
     JTextArea rpsGame;
     JPanel promptPanel;
     JScrollPane scrollPane;
-    MapView mapView;
-
+    boolean bossDead = false;
     String result;
     JLabel inputFromUser = new JLabel();
     JTextField textField = new JTextField();
@@ -30,13 +30,16 @@ public class MyJFrame extends JFrame implements ActionListener {
     JFrame frame;
     JPanel panel0;
     JTextArea textDisplay;
+    JTextField desicionField = new JTextField();
+    List<GameDictionary.Noun> nounList = null;
+    boolean decisionListener = false;
+    Command command = null;
     JPanel panel1;
     JPanel panel2;
     JPanel panel3;
     JPanel panel4;
     JTextField numInput;
 
-    String numFromUser;
     boolean calledOnce=false;
 
     MyJFrame() {
@@ -87,9 +90,31 @@ public class MyJFrame extends JFrame implements ActionListener {
         enterGame.addActionListener(this);
             }
 
-    public String decision() {
-        inputFromUser.setText("What do you want to do? ");
-        return inputFromUser.getText();
+    public String decision(List<GameDictionary.Noun> nounList, Command command) {
+        desicionField.setPreferredSize(new Dimension(500,100));
+        desicionField.setFont(new Font("Consolas", Font.CENTER_BASELINE, 15));
+        desicionField.setForeground(Color.black);
+        desicionField.setBackground(new Color(196, 223, 230));
+        desicionField.setCaretColor(Color.BLACK);
+        panel2.remove(textField);
+        panel2.add(desicionField);
+        desicionField.requestFocusInWindow();
+        if(!decisionListener) {
+            desicionField.addActionListener(this);
+            decisionListener = true;
+        }
+        this.nounList = nounList;
+        this.command = command;
+
+        StringBuilder choices = new StringBuilder();
+        for(int i = 0; i < nounList.size(); i++) {
+            if(i == nounList.size() - 1) {
+                choices.append(nounList.get(i).getName());
+            } else {
+                choices.append(nounList.get(i).getName()).append(" or ");
+            }
+        }
+        return choices.toString();
     }
 
     @Override
@@ -98,6 +123,34 @@ public class MyJFrame extends JFrame implements ActionListener {
             frame.remove(panel0);
             frame.remove(panel1);
             gameScreen(Story.introduction());
+        }
+        if(e.getSource()==desicionField) {
+            result = desicionField.getText();
+
+            desicionField.setText("");
+            for(int i = 0; i < nounList.size(); i++) {
+                if(nounList.get(i).getName().equals(result)) {
+                    if(command.getNoun().length <= 1) {
+                        command.setTargetNoun(new GameDictionary.Noun[]{nounList.get(i)});
+                    } else {
+                        command.setNoun(new GameDictionary.Noun[]{nounList.get(i)});
+                    }
+
+                    frame.remove(panel1);
+                    frame.remove(panel2);
+                    frame.remove(panel3);
+                    frame.remove(panel4);
+                    gameScreen(actions.execute(command));
+                    frame.setVisible(true);
+                    return;
+                }
+            }
+            frame.remove(panel1);
+            frame.remove(panel2);
+            frame.remove(panel3);
+            frame.remove(panel4);
+            gameScreen("you gotta be specific.");
+            frame.setVisible(true);
         }
         if(e.getSource()==textField){
 
@@ -138,20 +191,19 @@ public class MyJFrame extends JFrame implements ActionListener {
                 displayCombat();
             }
 
-            if(response.equals("BOSS")) {
+            if(response.equals("It's just a normal sculpture") && !bossDead) {
                 frame.remove(panel1);
                 frame.remove(panel2);
 //                frame.remove(panel3);
                 frame.remove(panel3);
                 frame.remove(panel4);
                 displayCombat();
+                bossDead = true;
             }
             textField.setText("");
         }
 
         if(e.getSource()==numInput){
-
-            boolean combatEnded = false;
 
                 rpsGame.setText(combat.playerTakesTurn(Integer.parseInt(numInput.getText())));
                 if(combat.checkGameEndingStatus()=="Enemy won") {
@@ -159,6 +211,9 @@ public class MyJFrame extends JFrame implements ActionListener {
                     frame.remove(scrollPane);
                     frame.setVisible(true);
                     gameOverScreen();
+                    if(clip != null) {
+                        clip.stop();
+                    }
                 }
                 else if(combat.checkGameEndingStatus()=="You defeated the monster!"){
 
@@ -169,6 +224,9 @@ public class MyJFrame extends JFrame implements ActionListener {
                         frame.remove(scrollPane);
                         gameScreen(actions.execute(new Event(99, board.allItems.get("sculpture"))));
                         frame.setVisible(true);
+                        if(clip != null) {
+                            clip.stop();
+                        }
 
                     } else {
                         frame.remove(promptPanel);
@@ -192,7 +250,7 @@ public class MyJFrame extends JFrame implements ActionListener {
 
     private void gameScreen(String initialPrint) {
         frame.getContentPane().setBackground(new Color(200,200,200));
-        frame.setSize(600,400);
+        frame.setSize(1500,1000);
 
         textDisplay = new JTextArea();
         textDisplay.setText(initialPrint);
@@ -253,6 +311,7 @@ public class MyJFrame extends JFrame implements ActionListener {
             calledOnce = true;
 
         }
+        textField.requestFocusInWindow();
 
         frame.setVisible(true);
     }
@@ -296,8 +355,6 @@ public class MyJFrame extends JFrame implements ActionListener {
         rpsGame.setForeground(Color.black);
         rpsGame.setBackground(new Color(80, 196, 131));
         rpsGame.setEditable(false);
-
-
         numInput = new JTextField();
         numInput.setPreferredSize(new Dimension(500,100));
         numInput.setBackground(new Color(241, 243, 206));
@@ -324,10 +381,8 @@ public class MyJFrame extends JFrame implements ActionListener {
         frame.setVisible(true);
         frame.setSize(700,500);
         frame.setResizable(false);
-
         combat.startCombat(player, board.getCurrentRoom(), board);
         numInput.addActionListener(this);
-
     }
 
     public void gameOverScreen(){

@@ -39,6 +39,7 @@ public class Combat {
                 return (player.getName() + " got ROCK.\n\n"+enemy.getEnemyName() + " got ROCK.\n\nIt's a tie!"+"\n\n"+player.getName() + "HP: " + playerHP + "\n"+enemy.getEnemyName() + "HP: " +enemyHP);
             } else if (randEnemy == PAPER) {
                 playerHP -= 10;
+                player.playerHP -=10;
                 return (player.getName() + " got ROCK.\n\n"+enemy.getEnemyName() + " got PAPER."+"\n\n" + enemy.getEnemyName()+" won! \n\n"+player.getName() + "HP: " + playerHP + "\n"+enemy.getEnemyName() + "HP: " +enemyHP);
 
             } else if (randEnemy == SCISS0R) {
@@ -64,6 +65,8 @@ public class Combat {
                 return (player.getName() + " got PAPER.\n\n"+enemy.getEnemyName() + " got PAPER.\n\nIt's a tie!"+"\n\n"+player.getName() + "HP: " + playerHP + "\n"+enemy.getEnemyName() + "HP: " +enemyHP);
             } else if (randEnemy == SCISS0R) {
                 playerHP -= 10;
+                player.playerHP -=10;
+
                 return (player.getName() + " got PAPER.\n\n"+enemy.getEnemyName() + " got SCISSOR.\n\n" + enemy.getEnemyName() + " won! "+"\n\n"+player.getName() + "HP: " + playerHP + "\n"+enemy.getEnemyName() + "HP: " +enemyHP);
             }
 
@@ -71,6 +74,8 @@ public class Combat {
 
             if (randEnemy == ROCK) {
                 playerHP -= 10;
+                player.playerHP -=10;
+
                 return (player.getName() + " got SCISSOR.\n\n"+enemy.getEnemyName() + " got ROCK.\n\n" + enemy.getEnemyName() + " won!"+"\n\n"+player.getName() + "HP: " + playerHP + "\n"+enemy.getEnemyName() + "HP: " +enemyHP);
             } else if (randEnemy == PAPER) {
                 enemyHP -= 10;
