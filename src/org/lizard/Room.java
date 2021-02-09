@@ -33,7 +33,7 @@ public class Room extends GameDictionary.Noun {
 
     public GameDictionary.Noun grabItem(Item item) {
         int index = items.indexOf(item);
-        if(index != -1) {
+        if (index != -1) {
             GameDictionary.Noun returnedItem = items.get(index);
             items.remove(item);
             return returnedItem;
@@ -42,7 +42,6 @@ public class Room extends GameDictionary.Noun {
         return null;
 
     }
-
 
 
     public Lock getLock(String direction) {
@@ -85,13 +84,14 @@ public class Room extends GameDictionary.Noun {
     }
 
     public String getRoomDescription() {
-        if(items.size() > 0) {
+        if (items.size() > 0) {
             StringBuilder roomSB = new StringBuilder();
             roomSB.append(roomDescription + "\n");
             return roomSB.toString();
         }
         return roomDescription;
     }
+
     public Enemy getEnemy() {
         return enemy;
     }

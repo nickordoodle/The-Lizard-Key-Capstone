@@ -1,5 +1,7 @@
 package org.lizard;
 
+import org.lizard.util.Music;
+
 public class Main {
 
 

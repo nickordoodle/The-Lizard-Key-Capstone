@@ -23,13 +23,13 @@ class Command {
         return noun;
     }
 
-    public  GameDictionary.Noun[] getTargetNoun() {
+    public GameDictionary.Noun[] getTargetNoun() {
 
         return targetNoun;
     }
 
     public boolean isAmbiguous() {
-        if(noun != null && noun.length > 1 || targetNoun != null && targetNoun.length > 1) {
+        if (noun != null && noun.length > 1 || targetNoun != null && targetNoun.length > 1) {
             return true;
         }
         return false;

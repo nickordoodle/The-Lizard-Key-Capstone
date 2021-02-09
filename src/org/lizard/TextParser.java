@@ -28,30 +28,30 @@ public class TextParser {
 
         Set<GameDictionary.Noun> ids = null;
 
-        for(int i = 0; i < userInputWords.size(); i++) {
+        for (int i = 0; i < userInputWords.size(); i++) {
             Set<GameDictionary.Noun> nounSet = knownWords.get(userInputWords.get(i));
-            if(nounSet == null) {
+            if (nounSet == null) {
                 continue;
             }
 
-            if(ids == null) {
+            if (ids == null) {
                 ids = nounSet;
             }
-            if(ids.size() > 0 && !Collections.disjoint(ids, nounSet)) {
+            if (ids.size() > 0 && !Collections.disjoint(ids, nounSet)) {
                 ids.retainAll(nounSet);
             }
 
 
-            if(ids.size() == 1) {
+            if (ids.size() == 1) {
                 nounCandidates = new GameDictionary.Noun[ids.size()];
                 nounCandidates = ids.toArray(nounCandidates);
                 Arrays.stream(nounCandidates[0].getName().split(" ")).forEach(userInputWords::remove);
                 break;
             }
-            if(i == userInputWords.size() - 1 && ids.size() > 1) {
+            if (i == userInputWords.size() - 1 && ids.size() > 1) {
                 nounCandidates = new GameDictionary.Noun[ids.size()];
                 nounCandidates = ids.toArray(nounCandidates);
-                if(userInputWords.get(i).equals("room")) continue;
+                if (userInputWords.get(i).equals("room")) continue;
                 ids.forEach(word -> {
                     Arrays.stream(word.getName().split(" ")).forEach(userInputWords::remove);
                 });
@@ -60,7 +60,7 @@ public class TextParser {
         }
         ids = null;
 
-        for(int i = 0; i < userInputWords.size(); i++) {
+        for (int i = 0; i < userInputWords.size(); i++) {
             Set<GameDictionary.Noun> nounSet = knownWords.get(userInputWords.get(i));
 
             if (nounSet == null) {
@@ -69,7 +69,7 @@ public class TextParser {
             if (ids == null) {
                 ids = nounSet;
             }
-            if(ids.size() > 0 && !Collections.disjoint(ids, nounSet)) {
+            if (ids.size() > 0 && !Collections.disjoint(ids, nounSet)) {
                 ids.retainAll(nounSet);
             }
 
@@ -84,7 +84,7 @@ public class TextParser {
         }
 
 
-        if(targetNounCandidates != null) {
+        if (targetNounCandidates != null) {
             return new Command(verbCandidate, nounCandidates, targetNounCandidates);
         } else {
             return new Command(verbCandidate, nounCandidates);
