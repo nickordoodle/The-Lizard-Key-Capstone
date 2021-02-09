@@ -9,9 +9,10 @@
         <commandInt></commandInt>
         <commandDirection></commandDirection>
         <description>
-A box, appearing as any other box of matches you are accustomed to from your world.
-On the front, the box shows a warning, but the meaning isn't quite clear.
-The picture shows an all black match lighting a candle, a plus sign, and circular lines that appear to be wind.
+            A box, appearing as any other box of matches you are accustomed to from your world.
+            On the front, the box shows a warning, but the meaning isn't quite clear.
+            The picture shows an all black match lighting a candle, a plus sign, and circular lines that appear to be
+            wind.
         </description>
     </item>
     <item>
@@ -21,9 +22,9 @@ The picture shows an all black match lighting a candle, a plus sign, and circula
         <roomName>keyRoom</roomName>
         <lockKey>matches</lockKey>
         <lockMessage>
-You strike a match, setting the candle aflame.
-Like a hurricane, wind gusts around you, lifting your feet from the ground.
-With just a blink, you have moved to a new room, barely catching your footing as the wind disappears.
+            You strike a match, setting the candle aflame.
+            Like a hurricane, wind gusts around you, lifting your feet from the ground.
+            With just a blink, you have moved to a new room, barely catching your footing as the wind disappears.
         </lockMessage>
         <commandInt>2</commandInt>
         <commandDirection>west</commandDirection>
@@ -39,9 +40,9 @@ With just a blink, you have moved to a new room, barely catching your footing as
         <commandInt></commandInt>
         <commandDirection></commandDirection>
         <description>
-Long and heavy, rusted on a lizard's belly.
-A key of this shape must be used for an escape.
-Find your own entry, the alternative could be deadly.
+            Long and heavy, rusted on a lizard's belly.
+            A key of this shape must be used for an escape.
+            Find your own entry, the alternative could be deadly.
         </description>
     </item>
     <item>
@@ -54,7 +55,7 @@ Find your own entry, the alternative could be deadly.
         <commandInt></commandInt>
         <commandDirection></commandDirection>
         <description>
-Made of bone, stained with age, the key is long.
+            Made of bone, stained with age, the key is long.
         </description>
     </item>
     <item>
@@ -67,7 +68,7 @@ Made of bone, stained with age, the key is long.
         <commandInt></commandInt>
         <commandDirection></commandDirection>
         <description>
-Long like a dagger, the key features a book at the pommel and small teeth at the point.
+            Long like a dagger, the key features a book at the pommel and small teeth at the point.
         </description>
     </item>
     <item>
@@ -80,8 +81,8 @@ Long like a dagger, the key features a book at the pommel and small teeth at the
         <commandInt></commandInt>
         <commandDirection></commandDirection>
         <description>
-A woman in a color block dress points in the direction of the locked chest.
-Her other hand is placed where her mouth would be on her headless body.
+            A woman in a color block dress points in the direction of the locked chest.
+            Her other hand is placed where her mouth would be on her headless body.
         </description>
     </item>
     <item>
@@ -94,8 +95,9 @@ Her other hand is placed where her mouth would be on her headless body.
         <commandInt></commandInt>
         <commandDirection></commandDirection>
         <description>
-Smoke swirls through the air from the end of a pipe that, like the female portrait, floats where the mouth would be if the man in the portrait wasn't headless.
-The well dressed man is otherwise holding a book titled "Surviving the Library".
+            Smoke swirls through the air from the end of a pipe that, like the female portrait, floats where the mouth
+            would be if the man in the portrait wasn't headless.
+            The well dressed man is otherwise holding a book titled "Surviving the Library".
         </description>
     </item>
     <item>
@@ -108,8 +110,9 @@ The well dressed man is otherwise holding a book titled "Surviving the Library".
         <commandInt></commandInt>
         <commandDirection></commandDirection>
         <description>
-A guillotine stands tall with a sharp blade at the top is at the ready to drop on an already headless man in dirty rags.
-Headless figures crowd around the guillotine in a town square, all of them pointing out in your direction.
+            A guillotine stands tall with a sharp blade at the top is at the ready to drop on an already headless man in
+            dirty rags.
+            Headless figures crowd around the guillotine in a town square, all of them pointing out in your direction.
         </description>
     </item>
     <item>
@@ -122,7 +125,7 @@ Headless figures crowd around the guillotine in a town square, all of them point
         <commandInt></commandInt>
         <commandDirection></commandDirection>
         <description>
-A thick line of salt circles the table, not a break in sight.
+            A thick line of salt circles the table, not a break in sight.
         </description>
     </item>
     <item>
@@ -135,8 +138,8 @@ A thick line of salt circles the table, not a break in sight.
         <commandInt></commandInt>
         <commandDirection></commandDirection>
         <description>
-At the pommel is a chest with chains and a lock.
-The point appears to be freshly cut with sharp teeth.
+            At the pommel is a chest with chains and a lock.
+            The point appears to be freshly cut with sharp teeth.
         </description>
     </item>
     <item>
@@ -144,14 +147,14 @@ The point appears to be freshly cut with sharp teeth.
         <name>locked chest</name>
         <canGrab>false</canGrab>
         <roomName>library</roomName>
-<!--        Eventually this item will need a lock that can be opened with a key to release a monster-->
+        <!--        Eventually this item will need a lock that can be opened with a key to release a monster-->
         <lockKey>chest key</lockKey>
         <lockMessage>You hear whispering coming from the west. better go see what it is.</lockMessage>
         <commandInt>2424</commandInt>
         <commandDirection></commandDirection>
         <description>
-Clunky and large, a metal chest with weird symbols rests on top of the table.
-An ancient, copper lock keeps the chest closed.
+            Clunky and large, a metal chest with weird symbols rests on top of the table.
+            An ancient, copper lock keeps the chest closed.
         </description>
     </item>
     <item>
@@ -164,8 +167,8 @@ An ancient, copper lock keeps the chest closed.
         <commandInt></commandInt>
         <commandDirection></commandDirection>
         <description>
-The face is pressed in as if someone had smashed the doll on the floor.
-With what is left of the mouth, you swear that you saw it smirk at you.
+            The face is pressed in as if someone had smashed the doll on the floor.
+            With what is left of the mouth, you swear that you saw it smirk at you.
         </description>
     </item>
     <item>
@@ -178,7 +181,7 @@ With what is left of the mouth, you swear that you saw it smirk at you.
         <commandInt></commandInt>
         <commandDirection></commandDirection>
         <description>
-Sharp and pointy, ready for cutting, chopping, or even stabbing.
+            Sharp and pointy, ready for cutting, chopping, or even stabbing.
         </description>
     </item>
     <item>
@@ -191,7 +194,7 @@ Sharp and pointy, ready for cutting, chopping, or even stabbing.
         <commandInt></commandInt>
         <commandDirection></commandDirection>
         <description>
-Tangled beyond usability, the rope doesn't seem to be worth your time.
+            Tangled beyond usability, the rope doesn't seem to be worth your time.
         </description>
     </item>
     <item>
@@ -204,7 +207,8 @@ Tangled beyond usability, the rope doesn't seem to be worth your time.
         <commandInt></commandInt>
         <commandDirection></commandDirection>
         <description>
-Rusted metal and a warn handle isn't the most ideal aspects in a potential weapon, but it's better than nothing.
+            Rusted metal and a warn handle isn't the most ideal aspects in a potential weapon, but it's better than
+            nothing.
         </description>
     </item>
     <item>
@@ -217,7 +221,8 @@ Rusted metal and a warn handle isn't the most ideal aspects in a potential weapo
         <commandInt></commandInt>
         <commandDirection></commandDirection>
         <description>
-Rather boring and old with a busted light on the front, seeming rather useless in an attempt to escape this world.
+            Rather boring and old with a busted light on the front, seeming rather useless in an attempt to escape this
+            world.
         </description>
     </item>
     <item>
@@ -230,8 +235,9 @@ Rather boring and old with a busted light on the front, seeming rather useless i
         <commandInt></commandInt>
         <commandDirection></commandDirection>
         <description>
-Modeled after a plague doctors mask, a long nose stems out the front of the mask, holding a metal canister at the end.
-Large glass, circular to form windows around the wearers eyes are shattered beyond further use.
+            Modeled after a plague doctors mask, a long nose stems out the front of the mask, holding a metal canister
+            at the end.
+            Large glass, circular to form windows around the wearers eyes are shattered beyond further use.
         </description>
     </item>
     <item>
@@ -244,8 +250,8 @@ Large glass, circular to form windows around the wearers eyes are shattered beyo
         <commandInt></commandInt>
         <commandDirection></commandDirection>
         <description>
-Shimmering with hundreds of diamonds, the tiara glimmers at every angle.
-While an item as such could be very valuable, it isn't much help in your escape.
+            Shimmering with hundreds of diamonds, the tiara glimmers at every angle.
+            While an item as such could be very valuable, it isn't much help in your escape.
         </description>
     </item>
     <item>
@@ -258,8 +264,8 @@ While an item as such could be very valuable, it isn't much help in your escape.
         <commandInt></commandInt>
         <commandDirection></commandDirection>
         <description>
-Mesmerizing to view, the blue of the sapphire reflects onto your skin.
-While an item as such could be very valuable, it isn't much help in your escape.
+            Mesmerizing to view, the blue of the sapphire reflects onto your skin.
+            While an item as such could be very valuable, it isn't much help in your escape.
         </description>
     </item>
     <item>
@@ -272,9 +278,9 @@ While an item as such could be very valuable, it isn't much help in your escape.
         <commandInt></commandInt>
         <commandDirection></commandDirection>
         <description>
-With gold shining high in the sky, a bird cannot soar if it cannot fly.
-A stream that flows is a life to grow, a stream not of water may death undergo.
-Unlocking a secret is not a forfeit, go forward with the lizard to be rewarded.
+            With gold shining high in the sky, a bird cannot soar if it cannot fly.
+            A stream that flows is a life to grow, a stream not of water may death undergo.
+            Unlocking a secret is not a forfeit, go forward with the lizard to be rewarded.
         </description>
     </item>
     <item>
@@ -287,7 +293,7 @@ Unlocking a secret is not a forfeit, go forward with the lizard to be rewarded.
         <commandInt></commandInt>
         <commandDirection></commandDirection>
         <description>
-A fresh bouquet of black roses lay on the rotted bench next to a photograph.
+            A fresh bouquet of black roses lay on the rotted bench next to a photograph.
         </description>
     </item>
     <item>
@@ -300,8 +306,8 @@ A fresh bouquet of black roses lay on the rotted bench next to a photograph.
         <commandInt></commandInt>
         <commandDirection></commandDirection>
         <description>
-A young boy in overalls plays in a sandbox with action figures.
-Just beyond the fence of the yard, the outline of a man can be seen, his face covered in shadow.
+            A young boy in overalls plays in a sandbox with action figures.
+            Just beyond the fence of the yard, the outline of a man can be seen, his face covered in shadow.
         </description>
     </item>
     <item>
@@ -313,7 +319,9 @@ Just beyond the fence of the yard, the outline of a man can be seen, his face co
         <lockMessage></lockMessage>
         <commandInt></commandInt>
         <commandDirection></commandDirection>
-        <description>The sculpture, as you now know, was just Copernicus Rex Verwirrtheit Theodore. The same red liquid from the floor streams from his eyes.</description>
+        <description>The sculpture, as you now know, was just Copernicus Rex Verwirrtheit Theodore. The same red liquid
+            from the floor streams from his eyes.
+        </description>
     </item>
     <item>
         <id>23</id>
@@ -325,7 +333,7 @@ Just beyond the fence of the yard, the outline of a man can be seen, his face co
         <commandInt></commandInt>
         <commandDirection></commandDirection>
         <description>
-A tombstone with your name reads, "RIP to you. You're never escaping this world!".
+            A tombstone with your name reads, "RIP to you. You're never escaping this world!".
         </description>
     </item>
     <item>
@@ -338,7 +346,7 @@ A tombstone with your name reads, "RIP to you. You're never escaping this world!
         <commandInt></commandInt>
         <commandDirection></commandDirection>
         <description>
-A cape has a message sewn into the collar, "Fly high, fly fast, fly free, fly just".
+            A cape has a message sewn into the collar, "Fly high, fly fast, fly free, fly just".
         </description>
     </item>
     <item>
@@ -351,7 +359,7 @@ A cape has a message sewn into the collar, "Fly high, fly fast, fly free, fly ju
         <commandInt></commandInt>
         <commandDirection></commandDirection>
         <description>
-The fresh aroma of chocolate seeps into your nose, enticing you to eat them.
+            The fresh aroma of chocolate seeps into your nose, enticing you to eat them.
         </description>
     </item>
 

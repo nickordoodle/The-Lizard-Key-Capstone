@@ -33,12 +33,13 @@ public class Player {
 
         public String add(GameDictionary.Noun item) {
 
-            if(item.getName().equals("lizard key")) {
+            if (item.getName().equals("lizard key")) {
                 hasWinningKey = true;
             }
             inventory.add(item);
-            return"Added to inventory";
+            return "Added to inventory";
         }
+
         public List<GameDictionary.Noun> getItems() {
             return inventory;
         }
@@ -51,6 +52,7 @@ public class Player {
             System.out.println("That is not in your bag");
             return null;
         }
+
         public boolean has(GameDictionary.Noun item) {
             return inventory.contains(item);
         }
@@ -58,7 +60,7 @@ public class Player {
         public String getDescription() {
             StringBuilder inventoryDescription = new StringBuilder();
             inventory.forEach(item -> inventoryDescription.append(item.getName()).append("\n"));
-            return inventoryDescription.toString().equals("") ? "You have nothing in your inventory": inventoryDescription.toString();
+            return inventoryDescription.toString().equals("") ? "You have nothing in your inventory" : inventoryDescription.toString();
         }
 
         public void consumeItem(GameDictionary.Noun item) {

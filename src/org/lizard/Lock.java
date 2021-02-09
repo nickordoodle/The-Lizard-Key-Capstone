@@ -8,7 +8,7 @@ public class Lock {
     public Lock(GameDictionary.Noun noun, String description, Event event) {
         this.noun = noun;
         this.description = description;
-        this.event= event;
+        this.event = event;
     }
 
     public GameDictionary.Noun getNoun() {
