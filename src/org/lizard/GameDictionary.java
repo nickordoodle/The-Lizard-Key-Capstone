@@ -27,9 +27,9 @@ public class GameDictionary {
         verbs.put("use", 4);
         verbs.put("drop", 5);
         verbs.put("eat", 9);
+        verbs.put("cheatcodekeys", 10);
         verbs.put("rules", 1000);
     }
-
 
 
     public Map<String, Set<Noun>> getKnownWords() {
@@ -182,16 +182,13 @@ public class GameDictionary {
 
         public void addKnownWord(Noun noun, String word) {
             Set<Noun> knownWord = gameDictionary.knownWords.get(word);
-            if(knownWord == null) {
+            if (knownWord == null) {
                 gameDictionary.knownWords.put(word, new HashSet<>());
                 knownWord = gameDictionary.knownWords.get(word);
             }
             knownWord.add(noun);
         }
     }
-
-
-
 
 
 }

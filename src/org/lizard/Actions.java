@@ -1,9 +1,6 @@
 package org.lizard;
 
-import javax.swing.*;
-import java.lang.reflect.Array;
 import java.util.*;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class Actions {
     private final Board board;
@@ -24,16 +21,16 @@ public class Actions {
 
     public String execute(Command command) {
 
-            GameDictionary.Noun noun;
-            GameDictionary.Noun targetNoun = null;
-            Integer verb;
-            if(command.isAmbiguous()) {
-                return disambiguate(command);
-            }
+        GameDictionary.Noun noun;
+        GameDictionary.Noun targetNoun = null;
+        Integer verb;
+        if (command.isAmbiguous()) {
+            return disambiguate(command);
+        }
         verb = command.getVerb();
         noun = command.getNoun() == null ? null : command.getNoun()[0];
 
-        if(command.getTargetNoun() != null && command.getTargetNoun().length == 1) {
+        if (command.getTargetNoun() != null && command.getTargetNoun().length == 1) {
             targetNoun = command.getTargetNoun()[0];
         }
 
@@ -70,6 +67,8 @@ public class Actions {
 //                    return changeDescription();
                 case 9:
                     return consumeHealingItem(noun);
+                case 10:
+                    return CheatCode.givePlayerAllKeysBesidesLizardKey(player.getInventory(), board);
                 case 99:
                     return bossAvailable("west", noun);
                 case 1000:
@@ -84,8 +83,8 @@ public class Actions {
 
 
     private String move(GameDictionary.Noun direction) {
-        if(direction instanceof Directions.Direction) {
-            if(player.hasWinningKey && board.getCurrentRoom().getName().equals("keyRoom")) {
+        if (direction instanceof Directions.Direction) {
+            if (player.hasWinningKey && board.getCurrentRoom().getName().equals("keyRoom")) {
                 return "You use the lizard key on the door to exit.\n" +
                         "Darkness surrounds you and wind presses against your back as if the ground is being pulled beneath you.\n" +
                         "You close your eyes to avoid sickness, only for the movement around you to stop.\n" +
@@ -95,13 +94,12 @@ public class Actions {
             if (!roomsVisited.contains(board.getCurrentRoom())) {
                 roomsVisited.add(board.getCurrentRoom());
             }
-           return board.changeCurrentRoom(((Directions.Direction) direction).getDirection());
+            return board.changeCurrentRoom(((Directions.Direction) direction).getDirection());
         } else {
             return ("What??? you can't go there.");
         }
 
     }
-
 
 
     private String grab(GameDictionary.Noun noun) {
@@ -110,8 +108,8 @@ public class Actions {
             return ("That doesn't exist");
         } else if (!noun.isGrabable()) {
             return ("You can't even grab a " + noun.getName());
-        } else if(player.getInventory().has(noun)) {
-           return "You already have that in your inventory";
+        } else if (player.getInventory().has(noun)) {
+            return "You already have that in your inventory";
         } else {
             //get current room
             Room currentRoom = board.getCurrentRoom();
@@ -129,7 +127,7 @@ public class Actions {
     }
 
     public String use(GameDictionary.Noun noun, GameDictionary.Noun targetNoun) {
-        if(targetNoun instanceof Directions.Direction) {
+        if (targetNoun instanceof Directions.Direction) {
             return unlockExit(((Directions.Direction) targetNoun).getDirection(), noun);
         }
 
@@ -157,12 +155,13 @@ public class Actions {
 
         return null;
     }
+
     public String unlockExit(String direction, GameDictionary.Noun noun) {
-        if(!player.getInventory().has(noun)) {
+        if (!player.getInventory().has(noun)) {
             return "You don't have that on your person";
         }
         Lock lock = board.getCurrentRoom().getLock(direction);
-        if(lock != null && lock.getNoun().equals(noun)) {
+        if (lock != null && lock.getNoun().equals(noun)) {
             lock.printDescription();
             board.getCurrentRoom().removeLock(direction);
             return this.execute(lock.getCommand());
@@ -170,9 +169,10 @@ public class Actions {
             return "What did you think that would even accomplish?";
         }
     }
+
     public String bossAvailable(String direction, GameDictionary.Noun noun) {
         Lock lock = board.allRooms.get("egyptianRoom").getLock(direction);
-        if(lock != null && lock.getNoun().equals(noun)) {
+        if (lock != null && lock.getNoun().equals(noun)) {
             board.allRooms.get("egyptianRoom").removeLock(direction);
             return lock.printDescription();
         } else {
@@ -180,7 +180,7 @@ public class Actions {
         }
     }
 
-    private String examine(GameDictionary.Noun noun){
+    private String examine(GameDictionary.Noun noun) {
         Room currentRoom = board.getCurrentRoom();
         Map<String, String> displayRooms = new HashMap<>();
 
@@ -194,7 +194,7 @@ public class Actions {
             capeAdded = true;
         }
         if (noun == null) { //examine
-            for (Map.Entry<String, Room> entry: currentRoom.getExits().entrySet()) {
+            for (Map.Entry<String, Room> entry : currentRoom.getExits().entrySet()) {
                 if (roomsVisited.contains(entry.getValue())) {
                     displayRooms.put(entry.getKey(), entry.getValue().getName());
                 } else {
@@ -212,14 +212,14 @@ public class Actions {
         } else if (!noun.isExaminable()) {
             return ("You can't examine " + noun.getName());
         } else {
-            if(noun instanceof Room) {
-                if(noun == board.getCurrentRoom()) {
+            if (noun instanceof Room) {
+                if (noun == board.getCurrentRoom()) {
                     return board.getCurrentRoom().getRoomDescription();
                 } else {
                     return "Your not in the " + noun.getName();
                 }
             }
-            if(noun.getName().equals("inventory")) {
+            if (noun.getName().equals("inventory")) {
                 return player.getInventory().getDescription();
             }
             if (noun.getName().equals("items")) { //examine items
@@ -236,7 +236,7 @@ public class Actions {
 
     public String drop(GameDictionary.Noun noun) {
         GameDictionary.Noun droppedItem = player.getInventory().drop(noun);
-        if(droppedItem == null) {
+        if (droppedItem == null) {
             return player.getName() + " how are you gonna drop something you don't have? How?";
         } else {
             board.getCurrentRoom().addItemToRoom(droppedItem);
@@ -256,9 +256,9 @@ public class Actions {
 
         nounSet.retainAll(availableNouns);
 
-        if(nounSet.size() == 1) {
+        if (nounSet.size() == 1) {
             noun = new GameDictionary.Noun[]{nounSet.iterator().next()};
-        } else if(nounSet.size() > 1) {
+        } else if (nounSet.size() > 1) {
             Iterator<GameDictionary.Noun> iterator = nounSet.iterator();
             return frame.decision(new ArrayList<>(nounSet), command);
 
@@ -266,21 +266,21 @@ public class Actions {
             noun = null;
         }
 
-        if(targetNoun != null) {
+        if (targetNoun != null) {
             System.out.println(Arrays.toString(targetNoun));
             Set<GameDictionary.Noun> targetNounSet = new HashSet<>(Arrays.asList(targetNoun));
             targetNounSet.retainAll(availableNouns);
 
-            if(targetNounSet.size() == 1) {
+            if (targetNounSet.size() == 1) {
                 targetNoun = new GameDictionary.Noun[]{targetNounSet.iterator().next()};
-            } else if(targetNounSet.size() > 1) {
+            } else if (targetNounSet.size() > 1) {
                 Iterator<GameDictionary.Noun> iterator = targetNounSet.iterator();
                 return frame.decision(new ArrayList<>(targetNounSet), command);
             }
 
         }
 
-        if(targetNoun != null && targetNoun.length == 1) {
+        if (targetNoun != null && targetNoun.length == 1) {
             return execute(new Command(command.getVerb(), noun, targetNoun));
         } else {
             return execute(new Command(command.getVerb(), noun));
@@ -302,6 +302,35 @@ public class Actions {
         player.playerHP += 100;
         player.inventory.consumeItem(noun);
         return "Consumed " + noun.getName() + "! Your health has increased to " + player.playerHP + "!";
+    }
+
+
+    // Cheat code class to be used for future implementation
+    // Contains all of the game cheat codes to enhance testing
+    // and give the option for the player to use cheats
+    static class CheatCode {
+
+        // A cheat code that grabs all the keys
+        // in the game and gives them to player
+        // NOTE this does not give the player
+        // the lizard key
+        static String givePlayerAllKeysBesidesLizardKey(Player.Inventory inv, final Board board){
+            Map<String, Item> allItems = board.getAllItems();
+            // Iterate over the map entries
+            for (Map.Entry<String,Item> item : allItems.entrySet()){
+                Item currItem = item.getValue();
+                // Check if the item is a key but not the winning key
+                if(currItem.getName().contains("key")
+                && !currItem.getName().equals("lizard key")){
+                    // Add to the player's inventory
+                    inv.add(currItem);
+                }
+            }
+
+            return "You activated a secret cheat code. You now have all" +
+                    " of the keys in the game!!!";
+        }
+
     }
 
 }
