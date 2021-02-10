@@ -69,6 +69,8 @@ public class Actions {
                     return consumeHealingItem(noun);
                 case 10:
                     return CheatCode.givePlayerAllKeysBesidesLizardKey(player.getInventory(), board);
+                case 11:
+                    return CheatCode.givePlayerSpecificItem(noun, player.getInventory(), board);
                 case 99:
                     return bossAvailable("west", noun);
                 case 1000:
@@ -340,6 +342,31 @@ public class Actions {
             return "You activated a secret cheat code. You now have all" +
                     " of the keys in the game!!!";
         }
+
+        static String givePlayerSpecificItem(GameDictionary.Noun requestedItem, Player.Inventory inv, final Board board){
+
+            try {
+                // Get the name of the item
+                String itemName = requestedItem.getName();
+                Map<String, Item> allItems = board.getAllItems();
+                // Iterate over the map entries
+                for (Map.Entry<String,Item> item : allItems.entrySet()){
+                    String currItemName = item.getValue().getName();
+                    // Check if it is the requested item
+                    if(currItemName.contains(itemName)){
+                        // Add to the player's inventory
+                        inv.add(item.getValue());
+                    }
+                }
+            } catch (NullPointerException e){
+                return "Oops! Cheat code get " + requestedItem + " item did not work! Try" +
+                        " cheatcodeget <item>";
+            }
+
+            return (requestedItem.getName() + " added to inventory!");
+        }
+
+
 
     }
 
