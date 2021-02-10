@@ -28,6 +28,7 @@ public class GameDictionary {
         verbs.put("drop", 5);
         verbs.put("eat", 9);
         verbs.put("cheatcodekeys", 10);
+        verbs.put("cheatcodeget", 11);
         verbs.put("rules", 1000);
     }
 
