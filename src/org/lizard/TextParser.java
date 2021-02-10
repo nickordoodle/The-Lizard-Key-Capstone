@@ -9,6 +9,8 @@ public class TextParser {
         this.gameDictionary = gameDictionary;
     }
 
+    // Takes the raw user input that the player types
+    // Returns the command extrapolated from the input
     public Command parse(String userInput) {
 
         List<String> userInputWords = new ArrayList<>(Arrays.asList(userInput.split(" ")));
@@ -17,6 +19,7 @@ public class TextParser {
         GameDictionary.Noun[] targetNounCandidates = null;
         Map<String, Set<GameDictionary.Noun>> knownWords = gameDictionary.getKnownWords();
 
+        // Get the type of verb the user entered
         for (int i = 0; i < userInputWords.size(); i++) {
             Integer verbCategory = gameDictionary.getVerbCategory(userInputWords.get(i));
             if (verbCategory != null) {

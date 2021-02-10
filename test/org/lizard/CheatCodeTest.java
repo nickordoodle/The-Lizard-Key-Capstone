@@ -21,16 +21,18 @@ public class CheatCodeTest {
     }
 
     @Test
-    public void testGivePlayerAllKeysBesidesLizardKey() {
+    public void testGivePlayerAllKeysBesidesLizardKeyNoLizardKeyFound() {
         Player.Inventory inv = player.getInventory();
         Actions.CheatCode.givePlayerAllKeysBesidesLizardKey(inv, board);
         List<GameDictionary.Noun> items = inv.getItems();
-        items.forEach(item -> assertFalse(item.getName().equals("lizard key")));
-        List<GameDictionary.Noun> keys =  items.stream()
-                .filter(item -> item.getName().contains("key"))
-                .collect(Collectors.toList());
-        assertTrue(keys.stream().anyMatch(key -> key.getName().equalsIgnoreCase("skeleton key")));
-        assertTrue(keys.stream().anyMatch(key -> key.getName().equalsIgnoreCase("library key")));
+        items.forEach(item -> assertNotEquals("lizard key", item.getName()));
+    }
+
+    @Test
+    public void testGivePlayerAllKeysBesidesLizardKeyPlayerInventoryIsNull() {
+        Player.Inventory inv = null;
+        String result = Actions.CheatCode.givePlayerAllKeysBesidesLizardKey(inv, board);
+        assertEquals(result, "Oops! Cheat code get all keys besides lizard key did not work!");
     }
 
     @After

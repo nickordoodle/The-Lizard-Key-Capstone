@@ -20,6 +20,9 @@ public class MapView extends JPanel {
         this.currentRoom = currentRoom;
     }
 
+    // Paints the Map using the Graphics object
+    // that is passed in.  You will see 'fillRect', 'drawRect',
+    // and other methods that do the bulk work in this method
     public void paint(Graphics g) {
 
 

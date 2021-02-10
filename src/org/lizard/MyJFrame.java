@@ -52,6 +52,8 @@ public class MyJFrame extends JFrame implements ActionListener {
         new Funsies("where", "idk figure it out");
         new Funsies("what", "idk figure it out");
 
+
+
         frame = new JFrame();
         frame.setTitle("Lizard Key");
         frame.setSize(1500, 1525);
@@ -123,14 +125,17 @@ public class MyJFrame extends JFrame implements ActionListener {
         return choices.toString();
     }
 
+    // Handles the functionality of the button
     @Override
-    public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == enterGame) {
+    public void actionPerformed(ActionEvent guiElement) {
+        if (guiElement.getSource() == enterGame) {
             frame.remove(panel0);
             frame.remove(panel1);
+            // Start the game music
+            Music.playMusic("princeofdarkness.wav");
             gameScreen(Story.introduction());
         }
-        if (e.getSource() == desicionField) {
+        if (guiElement.getSource() == desicionField) {
             result = desicionField.getText();
 
             desicionField.setText("");
@@ -158,7 +163,7 @@ public class MyJFrame extends JFrame implements ActionListener {
             gameScreen("you gotta be specific.");
             frame.setVisible(true);
         }
-        if (e.getSource() == textField) {
+        if (guiElement.getSource() == textField) {
 
             result = textField.getText();
 
@@ -209,7 +214,7 @@ public class MyJFrame extends JFrame implements ActionListener {
             textField.setText("");
         }
 
-        if (e.getSource() == numInput) {
+        if (guiElement.getSource() == numInput) {
 
             rpsGame.setText(combat.playerTakesTurn(Integer.parseInt(numInput.getText())));
             if (combat.checkGameEndingStatus() == "Enemy won") {

@@ -80,10 +80,10 @@ public class Actions {
         return null;
     }
 
-
-
+    // Attempts to move in a certain given direction
     private String move(GameDictionary.Noun direction) {
         if (direction instanceof Directions.Direction) {
+            // Winning condition and text if located in key room with lizard key
             if (player.hasWinningKey && board.getCurrentRoom().getName().equals("keyRoom")) {
                 return "You use the lizard key on the door to exit.\n" +
                         "Darkness surrounds you and wind presses against your back as if the ground is being pulled beneath you.\n" +
@@ -126,6 +126,7 @@ public class Actions {
         }
     }
 
+    // Tries to use an item or "noun" that is passed in
     public String use(GameDictionary.Noun noun, GameDictionary.Noun targetNoun) {
         if (targetNoun instanceof Directions.Direction) {
             return unlockExit(((Directions.Direction) targetNoun).getDirection(), noun);
@@ -137,7 +138,7 @@ public class Actions {
             return ("That's not how this works.");
 
         }
-        if (!player.getInventory().has((Item) noun)) {
+        if (!player.getInventory().has((Item) noun)) { // Check inventory
             return ("You don't have a " + noun.getName() + " in your inventory.");
 
         }
@@ -288,6 +289,8 @@ public class Actions {
 
     }
 
+    // Unleashes the demon/enemy and places the demon
+    // in the whisperingPassage room
     private String demonUnleashed() {
         Enemy demon = new Enemy("Demon");
         demon.setEnemyHP(30);
@@ -295,6 +298,9 @@ public class Actions {
         return "You hear whispers, loud whispers coming from the west.";
     }
 
+    // Consumes a healing type of item
+    // Increases the players health unless the player tries
+    // to use healing brownies
     private String consumeHealingItem(GameDictionary.Noun noun) {
         if (!noun.getName().equals("healing brownies")) {
             return "You can't eat that!";
@@ -315,6 +321,10 @@ public class Actions {
         // NOTE this does not give the player
         // the lizard key
         static String givePlayerAllKeysBesidesLizardKey(Player.Inventory inv, final Board board){
+            // Check for negative case and handle
+            if(inv == null || board == null){
+                return "Oops! Cheat code get all keys besides lizard key did not work!";
+            }
             Map<String, Item> allItems = board.getAllItems();
             // Iterate over the map entries
             for (Map.Entry<String,Item> item : allItems.entrySet()){
