@@ -16,6 +16,9 @@ public class Combat {
     final int PAPER = 2;
     final int SCISS0R = 3;
 
+    // Checks the game ending conditions
+    // Depends on player HP.  Gives back
+    // the game ending message to be displayed
     public String checkGameEndingStatus() {
         if (playerHP == 0) {
             return "Enemy won";
