@@ -315,6 +315,10 @@ public class Actions {
         // NOTE this does not give the player
         // the lizard key
         static String givePlayerAllKeysBesidesLizardKey(Player.Inventory inv, final Board board){
+            // Check for negative case and handle
+            if(inv == null || board == null){
+                return "Oops! Cheat code get all keys besides lizard key did not work!";
+            }
             Map<String, Item> allItems = board.getAllItems();
             // Iterate over the map entries
             for (Map.Entry<String,Item> item : allItems.entrySet()){
