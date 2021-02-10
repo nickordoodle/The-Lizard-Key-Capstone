@@ -8,8 +8,8 @@ import javax.swing.text.DefaultCaret;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
-import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.List;
 
 public class MyJFrame extends JFrame implements ActionListener {
@@ -30,7 +30,7 @@ public class MyJFrame extends JFrame implements ActionListener {
     JLabel inputFromUser = new JLabel();
     JTextField textField = new JTextField();
     JButton enterGame;
-    JFrame frame;
+    JFrame gameFrame;
     JPanel panel0;
     JTextArea textDisplay;
     JTextField desicionField = new JTextField();
@@ -52,11 +52,16 @@ public class MyJFrame extends JFrame implements ActionListener {
         new Funsies("where", "idk figure it out");
         new Funsies("what", "idk figure it out");
 
+        gameFrame = new JFrame();
 
+        try {
+            playWelcomeScreen();
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
 
-        frame = new JFrame();
-        frame.setTitle("Lizard Key");
-        frame.setSize(1500, 1525);
+        gameFrame.setTitle("Lizard Key");
+        gameFrame.setSize(1500, 1525);
 
         panel0 = new JPanel();
         panel0.setBackground(new Color(7, 87, 91));
@@ -91,13 +96,36 @@ public class MyJFrame extends JFrame implements ActionListener {
         panel0.add(enterGame);
         panel1.add(textDisplay);
 
-        frame.add(panel0);
-        frame.add(panel1);
+        gameFrame.add(panel0);
+        gameFrame.add(panel1);
 
-        frame.setVisible(true);
+        gameFrame.setVisible(true);
         enterGame.addActionListener(this);
     }
 
+    // Basic welcome / loading screen
+    // Displays a picture via a URL
+    // for the specified time in
+    // Thread.sleep.  It is currently 5 secondss
+    private void playWelcomeScreen() throws MalformedURLException {
+        // Set up the game window to full screen with a scary image via a URL
+        gameFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        JLabel splashImage = new JLabel("", new ImageIcon(new URL("https://i.insider.com/562fbe249dd7cc1b008c528d?width=1100&format=jpeg&auto=webp")), SwingConstants.CENTER);
+        gameFrame.getContentPane().add(splashImage);
+        // Display for the duration of Thread.sleep time
+        gameFrame.setVisible(true);
+
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        // Clean up the frame, remove the image, change window size to normal
+        gameFrame.remove(splashImage);
+        gameFrame.dispose();
+        gameFrame.setVisible(false);
+        gameFrame.setExtendedState(JFrame.NORMAL);
+    }
     public String decision(List<GameDictionary.Noun> nounList, Command command) {
         desicionField.setPreferredSize(new Dimension(500, 100));
         desicionField.setFont(new Font("Consolas", Font.CENTER_BASELINE, 15));
@@ -129,8 +157,8 @@ public class MyJFrame extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent guiElement) {
         if (guiElement.getSource() == enterGame) {
-            frame.remove(panel0);
-            frame.remove(panel1);
+            gameFrame.remove(panel0);
+            gameFrame.remove(panel1);
             // Start the game music
             Music.playMusic("princeofdarkness.wav");
             gameScreen(Story.introduction());
@@ -147,21 +175,21 @@ public class MyJFrame extends JFrame implements ActionListener {
                         command.setNoun(new GameDictionary.Noun[]{nounList.get(i)});
                     }
 
-                    frame.remove(panel1);
-                    frame.remove(panel2);
-                    frame.remove(panel3);
-                    frame.remove(panel4);
+                    gameFrame.remove(panel1);
+                    gameFrame.remove(panel2);
+                    gameFrame.remove(panel3);
+                    gameFrame.remove(panel4);
                     gameScreen(actions.execute(command));
-                    frame.setVisible(true);
+                    gameFrame.setVisible(true);
                     return;
                 }
             }
-            frame.remove(panel1);
-            frame.remove(panel2);
-            frame.remove(panel3);
-            frame.remove(panel4);
+            gameFrame.remove(panel1);
+            gameFrame.remove(panel2);
+            gameFrame.remove(panel3);
+            gameFrame.remove(panel4);
             gameScreen("you gotta be specific.");
-            frame.setVisible(true);
+            gameFrame.setVisible(true);
         }
         if (guiElement.getSource() == textField) {
 
@@ -175,39 +203,39 @@ public class MyJFrame extends JFrame implements ActionListener {
 
             textDisplay.setText(response);
 
-            frame.remove(panel4);
+            gameFrame.remove(panel4);
 
             panel4 = new MapView(board.rooms, board.getCurrentRoom().getName());
             panel4.setBounds(0, 750, 1500, 550);
 
-            frame.add(panel4);
-            frame.setBackground(Color.black);
+            gameFrame.add(panel4);
+            gameFrame.setBackground(Color.black);
             panel4.setVisible(true);
-            frame.setVisible(true);
+            gameFrame.setVisible(true);
 
             if (player.hasWinningKey && board.getCurrentRoom().getName().equals("keyRoom")) {
-                frame.remove(panel1);
-                frame.remove(panel2);
-                frame.remove(panel3);
-                frame.remove(panel4);
+                gameFrame.remove(panel1);
+                gameFrame.remove(panel2);
+                gameFrame.remove(panel3);
+                gameFrame.remove(panel4);
                 winScreen();
             }
 
             if (board.getCurrentRoom().getEnemy() != null && !board.getCurrentRoom().getEnemy().enemyName.equals("Copernicus Rex Verwirrtheit Theodore")) {
-                frame.remove(panel1);
-                frame.remove(panel2);
-                frame.remove(panel3);
-                frame.remove(panel4);
+                gameFrame.remove(panel1);
+                gameFrame.remove(panel2);
+                gameFrame.remove(panel3);
+                gameFrame.remove(panel4);
 
                 displayCombat();
             }
 
             if (response.equals("The sculpture, as you now know, was just Copernicus Rex Verwirrtheit Theodore. The same red liquid from the floor streams from his eyes.") && !bossDead) {
-                frame.remove(panel1);
-                frame.remove(panel2);
+                gameFrame.remove(panel1);
+                gameFrame.remove(panel2);
 //                frame.remove(panel3);
-                frame.remove(panel3);
-                frame.remove(panel4);
+                gameFrame.remove(panel3);
+                gameFrame.remove(panel4);
                 displayCombat();
                 bossDead = true;
             }
@@ -218,9 +246,9 @@ public class MyJFrame extends JFrame implements ActionListener {
 
             rpsGame.setText(combat.playerTakesTurn(Integer.parseInt(numInput.getText())));
             if (combat.checkGameEndingStatus() == "Enemy won") {
-                frame.remove(promptPanel);
-                frame.remove(scrollPane);
-                frame.setVisible(true);
+                gameFrame.remove(promptPanel);
+                gameFrame.remove(scrollPane);
+                gameFrame.setVisible(true);
                 gameOverScreen();
                 if (clip != null) {
                     clip.stop();
@@ -230,23 +258,23 @@ public class MyJFrame extends JFrame implements ActionListener {
                 if (combat.bossTime) {
                     combat.bossTime = false;
                     board.totalEnemies = -1;
-                    frame.remove(promptPanel);
-                    frame.remove(scrollPane);
+                    gameFrame.remove(promptPanel);
+                    gameFrame.remove(scrollPane);
                     gameScreen(actions.execute(new Event(99, board.allItems.get("sculpture"))));
-                    frame.setVisible(true);
+                    gameFrame.setVisible(true);
                     if (clip != null) {
                         clip.stop();
                     }
 
                 } else {
-                    frame.remove(promptPanel);
-                    frame.remove(scrollPane);
+                    gameFrame.remove(promptPanel);
+                    gameFrame.remove(scrollPane);
                     if (board.totalEnemies < 0) {
                         gameScreen("Copernicus Rex Verwirrtheit Theodore has fallen in his own world! His magic cape has fallen with him, and you are one step closer to freedom!");
                     } else {
                         gameScreen("You defeated the monster!");
                     }
-                    frame.setVisible(true);
+                    gameFrame.setVisible(true);
                     if (clip != null) {
                         clip.stop();
                     }
@@ -259,8 +287,8 @@ public class MyJFrame extends JFrame implements ActionListener {
 
 
     private void gameScreen(String initialPrint) {
-        frame.getContentPane().setBackground(new Color(200, 200, 200));
-        frame.setSize(1500, 1525);
+        gameFrame.getContentPane().setBackground(new Color(200, 200, 200));
+        gameFrame.setSize(1500, 1525);
 
         textDisplay = new JTextArea();
         DefaultCaret caret = (DefaultCaret) textDisplay.getCaret();
@@ -312,12 +340,12 @@ public class MyJFrame extends JFrame implements ActionListener {
         panel4.setBackground(Color.black);
 
 
-        frame.add(panel1);
-        frame.add(panel2);
-        frame.add(panel4);
-        frame.setBackground(Color.black);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(1500, 1000);
+        gameFrame.add(panel1);
+        gameFrame.add(panel2);
+        gameFrame.add(panel4);
+        gameFrame.setBackground(Color.black);
+        gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        gameFrame.setSize(1500, 1000);
         if (!calledOnce) {
             textField.addActionListener(this);
             calledOnce = true;
@@ -325,7 +353,7 @@ public class MyJFrame extends JFrame implements ActionListener {
         }
         textField.requestFocusInWindow();
 
-        frame.setVisible(true);
+        gameFrame.setVisible(true);
     }
 
 
@@ -381,11 +409,11 @@ public class MyJFrame extends JFrame implements ActionListener {
         promptPanel.add(numInput);
         promptPanel.setBackground(new Color(1, 11, 12));
 
-        frame.add(scrollPane, BorderLayout.NORTH);
-        frame.add(promptPanel);
-        frame.setVisible(true);
-        frame.setSize(700, 500);
-        frame.setResizable(false);
+        gameFrame.add(scrollPane, BorderLayout.NORTH);
+        gameFrame.add(promptPanel);
+        gameFrame.setVisible(true);
+        gameFrame.setSize(700, 500);
+        gameFrame.setResizable(false);
         combat.startCombat(player, board.getCurrentRoom(), board);
         numInput.addActionListener(this);
     }
@@ -393,16 +421,16 @@ public class MyJFrame extends JFrame implements ActionListener {
 
 
     public void gameOverScreen() {
-        frame.remove(panel1);
-        frame.remove(panel2);
+        gameFrame.remove(panel1);
+        gameFrame.remove(panel2);
 
         ImageIcon lost = new ImageIcon(getClass().getResource("over.png"));
 
         JLabel imgLabel = new JLabel(lost);
         add(imgLabel);
 
-        frame.add(imgLabel);
-        frame.setVisible(true);
+        gameFrame.add(imgLabel);
+        gameFrame.setVisible(true);
 
     }
 
@@ -428,10 +456,10 @@ public class MyJFrame extends JFrame implements ActionListener {
         pane.add(winTextArea, BorderLayout.CENTER);
         pane.setBackground(new Color(175, 68, 37));
 
-        frame.add(pane);
-        frame.setSize(700, 600);
-        frame.setVisible(true);
-        frame.setResizable(false);
+        gameFrame.add(pane);
+        gameFrame.setSize(700, 600);
+        gameFrame.setVisible(true);
+        gameFrame.setResizable(false);
     }
 
 }
