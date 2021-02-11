@@ -5,6 +5,8 @@ package org.lizard;
 
 import org.lizard.constants.GameInformation;
 import org.lizard.util.Music;
+import org.lizard.util.Screen;
+
 import javax.imageio.ImageIO;
 import javax.sound.sampled.*;
 import javax.swing.*;
@@ -75,13 +77,12 @@ public class MyJFrame extends JFrame implements ActionListener {
 
         //button to play the game
         enterGame = new JButton("Enter Game");
-        // Get the screen size's dimensions
-        Dimension playerScreenDimensions = Toolkit.getDefaultToolkit().getScreenSize();
+
         int buttonWidth = 200;
         int buttonHeight = 60;
         // Subtract width and height so we account for the button itself
-        int xCoordinate = (int) ((playerScreenDimensions.getWidth() - buttonWidth) / 2);
-        int yCoordinate = (int) ((playerScreenDimensions.getHeight() - buttonHeight) / 2);
+        int xCoordinate =  (Screen.WIDTH - buttonWidth) / 2;
+        int yCoordinate =  (Screen.HEIGHT - buttonHeight) / 2;
         // Set the button's properties
         enterGame.setBounds(xCoordinate, yCoordinate, buttonWidth, buttonHeight);
         enterGame.addActionListener(this);
@@ -219,14 +220,15 @@ public class MyJFrame extends JFrame implements ActionListener {
         }
         if(e.getSource()==enterGame){
 //            gameScreen(Story.introduction()); //shows main game
-            frame.remove(titlePanel);
-            frame.remove(imageLabel);
-            frame.remove(enterGame);
+            // Remove components from earlier
+            frame.getContentPane().removeAll();
+            frame.repaint();
+
             createGameView();
 //            Music.playMusic("princeofdarkness.wav");
 
             mapPanel = new MapView(board.rooms, board.getCurrentRoom().getName());
-            mapPanel.setBounds(100,40,1000,800);
+            mapPanel.setBounds(100,40,1000,Screen.HEIGHT);
 
             frame.add(mapPanel);
             frame.repaint();
