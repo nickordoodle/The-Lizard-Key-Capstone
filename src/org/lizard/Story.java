@@ -1,5 +1,8 @@
 package org.lizard;
 
+// Static / singleton pattern type of class
+// Contains hard coded text required for
+// the story of the game
 class Story {
     static String introduction() {
         return "Like a dream, your thoughts carry you to an unknown universe. Four bare walls keep you as a prisoner to an overly bright room with no windows. " +
@@ -14,13 +17,13 @@ class Story {
     }
 
     static String howToPlay() {
-        return "\n" +"\n" +"\n" +"\n" +"\n" +"\n" +
+        return "\n" + "\n" + "\n" + "\n" + "\n" + "\n" +
                 "How to Play: \n" +
                 "\n" +
                 "Look for clues, and don't be afraid to explore!\n" +
                 "To perform an action, type your command in the text box and hit enter.\n" +
                 "\n" +
-                "Examples of possible commands are: \n"  +
+                "Examples of possible commands are: \n" +
                 "\n" +
                 "'rules' - to see instructions.\n" +
                 "\n" +
@@ -48,7 +51,7 @@ class Story {
                 "Look for clues, and don't be afraid to explore!\n" +
                 "To perform an action, type your command in the text box and hit enter.\n" +
                 "\n" +
-                "Examples of possible commands are: \n"  +
+                "Examples of possible commands are: \n" +
                 "\n" +
                 "'rules' - to see instructions.\n" +
                 "\n" +

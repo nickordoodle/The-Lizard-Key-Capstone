@@ -23,6 +23,11 @@ public class Board {
         createMap();
         addToVisitedRooms("keyRoom");
     }
+
+    public Map<String, Item> getAllItems(){
+        return this.allItems;
+    }
+
     public void addToVisitedRooms(String roomNombre) {
         switch (roomNombre) {
             case "floatingRoom":
@@ -104,7 +109,8 @@ public class Board {
                 rooms[5][4] = "Secret Passage";
         }
     }
-    private void createMap(){
+
+    private void createMap() {
         // Call XMLParser to gain access to a nodeList of all the rooms in the XML file
         NodeList nodeList = XMLParser("xml/Rooms.xml", "room");
         // Create a for loop to go the length of the nodeList
@@ -112,7 +118,7 @@ public class Board {
             Node node = nodeList.item(itr);
             if (node.getNodeType() == Node.ELEMENT_NODE) {
                 // Create a way to hold the exits for each room before placing them in allExits
-                Map<String,String> exits = new HashMap<>();
+                Map<String, String> exits = new HashMap<>();
                 Element eElement = (Element) node;
 
                 // Gain and save all relevant information needed to create a Room class object
@@ -127,7 +133,7 @@ public class Board {
                 room.setRoomDescription(roomDescription);
 
                 // List of all of the possible locked paths in this Room class object
-                List<Map<String, String>> locks  = new ArrayList<>();
+                List<Map<String, String>> locks = new ArrayList<>();
 
 
                 // Gain all exits for this particular room and save them in exits
@@ -164,13 +170,13 @@ public class Board {
     public String changeCurrentRoom(String direction) {
         Map<String, Room> exits = currentRoom.getExits();
         Lock lock = currentRoom.getLock(direction);
-        if(lock != null) {
-            if((currentRoom.getName().equals("treasureRoom") && direction.equals("west"))||currentRoom.getName().equals("river") && direction.equals("east")) {
+        if (lock != null) {
+            if ((currentRoom.getName().equals("treasureRoom") && direction.equals("west")) || currentRoom.getName().equals("river") && direction.equals("east")) {
                 return "You'll die if you try to cross the river like that.";
             }
             return "Seems to be locked.";
         }
-        if(exits.containsKey(direction)){
+        if (exits.containsKey(direction)) {
             currentRoom = exits.get(direction);
             addToVisitedRooms(currentRoom.getName());
             return ("You have entered the " + currentRoom.getName() + "\n" + currentRoom.getRoomDescription());
@@ -181,7 +187,7 @@ public class Board {
 
     }
 
-    private NodeList XMLParser (String pathName, String tagName) {
+    private NodeList XMLParser(String pathName, String tagName) {
         NodeList nodeList;
         try {
             // Creating a constructor of file class and parsing an XML file
@@ -194,8 +200,7 @@ public class Board {
             doc.getDocumentElement().normalize();
             nodeList = doc.getElementsByTagName(tagName);
             return nodeList;
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
@@ -223,7 +228,7 @@ public class Board {
     }
 
 
-    private void addItemsToRooms () {
+    private void addItemsToRooms() {
 
         NodeList nodeList = XMLParser("xml/Items.xml", "item");
         // Iterate over each item
@@ -254,7 +259,7 @@ public class Board {
                     allRooms.get(roomName).addItemToRoom(roomItem);
                 } else {
                     GameDictionary.Noun noun;
-                    if(commandDirection == "") {
+                    if (commandDirection == "") {
                         noun = allItems.get(lockKey);
                     } else {
                         noun = directions.getDirection(commandDirection);
@@ -291,6 +296,7 @@ public class Board {
             }
         }
     }
+
     public boolean enemyDied() {
         totalEnemies--;
         return totalEnemies == 1;

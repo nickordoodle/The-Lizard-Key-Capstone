@@ -6,7 +6,8 @@ class Directions {
     public final Direction east = new Direction("east");
     public final Direction west = new Direction("west");
 
-    public Directions() { }
+    public Directions() {
+    }
 
     public Direction getDirection(String direction) {
         switch (direction) {
@@ -30,6 +31,7 @@ class Directions {
             super(direction);
             this.direction = direction;
         }
+
         public String getDirection() {
             return direction;
         }

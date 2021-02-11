@@ -5,11 +5,11 @@ public class Enemy {
     String enemyName;
     int enemyHP = 50;
 
-    Enemy(String enemyName){
+    Enemy(String enemyName) {
         this.enemyName = enemyName;
     }
 
-    Enemy(String enemyName, int enemyHP){
+    Enemy(String enemyName, int enemyHP) {
         this.enemyName = enemyName;
         this.enemyHP = enemyHP;
     }
