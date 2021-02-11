@@ -71,13 +71,14 @@ public class MyJFrame extends JFrame implements ActionListener {
         frame.setContentPane(new JLabel(imageIcon));
         imageLabel = new JLabel(new ImageIcon(img));
         frame.setBackground(Color.black);
-        frame.add(imageLabel);
+
 
         //button to play the game
         enterGame = new JButton("Enter Game");
-        enterGame.setBounds(680,480,120,40);
+        enterGame.setAlignmentX(CENTER_ALIGNMENT);
+        enterGame.setAlignmentY(CENTER_ALIGNMENT);
         enterGame.addActionListener(this);
-        frame.add(enterGame);
+
 
         //button to play the game
         quitGame = new JButton("Quit Game");
@@ -111,12 +112,12 @@ public class MyJFrame extends JFrame implements ActionListener {
         //add text to the instructions panel
         titlePanel.add(welcome,BorderLayout.CENTER);
         instructionsPanel.add(instructionsTxt);
+        frame.add(enterGame);
 
         //add title and image to main frame.
         frame.add(titlePanel);
         frame.add(imageLabel);
         //frame.add(instructionsPanel);
-
         frame.setVisible(true);
 
     }
@@ -128,6 +129,7 @@ public class MyJFrame extends JFrame implements ActionListener {
         gameFrame.setTitle(GameInformation.TITLE);
         // Set frame to full screen via modifying its extended state
         gameFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        gameFrame.setLocationRelativeTo(null);
         gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         return gameFrame;
     }
