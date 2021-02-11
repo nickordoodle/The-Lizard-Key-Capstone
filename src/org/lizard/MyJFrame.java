@@ -3,6 +3,7 @@
 
 package org.lizard;
 
+import org.lizard.constants.GameInformation;
 import org.lizard.util.Music;
 import javax.imageio.ImageIO;
 import javax.sound.sampled.*;
@@ -55,11 +56,7 @@ public class MyJFrame extends JFrame implements ActionListener {
         new Funsies("where", "idk figure it out");
         new Funsies("what", "idk figure it out");
 
-        frame = new JFrame();
-        frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        frame.setTitle("Lizard Key");
-        frame.setSize(1500,1525);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame = createGameJFrame();
 
         //create background image
         BufferedImage img = null;
@@ -122,6 +119,17 @@ public class MyJFrame extends JFrame implements ActionListener {
 
         frame.setVisible(true);
 
+    }
+
+    // Creates the initial JFrame and sets basic properties
+    private JFrame createGameJFrame() {
+        JFrame gameFrame = new JFrame();
+        // Set title and use String text from GameInformation Constants
+        gameFrame.setTitle(GameInformation.TITLE);
+        // Set frame to full screen via modifying its extended state
+        gameFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        return gameFrame;
     }
 
     public String decision(List<GameDictionary.Noun> nounList, Command command) {
@@ -263,6 +271,7 @@ public class MyJFrame extends JFrame implements ActionListener {
             mapPanel.setVisible(true);
             frame.setVisible(true);
 
+            // Winning condition check - player has winning key
             if(player.hasWinningKey && board.getCurrentRoom().getName().equals("keyRoom")){
 //                frame.remove(instructionsPanel);
 //                frame.remove(inputPanel);
