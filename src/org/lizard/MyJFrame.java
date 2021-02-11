@@ -75,9 +75,17 @@ public class MyJFrame extends JFrame implements ActionListener {
 
         //button to play the game
         enterGame = new JButton("Enter Game");
-        enterGame.setAlignmentX(CENTER_ALIGNMENT);
-        enterGame.setAlignmentY(CENTER_ALIGNMENT);
+        // Get the screen size's dimensions
+        Dimension playerScreenDimensions = Toolkit.getDefaultToolkit().getScreenSize();
+        int buttonWidth = 200;
+        int buttonHeight = 60;
+        // Subtract width and height so we account for the button itself
+        int xCoordinate = (int) ((playerScreenDimensions.getWidth() - buttonWidth) / 2);
+        int yCoordinate = (int) ((playerScreenDimensions.getHeight() - buttonHeight) / 2);
+        // Set the button's properties
+        enterGame.setBounds(xCoordinate, yCoordinate, buttonWidth, buttonHeight);
         enterGame.addActionListener(this);
+
 
 
         //button to play the game
@@ -112,12 +120,13 @@ public class MyJFrame extends JFrame implements ActionListener {
         //add text to the instructions panel
         titlePanel.add(welcome,BorderLayout.CENTER);
         instructionsPanel.add(instructionsTxt);
-        frame.add(enterGame);
 
-        //add title and image to main frame.
+        // Add components to the frame
         frame.add(titlePanel);
+        frame.add(enterGame);
         frame.add(imageLabel);
         //frame.add(instructionsPanel);
+        // Make the frame visible to the player
         frame.setVisible(true);
 
     }
@@ -129,7 +138,6 @@ public class MyJFrame extends JFrame implements ActionListener {
         gameFrame.setTitle(GameInformation.TITLE);
         // Set frame to full screen via modifying its extended state
         gameFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        gameFrame.setLocationRelativeTo(null);
         gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         return gameFrame;
     }
