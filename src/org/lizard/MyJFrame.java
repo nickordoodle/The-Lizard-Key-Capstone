@@ -3,7 +3,10 @@
 
 package org.lizard;
 
+import org.lizard.constants.GameInformation;
 import org.lizard.util.Music;
+import org.lizard.util.Screen;
+
 import javax.imageio.ImageIO;
 import javax.sound.sampled.*;
 import javax.swing.*;
@@ -55,11 +58,7 @@ public class MyJFrame extends JFrame implements ActionListener {
         new Funsies("where", "idk figure it out");
         new Funsies("what", "idk figure it out");
 
-        frame = new JFrame();
-        frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        frame.setTitle("Lizard Key");
-        frame.setSize(1500,1525);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame = createGameJFrame();
 
         //create background image
         BufferedImage img = null;
@@ -74,13 +73,21 @@ public class MyJFrame extends JFrame implements ActionListener {
         frame.setContentPane(new JLabel(imageIcon));
         imageLabel = new JLabel(new ImageIcon(img));
         frame.setBackground(Color.black);
-        frame.add(imageLabel);
+
 
         //button to play the game
         enterGame = new JButton("Enter Game");
-        enterGame.setBounds(680,480,120,40);
+
+        int buttonWidth = 200;
+        int buttonHeight = 60;
+        // Subtract width and height so we account for the button itself
+        int xCoordinate =  (Screen.WIDTH - buttonWidth) / 2;
+        int yCoordinate =  (Screen.HEIGHT - buttonHeight) / 2;
+        // Set the button's properties
+        enterGame.setBounds(xCoordinate, yCoordinate, buttonWidth, buttonHeight);
         enterGame.addActionListener(this);
-        frame.add(enterGame);
+
+
 
         //button to play the game
         quitGame = new JButton("Quit Game");
@@ -115,13 +122,25 @@ public class MyJFrame extends JFrame implements ActionListener {
         titlePanel.add(welcome,BorderLayout.CENTER);
         instructionsPanel.add(instructionsTxt);
 
-        //add title and image to main frame.
+        // Add components to the frame
         frame.add(titlePanel);
+        frame.add(enterGame);
         frame.add(imageLabel);
         //frame.add(instructionsPanel);
-
+        // Make the frame visible to the player
         frame.setVisible(true);
 
+    }
+
+    // Creates the initial JFrame and sets basic properties
+    private JFrame createGameJFrame() {
+        JFrame gameFrame = new JFrame();
+        // Set title and use String text from GameInformation Constants
+        gameFrame.setTitle(GameInformation.TITLE);
+        // Set frame to full screen via modifying its extended state
+        gameFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        return gameFrame;
     }
 
     public String decision(List<GameDictionary.Noun> nounList, Command command) {
@@ -201,14 +220,15 @@ public class MyJFrame extends JFrame implements ActionListener {
         }
         if(e.getSource()==enterGame){
 //            gameScreen(Story.introduction()); //shows main game
-            frame.remove(titlePanel);
-            frame.remove(imageLabel);
-            frame.remove(enterGame);
+            // Remove components from earlier
+            frame.getContentPane().removeAll();
+            frame.repaint();
+
             createGameView();
 //            Music.playMusic("princeofdarkness.wav");
 
             mapPanel = new MapView(board.rooms, board.getCurrentRoom().getName());
-            mapPanel.setBounds(100,40,1000,800);
+            mapPanel.setBounds(100,40,1000,Screen.HEIGHT);
 
             frame.add(mapPanel);
             frame.repaint();
@@ -263,6 +283,7 @@ public class MyJFrame extends JFrame implements ActionListener {
             mapPanel.setVisible(true);
             frame.setVisible(true);
 
+            // Winning condition check - player has winning key
             if(player.hasWinningKey && board.getCurrentRoom().getName().equals("keyRoom")){
 //                frame.remove(instructionsPanel);
 //                frame.remove(inputPanel);
