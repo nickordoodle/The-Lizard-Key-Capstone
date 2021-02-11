@@ -40,7 +40,7 @@ public class MapView extends JPanel {
 
                 }
                 g.fillRect(i * size + 350, j * size + 430, size, size);
-                g.setColor(Color.BLACK);
+                g.setColor(Color.orange);
                 g.drawRect(i * size + 350, j * size + 430, size, size);
                 String joined = null;
                 if (rooms[i][j] != null) {
