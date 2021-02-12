@@ -110,7 +110,7 @@ public class MyJFrame extends JFrame implements ActionListener {
 
         //instructions text
         instructionsTxt = new JTextArea();
-        instructionsTxt.setText(Story.howToPlay());
+        instructionsTxt.setText(board.howToPlayInGame());
         instructionsTxt.setLineWrap(true);
         instructionsTxt.setWrapStyleWord(true);
         instructionsTxt.setForeground(new Color(0, 60, 70));//light blue
@@ -209,7 +209,7 @@ public class MyJFrame extends JFrame implements ActionListener {
         frame.add(quitGame);
         titlePanel.setBounds(50,50, 450,80);
         frame.add(titlePanel);
-        gameScreen(Story.introduction());
+        gameScreen(board.introduction());
     }
 
     @Override
