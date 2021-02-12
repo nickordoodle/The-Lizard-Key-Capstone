@@ -74,7 +74,6 @@ public class MyJFrame extends JFrame implements ActionListener {
         imageLabel = new JLabel(new ImageIcon(img));
         frame.setBackground(Color.black);
 
-
         //button to play the game
         enterGame = new JButton("Enter Game");
 
@@ -86,8 +85,6 @@ public class MyJFrame extends JFrame implements ActionListener {
         // Set the button's properties
         enterGame.setBounds(xCoordinate, yCoordinate, buttonWidth, buttonHeight);
         enterGame.addActionListener(this);
-
-
 
         //button to play the game
         quitGame = new JButton("Quit Game");
@@ -138,17 +135,18 @@ public class MyJFrame extends JFrame implements ActionListener {
         // Set title and use String text from GameInformation Constants
         gameFrame.setTitle(GameInformation.TITLE);
         // Set frame to full screen via modifying its extended state
-        gameFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        gameFrame.setSize(1600,1060);
+        gameFrame.setResizable(false);
         gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         return gameFrame;
     }
 
     public String decision(List<GameDictionary.Noun> nounList, Command command) {
-        desicionField.setPreferredSize(new Dimension(500,100));
+        desicionField.setPreferredSize(new Dimension(250,40));
         desicionField.setFont(new Font("Consolas", Font.BOLD, 15));
-        desicionField.setForeground(Color.red);
-        desicionField.setBackground(Color.blue);
-        desicionField.setCaretColor(Color.green);
+        desicionField.setForeground(Color.blue);
+        desicionField.setBackground(Color.white);
+        desicionField.setCaretColor(Color.blue);
 
         inputPanel.remove(textField);
         frame.repaint();
@@ -223,6 +221,7 @@ public class MyJFrame extends JFrame implements ActionListener {
             // Remove components from earlier
             frame.getContentPane().removeAll();
             frame.repaint();
+            frame.revalidate();
 
             createGameView();
 //            Music.playMusic("princeofdarkness.wav");
@@ -231,8 +230,6 @@ public class MyJFrame extends JFrame implements ActionListener {
             mapPanel.setBounds(100,40,1000,Screen.HEIGHT);
 
             frame.add(mapPanel);
-            frame.repaint();
-            frame.revalidate();
 
         }
         if(e.getSource()==desicionField) {
@@ -249,23 +246,23 @@ public class MyJFrame extends JFrame implements ActionListener {
 
 //                    frame.remove(instructionsPanel);
                     frame.remove(inputPanel);
-                    frame.remove(mapPanel);
+//                    frame.remove(mapPanel);
                     frame.repaint();
                     frame.revalidate();
 
                     gameScreen(actions.execute(command));
-                    frame.setVisible(true);
+//                    frame.setVisible(true);//?? why
                     return;
                 }
             }
-            frame.remove(instructionsPanel);
+//            frame.remove(instructionsPanel);
             frame.remove(inputPanel);
-            frame.remove(mapPanel);
+//            frame.remove(mapPanel);
             frame.repaint();
             frame.revalidate();
 
             gameScreen("you gotta be specific.");
-            frame.setVisible(true);
+//            frame.setVisible(true);??
         }
         if(e.getSource()==textField){
             result = textField.getText();
@@ -273,23 +270,22 @@ public class MyJFrame extends JFrame implements ActionListener {
             String response = actions.execute(command);
             mainStoryText.setText(response);
 
+            //this code shows map with updted orange oval.
             frame.remove(mapPanel);
             frame.repaint();
             frame.revalidate();
 
             mapPanel = new MapView(board.rooms, board.getCurrentRoom().getName());
-            mapPanel.setBounds(100,40,1000,800);
+            mapPanel.setBounds(100,40,1000,Screen.HEIGHT);
             frame.add(mapPanel);
-            mapPanel.setVisible(true);
-            frame.setVisible(true);
 
             // Winning condition check - player has winning key
             if(player.hasWinningKey && board.getCurrentRoom().getName().equals("keyRoom")){
 //                frame.remove(instructionsPanel);
 //                frame.remove(inputPanel);
-                frame.remove(mapPanel);
-                frame.repaint();
-                frame.revalidate();
+//                frame.remove(mapPanel);
+//                frame.repaint();
+//                frame.revalidate();
 
                 winScreen();
             }
@@ -297,7 +293,7 @@ public class MyJFrame extends JFrame implements ActionListener {
             if(board.getCurrentRoom().getEnemy() != null && !board.getCurrentRoom().getEnemy().enemyName.equals("Copernicus Rex Verwirrtheit Theodore") ){
 //                frame.remove(instructionsPanel);
                 frame.remove(inputPanel);
-                frame.remove(mapPanel);
+//                frame.remove(mapPanel);
                 frame.repaint();
                 frame.revalidate();
 
@@ -306,7 +302,7 @@ public class MyJFrame extends JFrame implements ActionListener {
 
             if(response.equals("The sculpture, as you now know, was just Copernicus Rex Verwirrtheit Theodore. The same red liquid from the floor streams from his eyes.") && !bossDead) {
                 frame.remove(inputPanel);
-                frame.remove(mapPanel);
+//                frame.remove(mapPanel);
                 frame.repaint();
                 frame.revalidate();
 
@@ -420,9 +416,6 @@ public class MyJFrame extends JFrame implements ActionListener {
         frame.add(storyPanel);
         frame.add(inputPanel);
 
-//        frame.setBackground(Color.blue);//
-//        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//        frame.setSize(1500,1000);
         if (!calledOnce) {
             textField.addActionListener(this);
             calledOnce = true;
