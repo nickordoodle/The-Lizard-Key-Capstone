@@ -1,19 +1,17 @@
 package org.lizard;
 
-import javax.imageio.ImageIO;
+import org.lizard.util.Screen;
+
 import javax.swing.*;
 import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 import java.util.Arrays;
 
 public class MapView extends JPanel {
-    int rows = 8;
-    int cols = 8;
-    int size = 80;
+    int numOfCols = 8;
+    int numOfRows = 6;
+    private final int size = Screen.MAP_SQUARE_SIZE;
     String currentRoom = null;
-    String[][] rooms = new String[rows][cols];
+    String[][] rooms = new String[numOfCols][numOfRows];
 
     MapView(String[][] rooms, String currentRoom) {
         this.rooms = rooms;
@@ -26,9 +24,10 @@ public class MapView extends JPanel {
     public void paint(Graphics g) {
 
 
-        g.fillRect(size, size, size * rows, size * cols);
-        for (int i = 0; i < 8; i += 1) {
-            for (int j = 0; j < 8; j += 1) {
+        g.fillRect(size, size, size * numOfCols, size * numOfRows);
+        for (int i = 0; i < numOfCols; i += 1) {
+
+            for (int j = 0; j < numOfRows; j += 1) {
                 String current;
                 if (rooms[i][j] == null) {
                     g.setColor(Color.black);

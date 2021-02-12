@@ -16,4 +16,8 @@ public class Screen {
     public static final int CENTER_HORIZONTAL = WIDTH / 2;
 
     public static final int CENTER_VERTICAL = HEIGHT / 2;
+
+    public static final int MAP_SQUARE_SIZE = 80;
+
+
 }
