@@ -188,7 +188,7 @@ public class MyJFrame extends JFrame implements ActionListener {
         imageLabel.setLayout(null);
         imageLabel.setBackground(Color.black);
         imageLabel.setBounds(300,0, 990,135);
-        frame.add(imageLabel); //shows correct location but doesn't remove img
+//        frame.add(imageLabel); //shows correct location but doesn't remove img
 
         img = null;
         try {
@@ -202,7 +202,7 @@ public class MyJFrame extends JFrame implements ActionListener {
         imageLabel.setLayout(null);
         imageLabel.setBackground(Color.black);
         imageLabel.setBounds(30,260, 420,500);
-        frame.add(imageLabel); //shows correct location but doesn't remove img
+//        frame.add(imageLabel); //shows correct location but doesn't remove img
 
         frame.setBackground(Color.black);
 
@@ -222,7 +222,6 @@ public class MyJFrame extends JFrame implements ActionListener {
 //            gameScreen(Story.introduction()); //shows main game
             // Remove components from earlier
             frame.getContentPane().removeAll();
-            frame.repaint();
 
             createGameView();
 //            Music.playMusic("princeofdarkness.wav");
@@ -231,8 +230,8 @@ public class MyJFrame extends JFrame implements ActionListener {
             mapPanel.setBounds(100,40,1000,Screen.HEIGHT);
 
             frame.add(mapPanel);
-            frame.repaint();
             frame.revalidate();
+            frame.repaint();
 
         }
         if(e.getSource()==desicionField) {
