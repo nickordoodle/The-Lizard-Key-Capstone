@@ -20,6 +20,7 @@ public class GameDictionary {
     private void setVerbs() {
         verbs.put("grab", 1);
         verbs.put("take", 1);
+        verbs.put("get", 1);
         verbs.put("go", 2);
         verbs.put("move", 2);
         verbs.put("look", 3);
@@ -191,5 +192,10 @@ public class GameDictionary {
         }
     }
 
+    public static void main(String[] args) {
+        for (String s : gameDictionary.verbs.keySet()) {
+            System.out.println(s);
+        }
+    }
 
 }
