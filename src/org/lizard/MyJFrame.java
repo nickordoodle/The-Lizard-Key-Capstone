@@ -189,10 +189,10 @@ public class MyJFrame extends JFrame implements ActionListener {
         instructionsTxt.setText(board.howToPlayInGame());
         instructionsTxt.setLineWrap(true);
         instructionsTxt.setWrapStyleWord(true);
-        instructionsTxt.setForeground(Color.white);
+        instructionsTxt.setForeground(Color.black);
         instructionsTxt.setFont(new Font("Comic Sans", Font.BOLD, 15));
         instructionsTxt.setEditable(false);
-        instructionsTxt.setBackground(Color.black);
+        instructionsTxt.setBackground(Color.white);
 
         //makes story text scrollable
         JScrollPane scrollPane = new JScrollPane(instructionsTxt);
@@ -251,7 +251,9 @@ public class MyJFrame extends JFrame implements ActionListener {
         }
         if (e.getSource() == helpBtn) {
             createHelpWindow();
-//            winScreen();
+            winScreen(); //uncomment to test win screen
+//            displayCombat(); //uncomment to test combat screen
+//            gameOverScreen(); //uncomment to test gameover screen
         }
         if (e.getSource() == enterGame) {
 //            gameScreen(Story.introduction()); //shows main game
@@ -320,12 +322,6 @@ public class MyJFrame extends JFrame implements ActionListener {
 
             // Winning condition check - player has winning key
             if (player.hasWinningKey && board.getCurrentRoom().getName().equals("keyRoom")) {
-//                frame.remove(instructionsPanel);
-//                frame.remove(inputPanel);
-//                frame.remove(mapPanel);
-//                frame.repaint();
-//                frame.revalidate();
-
                 winScreen();
             }
 
@@ -466,6 +462,15 @@ public class MyJFrame extends JFrame implements ActionListener {
 
     //fighting scene with the enemy.
     private void displayCombat() {
+        JFrame combatWindow = new JFrame(); //initiate game over window
+
+        //set up combat window
+        combatWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        combatWindow.setSize(800, 600);
+        combatWindow.setVisible(true); //makes window appear on screen
+//        combatWindow.setLayout(null);
+        combatWindow.setLocation(480, 200);
+
         Music.playMusic(soundName);
 
         rpsGame = new JTextArea();
@@ -479,7 +484,7 @@ public class MyJFrame extends JFrame implements ActionListener {
                     "\n3: SCISSOR");
         } else {
             rpsGame.setText("You have come face to face with a monster!" +
-                    "To defeat it, you must win in combat... or rock, paper, scissors." +
+                    "To defeat it, you must win in combat... of rock, paper, scissors." +
                     "\nPlease choose from the following numbers:" +
                     "\n1: ROCK" +
                     "\n2: PAPER" +
@@ -492,16 +497,16 @@ public class MyJFrame extends JFrame implements ActionListener {
         rpsGame.setLineWrap(true);
         rpsGame.setWrapStyleWord(true);
         rpsGame.setBorder(BorderFactory.createBevelBorder(1));
-        rpsGame.setForeground(Color.black);
-        rpsGame.setBackground(Color.CYAN);
+        rpsGame.setForeground(Color.orange);
+        rpsGame.setBackground(Color.darkGray);
         rpsGame.setEditable(false);
 
         numInput = new JTextField();
-        numInput.setPreferredSize(new Dimension(500, 100));
+        numInput.setPreferredSize(new Dimension(500, 50));
         numInput.setBackground(Color.white);
 
         scrollPane = new JScrollPane(rpsGame);
-        scrollPane.setPreferredSize(new Dimension(500, 250));
+        scrollPane.setPreferredSize(new Dimension(500, 200));
         scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 
         JPanel panel = new JPanel();
@@ -516,11 +521,18 @@ public class MyJFrame extends JFrame implements ActionListener {
         promptPanel.add(numInput);
         promptPanel.setBackground(Color.blue);
 
-        frame.add(scrollPane, BorderLayout.NORTH);
-        frame.add(promptPanel);
-        frame.setVisible(true);
-        frame.setSize(700, 500);
-        frame.setResizable(false);
+//        //win screen image
+//        winImgPanel = new JPanel();
+//        winImgPanel.setBackground(Color.black);
+//        winImgPanel.setBounds(0, 300, 800, 400);
+
+        JLabel imgLabel = new JLabel();
+        imgLabel.setIcon(new ImageIcon("RPS.png"));
+        imgLabel.setLayout(new FlowLayout(FlowLayout.CENTER));
+        promptPanel.add(imageLabel);
+
+        combatWindow.add(scrollPane, BorderLayout.NORTH);
+        combatWindow.add(promptPanel);
         combat.startCombat(player, board.getCurrentRoom(), board);
         numInput.addActionListener(this);
     }
@@ -538,9 +550,7 @@ public class MyJFrame extends JFrame implements ActionListener {
         winScreen.setSize(800, 600);
         winScreen.setLocation(480, 200);
         winScreen.setVisible(true);
-//        winScreen.setLayout(null); //disables default layout
-        winScreen.setBackground(Color.black);
-
+        winScreen.setLayout(null); //disables default layout
 
         //win window container
         winContainer = winScreen.getContentPane(); //container inside the window with help content
@@ -555,7 +565,8 @@ public class MyJFrame extends JFrame implements ActionListener {
 
         //victory text panel
         winTextPanel = new JPanel();
-        winTextPanel.setBounds(50, 90, 500, 200);
+        winTextPanel.setBounds(50, 80, 500, 190);
+        winTextPanel.setBackground(Color.black);
 
         //victory text
         winTextArea = new JTextArea("You use the lizard key on the door to exit." +
@@ -566,6 +577,7 @@ public class MyJFrame extends JFrame implements ActionListener {
         winTextArea.setLineWrap(true);
         winTextArea.setWrapStyleWord(true);
         winTextArea.setForeground(Color.white);
+        winTextArea.setBounds(50, 80, 500, 190);
         winTextArea.setFont(new Font("Comic Sans", Font.BOLD, 15));
         winTextArea.setEditable(false);
         winTextArea.setBackground(Color.black);
@@ -575,17 +587,13 @@ public class MyJFrame extends JFrame implements ActionListener {
         //win screen image
         winImgPanel = new JPanel();
         winImgPanel.setBackground(Color.black);
-        winImgPanel.setBounds(0, 300, 800, 400);
+        winImgPanel.setBounds(0, 380, 800, 400);
 
         JLabel imgLabel = new JLabel();
         imgLabel.setIcon(new ImageIcon("key.png"));
         imgLabel.setLayout(new FlowLayout(FlowLayout.CENTER));
         winImgPanel.add(imageLabel);
         winContainer.add(winImgPanel);
-
-        //add scrollable text to the instructions panel then to the main container.
-//        winContainer.add(winTextPanel);
-//        winContainer.add(winImgPanel);
     }
 
     public void gameOverScreen() {
