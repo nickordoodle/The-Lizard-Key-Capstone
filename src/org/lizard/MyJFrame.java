@@ -252,6 +252,7 @@ public class MyJFrame extends JFrame implements ActionListener {
         if (e.getSource() == helpBtn) {
             createHelpWindow();
 //            winScreen();
+            displayCombat();
         }
         if (e.getSource() == enterGame) {
 //            gameScreen(Story.introduction()); //shows main game
@@ -466,6 +467,15 @@ public class MyJFrame extends JFrame implements ActionListener {
 
     //fighting scene with the enemy.
     private void displayCombat() {
+        JFrame combatWindow = new JFrame(); //initiate game over window
+
+        //set up combat window
+        combatWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        combatWindow.setSize(800, 600);
+        combatWindow.setVisible(true); //makes window appear on screen
+//        combatWindow.setLayout(null);
+        combatWindow.setLocation(480, 200);
+
         Music.playMusic(soundName);
 
         rpsGame = new JTextArea();
@@ -479,7 +489,7 @@ public class MyJFrame extends JFrame implements ActionListener {
                     "\n3: SCISSOR");
         } else {
             rpsGame.setText("You have come face to face with a monster!" +
-                    "To defeat it, you must win in combat... or rock, paper, scissors." +
+                    "To defeat it, you must win in combat... of rock, paper, scissors." +
                     "\nPlease choose from the following numbers:" +
                     "\n1: ROCK" +
                     "\n2: PAPER" +
@@ -492,16 +502,16 @@ public class MyJFrame extends JFrame implements ActionListener {
         rpsGame.setLineWrap(true);
         rpsGame.setWrapStyleWord(true);
         rpsGame.setBorder(BorderFactory.createBevelBorder(1));
-        rpsGame.setForeground(Color.black);
-        rpsGame.setBackground(Color.CYAN);
+        rpsGame.setForeground(Color.orange);
+        rpsGame.setBackground(Color.darkGray);
         rpsGame.setEditable(false);
 
         numInput = new JTextField();
-        numInput.setPreferredSize(new Dimension(500, 100));
+        numInput.setPreferredSize(new Dimension(500, 50));
         numInput.setBackground(Color.white);
 
         scrollPane = new JScrollPane(rpsGame);
-        scrollPane.setPreferredSize(new Dimension(500, 250));
+        scrollPane.setPreferredSize(new Dimension(500, 200));
         scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 
         JPanel panel = new JPanel();
@@ -516,11 +526,18 @@ public class MyJFrame extends JFrame implements ActionListener {
         promptPanel.add(numInput);
         promptPanel.setBackground(Color.blue);
 
-        frame.add(scrollPane, BorderLayout.NORTH);
-        frame.add(promptPanel);
-        frame.setVisible(true);
-        frame.setSize(700, 500);
-        frame.setResizable(false);
+//        //win screen image
+//        winImgPanel = new JPanel();
+//        winImgPanel.setBackground(Color.black);
+//        winImgPanel.setBounds(0, 300, 800, 400);
+
+        JLabel imgLabel = new JLabel();
+        imgLabel.setIcon(new ImageIcon("RPS.png"));
+        imgLabel.setLayout(new FlowLayout(FlowLayout.CENTER));
+        promptPanel.add(imageLabel);
+
+        combatWindow.add(scrollPane, BorderLayout.NORTH);
+        combatWindow.add(promptPanel);
         combat.startCombat(player, board.getCurrentRoom(), board);
         numInput.addActionListener(this);
     }
