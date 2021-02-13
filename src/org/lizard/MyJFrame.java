@@ -186,7 +186,7 @@ public class MyJFrame extends JFrame implements ActionListener {
         imageLabel.setLayout(null);
         imageLabel.setBackground(Color.black);
         imageLabel.setBounds(300,0, 990,135);
-//        frame.add(imageLabel); //shows correct location but doesn't remove img
+        frame.add(imageLabel); //shows correct location but doesn't remove img
 
         img = null;
         try {
@@ -200,7 +200,7 @@ public class MyJFrame extends JFrame implements ActionListener {
         imageLabel.setLayout(null);
         imageLabel.setBackground(Color.black);
         imageLabel.setBounds(30,260, 420,500);
-//        frame.add(imageLabel); //shows correct location but doesn't remove img
+        frame.add(imageLabel); //shows correct location but doesn't remove img
 
         frame.setBackground(Color.black);
 
