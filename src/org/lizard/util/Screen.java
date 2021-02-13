@@ -4,7 +4,8 @@ import java.awt.*;
 
 public class Screen {
 
-    private Screen() {}
+    private Screen() {
+    }
 
     // Get the screen size's dimensions
     public static final Dimension SCREEN_DIMENSIONS = Toolkit.getDefaultToolkit().getScreenSize();
