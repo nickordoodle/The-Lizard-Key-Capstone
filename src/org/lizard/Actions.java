@@ -322,18 +322,18 @@ public class Actions {
         // in the game and gives them to player
         // NOTE this does not give the player
         // the lizard key
-        static String givePlayerAllKeysBesidesLizardKey(Player.Inventory inv, final Board board){
+        static String givePlayerAllKeysBesidesLizardKey(Player.Inventory inv, final Board board) {
             // Check for negative case and handle
-            if(inv == null || board == null){
+            if (inv == null || board == null) {
                 return "Oops! Cheat code get all keys besides lizard key did not work!";
             }
             Map<String, Item> allItems = board.getAllItems();
             // Iterate over the map entries
-            for (Map.Entry<String,Item> item : allItems.entrySet()){
+            for (Map.Entry<String, Item> item : allItems.entrySet()) {
                 Item currItem = item.getValue();
                 // Check if the item is a key but not the winning key
-                if(currItem.getName().contains("key")
-                && !currItem.getName().equals("lizard key")){
+                if (currItem.getName().contains("key")
+                        && !currItem.getName().equals("lizard key")) {
                     // Add to the player's inventory
                     inv.add(currItem);
                 }
@@ -343,29 +343,28 @@ public class Actions {
                     " of the keys in the game!!!";
         }
 
-        static String givePlayerSpecificItem(GameDictionary.Noun requestedItem, Player.Inventory inv, final Board board){
+        static String givePlayerSpecificItem(GameDictionary.Noun requestedItem, Player.Inventory inv, final Board board) {
 
             try {
                 // Get the name of the item
                 String itemName = requestedItem.getName();
                 Map<String, Item> allItems = board.getAllItems();
                 // Iterate over the map entries
-                for (Map.Entry<String,Item> item : allItems.entrySet()){
+                for (Map.Entry<String, Item> item : allItems.entrySet()) {
                     String currItemName = item.getValue().getName();
                     // Check if it is the requested item
-                    if(currItemName.contains(itemName)){
+                    if (currItemName.contains(itemName)) {
                         // Add to the player's inventory
                         inv.add(item.getValue());
                     }
                 }
-            } catch (NullPointerException e){
+            } catch (NullPointerException e) {
                 return "Oops! Cheat code get " + requestedItem + " item did not work! Try" +
                         " cheatcodeget <item>";
             }
 
             return (requestedItem.getName() + " added to inventory!");
         }
-
 
 
     }
