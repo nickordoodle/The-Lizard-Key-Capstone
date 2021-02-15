@@ -266,6 +266,7 @@ public class MyJFrame extends JFrame implements ActionListener {
             if(Music.isRunning()){
                 Music.stop();
             } else {
+                // Otherwise, play music form the specified track
                 Music.play("princeofdarkness.wav");
             }
 
@@ -278,7 +279,6 @@ public class MyJFrame extends JFrame implements ActionListener {
             frame.revalidate();
 
             createGameView();
-//            Music.playMusic("princeofdarkness.wav");
 
             mapPanel = new MapView(board.rooms, board.getCurrentRoom().getName());
             mapPanel.setBounds(100, 40, 1000, Screen.HEIGHT);
