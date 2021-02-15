@@ -29,9 +29,9 @@ public class MapView extends JPanel {
 
 
         g.fillRect(size, size, size * numOfCols, size * numOfRows);
-        for (int column = 0; column < numOfCols; column += 1) {
+        for (int column = 0; column < numOfCols; column++) {
 
-            for (int row = 0; row < numOfRows; row += 1) {
+            for (int row = 0; row < numOfRows; row++) {
                 String roomName;
                 if (rooms[column][row] == null) {
                     // Set undiscovered room properties and view
@@ -54,7 +54,7 @@ public class MapView extends JPanel {
 
                 }
 
-
+                // Draw orange outline for all boxes
                 g.setColor(Color.orange);
                 g.drawRect(column * size + 350, row * size + 430, size, size);
                 String joined = null;
