@@ -12,7 +12,7 @@ import java.util.Arrays;
 
 public class MapView extends JPanel {
     int numOfCols = 8;
-    int numOfRows = 6;
+    int numOfRows = 5;
     private final int size = Screen.MAP_SQUARE_SIZE;
     String currentRoom = null;
     String[][] rooms = new String[numOfCols][numOfRows];
@@ -32,14 +32,14 @@ public class MapView extends JPanel {
         for (int i = 0; i < numOfCols; i += 1) {
 
             for (int j = 0; j < numOfRows; j += 1) {
-                String current;
+                String roomName;
                 if (rooms[i][j] == null) {
                     g.setColor(Color.black);
-                    current = "";
+                    roomName = "";
                 } else {
 
                     g.setColor(Color.BLUE);
-                    current = rooms[i][j];
+                    roomName = rooms[i][j];
 
                 }
                 g.fillRect(i * size + 350, j * size + 430, size, size);
@@ -74,20 +74,31 @@ public class MapView extends JPanel {
 
                     }
 
+                    // Set the text to black for current room for better contrast
+                    setBoxText(g, i, j, roomName, Color.BLACK);
+
+                } else {
+                    // Set the text to white for visited rooms besides your current room for better contrast
+                    setBoxText(g, i, j, roomName, Color.WHITE);
+
                 }
 
-                g.setColor(Color.GREEN);
-                Font font = new Font("Arial", Font.BOLD, 10);
-                g.setFont(font);
-                FontMetrics fm = g.getFontMetrics();
-                int x = ((size - fm.stringWidth(current)) / 2);
-                int y = ((size - fm.getHeight()) / 2) + fm.getAscent();
 
-                g.drawString(current, i * size + x + 350, j * size + (size / 2) + 430);
 
             }
         }
 
+    }
+
+    private void setBoxText(Graphics g, int i, int j, String current, Color color) {
+        g.setColor(color);
+        Font font = new Font("Arial", Font.BOLD, 10);
+        g.setFont(font);
+        FontMetrics fm = g.getFontMetrics();
+        int x = ((size - fm.stringWidth(current)) / 2);
+        int y = ((size - fm.getHeight()) / 2) + fm.getAscent();
+
+        g.drawString(current, i * size + x + 350, j * size + (size / 2) + 430);
     }
 
 }
