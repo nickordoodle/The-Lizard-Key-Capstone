@@ -107,11 +107,11 @@ public class Actions {
     private String grab(GameDictionary.Noun noun) {
 
         if (noun == null) {
-            return ("That doesn't exist");
+            return ("You don't see anything like that.");
         } else if (!noun.isGrabable()) {
-            return ("You can't even grab a " + noun.getName());
+            return ("You cannot take " + noun.getName() + ".");
         } else if (player.getInventory().has(noun)) {
-            return "You already have that in your inventory";
+            return "You already have " + noun.getName() + " in your inventory.";
         } else {
             //get current room
             Room currentRoom = board.getCurrentRoom();
@@ -161,7 +161,7 @@ public class Actions {
 
     public String unlockExit(String direction, GameDictionary.Noun noun) {
         if (!player.getInventory().has(noun)) {
-            return "You don't have that on your person";
+            return "You don't have a " + noun.getName() + ".";
         }
         Lock lock = board.getCurrentRoom().getLock(direction);
         if (lock != null && lock.getNoun().equals(noun)) {
