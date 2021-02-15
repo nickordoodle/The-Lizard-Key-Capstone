@@ -23,13 +23,7 @@
                 <pathName>psychWard</pathName>
             </exit>
         </roomExits>
-        <roomDescription>
-            Four bare walls keep you as a prisoner to an overly bright room with no windows.
-            Shelves with millions of keys in varying sizes, shapes, and colors line the floors like passageways to four
-            doors around you.
-            What lies behind each door is unknown to you, but your options are limited.
-            Faded, and somewhat unclear to read above the east side door reads "libra".
-            The keys you touch are as real as the keys to your home, varying in shapes and sizes.
+        <roomDescription>Four bare walls keep you as a prisoner to an overly bright room with no windows. Shelves with millions of keys in varying sizes, shapes, and colors line the floors like passageways to four doors around you. What lies behind each door is unknown to you, but your options are limited. Faded, and somewhat unclear to read above the east side door reads "libra". The keys you touch are as real as the keys to your home, varying in shapes and sizes.
         </roomDescription>
     </room>
     <room>
@@ -49,11 +43,7 @@
                 <pathName>keyRoom</pathName>
             </exit>
         </roomExits>
-        <roomDescription>
-            An overlty large room with cobwebbed filled shelves, oversized portraits with headless bodies, and open
-            skylights.
-            Under the full moon night, a single locked chest is highlighted on the perfectly centered table.
-            Surrounding the table, a thin line of salt surrounds the only seemingly normal thing in the room.
+        <roomDescription>An overly large room with cobwebbed filled shelves, over sized portraits with headless bodies, and open skylights. Under the full moon night, a single locked chest is highlighted on the perfectly centered table. Surrounding the table, a thin line of salt surrounds the only seemingly normal thing in the room.
         </roomDescription>
     </room>
     <room>
@@ -69,9 +59,7 @@
                 <pathName>library</pathName>
             </exit>
         </roomExits>
-        <roomDescription>
-            As if you have entered a Kiss concert, music blares against your ears.
-            On all corners of the room, speakers climb the cathedral ceilings, vibrating waves through the room.
+        <roomDescription>As if you have entered a Kiss concert, music blares against your ears. On all corners of the room, speakers climb the cathedral ceilings, vibrating waves through the room.
         </roomDescription>
     </room>
     <room>
@@ -87,11 +75,7 @@
                 <pathName>closet</pathName>
             </exit>
         </roomExits>
-        <roomDescription>
-            Lined along the walls are metal framed beds, plain with white sheets and drapes hanging over them.
-            Dolls with cracked and fractured faces sit at the end of each bed, following you as you move around the
-            room.
-            From beneath the beds, a chill crawls up your legs, up your back, and around the sides of your neck.
+        <roomDescription>Lined along the walls are metal framed beds, plain with white sheets and drapes hanging over them. Dolls with cracked and fractured faces sit at the end of each bed, following you as you move around the room. From beneath the beds, a chill crawls up your legs, up your back, and around the sides of your neck.
         </roomDescription>
     </room>
     <room>
@@ -103,11 +87,7 @@
                 <pathName>keyRoom</pathName>
             </exit>
         </roomExits>
-        <roomDescription>
-            Like darts, knives hang from the vaulted ceiling in varying sizes.
-            Across the white marble island, an oven blasts heat in your direction, carrying the smell of blackened
-            cookies.
-            As if the walls were made of paper, conversations can be heard in the other room.
+        <roomDescription>Like darts, knives hang from the vaulted ceiling in varying sizes. Across the white marble island, an oven blasts heat in your direction, carrying the smell of blackened cookies. As if the walls were made of paper, conversations can be heard in the other room.
         </roomDescription>
     </room>
     <room>
@@ -123,9 +103,7 @@
                 <pathName>coalMine</pathName>
             </exit>
         </roomExits>
-        <roomDescription>
-            Above a bed of rocks with crashing waters, a wooden bridge cries in the wind.
-            Bundled in a wicker basket, rope is tangled around itself, rendering itself nearly useless.
+        <roomDescription>Above a bed of rocks with crashing waters, a wooden bridge cries in the wind. Bundled in a wicker basket, rope is tangled around itself, rendering itself nearly useless.
         </roomDescription>
     </room>
     <room>
@@ -137,9 +115,7 @@
                 <pathName>creakyPath</pathName>
             </exit>
         </roomExits>
-        <roomDescription>
-            Dimly lit lamps, covered in soot, line the walls of the mine down a path cut short by tumbled rock.
-            An old pickaxe lays against the wall, next to a faded, brown miners hat and a gas mask.
+        <roomDescription>Dimly lit lamps, covered in soot, line the walls of the mine down a path cut short by tumbled rock. An old pickaxe lays against the wall, next to a faded, brown miners hat and a gas mask.
         </roomDescription>
     </room>
     <room>
@@ -151,8 +127,7 @@
                 <pathName>kitchen</pathName>
             </exit>
         </roomExits>
-        <roomDescription>
-            Long and narrow before you, an empty passage shows a single door at the opposite end.
+        <roomDescription>Long and narrow before you, an empty passage shows a single door at the opposite end.
         </roomDescription>
     </room>
     <room>
@@ -164,9 +139,7 @@
                 <pathName>secretPassage</pathName>
             </exit>
         </roomExits>
-        <roomDescription>
-            Spewing lava from it's top, a volcano destroys everything near it.
-            A random, small door stands alone at the edge of the treeline, only twenty feet from a lava river.
+        <roomDescription>Spewing lava from it's top, a volcano destroys everything near it. A random, small door stands alone at the edge of the treeline, only twenty feet from a lava river.
         </roomDescription>
     </room>
     <room>
@@ -186,10 +159,7 @@
                 <pathName>volcano</pathName>
             </exit>
         </roomExits>
-        <roomDescription>
-            Piles upon piles of gold and gems climb to the sky, high where birds fly.
-            A platinum river, boiling at over 3,000 degrees, flows through the middle of a reflective meadow.
-            For miles west, the river appears to never end.
+        <roomDescription>Piles upon piles of gold and gems climb to the sky, high where birds fly. A platinum river, boiling at over 3,000 degrees, flows through the middle of a reflective meadow. For miles west, the river appears to never end.
         </roomDescription>
     </room>
     <room>
@@ -205,8 +175,7 @@
                 <pathName>whisperingPassage</pathName>
             </exit>
         </roomExits>
-        <roomDescription>
-            The empty room bares a tulip filled wallpaper with a single portion ripped away to reveal a riddle.
+        <roomDescription>The empty room bares a tulip filled wallpaper with a single portion ripped away to reveal a riddle.
         </roomDescription>
     </room>
     <room>
@@ -218,10 +187,7 @@
                 <pathName>treasureRoom</pathName>
             </exit>
         </roomExits>
-        <roomDescription>
-            With each step you take down the cobblestone path, a footstep behind you can be heard.
-            Whispers in your ear sound as if someone is right behind you, but upon turning around, no one is there.
-            In the center of the path is a rotted bench with fresh flowers and a photograph.
+        <roomDescription>With each step you take down the cobblestone path, a footstep behind you can be heard. Whispers in your ear sound as if someone is right behind you, but upon turning around, no one is there. In the center of the path is a rotted bench with fresh flowers and a photograph.
         </roomDescription>
     </room>
     <room>
@@ -237,11 +203,7 @@
                 <pathName>riddleRoom</pathName>
             </exit>
         </roomExits>
-        <roomDescription>
-            A single light dimly guides you through a small space.
-            Packed tight with clothes from eras that don't make sense to one another, you struggle to push your way
-            through.
-            Several boxes lay atop the shelves, covered in dust.
+        <roomDescription>A single light dimly guides you through a small space. Packed tight with clothes from eras that don't make sense to one another, you struggle to push your way through. Several boxes lay atop the shelves, covered in dust.
         </roomDescription>
     </room>
     <room>
@@ -257,9 +219,7 @@
                 <pathName>keyRoom</pathName>
             </exit>
         </roomExits>
-        <roomDescription>
-            From left to right, staircases move around you, loud and reckless, clashing against walls like thunder.
-            Below seems to be an endless pit with cries and blazing heat lifting high in the room.
+        <roomDescription>From left to right, staircases move around you, loud and reckless, clashing against walls like thunder. Below seems to be an endless pit with cries and blazing heat lifting high in the room.
         </roomDescription>
     </room>
     <room>
@@ -285,11 +245,7 @@
                 <pathName>swingingStairs</pathName>
             </exit>
         </roomExits>
-        <roomDescription>
-            As you step through the door, sand brushes across your face, forcing your eyes to veer to upward.
-            You are now in the desert with pyramids and camels before you.
-            Like the door behind you, there are two other doors that are situated in the middle of the dessert, attached
-            to nothing.
+        <roomDescription>As you step through the door, sand brushes across your face, forcing your eyes to veer to upward. You are now in the desert with pyramids and camels before you. Like the door behind you, there are two other doors that are situated in the middle of the dessert, attached to nothing.
         </roomDescription>
     </room>
     <room>
@@ -301,11 +257,7 @@
                 <pathName>egyptianRoom</pathName>
             </exit>
         </roomExits>
-        <roomDescription>
-            With every step, your feet slush through murky water. Willow branches hang low above you, blocking clear
-            sight of an exit.
-            Fog lifts from the top of the water, further blocking your view, the stinch of death seeping through your
-            nose hairs.
+        <roomDescription>With every step, your feet slush through murky water. Willow branches hang low above you, blocking clear sight of an exit. Fog lifts from the top of the water, further blocking your view, the stinch of death seeping through your nose hairs.
         </roomDescription>
     </room>
     <room>
@@ -317,11 +269,7 @@
                 <pathName>egyptianRoom</pathName>
             </exit>
         </roomExits>
-        <roomDescription>
-            Fumes of alcohol fill the air as moisture drips down the paintings on easels, almost as if the subjects are
-            crying themselves.
-            A red liquid covers the floor, not dry, nor wet.
-            In the center of the room, a sculpture is covered with a cloth, the same red liquid coming from the bottom.
+        <roomDescription>Fumes of alcohol fill the air as moisture drips down the paintings on easels, almost as if the subjects are crying themselves. A red liquid covers the floor, not dry, nor wet. In the center of the room, a sculpture is covered with a cloth, the same red liquid coming from the bottom.
         </roomDescription>
     </room>
     <room>
@@ -337,9 +285,7 @@
                 <pathName>loudRoom</pathName>
             </exit>
         </roomExits>
-        <roomDescription>
-            Musty air carries you through a tombstone filled cave, scratches covering the walls, random but deep.
-            A narrow passage sucks air from the cave, making it harder to breathe by the second.
+        <roomDescription>Musty air carries you through a tombstone filled cave, scratches covering the walls, random but deep. A narrow passage sucks air from the cave, making it harder to breathe by the second.
         </roomDescription>
     </room>
     <room>
@@ -351,9 +297,7 @@
                 <pathName>landOfTheDead</pathName>
             </exit>
         </roomExits>
-        <roomDescription>
-            Heavy as a boulder, standing on a feather, your foot triggers a pressure plate on the floor.
-            Large bubbles burst of cotton candy around you, one of them surrounding you and lifting you to the ceiling.
+        <roomDescription>Heavy as a boulder, standing on a feather, your foot triggers a pressure plate on the floor. Large bubbles burst of cotton candy around you, one of them surrounding you and lifting you to the ceiling.
         </roomDescription>
     </room>
     <room>
@@ -369,11 +313,7 @@
                 <commandInt>2</commandInt>
             </exit>
         </roomExits>
-        <roomDescription>
-            Miles upon miles of darkness and emptiness surrounds a platinum river with a shine that could light an
-            entire city.
-            Bubbles burst around you at high temperatures as you fly with your magic cape.
-            The sight of a single pedestal stops you from going farther.
+        <roomDescription>Miles upon miles of darkness and emptiness surrounds a platinum river with a shine that could light an entire city. Bubbles burst around you at high temperatures as you fly with your magic cape. The sight of a single pedestal stops you from going farther.
         </roomDescription>
     </room>
 </rooms>
