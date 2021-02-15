@@ -2,8 +2,12 @@ package org.lizard;
 
 import org.lizard.util.Screen;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.Arrays;
 
 public class MapView extends JPanel {
@@ -58,8 +62,16 @@ public class MapView extends JPanel {
 
                 if (rooms[i][j] != null && joined != null && joined.equals(currentRoom)) {
                     if (!((i == 3 || i == 4 || i == 2) && j == 4)) {
-                        g.setColor(Color.ORANGE);
-                        g.fillOval(i * size + size / 2 + 350, j * size + 440, 20, 20);
+//                        g.setColor(Color.GREEN);
+//                        g.drawRect(i * size + 350, j * size + 430, size, size);
+                        try {
+                            BufferedImage image = ImageIO.read(new File("./person.jpeg"));
+                            g.drawImage(image, i * size + 350, j * size + 430, size, size, null);
+
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+
                     }
 
                 }
