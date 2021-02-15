@@ -306,7 +306,7 @@ public class MyJFrame extends JFrame implements ActionListener {
 //            frame.setVisible(true);??
         }
         if (e.getSource() == textField) {
-            result = textField.getText();
+            result = textField.getText().toLowerCase();
             Command command = parser.parse(result);
             String response = actions.execute(command);
             mainStoryText.setText(response);
@@ -402,17 +402,14 @@ public class MyJFrame extends JFrame implements ActionListener {
     }
 
     private void gameScreen(String initialPrint) {
-//        frame.getContentPane().setBackground(Color.red); //i think shows red color if wrong way.
-//        frame.setSize(1500,1525);
 
         //main story text
         mainStoryText = new JTextArea();
         mainStoryText.setText(initialPrint);
         mainStoryText.setLineWrap(true);
         mainStoryText.setWrapStyleWord(true);
-//        mainStoryText.setBorder(BorderFactory.createBevelBorder(1));
         mainStoryText.setForeground(Color.white);
-        mainStoryText.setFont(new Font("Comic Sans", Font.PLAIN, 15));
+        mainStoryText.setFont(new Font("Comic Sans", Font.PLAIN, 16));
         mainStoryText.setEditable(false);
         mainStoryText.setBackground(Color.black);
 
