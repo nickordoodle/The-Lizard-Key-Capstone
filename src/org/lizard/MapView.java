@@ -29,25 +29,37 @@ public class MapView extends JPanel {
 
 
         g.fillRect(size, size, size * numOfCols, size * numOfRows);
-        for (int i = 0; i < numOfCols; i += 1) {
+        for (int column = 0; column < numOfCols; column += 1) {
 
-            for (int j = 0; j < numOfRows; j += 1) {
+            for (int row = 0; row < numOfRows; row += 1) {
                 String roomName;
-                if (rooms[i][j] == null) {
+                if (rooms[column][row] == null) {
+                    // Set undiscovered room properties and view
                     g.setColor(Color.black);
+                    g.fillRect(column * size + 350, row * size + 430, size, size);
                     roomName = "";
                 } else {
-
+                    // Set discovered/visited rooms that player is not currently in
                     g.setColor(Color.BLUE);
-                    roomName = rooms[i][j];
+                    g.fillRect(column * size + 350, row * size + 430, size, size);
+                    try {
+                        BufferedImage image = ImageIO.read(new File("./four-colored-door-room.jpeg"));
+                        g.drawImage(image, column * size + 350, row * size + 430, size, size, null);
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+                    roomName = rooms[column][row];
 
                 }
-                g.fillRect(i * size + 350, j * size + 430, size, size);
+
+
                 g.setColor(Color.orange);
-                g.drawRect(i * size + 350, j * size + 430, size, size);
+                g.drawRect(column * size + 350, row * size + 430, size, size);
                 String joined = null;
-                if (rooms[i][j] != null) {
-                    String[] nameSplit = rooms[i][j].split(" ");
+                if (rooms[column][row] != null) {
+                    String[] nameSplit = rooms[column][row].split(" ");
 
                     for (int v = 0; v < nameSplit.length; v++) {
                         if (v == 0) {
@@ -60,13 +72,12 @@ public class MapView extends JPanel {
                 }
 
 
-                if (rooms[i][j] != null && joined != null && joined.equals(currentRoom)) {
-                    if (!((i == 3 || i == 4 || i == 2) && j == 4)) {
-//                        g.setColor(Color.GREEN);
-//                        g.drawRect(i * size + 350, j * size + 430, size, size);
+                if (rooms[column][row] != null && joined != null && joined.equals(currentRoom)) {
+                    if (!((column == 3 || column == 4 || column == 2) && row == 4)) {
+
                         try {
                             BufferedImage image = ImageIO.read(new File("./person.jpeg"));
-                            g.drawImage(image, i * size + 350, j * size + 430, size, size, null);
+                            g.drawImage(image, column * size + 350, row * size + 430, size, size, null);
 
                         } catch (IOException e) {
                             e.printStackTrace();
@@ -75,11 +86,12 @@ public class MapView extends JPanel {
                     }
 
                     // Set the text to black for current room for better contrast
-                    setBoxText(g, i, j, roomName, Color.BLACK);
+                    setBoxText(g, column, row, roomName, Color.BLACK);
 
                 } else {
                     // Set the text to white for visited rooms besides your current room for better contrast
-                    setBoxText(g, i, j, roomName, Color.WHITE);
+                    setBoxText(g, column, row, roomName, Color.WHITE);
+
 
                 }
 
