@@ -2,13 +2,17 @@ package org.lizard;
 
 import org.lizard.util.Screen;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.Arrays;
 
 public class MapView extends JPanel {
     int numOfCols = 8;
-    int numOfRows = 6;
+    int numOfRows = 5;
     private final int size = Screen.MAP_SQUARE_SIZE;
     String currentRoom = null;
     String[][] rooms = new String[numOfCols][numOfRows];
@@ -25,25 +29,37 @@ public class MapView extends JPanel {
 
 
         g.fillRect(size, size, size * numOfCols, size * numOfRows);
-        for (int i = 0; i < numOfCols; i += 1) {
+        for (int column = 0; column < numOfCols; column++) {
 
-            for (int j = 0; j < numOfRows; j += 1) {
-                String current;
-                if (rooms[i][j] == null) {
+            for (int row = 0; row < numOfRows; row++) {
+                String roomName;
+                if (rooms[column][row] == null) {
+                    // Set undiscovered room properties and view
                     g.setColor(Color.black);
-                    current = "";
+                    g.fillRect(column * size + 350, row * size + 430, size, size);
+                    roomName = "";
                 } else {
-
+                    // Set discovered/visited rooms that player is not currently in
                     g.setColor(Color.BLUE);
-                    current = rooms[i][j];
+                    g.fillRect(column * size + 350, row * size + 430, size, size);
+                    try {
+                        BufferedImage image = ImageIO.read(new File("./four-colored-door-room.jpeg"));
+                        g.drawImage(image, column * size + 350, row * size + 430, size, size, null);
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+                    roomName = rooms[column][row];
 
                 }
-                g.fillRect(i * size + 350, j * size + 430, size, size);
+
+                // Draw orange outline for all boxes
                 g.setColor(Color.orange);
-                g.drawRect(i * size + 350, j * size + 430, size, size);
+                g.drawRect(column * size + 350, row * size + 430, size, size);
                 String joined = null;
-                if (rooms[i][j] != null) {
-                    String[] nameSplit = rooms[i][j].split(" ");
+                if (rooms[column][row] != null) {
+                    String[] nameSplit = rooms[column][row].split(" ");
 
                     for (int v = 0; v < nameSplit.length; v++) {
                         if (v == 0) {
@@ -56,26 +72,45 @@ public class MapView extends JPanel {
                 }
 
 
-                if (rooms[i][j] != null && joined != null && joined.equals(currentRoom)) {
-                    if (!((i == 3 || i == 4 || i == 2) && j == 4)) {
-                        g.setColor(Color.ORANGE);
-                        g.fillOval(i * size + size / 2 + 350, j * size + 440, 20, 20);
+                if (rooms[column][row] != null && joined != null && joined.equals(currentRoom)) {
+                    if (!((column == 3 || column == 4 || column == 2) && row == 4)) {
+
+                        try {
+                            BufferedImage image = ImageIO.read(new File("./person.jpeg"));
+                            g.drawImage(image, column * size + 350, row * size + 430, size, size, null);
+
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+
                     }
+
+                    // Set the text to black for current room for better contrast
+                    setBoxText(g, column, row, roomName, Color.BLACK);
+
+                } else {
+                    // Set the text to white for visited rooms besides your current room for better contrast
+                    setBoxText(g, column, row, roomName, Color.WHITE);
+
 
                 }
 
-                g.setColor(Color.GREEN);
-                Font font = new Font("Arial", Font.BOLD, 10);
-                g.setFont(font);
-                FontMetrics fm = g.getFontMetrics();
-                int x = ((size - fm.stringWidth(current)) / 2);
-                int y = ((size - fm.getHeight()) / 2) + fm.getAscent();
 
-                g.drawString(current, i * size + x + 350, j * size + (size / 2) + 430);
 
             }
         }
 
+    }
+
+    private void setBoxText(Graphics g, int i, int j, String current, Color color) {
+        g.setColor(color);
+        Font font = new Font("Arial", Font.BOLD, 10);
+        g.setFont(font);
+        FontMetrics fm = g.getFontMetrics();
+        int x = ((size - fm.stringWidth(current)) / 2);
+        int y = ((size - fm.getHeight()) / 2) + fm.getAscent();
+
+        g.drawString(current, i * size + x + 350, j * size + (size / 2) + 430);
     }
 
 }
