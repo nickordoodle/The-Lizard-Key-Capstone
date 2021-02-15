@@ -306,7 +306,7 @@ public class MyJFrame extends JFrame implements ActionListener {
 //            frame.setVisible(true);??
         }
         if (e.getSource() == textField) {
-            result = textField.getText();
+            result = textField.getText().toLowerCase();
             Command command = parser.parse(result);
             String response = actions.execute(command);
             mainStoryText.setText(response);
