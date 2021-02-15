@@ -6,9 +6,17 @@ import java.io.IOException;
 
 public class Music {
 
-    public static void playMusic(String soundFileName) {
+
+    private static Clip clip = null;
+
+    private Music(){
+
+    }
+
+
+    public static void play(String soundFileName) {
         AudioInputStream audioInputStream = null;
-        Clip clip = null;
+
         try {
             audioInputStream = AudioSystem.getAudioInputStream(new File(soundFileName).getAbsoluteFile());
         } catch (UnsupportedAudioFileException | IOException unsupportedAudioFileException) {
@@ -26,8 +34,19 @@ public class Music {
         } catch (LineUnavailableException | IOException lineUnavailableException) {
             lineUnavailableException.printStackTrace();
         }
-
         clip.start();
+    }
+
+    public static void stop(){
+        clip.stop();
+    }
+
+    public static boolean isRunning(){
+        try {
+            return clip.isRunning();
+        } catch (NullPointerException e) {
+            return false;
+        }
     }
 
 }

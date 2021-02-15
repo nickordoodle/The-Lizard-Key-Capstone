@@ -36,7 +36,7 @@ public class MyJFrame extends JFrame implements ActionListener {
     JLabel inputFromUser = new JLabel();
     JLabel imageLabel;
     JTextField textField = new JTextField();
-    JButton enterGame, quitGame, helpBtn;
+    JButton enterGame, quitGame, helpBtn, musicBtn;
     JFrame frame;
     JPanel titlePanel;
     JTextArea mainStoryText, instructionsTxt;
@@ -95,6 +95,11 @@ public class MyJFrame extends JFrame implements ActionListener {
         helpBtn = new JButton("Guidance");
         helpBtn.setBounds(1120, 415, 120, 40);
         helpBtn.addActionListener(this);
+
+        //button to get the help window that shows instructions to the game.
+        musicBtn = new JButton("Music");
+        musicBtn.setBounds(1250, 415, 120, 40);
+        musicBtn.addActionListener(this);
 
         //panel with the game title
         titlePanel = new JPanel();
@@ -238,6 +243,7 @@ public class MyJFrame extends JFrame implements ActionListener {
 
         frame.add(helpBtn);
         frame.add(quitGame);
+        frame.add(musicBtn);
         titlePanel.setBounds(50, 50, 450, 80);
         frame.add(titlePanel);
         gameScreen(board.introduction());
@@ -254,6 +260,15 @@ public class MyJFrame extends JFrame implements ActionListener {
 //            winScreen(); //uncomment to test win screen
 //            displayCombat(); //uncomment to test combat screen
 //            gameOverScreen(); //uncomment to test gameover screen
+        }
+        if (e.getSource() == musicBtn) {
+            // Check if music is already running
+            if(Music.isRunning()){
+                Music.stop();
+            } else {
+                Music.play("princeofdarkness.wav");
+            }
+
         }
         if (e.getSource() == enterGame) {
 //            gameScreen(Story.introduction()); //shows main game
