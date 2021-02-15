@@ -189,10 +189,10 @@ public class MyJFrame extends JFrame implements ActionListener {
         instructionsTxt.setText(board.howToPlayInGame());
         instructionsTxt.setLineWrap(true);
         instructionsTxt.setWrapStyleWord(true);
-        instructionsTxt.setForeground(Color.white);
+        instructionsTxt.setForeground(Color.black);
         instructionsTxt.setFont(new Font("Comic Sans", Font.BOLD, 15));
         instructionsTxt.setEditable(false);
-        instructionsTxt.setBackground(Color.black);
+        instructionsTxt.setBackground(Color.white);
 
         //makes story text scrollable
         JScrollPane scrollPane = new JScrollPane(instructionsTxt);
@@ -251,8 +251,9 @@ public class MyJFrame extends JFrame implements ActionListener {
         }
         if (e.getSource() == helpBtn) {
             createHelpWindow();
-//            winScreen();
-            displayCombat();
+//            winScreen(); //uncomment to test win screen
+//            displayCombat(); //uncomment to test combat screen
+//            gameOverScreen(); //uncomment to test gameover screen
         }
         if (e.getSource() == enterGame) {
 //            gameScreen(Story.introduction()); //shows main game
@@ -321,12 +322,6 @@ public class MyJFrame extends JFrame implements ActionListener {
 
             // Winning condition check - player has winning key
             if (player.hasWinningKey && board.getCurrentRoom().getName().equals("keyRoom")) {
-//                frame.remove(instructionsPanel);
-//                frame.remove(inputPanel);
-//                frame.remove(mapPanel);
-//                frame.repaint();
-//                frame.revalidate();
-
                 winScreen();
             }
 
@@ -476,7 +471,7 @@ public class MyJFrame extends JFrame implements ActionListener {
 //        combatWindow.setLayout(null);
         combatWindow.setLocation(480, 200);
 
-        Music.playMusic(soundName);
+//        Music.playMusic(soundName); uncomment for audio
 
         rpsGame = new JTextArea();
         if (board.totalEnemies < 1) {
@@ -526,15 +521,15 @@ public class MyJFrame extends JFrame implements ActionListener {
         promptPanel.add(numInput);
         promptPanel.setBackground(Color.blue);
 
-//        //win screen image
-//        winImgPanel = new JPanel();
-//        winImgPanel.setBackground(Color.black);
-//        winImgPanel.setBounds(0, 300, 800, 400);
+        JPanel rpgImgPanel = new JPanel();
+        rpgImgPanel.setBackground(Color.blue);
+        rpgImgPanel.setBounds(0, 300, 800, 400);
 
         JLabel imgLabel = new JLabel();
         imgLabel.setIcon(new ImageIcon("RPS.png"));
         imgLabel.setLayout(new FlowLayout(FlowLayout.CENTER));
-        promptPanel.add(imageLabel);
+        rpgImgPanel.add(imgLabel);
+        combatWindow.add(rpgImgPanel);
 
         combatWindow.add(scrollPane, BorderLayout.NORTH);
         combatWindow.add(promptPanel);
@@ -556,8 +551,6 @@ public class MyJFrame extends JFrame implements ActionListener {
         winScreen.setLocation(480, 200);
         winScreen.setVisible(true);
 //        winScreen.setLayout(null); //disables default layout
-        winScreen.setBackground(Color.black);
-
 
         //win window container
         winContainer = winScreen.getContentPane(); //container inside the window with help content
@@ -565,14 +558,15 @@ public class MyJFrame extends JFrame implements ActionListener {
 
         //win window title
         victoryTitle = new JLabel("Congratulations, you won!!!");
-        victoryTitle.setBounds(50, -80, 600, 250);
-        victoryTitle.setForeground(Color.green); //title text color
+        victoryTitle.setBounds(180, -70, 600, 250);
+        victoryTitle.setForeground(Color.orange); //title text color
         victoryTitle.setFont(new Font("Comic Sans", Font.PLAIN, 36));
         winContainer.add(victoryTitle);
 
         //victory text panel
         winTextPanel = new JPanel();
-        winTextPanel.setBounds(50, 90, 500, 200);
+        winTextPanel.setBounds(380, 100, 380, 250);
+        winTextPanel.setBackground(Color.black);
 
         //victory text
         winTextArea = new JTextArea("You use the lizard key on the door to exit." +
@@ -583,6 +577,7 @@ public class MyJFrame extends JFrame implements ActionListener {
         winTextArea.setLineWrap(true);
         winTextArea.setWrapStyleWord(true);
         winTextArea.setForeground(Color.white);
+        winTextArea.setBounds(380, 100, 380, 250);
         winTextArea.setFont(new Font("Comic Sans", Font.BOLD, 15));
         winTextArea.setEditable(false);
         winTextArea.setBackground(Color.black);
@@ -590,18 +585,14 @@ public class MyJFrame extends JFrame implements ActionListener {
         winContainer.add(winTextPanel);
 
         //win screen image
-        winImgPanel = new JPanel();
-        winImgPanel.setBackground(Color.black);
-        winImgPanel.setBounds(0, 300, 800, 400);
+//        winImgPanel = new JPanel();
+//        winImgPanel.setBackground(Color.black);
+//        winImgPanel.setBounds(0, 380, 800, 400);
 
         JLabel imgLabel = new JLabel();
-        imgLabel.setIcon(new ImageIcon("key.png"));
+        imgLabel.setIcon(new ImageIcon("lizardKey.png"));
         imgLabel.setLayout(new FlowLayout(FlowLayout.CENTER));
-        winImgPanel.add(imageLabel);
-        winContainer.add(winImgPanel);
-
-        //add scrollable text to the instructions panel then to the main container.
-//        winContainer.add(winTextPanel);
+        winContainer.add(imgLabel);
 //        winContainer.add(winImgPanel);
     }
 
