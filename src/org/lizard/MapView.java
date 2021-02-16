@@ -28,7 +28,6 @@ public class MapView extends JPanel {
     public void paint(Graphics g) {
 
 
-        g.fillRect(size, size, size * numOfCols, size * numOfRows);
         for (int column = 0; column < numOfCols; column++) {
 
             for (int row = 0; row < numOfRows; row++) {
