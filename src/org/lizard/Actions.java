@@ -24,9 +24,9 @@ public class Actions {
         GameDictionary.Noun noun;
         GameDictionary.Noun targetNoun = null;
         Integer verb;
-        if (command.isAmbiguous()) {
-            return disambiguate(command);
-        }
+//        if (command.isAmbiguous()) {
+//            return disambiguate(command);
+//        }
         verb = command.getVerb();
         noun = command.getNoun() == null ? null : command.getNoun()[0];
 
@@ -107,11 +107,11 @@ public class Actions {
     private String grab(GameDictionary.Noun noun) {
 
         if (noun == null) {
-            return ("That doesn't exist");
+            return ("You don't see anything like that.");
         } else if (!noun.isGrabable()) {
-            return ("You can't even grab a " + noun.getName());
+            return ("You cannot take " + noun.getName() + ".");
         } else if (player.getInventory().has(noun)) {
-            return "You already have that in your inventory";
+            return "You already have " + noun.getName() + " in your inventory.";
         } else {
             //get current room
             Room currentRoom = board.getCurrentRoom();
@@ -161,7 +161,7 @@ public class Actions {
 
     public String unlockExit(String direction, GameDictionary.Noun noun) {
         if (!player.getInventory().has(noun)) {
-            return "You don't have that on your person";
+            return "You don't have a " + noun.getName() + ".";
         }
         Lock lock = board.getCurrentRoom().getLock(direction);
         if (lock != null && lock.getNoun().equals(noun)) {
@@ -248,48 +248,48 @@ public class Actions {
 
     }
 
-    private String disambiguate(Command command) {
-        GameDictionary.Noun[] noun = command.getNoun();
-        GameDictionary.Noun[] targetNoun = command.getTargetNoun();
-
-        Set<GameDictionary.Noun> availableNouns = new HashSet<>(player.getInventory().getItems());
-        availableNouns.addAll(board.getCurrentRoom().getItems());
-
-        Set<GameDictionary.Noun> nounSet = new HashSet<>(Arrays.asList(noun));
-
-        nounSet.retainAll(availableNouns);
-
-        if (nounSet.size() == 1) {
-            noun = new GameDictionary.Noun[]{nounSet.iterator().next()};
-        } else if (nounSet.size() > 1) {
-            Iterator<GameDictionary.Noun> iterator = nounSet.iterator();
-            return frame.decision(new ArrayList<>(nounSet), command);
-
-        } else {
-            noun = null;
-        }
-
-        if (targetNoun != null) {
-            System.out.println(Arrays.toString(targetNoun));
-            Set<GameDictionary.Noun> targetNounSet = new HashSet<>(Arrays.asList(targetNoun));
-            targetNounSet.retainAll(availableNouns);
-
-            if (targetNounSet.size() == 1) {
-                targetNoun = new GameDictionary.Noun[]{targetNounSet.iterator().next()};
-            } else if (targetNounSet.size() > 1) {
-                Iterator<GameDictionary.Noun> iterator = targetNounSet.iterator();
-                return frame.decision(new ArrayList<>(targetNounSet), command);
-            }
-
-        }
-
-        if (targetNoun != null && targetNoun.length == 1) {
-            return execute(new Command(command.getVerb(), noun, targetNoun));
-        } else {
-            return execute(new Command(command.getVerb(), noun));
-        }
-
-    }
+//    private String disambiguate(Command command) {
+//        GameDictionary.Noun[] noun = command.getNoun();
+//        GameDictionary.Noun[] targetNoun = command.getTargetNoun();
+//
+//        Set<GameDictionary.Noun> availableNouns = new HashSet<>(player.getInventory().getItems());
+//        availableNouns.addAll(board.getCurrentRoom().getItems());
+//
+//        Set<GameDictionary.Noun> nounSet = new HashSet<>(Arrays.asList(noun));
+//
+//        nounSet.retainAll(availableNouns);
+//
+//        if (nounSet.size() == 1) {
+//            noun = new GameDictionary.Noun[]{nounSet.iterator().next()};
+//        } else if (nounSet.size() > 1) {
+//            Iterator<GameDictionary.Noun> iterator = nounSet.iterator();
+//            return frame.decision(new ArrayList<>(nounSet), command);
+//
+//        } else {
+//            noun = null;
+//        }
+//
+//        if (targetNoun != null) {
+//            System.out.println(Arrays.toString(targetNoun));
+//            Set<GameDictionary.Noun> targetNounSet = new HashSet<>(Arrays.asList(targetNoun));
+//            targetNounSet.retainAll(availableNouns);
+//
+//            if (targetNounSet.size() == 1) {
+//                targetNoun = new GameDictionary.Noun[]{targetNounSet.iterator().next()};
+//            } else if (targetNounSet.size() > 1) {
+//                Iterator<GameDictionary.Noun> iterator = targetNounSet.iterator();
+//                return frame.decision(new ArrayList<>(targetNounSet), command);
+//            }
+//
+//        }
+//
+//        if (targetNoun != null && targetNoun.length == 1) {
+//            return execute(new Command(command.getVerb(), noun, targetNoun));
+//        } else {
+//            return execute(new Command(command.getVerb(), noun));
+//        }
+//
+//    }
 
     // Unleashes the demon/enemy and places the demon
     // in the whisperingPassage room

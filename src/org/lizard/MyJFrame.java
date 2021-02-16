@@ -154,36 +154,36 @@ public class MyJFrame extends JFrame implements ActionListener {
         return gameFrame;
     }
 
-    public String decision(List<GameDictionary.Noun> nounList, Command command) {
-        desicionField.setPreferredSize(new Dimension(250, 40));
-        desicionField.setFont(new Font("Consolas", Font.BOLD, 15));
-        desicionField.setForeground(Color.blue);
-        desicionField.setBackground(Color.white);
-        desicionField.setCaretColor(Color.blue);
-
-        inputPanel.remove(textField);
-        frame.repaint();
-        frame.revalidate();
-
-        inputPanel.add(desicionField);
-        desicionField.requestFocusInWindow();
-        if (!decisionListener) {
-            desicionField.addActionListener(this);
-            decisionListener = true;
-        }
-        this.nounList = nounList;
-        this.command = command;
-
-        StringBuilder choices = new StringBuilder();
-        for (int i = 0; i < nounList.size(); i++) {
-            if (i == nounList.size() - 1) {
-                choices.append(nounList.get(i).getName());
-            } else {
-                choices.append(nounList.get(i).getName()).append(" or ");
-            }
-        }
-        return choices.toString();
-    }
+//    public String decision(List<GameDictionary.Noun> nounList, Command command) {
+//        desicionField.setPreferredSize(new Dimension(250, 40));
+//        desicionField.setFont(new Font("Consolas", Font.BOLD, 15));
+//        desicionField.setForeground(Color.blue);
+//        desicionField.setBackground(Color.white);
+//        desicionField.setCaretColor(Color.blue);
+//
+//        inputPanel.remove(textField);
+//        frame.repaint();
+//        frame.revalidate();
+//
+//        inputPanel.add(desicionField);
+//        desicionField.requestFocusInWindow();
+//        if (!decisionListener) {
+//            desicionField.addActionListener(this);
+//            decisionListener = true;
+//        }
+//        this.nounList = nounList;
+//        this.command = command;
+//
+//        StringBuilder choices = new StringBuilder();
+//        for (int i = 0; i < nounList.size(); i++) {
+//            if (i == nounList.size() - 1) {
+//                choices.append(nounList.get(i).getName());
+//            } else {
+//                choices.append(nounList.get(i).getName()).append(" or ");
+//            }
+//        }
+//        return choices.toString();
+//    }
 
     public void createHelpWindow() {
         JFrame helpWindow = new JFrame(); //initiate help window
@@ -312,38 +312,38 @@ public class MyJFrame extends JFrame implements ActionListener {
             frame.repaint();
 
         }
-        if (e.getSource() == desicionField) {
-            result = desicionField.getText();
-
-            desicionField.setText("");
-            for (GameDictionary.Noun noun : nounList) {
-                if (noun.getName().equals(result)) {
-                    if (command.getNoun().length <= 1) {
-                        command.setTargetNoun(new GameDictionary.Noun[]{noun});
-                    } else {
-                        command.setNoun(new GameDictionary.Noun[]{noun});
-                    }
-
-//                    frame.remove(instructionsPanel);
-                    frame.remove(inputPanel);
-//                    frame.remove(mapPanel);
-                    frame.repaint();
-                    frame.revalidate();
-
-                    gameScreen(actions.execute(command));
-//                    frame.setVisible(true);//?? why
-                    return;
-                }
-            }
-//            frame.remove(instructionsPanel);
-            frame.remove(inputPanel);
-//            frame.remove(mapPanel);
-            frame.repaint();
-            frame.revalidate();
-
-            gameScreen("you gotta be specific.");
-//            frame.setVisible(true);??
-        }
+//        if (e.getSource() == desicionField) {
+//            result = desicionField.getText();
+//
+//            desicionField.setText("");
+//            for (GameDictionary.Noun noun : nounList) {
+//                if (noun.getName().equals(result)) {
+//                    if (command.getNoun().length <= 1) {
+//                        command.setTargetNoun(new GameDictionary.Noun[]{noun});
+//                    } else {
+//                        command.setNoun(new GameDictionary.Noun[]{noun});
+//                    }
+//
+////                    frame.remove(instructionsPanel);
+//                    frame.remove(inputPanel);
+////                    frame.remove(mapPanel);
+//                    frame.repaint();
+//                    frame.revalidate();
+//
+//                    gameScreen(actions.execute(command));
+////                    frame.setVisible(true);//?? why
+//                    return;
+//                }
+//            }
+////            frame.remove(instructionsPanel);
+//            frame.remove(inputPanel);
+////            frame.remove(mapPanel);
+//            frame.repaint();
+//            frame.revalidate();
+//
+//            gameScreen("you gotta be specific.");
+////            frame.setVisible(true);??
+//        }
         if (e.getSource() == textField) {
             result = textField.getText().toLowerCase();
             Command command = parser.parse(result);
