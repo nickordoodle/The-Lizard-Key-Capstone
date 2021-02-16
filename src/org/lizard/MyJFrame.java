@@ -4,12 +4,15 @@
 package org.lizard;
 
 import org.lizard.constants.GameInformation;
+import org.lizard.constants.Settings;
 import org.lizard.util.Music;
 import org.lizard.util.Screen;
 
 import javax.imageio.ImageIO;
 import javax.sound.sampled.*;
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -37,8 +40,9 @@ public class MyJFrame extends JFrame implements ActionListener {
     JLabel imageLabel;
     JTextField textField = new JTextField();
     JButton enterGame, quitGame, helpBtn, musicBtn;
+    JSlider volumeSlider;
     JFrame frame;
-    JPanel titlePanel;
+    JPanel titlePanel, volumePanel;
     JTextArea mainStoryText, instructionsTxt;
     JTextField desicionField = new JTextField();
     List<GameDictionary.Noun> nounList = null;
@@ -101,6 +105,25 @@ public class MyJFrame extends JFrame implements ActionListener {
         musicBtn.setBounds(1250, 415, 120, 40);
         musicBtn.addActionListener(this);
 
+        FloatControl gainControl =
+                (FloatControl) Music.clip.getControl(FloatControl.Type.MASTER_GAIN);
+
+        //Create the slider to adjust volume
+        volumeSlider = new JSlider(JSlider.VERTICAL,
+                (int) gainControl.getMinimum() * 100,
+                (int) gainControl.getMaximum() * 100,
+                (int) gainControl.getValue() * 100);
+        volumeSlider.setMajorTickSpacing(25);
+        volumeSlider.setPaintTicks(true);
+        volumeSlider.addChangeListener(event -> {
+            // Update global volume adjustment whenever it changes
+            Settings.VOLUME_SETTING = volumeSlider.getValue() - 50;
+            Music.adjustVolume((float)Settings.VOLUME_SETTING, gainControl);
+        });
+
+        volumePanel = new JPanel();
+        volumePanel.add(volumeSlider);
+
         //panel with the game title
         titlePanel = new JPanel();
         titlePanel.setBackground(Color.black);
@@ -113,7 +136,7 @@ public class MyJFrame extends JFrame implements ActionListener {
         frame.add(titlePanel);
         frame.add(enterGame);
         frame.add(imageLabel);
-
+        frame.add(volumePanel);
         // Make the frame visible to the player
         frame.setVisible(true);
 
@@ -244,6 +267,7 @@ public class MyJFrame extends JFrame implements ActionListener {
         frame.add(helpBtn);
         frame.add(quitGame);
         frame.add(musicBtn);
+        frame.add(volumeSlider);
         titlePanel.setBounds(50, 50, 450, 80);
         frame.add(titlePanel);
         gameScreen(board.introduction());
@@ -267,7 +291,7 @@ public class MyJFrame extends JFrame implements ActionListener {
                 Music.stop();
             } else {
                 // Otherwise, play music form the specified track
-                Music.play("princeofdarkness.wav");
+                Music.play();
             }
 
         }
