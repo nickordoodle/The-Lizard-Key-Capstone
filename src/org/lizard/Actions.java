@@ -24,9 +24,9 @@ public class Actions {
         GameDictionary.Noun noun;
         GameDictionary.Noun targetNoun = null;
         Integer verb;
-        if (command.isAmbiguous()) {
-            return disambiguate(command);
-        }
+//        if (command.isAmbiguous()) {
+//            return disambiguate(command);
+//        }
         verb = command.getVerb();
         noun = command.getNoun() == null ? null : command.getNoun()[0];
 
@@ -248,48 +248,48 @@ public class Actions {
 
     }
 
-    private String disambiguate(Command command) {
-        GameDictionary.Noun[] noun = command.getNoun();
-        GameDictionary.Noun[] targetNoun = command.getTargetNoun();
-
-        Set<GameDictionary.Noun> availableNouns = new HashSet<>(player.getInventory().getItems());
-        availableNouns.addAll(board.getCurrentRoom().getItems());
-
-        Set<GameDictionary.Noun> nounSet = new HashSet<>(Arrays.asList(noun));
-
-        nounSet.retainAll(availableNouns);
-
-        if (nounSet.size() == 1) {
-            noun = new GameDictionary.Noun[]{nounSet.iterator().next()};
-        } else if (nounSet.size() > 1) {
-            Iterator<GameDictionary.Noun> iterator = nounSet.iterator();
-            return frame.decision(new ArrayList<>(nounSet), command);
-
-        } else {
-            noun = null;
-        }
-
-        if (targetNoun != null) {
-            System.out.println(Arrays.toString(targetNoun));
-            Set<GameDictionary.Noun> targetNounSet = new HashSet<>(Arrays.asList(targetNoun));
-            targetNounSet.retainAll(availableNouns);
-
-            if (targetNounSet.size() == 1) {
-                targetNoun = new GameDictionary.Noun[]{targetNounSet.iterator().next()};
-            } else if (targetNounSet.size() > 1) {
-                Iterator<GameDictionary.Noun> iterator = targetNounSet.iterator();
-                return frame.decision(new ArrayList<>(targetNounSet), command);
-            }
-
-        }
-
-        if (targetNoun != null && targetNoun.length == 1) {
-            return execute(new Command(command.getVerb(), noun, targetNoun));
-        } else {
-            return execute(new Command(command.getVerb(), noun));
-        }
-
-    }
+//    private String disambiguate(Command command) {
+//        GameDictionary.Noun[] noun = command.getNoun();
+//        GameDictionary.Noun[] targetNoun = command.getTargetNoun();
+//
+//        Set<GameDictionary.Noun> availableNouns = new HashSet<>(player.getInventory().getItems());
+//        availableNouns.addAll(board.getCurrentRoom().getItems());
+//
+//        Set<GameDictionary.Noun> nounSet = new HashSet<>(Arrays.asList(noun));
+//
+//        nounSet.retainAll(availableNouns);
+//
+//        if (nounSet.size() == 1) {
+//            noun = new GameDictionary.Noun[]{nounSet.iterator().next()};
+//        } else if (nounSet.size() > 1) {
+//            Iterator<GameDictionary.Noun> iterator = nounSet.iterator();
+//            return frame.decision(new ArrayList<>(nounSet), command);
+//
+//        } else {
+//            noun = null;
+//        }
+//
+//        if (targetNoun != null) {
+//            System.out.println(Arrays.toString(targetNoun));
+//            Set<GameDictionary.Noun> targetNounSet = new HashSet<>(Arrays.asList(targetNoun));
+//            targetNounSet.retainAll(availableNouns);
+//
+//            if (targetNounSet.size() == 1) {
+//                targetNoun = new GameDictionary.Noun[]{targetNounSet.iterator().next()};
+//            } else if (targetNounSet.size() > 1) {
+//                Iterator<GameDictionary.Noun> iterator = targetNounSet.iterator();
+//                return frame.decision(new ArrayList<>(targetNounSet), command);
+//            }
+//
+//        }
+//
+//        if (targetNoun != null && targetNoun.length == 1) {
+//            return execute(new Command(command.getVerb(), noun, targetNoun));
+//        } else {
+//            return execute(new Command(command.getVerb(), noun));
+//        }
+//
+//    }
 
     // Unleashes the demon/enemy and places the demon
     // in the whisperingPassage room
