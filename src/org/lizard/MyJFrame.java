@@ -110,18 +110,24 @@ public class MyJFrame extends JFrame implements ActionListener {
 
         //Create the slider to adjust volume
         volumeSlider = new JSlider(JSlider.VERTICAL,
-                (int) gainControl.getMinimum() * 100,
-                (int) gainControl.getMaximum() * 100,
-                (int) gainControl.getValue() * 100);
+                (int) gainControl.getMinimum(),
+                (int) gainControl.getMaximum(),
+                (int) gainControl.getValue());
         volumeSlider.setMajorTickSpacing(25);
         volumeSlider.setPaintTicks(true);
+        volumeSlider.setForeground(Color.BLUE);
         volumeSlider.addChangeListener(event -> {
             // Update global volume adjustment whenever it changes
-            Settings.VOLUME_SETTING = volumeSlider.getValue() - 50;
-            Music.adjustVolume((float)Settings.VOLUME_SETTING, gainControl);
+                    JSlider volumeSlider = (JSlider) event.getSource();
+                    if (!volumeSlider.getValueIsAdjusting()) {
+                        Settings.VOLUME_SETTING = volumeSlider.getValue();
+                        Music.adjustVolume((float) Settings.VOLUME_SETTING, gainControl);
+                    }
         });
 
+        // Create a volume panel "container" to hold the slider
         volumePanel = new JPanel();
+        volumePanel.setBounds(1200, 550, 80, 250);
         volumePanel.add(volumeSlider);
 
         //panel with the game title
@@ -136,7 +142,6 @@ public class MyJFrame extends JFrame implements ActionListener {
         frame.add(titlePanel);
         frame.add(enterGame);
         frame.add(imageLabel);
-        frame.add(volumePanel);
         // Make the frame visible to the player
         frame.setVisible(true);
 
@@ -267,7 +272,7 @@ public class MyJFrame extends JFrame implements ActionListener {
         frame.add(helpBtn);
         frame.add(quitGame);
         frame.add(musicBtn);
-        frame.add(volumeSlider);
+        frame.add(volumePanel);
         titlePanel.setBounds(50, 50, 450, 80);
         frame.add(titlePanel);
         gameScreen(board.introduction());

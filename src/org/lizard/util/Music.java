@@ -61,7 +61,7 @@ public class Music {
 
             gainControl.setValue(amount); //Change volume by the amount
 
-        } catch (NullPointerException e) {
+        } catch (NullPointerException | IllegalArgumentException e) {
             e.printStackTrace();
         }
     }
