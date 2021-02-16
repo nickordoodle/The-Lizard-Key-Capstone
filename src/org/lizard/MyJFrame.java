@@ -118,11 +118,11 @@ public class MyJFrame extends JFrame implements ActionListener {
         volumeSlider.setForeground(Color.BLUE);
         volumeSlider.addChangeListener(event -> {
             // Update global volume adjustment whenever it changes
-                    JSlider volumeSlider = (JSlider) event.getSource();
-                    if (!volumeSlider.getValueIsAdjusting()) {
-                        Settings.VOLUME_SETTING = volumeSlider.getValue();
-                        Music.adjustVolume((float) Settings.VOLUME_SETTING, gainControl);
-                    }
+            JSlider volumeSlider = (JSlider) event.getSource();
+            if (!volumeSlider.getValueIsAdjusting()) {
+                Settings.VOLUME_SETTING = volumeSlider.getValue();
+                Music.adjustVolume((float) Settings.VOLUME_SETTING, gainControl);
+            }
         });
 
         // Create a volume panel "container" to hold the slider
@@ -292,7 +292,7 @@ public class MyJFrame extends JFrame implements ActionListener {
         }
         if (e.getSource() == musicBtn) {
             // Check if music is already running
-            if(Music.isRunning()){
+            if (Music.isRunning()) {
                 Music.stop();
             } else {
                 // Otherwise, play music form the specified track

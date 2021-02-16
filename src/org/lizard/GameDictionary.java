@@ -192,10 +192,10 @@ public class GameDictionary {
         }
     }
 
-    public static void main(String[] args) {
-        for (String s : gameDictionary.verbs.keySet()) {
-            System.out.println(s);
-        }
-    }
+//    public static void main(String[] args) {
+//        for (String s : gameDictionary.verbs.keySet()) {
+//            System.out.println(s);
+//        }
+//    }
 
 }

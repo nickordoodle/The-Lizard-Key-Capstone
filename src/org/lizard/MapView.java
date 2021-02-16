@@ -95,7 +95,6 @@ public class MapView extends JPanel {
                 }
 
 
-
             }
         }
 

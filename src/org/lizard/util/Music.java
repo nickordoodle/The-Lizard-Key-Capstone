@@ -13,16 +13,15 @@ public class Music {
     private static Music musicHandler = new Music();
 
 
-
-    private Music(){
+    private Music() {
         loadTrack("princeofdarkness.wav");
     }
 
-    private Music(List<String> listOfTracks){
+    private Music(List<String> listOfTracks) {
         //TODO Implement a multi song library
     }
 
-    private static void loadTrack(String fileName){
+    private static void loadTrack(String fileName) {
         AudioInputStream audioInputStream = null;
 
         try {
@@ -49,13 +48,13 @@ public class Music {
         clip.start();
     }
 
-    public static void stop(){
+    public static void stop() {
         clip.stop();
     }
 
     // Amount is in decibels.  Enter negative amount to reduce volume.
     // Enter positive amount to raise volume.
-    public static void adjustVolume(float amount, FloatControl gainControl){
+    public static void adjustVolume(float amount, FloatControl gainControl) {
 
         try {
 
@@ -66,7 +65,7 @@ public class Music {
         }
     }
 
-    public static boolean isRunning(){
+    public static boolean isRunning() {
         try {
             return clip.isRunning();
         } catch (NullPointerException e) {
