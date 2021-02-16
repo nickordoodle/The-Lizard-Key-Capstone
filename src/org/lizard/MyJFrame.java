@@ -11,8 +11,6 @@ import org.lizard.util.Screen;
 import javax.imageio.ImageIO;
 import javax.sound.sampled.*;
 import javax.swing.*;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -72,22 +70,29 @@ public class MyJFrame extends JFrame implements ActionListener {
             e.printStackTrace();
         }
         assert img != null;
-        Image bgImg = img.getScaledInstance(540, 500, Image.SCALE_SMOOTH);
+        // Adjust image to fit game
+        Image bgImg = img.getScaledInstance(1200, 800, Image.SCALE_SMOOTH);
         ImageIcon imageIcon = new ImageIcon(bgImg);
-        frame.setContentPane(new JLabel(imageIcon));
-        imageLabel = new JLabel(new ImageIcon(img));
-        frame.setBackground(Color.black);
+
+        // Create the image label or "background"
+        imageLabel = new JLabel(imageIcon);
+        // IMPORTANT : SetContentPane is similar to setting the background
+        // It sets the root JComponent to display on the frame
+        frame.setContentPane(imageLabel);
+        frame.setBackground(Color.BLACK);
 
         //button to play the game
         enterGame = new JButton("Enter Game");
 
         int buttonWidth = 200;
         int buttonHeight = 60;
-        // Subtract width and height so we account for the button itself
-        int xCoordinate = (Screen.WIDTH - buttonWidth) / 2;
-        int yCoordinate = (Screen.HEIGHT - buttonHeight) / 2;
+
         // Set the button's properties
-        enterGame.setBounds(xCoordinate, yCoordinate, buttonWidth, buttonHeight);
+        enterGame.setBounds(
+                Screen.getLeftXCoordinateForElement(buttonWidth),
+                Screen.getTopYCoordinateForElement(buttonHeight),
+                buttonWidth,
+                buttonHeight);
         enterGame.addActionListener(this);
 
         //button to quit the game
@@ -134,14 +139,16 @@ public class MyJFrame extends JFrame implements ActionListener {
         titlePanel = new JPanel();
         titlePanel.setBackground(Color.black);
         titlePanel.setBounds(0, 80, 1500, 80);
+
         JLabel welcome = new JLabel("The Lizard Key Game!");
         welcome.setFont(new Font("IronWood", Font.BOLD, 30));
         welcome.setForeground(Color.green);
         titlePanel.add(welcome, BorderLayout.CENTER);
+
         // Add components to the frame
         frame.add(titlePanel);
         frame.add(enterGame);
-        frame.add(imageLabel);
+
         // Make the frame visible to the player
         frame.setVisible(true);
 
@@ -152,8 +159,8 @@ public class MyJFrame extends JFrame implements ActionListener {
         JFrame gameFrame = new JFrame();
         // Set title and use String text from GameInformation Constants
         gameFrame.setTitle(GameInformation.TITLE);
-        // Set frame to full screen via modifying its extended state
-        gameFrame.setSize(1600, 1060);
+        // Set the game container to a specific and absolute size
+        gameFrame.setSize(Screen.SPECIFIED_WIDTH, Screen.SPECIFIED_HEIGHT);
         gameFrame.setResizable(false);
         gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         return gameFrame;
@@ -238,6 +245,8 @@ public class MyJFrame extends JFrame implements ActionListener {
     }
 
     public void createGameView() {
+        // Create a new "empty" root/base for the new game screen components
+        frame.setContentPane(new JLabel());
 
         img = null;
         try {
@@ -246,7 +255,7 @@ public class MyJFrame extends JFrame implements ActionListener {
             e.printStackTrace();
         }
         assert img != null;
-
+        // Create, set properties and add the black puppeteer image to the view
         imageLabel = new JLabel(new ImageIcon(img));
         imageLabel.setLayout(null);
         imageLabel.setBackground(Color.black);
@@ -261,6 +270,7 @@ public class MyJFrame extends JFrame implements ActionListener {
         }
         assert img != null;
 
+        // Create, set properties and add the lizard image to the view
         imageLabel = new JLabel(new ImageIcon(img.getScaledInstance(420, 500, Image.SCALE_SMOOTH)));
         imageLabel.setLayout(null);
         imageLabel.setBackground(Color.black);
@@ -269,6 +279,7 @@ public class MyJFrame extends JFrame implements ActionListener {
 
         frame.setBackground(Color.black);
 
+        // Add the remaining elements to the view/frame
         frame.add(helpBtn);
         frame.add(quitGame);
         frame.add(musicBtn);
@@ -301,16 +312,12 @@ public class MyJFrame extends JFrame implements ActionListener {
 
         }
         if (e.getSource() == enterGame) {
-//            gameScreen(Story.introduction()); //shows main game
-            // Remove components from earlier
-            frame.getContentPane().removeAll();
-            frame.repaint();
-            frame.revalidate();
+
 
             createGameView();
 
             mapPanel = new MapView(board.rooms, board.getCurrentRoom().getName());
-            mapPanel.setBounds(100, 40, 1000, Screen.HEIGHT);
+            mapPanel.setBounds(100, 40, 1000, Screen.SCREEN_HEIGHT);
 
             frame.add(mapPanel);
             frame.revalidate();
@@ -361,7 +368,7 @@ public class MyJFrame extends JFrame implements ActionListener {
             frame.revalidate();
 
             mapPanel = new MapView(board.rooms, board.getCurrentRoom().getName());
-            mapPanel.setBounds(100, 40, 1000, Screen.HEIGHT);
+            mapPanel.setBounds(100, 40, 1000, Screen.SCREEN_HEIGHT);
             frame.add(mapPanel);
 
             // Winning condition check - player has winning key
