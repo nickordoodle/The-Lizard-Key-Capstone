@@ -387,27 +387,30 @@ public class MyJFrame extends JFrame implements ActionListener {
             }
 
             if (response.equals("The sculpture, as you now know, was just Copernicus Rex Verwirrtheit Theodore. The same red liquid from the floor streams from his eyes.") && !bossDead) {
-                frame.remove(inputPanel);
-//                frame.remove(mapPanel);
-                frame.repaint();
-                frame.revalidate();
+//                frame.remove(inputPanel);
+////                frame.remove(mapPanel);
+//                frame.repaint();
+//                frame.revalidate();
 
                 displayCombat();
-                bossDead = true;
+//                bossDead = true;
             }
             textField.setText("");
         }
 
         if (e.getSource() == numInput) {
+            frame.remove(storyPanel);
+            frame.repaint();
+            frame.revalidate();
 
             rpsGame.setText(combat.playerTakesTurn(Integer.parseInt(numInput.getText())));
             if (combat.checkGameEndingStatus().equals("Enemy won")) {
-                frame.remove(promptPanel);
-                frame.remove(scrollPane);
-                frame.repaint();
-                frame.setVisible(true);
-                frame.repaint();
-                frame.revalidate();
+//                frame.remove(promptPanel);
+//                frame.remove(scrollPane);
+//                frame.repaint();
+//                frame.setVisible(true);
+//                frame.repaint();
+//                frame.revalidate();
 
                 gameOverScreen();
                 if (clip != null) {
@@ -418,10 +421,10 @@ public class MyJFrame extends JFrame implements ActionListener {
                 if (combat.bossTime) {
                     combat.bossTime = false;
                     board.totalEnemies = -1;
-                    frame.remove(promptPanel);
-                    frame.remove(scrollPane);
-                    frame.repaint();
-                    frame.revalidate();
+//                    frame.remove(promptPanel);
+//                    frame.remove(scrollPane);
+//                    frame.repaint();
+//                    frame.revalidate();
 
                     gameScreen(actions.execute(new Event(99, board.allItems.get("sculpture"))));
                     frame.setVisible(true);
@@ -430,10 +433,10 @@ public class MyJFrame extends JFrame implements ActionListener {
                     }
 
                 } else {
-                    frame.remove(promptPanel);
-                    frame.remove(scrollPane);
-                    frame.repaint();
-                    frame.revalidate();
+//                    frame.remove(promptPanel);
+//                    frame.remove(scrollPane);
+//                    frame.repaint();
+//                    frame.revalidate();
 
 
                     if (board.totalEnemies < 0) {
