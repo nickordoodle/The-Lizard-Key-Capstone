@@ -17,7 +17,6 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.List;
 
 public class MyJFrame extends JFrame implements ActionListener {
 
@@ -40,12 +39,9 @@ public class MyJFrame extends JFrame implements ActionListener {
     JButton enterGame, quitGame, helpBtn, musicBtn;
     JSlider volumeSlider;
     JFrame frame;
+    JFrame combatWindow;
     JPanel titlePanel, volumePanel;
     JTextArea mainStoryText, instructionsTxt;
-    JTextField desicionField = new JTextField();
-    List<GameDictionary.Noun> nounList = null;
-    boolean decisionListener = false;
-    Command command = null;
     JPanel instructionsPanel, storyPanel, mapPanel;
     JPanel inputPanel;
     JTextField numInput;
@@ -166,37 +162,6 @@ public class MyJFrame extends JFrame implements ActionListener {
         return gameFrame;
     }
 
-//    public String decision(List<GameDictionary.Noun> nounList, Command command) {
-//        desicionField.setPreferredSize(new Dimension(250, 40));
-//        desicionField.setFont(new Font("Consolas", Font.BOLD, 15));
-//        desicionField.setForeground(Color.blue);
-//        desicionField.setBackground(Color.white);
-//        desicionField.setCaretColor(Color.blue);
-//
-//        inputPanel.remove(textField);
-//        frame.repaint();
-//        frame.revalidate();
-//
-//        inputPanel.add(desicionField);
-//        desicionField.requestFocusInWindow();
-//        if (!decisionListener) {
-//            desicionField.addActionListener(this);
-//            decisionListener = true;
-//        }
-//        this.nounList = nounList;
-//        this.command = command;
-//
-//        StringBuilder choices = new StringBuilder();
-//        for (int i = 0; i < nounList.size(); i++) {
-//            if (i == nounList.size() - 1) {
-//                choices.append(nounList.get(i).getName());
-//            } else {
-//                choices.append(nounList.get(i).getName()).append(" or ");
-//            }
-//        }
-//        return choices.toString();
-//    }
-
     public void createHelpWindow() {
         JFrame helpWindow = new JFrame(); //initiate help window
         Container helpContainer;
@@ -227,6 +192,7 @@ public class MyJFrame extends JFrame implements ActionListener {
         //instructions text
         instructionsTxt = new JTextArea();
         instructionsTxt.setText(board.howToPlayInGame());
+        instructionsTxt.setMargin(new Insets(10,10,10,10));
         instructionsTxt.setLineWrap(true);
         instructionsTxt.setWrapStyleWord(true);
         instructionsTxt.setForeground(Color.black);
@@ -297,9 +263,6 @@ public class MyJFrame extends JFrame implements ActionListener {
         }
         if (e.getSource() == helpBtn) {
             createHelpWindow();
-//            winScreen(); //uncomment to test win screen
-//            displayCombat(); //uncomment to test combat screen
-//            gameOverScreen(); //uncomment to test gameover screen
         }
         if (e.getSource() == musicBtn) {
             // Check if music is already running
@@ -324,45 +287,14 @@ public class MyJFrame extends JFrame implements ActionListener {
             frame.repaint();
 
         }
-//        if (e.getSource() == desicionField) {
-//            result = desicionField.getText();
-//
-//            desicionField.setText("");
-//            for (GameDictionary.Noun noun : nounList) {
-//                if (noun.getName().equals(result)) {
-//                    if (command.getNoun().length <= 1) {
-//                        command.setTargetNoun(new GameDictionary.Noun[]{noun});
-//                    } else {
-//                        command.setNoun(new GameDictionary.Noun[]{noun});
-//                    }
-//
-////                    frame.remove(instructionsPanel);
-//                    frame.remove(inputPanel);
-////                    frame.remove(mapPanel);
-//                    frame.repaint();
-//                    frame.revalidate();
-//
-//                    gameScreen(actions.execute(command));
-////                    frame.setVisible(true);//?? why
-//                    return;
-//                }
-//            }
-////            frame.remove(instructionsPanel);
-//            frame.remove(inputPanel);
-////            frame.remove(mapPanel);
-//            frame.repaint();
-//            frame.revalidate();
-//
-//            gameScreen("you gotta be specific.");
-////            frame.setVisible(true);??
-//        }
+
         if (e.getSource() == textField) {
             result = textField.getText().toLowerCase();
             Command command = parser.parse(result);
             String response = actions.execute(command);
             mainStoryText.setText(response);
 
-            //this code shows map with updted orange oval.
+            //this code removed map and adds a new one based on the navigation from user input.
             frame.remove(mapPanel);
             frame.repaint();
             frame.revalidate();
@@ -377,21 +309,15 @@ public class MyJFrame extends JFrame implements ActionListener {
             }
 
             if (board.getCurrentRoom().getEnemy() != null && !board.getCurrentRoom().getEnemy().enemyName.equals("Copernicus Rex Verwirrtheit Theodore")) {
-//                frame.remove(instructionsPanel);
-                frame.remove(inputPanel);
-//                frame.remove(mapPanel);
-                frame.repaint();
-                frame.revalidate();
+//                frame.remove(inputPanel);
+//                frame.repaint();
+//                frame.revalidate();
 
                 displayCombat();
             }
 
             if (response.equals("The sculpture, as you now know, was just Copernicus Rex Verwirrtheit Theodore. The same red liquid from the floor streams from his eyes.") && !bossDead) {
-//                frame.remove(inputPanel);
-////                frame.remove(mapPanel);
-//                frame.repaint();
-//                frame.revalidate();
-
+//
                 displayCombat();
 //                bossDead = true;
             }
@@ -405,26 +331,16 @@ public class MyJFrame extends JFrame implements ActionListener {
 
             rpsGame.setText(combat.playerTakesTurn(Integer.parseInt(numInput.getText())));
             if (combat.checkGameEndingStatus().equals("Enemy won")) {
-//                frame.remove(promptPanel);
-//                frame.remove(scrollPane);
-//                frame.repaint();
-//                frame.setVisible(true);
-//                frame.repaint();
-//                frame.revalidate();
-
+                combatWindow.dispose();
                 gameOverScreen();
                 if (clip != null) {
                     clip.stop();
                 }
             } else if (combat.checkGameEndingStatus().equals("You defeated the monster!")) {
-
+                combatWindow.dispose();
                 if (combat.bossTime) {
                     combat.bossTime = false;
                     board.totalEnemies = -1;
-//                    frame.remove(promptPanel);
-//                    frame.remove(scrollPane);
-//                    frame.repaint();
-//                    frame.revalidate();
 
                     gameScreen(actions.execute(new Event(99, board.allItems.get("sculpture"))));
                     frame.setVisible(true);
@@ -433,18 +349,13 @@ public class MyJFrame extends JFrame implements ActionListener {
                     }
 
                 } else {
-//                    frame.remove(promptPanel);
-//                    frame.remove(scrollPane);
-//                    frame.repaint();
-//                    frame.revalidate();
-
 
                     if (board.totalEnemies < 0) {
                         gameScreen("Copernicus Rex Verwirrtheit Theodore has fallen in his own world! His magic cape has fallen with him, and you are one step closer to freedom!");
+                        combatWindow.dispose();
                     } else {
                         gameScreen("You defeated the monster!");
                     }
-                    frame.setVisible(true);
                     if (clip != null) {
                         clip.stop();
                     }
@@ -460,6 +371,7 @@ public class MyJFrame extends JFrame implements ActionListener {
         //main story text
         mainStoryText = new JTextArea();
         mainStoryText.setText(initialPrint);
+        mainStoryText.setMargin(new Insets(10,10,10,10));
         mainStoryText.setLineWrap(true);
         mainStoryText.setWrapStyleWord(true);
         mainStoryText.setForeground(Color.white);
@@ -513,16 +425,13 @@ public class MyJFrame extends JFrame implements ActionListener {
 
     //fighting scene with the enemy.
     private void displayCombat() {
-        JFrame combatWindow = new JFrame(); //initiate game over window
+        combatWindow = new JFrame(); //initiate game over window
 
         //set up combat window
         combatWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         combatWindow.setSize(800, 600);
         combatWindow.setVisible(true); //makes window appear on screen
-//        combatWindow.setLayout(null);
         combatWindow.setLocation(480, 200);
-
-//        Music.playMusic(soundName); uncomment for audio
 
         rpsGame = new JTextArea();
         if (board.totalEnemies < 1) {
@@ -542,12 +451,14 @@ public class MyJFrame extends JFrame implements ActionListener {
                     "\n3: SCISSOR");
         }
 
-        rpsGame.setPreferredSize(new Dimension(500, 100));
+//        rpsGame.setPreferredSize(new Dimension(500, 100));
         rpsGame.setBounds(50, 50, 100, 100);
+        rpsGame.setMargin(new Insets(10,10,10,10));
+
         rpsGame.setFont(new Font("Sans Script", Font.BOLD, 15));
         rpsGame.setLineWrap(true);
         rpsGame.setWrapStyleWord(true);
-        rpsGame.setBorder(BorderFactory.createBevelBorder(1));
+//        rpsGame.setBorder(BorderFactory.createBevelBorder(1));
         rpsGame.setForeground(Color.orange);
         rpsGame.setBackground(Color.darkGray);
         rpsGame.setEditable(false);
@@ -594,7 +505,6 @@ public class MyJFrame extends JFrame implements ActionListener {
         JLabel victoryTitle;
         JTextArea winTextArea;
         JPanel winTextPanel;
-        JPanel winImgPanel;
 
         //set up win window
         winScreen.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -635,16 +545,10 @@ public class MyJFrame extends JFrame implements ActionListener {
         winTextPanel.add(winTextArea);
         winContainer.add(winTextPanel);
 
-        //win screen image
-//        winImgPanel = new JPanel();
-//        winImgPanel.setBackground(Color.black);
-//        winImgPanel.setBounds(0, 380, 800, 400);
-
         JLabel imgLabel = new JLabel();
         imgLabel.setIcon(new ImageIcon("lizardKey.png"));
         imgLabel.setLayout(new FlowLayout(FlowLayout.CENTER));
         winContainer.add(imgLabel);
-//        winContainer.add(winImgPanel);
     }
 
     public void gameOverScreen() {
