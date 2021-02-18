@@ -41,7 +41,7 @@ public class MyJFrame extends JFrame implements ActionListener {
     JFrame frame;
     JFrame combatWindow;
     JPanel titlePanel, volumePanel;
-    JTextArea mainStoryText, instructionsTxt;
+    JTextArea mainStoryText, instructionsTxt, inventoryText;
     JPanel instructionsPanel, storyPanel, mapPanel, inventoryPanel;
     JPanel inputPanel;
     JTextField numInput;
@@ -128,7 +128,7 @@ public class MyJFrame extends JFrame implements ActionListener {
 
         // Create a volume panel "container" to hold the slider
         volumePanel = new JPanel();
-        volumePanel.setBounds(1400, 550, 80, 250);
+        volumePanel.setBounds(1200, 550, 80, 220);
         volumePanel.add(volumeSlider);
 
         //panel with the game title
@@ -293,6 +293,7 @@ public class MyJFrame extends JFrame implements ActionListener {
             Command command = parser.parse(result);
             String response = actions.execute(command);
             mainStoryText.setText(response);
+            inventoryText.setText(player.getInventory().getItemNames().toString());
 
             //this code removed map and adds a new one based on the navigation from user input.
             frame.remove(mapPanel);
@@ -401,30 +402,40 @@ public class MyJFrame extends JFrame implements ActionListener {
         storyPanel.setBackground(Color.black);
         storyPanel.setBounds(-100, 130, 1800, 280);
 
+        //panel that contains the player's inventory
+        inventoryPanel = new JPanel();
+        inventoryPanel.setBackground(Color.BLUE);
+        inventoryPanel.setBounds(110, 800, 200, 200);
+
         //panel where the input is located.
         inputPanel = new JPanel();
         inputPanel.setBackground(Color.black);
         inputPanel.setBounds(-190, 410, 1800, 60);
 
-//        // Container to hold the inventory panel grid
-//        JScrollPane scroll = new JScrollPane(myGrid,
-//                JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
-//                JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        //inventory display as text
+        inventoryText = new JTextArea();
+        inventoryText.setMargin(new Insets(10, 10, 10, 10));
+        inventoryText.setLineWrap(true);
+        inventoryText.setWrapStyleWord(true);
+        inventoryText.setForeground(Color.ORANGE);
+        inventoryText.setFont(new Font("Comic Sans", Font.PLAIN, 18));
+        inventoryText.setEditable(false);
+        inventoryText.setBackground(Color.CYAN);
 
-        //panel where the input is located.
-//        inventoryPanel = new JPanel();
-//        inventoryPanel.setLayout(new GridLayout(2, 2));
-//        inventoryPanel.setBackground(Color.YELLOW);
-//        inventoryPanel.setBounds(450, 890, 640, 130);
+        //makes story text scrollable
+        JScrollPane scrollInventoryContainer = new JScrollPane(inventoryText);
+        scrollInventoryContainer.setPreferredSize(new Dimension(200, 200));
+        scrollInventoryContainer.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 
         // Add the scroll pane with text to its panel container
         storyPanel.add(scrollPane);
+        inventoryPanel.add(scrollInventoryContainer);
         inputPanel.add(inputFromUser);
         inputPanel.add(textField);
 
         frame.add(storyPanel);
+        frame.add(inventoryPanel);
         frame.add(inputPanel);
-//        frame.add(inventoryPanel);
 
         if (!calledOnce) {
             textField.addActionListener(this);
