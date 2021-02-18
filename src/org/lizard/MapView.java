@@ -83,6 +83,7 @@ public class MapView extends JPanel {
 
                     // Set the text to black for current room for better contrast
                     setBoxText(g, column, row, roomName, Color.BLACK);
+                    setBoxText(g, column, row, roomName, Color.BLACK);
 
                 } else {
                     // Set the text to white for visited rooms besides your current room for better contrast
@@ -91,7 +92,7 @@ public class MapView extends JPanel {
 
 
                 try {
-                    BufferedImage image = ImageIO.read(new File("./four-walls-aerial-view-v5.png"));
+                    BufferedImage image = ImageIO.read(new File("./four-walls-aerial-view-v6.png"));
                     g.drawImage(image, column * size + 350, row * size + 430, size, size, null);
 
                 } catch (IOException e) {
@@ -101,15 +102,30 @@ public class MapView extends JPanel {
         }
     }
 
-    private void setBoxText(Graphics g, int i, int j, String current, Color color) {
+    private void setBoxText(Graphics g, int numRows, int numCols, String current, Color color) {
         g.setColor(color);
-        Font font = new Font("Arial", Font.BOLD, 10);
+        Font font = new Font("Arial", Font.BOLD, 14);
         g.setFont(font);
         FontMetrics fm = g.getFontMetrics();
-        int x = ((size - fm.stringWidth(current)) / 2);
-        int y = ((size - fm.getHeight()) / 2) + fm.getAscent();
+        int offsetX = ((size - fm.stringWidth(current)) / 2);
+        int offsetY = ((size - fm.getHeight()) / 2) + fm.getAscent();
 
-        g.drawString(current, i * size + x + 350, j * size + (size / 2) + 430);
+        try {
+            String[] parsedWords = current.split(" ");
+            // The offset to adjust for every word
+            int heightOffset = 0;
+            for(int i = 0; i < parsedWords.length; i++){
+                g.drawString(
+                        parsedWords[i],
+                        numRows * size + 380,
+                        numCols * size + (size / 2) + 420 + heightOffset);
+                heightOffset += 15;
+            }
+
+        } catch (ArrayIndexOutOfBoundsException e) {
+            e.printStackTrace();
+        }
+
     }
 
 }
