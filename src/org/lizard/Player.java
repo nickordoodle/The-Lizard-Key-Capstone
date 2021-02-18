@@ -2,6 +2,7 @@ package org.lizard;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Player {
     Inventory inventory = new Inventory();
@@ -43,6 +44,15 @@ public class Player {
         public List<GameDictionary.Noun> getItems() {
             return inventory;
         }
+
+        // Returns a list of all item names that the player has in inventory
+        public List<String> getItemNames() {
+            return inventory
+                    .stream()
+                    .map(GameDictionary.Noun::getName)
+                    .collect(Collectors.toList());
+        }
+
 
         public GameDictionary.Noun drop(GameDictionary.Noun item) {
             int index = inventory.indexOf(item);
