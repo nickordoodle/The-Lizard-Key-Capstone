@@ -14,7 +14,7 @@ public class Screen {
 
     public static final int SCREEN_HEIGHT = (int) SCREEN_DIMENSIONS.getHeight();
 
-    public static final int SPECIFIED_WIDTH = 1600;
+    public static final int SPECIFIED_WIDTH = 1500;
 
     public static final int SPECIFIED_HEIGHT = 1060;
 
@@ -22,7 +22,7 @@ public class Screen {
 
     public static final int CENTER_VERTICAL = SPECIFIED_HEIGHT / 2;
 
-    public static final int MAP_SQUARE_SIZE = 80;
+    public static final int MAP_SQUARE_SIZE = 110;
 
     public static int getLeftXCoordinateForElement(int elementWidth){
         return (CENTER_HORIZONTAL - (elementWidth / 2));

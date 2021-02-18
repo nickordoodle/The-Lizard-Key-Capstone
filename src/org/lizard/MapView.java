@@ -39,23 +39,20 @@ public class MapView extends JPanel {
                     roomName = "";
                 } else {
                     // Set discovered/visited rooms that player is not currently in
-                    g.setColor(Color.BLUE);
+                    g.setColor(Color.WHITE);
                     g.fillRect(column * size + 350, row * size + 430, size, size);
-                    try {
-                        BufferedImage image = ImageIO.read(new File("./four-colored-door-room.jpeg"));
-                        g.drawImage(image, column * size + 350, row * size + 430, size, size, null);
-
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+//                    try {
+//                        BufferedImage image = ImageIO.read(new File("./four-colored-door-room.jpeg"));
+//                        g.drawImage(image, column * size + 350, row * size + 430, size, size, null);
+//
+//                    } catch (IOException e) {
+//                        e.printStackTrace();
+//                    }
 
                     roomName = rooms[column][row];
 
                 }
 
-                // Draw orange outline for all boxes
-                g.setColor(Color.orange);
-                g.drawRect(column * size + 350, row * size + 430, size, size);
                 String joined = null;
                 if (rooms[column][row] != null) {
                     String[] nameSplit = rooms[column][row].split(" ");
@@ -75,8 +72,8 @@ public class MapView extends JPanel {
                     if (!((column == 3 || column == 4 || column == 2) && row == 4)) {
 
                         try {
-                            BufferedImage image = ImageIO.read(new File("./person.jpeg"));
-                            g.drawImage(image, column * size + 350, row * size + 430, size, size, null);
+                            BufferedImage image = ImageIO.read(new File("./person-v2.png"));
+                            g.drawImage(image, column * size + 380, row * size + 450, size-20, size-50, null);
 
                         } catch (IOException e) {
                             e.printStackTrace();
@@ -89,15 +86,19 @@ public class MapView extends JPanel {
 
                 } else {
                     // Set the text to white for visited rooms besides your current room for better contrast
-                    setBoxText(g, column, row, roomName, Color.WHITE);
-
-
+                    setBoxText(g, column, row, roomName, Color.BLACK);
                 }
 
 
+                try {
+                    BufferedImage image = ImageIO.read(new File("./four-walls-aerial-view-v5.png"));
+                    g.drawImage(image, column * size + 350, row * size + 430, size, size, null);
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         }
-
     }
 
     private void setBoxText(Graphics g, int i, int j, String current, Color color) {

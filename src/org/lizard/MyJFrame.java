@@ -46,7 +46,7 @@ public class MyJFrame extends JFrame implements ActionListener {
     List<GameDictionary.Noun> nounList = null;
     boolean decisionListener = false;
     Command command = null;
-    JPanel instructionsPanel, storyPanel, mapPanel;
+    JPanel instructionsPanel, storyPanel, mapPanel, inventoryPanel;
     JPanel inputPanel;
     JTextField numInput;
     BufferedImage img;
@@ -132,7 +132,7 @@ public class MyJFrame extends JFrame implements ActionListener {
 
         // Create a volume panel "container" to hold the slider
         volumePanel = new JPanel();
-        volumePanel.setBounds(1200, 550, 80, 250);
+        volumePanel.setBounds(1400, 550, 80, 250);
         volumePanel.add(volumeSlider);
 
         //panel with the game title
@@ -317,7 +317,7 @@ public class MyJFrame extends JFrame implements ActionListener {
             createGameView();
 
             mapPanel = new MapView(board.rooms, board.getCurrentRoom().getName());
-            mapPanel.setBounds(100, 40, 1000, Screen.SCREEN_HEIGHT);
+            mapPanel.setBounds(100, 40, Screen.SPECIFIED_WIDTH, Screen.SPECIFIED_HEIGHT);
 
             frame.add(mapPanel);
             frame.revalidate();
@@ -368,7 +368,7 @@ public class MyJFrame extends JFrame implements ActionListener {
             frame.revalidate();
 
             mapPanel = new MapView(board.rooms, board.getCurrentRoom().getName());
-            mapPanel.setBounds(100, 40, 1000, Screen.SCREEN_HEIGHT);
+            mapPanel.setBounds(100, 40, Screen.SPECIFIED_WIDTH, Screen.SPECIFIED_HEIGHT);
             frame.add(mapPanel);
 
             // Winning condition check - player has winning key
@@ -494,12 +494,25 @@ public class MyJFrame extends JFrame implements ActionListener {
         inputPanel.setBackground(Color.black);
         inputPanel.setBounds(-190, 410, 1800, 60);
 
+//        // Container to hold the inventory panel grid
+//        JScrollPane scroll = new JScrollPane(myGrid,
+//                JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
+//                JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+
+        //panel where the input is located.
+//        inventoryPanel = new JPanel();
+//        inventoryPanel.setLayout(new GridLayout(2, 2));
+//        inventoryPanel.setBackground(Color.YELLOW);
+//        inventoryPanel.setBounds(450, 890, 640, 130);
+
+        // Add the scroll pane with text to its panel container
         storyPanel.add(scrollPane);
         inputPanel.add(inputFromUser);
         inputPanel.add(textField);
 
         frame.add(storyPanel);
         frame.add(inputPanel);
+//        frame.add(inventoryPanel);
 
         if (!calledOnce) {
             textField.addActionListener(this);
