@@ -39,16 +39,8 @@ public class MapView extends JPanel {
                     roomName = "";
                 } else {
                     // Set discovered/visited rooms that player is not currently in
-                    g.setColor(Color.WHITE);
+                    g.setColor(Color.LIGHT_GRAY);
                     g.fillRect(column * size + 350, row * size + 430, size, size);
-//                    try {
-//                        BufferedImage image = ImageIO.read(new File("./four-colored-door-room.jpeg"));
-//                        g.drawImage(image, column * size + 350, row * size + 430, size, size, null);
-//
-//                    } catch (IOException e) {
-//                        e.printStackTrace();
-//                    }
-
                     roomName = rooms[column][row];
 
                 }
@@ -67,13 +59,15 @@ public class MapView extends JPanel {
                     joined = String.join("", Arrays.asList(nameSplit));
                 }
 
-
+                // Draws the current room of the player
                 if (rooms[column][row] != null && joined != null && joined.equals(currentRoom)) {
                     if (!((column == 3 || column == 4 || column == 2) && row == 4)) {
 
                         try {
+                            g.setColor(Color.WHITE);
+                            g.fillRect(column * size + 350, row * size + 430, size, size);
                             BufferedImage image = ImageIO.read(new File("./person-v2.png"));
-                            g.drawImage(image, column * size + 380, row * size + 450, size-20, size-50, null);
+                            g.drawImage(image, column * size + 370, row * size + 440, size, size-25, null);
 
                         } catch (IOException e) {
                             e.printStackTrace();
@@ -82,7 +76,6 @@ public class MapView extends JPanel {
                     }
 
                     // Set the text to black for current room for better contrast
-                    setBoxText(g, column, row, roomName, Color.BLACK);
                     setBoxText(g, column, row, roomName, Color.BLACK);
 
                 } else {
@@ -104,7 +97,7 @@ public class MapView extends JPanel {
 
     private void setBoxText(Graphics g, int numRows, int numCols, String current, Color color) {
         g.setColor(color);
-        Font font = new Font("Arial", Font.BOLD, 14);
+        Font font = new Font("Arial", Font.BOLD, 12);
         g.setFont(font);
         FontMetrics fm = g.getFontMetrics();
         int offsetX = ((size - fm.stringWidth(current)) / 2);
@@ -117,7 +110,7 @@ public class MapView extends JPanel {
             for(int i = 0; i < parsedWords.length; i++){
                 g.drawString(
                         parsedWords[i],
-                        numRows * size + 380,
+                        numRows * size + 375,
                         numCols * size + (size / 2) + 420 + heightOffset);
                 heightOffset += 15;
             }
