@@ -54,7 +54,7 @@ public class TextParser {
             if (i == userInputWords.size() - 1 && ids.size() > 1) {
                 nounCandidates = new GameDictionary.Noun[ids.size()];
                 nounCandidates = ids.toArray(nounCandidates);
-                if (userInputWords.get(i).equals("room")) continue;
+                if (userInputWords.get(i).equalsIgnoreCase("room")) continue;
                 ids.forEach(word -> {
                     Arrays.stream(word.getName().split(" ")).forEach(userInputWords::remove);
                 });
