@@ -88,7 +88,7 @@ public class Actions {
     private String move(GameDictionary.Noun direction) {
         if (direction instanceof Directions.Direction) {
             // Winning condition and text if located in key room with lizard key
-            if (player.hasWinningKey && board.getCurrentRoom().getName().equals("keyRoom")) {
+            if (player.hasWinningKey && board.getCurrentRoom().getName().equalsIgnoreCase("keyRoom")) {
                 return "You use the lizard key on the door to exit.\n" +
                         "Darkness surrounds you and wind presses against your back as if the ground is being pulled beneath you.\n" +
                         "You close your eyes to avoid sickness, only for the movement around you to stop.\n" +
@@ -224,10 +224,10 @@ public class Actions {
                     return "Your not in the " + noun.getName();
                 }
             }
-            if (noun.getName().equals("inventory")) {
+            if (noun.getName().equalsIgnoreCase("inventory")) {
                 return player.getInventory().getDescription();
             }
-            if (noun.getName().equals("items")) { //examine items
+            if (noun.getName().equalsIgnoreCase("items")) { //examine items
                 return ("Items present in the " + currentRoom.getName() + " are: " + currentRoom.printItemsInRoom());
             } else if (currentRoom.has(noun) || player.getInventory().has(noun)) { //examine candle
                 return noun.getDescription();
@@ -306,7 +306,7 @@ public class Actions {
     // Increases the players health unless the player tries
     // to use healing brownies
     private String consumeHealingItem(GameDictionary.Noun noun) {
-        if (!noun.getName().equals("healing brownies")) {
+        if (!noun.getName().equalsIgnoreCase("healing brownies")) {
             return "You can't eat that!";
         }
         player.playerHP += 100;
@@ -335,7 +335,7 @@ public class Actions {
                 Item currItem = item.getValue();
                 // Check if the item is a key but not the winning key
                 if (currItem.getName().contains("key")
-                        && !currItem.getName().equals("lizard key")) {
+                        && !currItem.getName().equalsIgnoreCase("lizard key")) {
                     // Add to the player's inventory
                     inv.add(currItem);
                 }

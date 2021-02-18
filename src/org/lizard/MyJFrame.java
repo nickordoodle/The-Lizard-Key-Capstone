@@ -192,7 +192,7 @@ public class MyJFrame extends JFrame implements ActionListener {
         //instructions text
         instructionsTxt = new JTextArea();
         instructionsTxt.setText(board.howToPlayInGame());
-        instructionsTxt.setMargin(new Insets(10,10,10,10));
+        instructionsTxt.setMargin(new Insets(10, 10, 10, 10));
         instructionsTxt.setLineWrap(true);
         instructionsTxt.setWrapStyleWord(true);
         instructionsTxt.setForeground(Color.black);
@@ -304,11 +304,11 @@ public class MyJFrame extends JFrame implements ActionListener {
             frame.add(mapPanel);
 
             // Winning condition check - player has winning key
-            if (player.hasWinningKey && board.getCurrentRoom().getName().equals("keyRoom")) {
+            if (player.hasWinningKey && board.getCurrentRoom().getName().equalsIgnoreCase("keyRoom")) {
                 winScreen();
             }
 
-            if (board.getCurrentRoom().getEnemy() != null && !board.getCurrentRoom().getEnemy().enemyName.equals("Copernicus Rex Verwirrtheit Theodore")) {
+            if (board.getCurrentRoom().getEnemy() != null && !board.getCurrentRoom().getEnemy().enemyName.equalsIgnoreCase("Copernicus Rex Verwirrtheit Theodore")) {
 //                frame.remove(inputPanel);
 //                frame.repaint();
 //                frame.revalidate();
@@ -316,7 +316,7 @@ public class MyJFrame extends JFrame implements ActionListener {
                 displayCombat();
             }
 
-            if (response.equals("The sculpture, as you now know, was just Copernicus Rex Verwirrtheit Theodore. The same red liquid from the floor streams from his eyes.") && !bossDead) {
+            if (response.equalsIgnoreCase("The sculpture, as you now know, was just Copernicus Rex Verwirrtheit Theodore. The same red liquid from the floor streams from his eyes.") && !bossDead) {
 //
                 displayCombat();
 //                bossDead = true;
@@ -330,13 +330,13 @@ public class MyJFrame extends JFrame implements ActionListener {
             frame.revalidate();
 
             rpsGame.setText(combat.playerTakesTurn(Integer.parseInt(numInput.getText())));
-            if (combat.checkGameEndingStatus().equals("Enemy won")) {
+            if (combat.checkGameEndingStatus().equalsIgnoreCase("Enemy won")) {
                 combatWindow.dispose();
                 gameOverScreen();
                 if (clip != null) {
                     clip.stop();
                 }
-            } else if (combat.checkGameEndingStatus().equals("You defeated the monster!")) {
+            } else if (combat.checkGameEndingStatus().equalsIgnoreCase("You defeated the monster!")) {
                 combatWindow.dispose();
                 if (combat.bossTime) {
                     combat.bossTime = false;
@@ -371,7 +371,7 @@ public class MyJFrame extends JFrame implements ActionListener {
         //main story text
         mainStoryText = new JTextArea();
         mainStoryText.setText(initialPrint);
-        mainStoryText.setMargin(new Insets(10,10,10,10));
+        mainStoryText.setMargin(new Insets(10, 10, 10, 10));
         mainStoryText.setLineWrap(true);
         mainStoryText.setWrapStyleWord(true);
         mainStoryText.setForeground(Color.white);
@@ -466,7 +466,7 @@ public class MyJFrame extends JFrame implements ActionListener {
 
 //        rpsGame.setPreferredSize(new Dimension(500, 100));
         rpsGame.setBounds(50, 50, 100, 100);
-        rpsGame.setMargin(new Insets(10,10,10,10));
+        rpsGame.setMargin(new Insets(10, 10, 10, 10));
 
         rpsGame.setFont(new Font("Sans Script", Font.BOLD, 15));
         rpsGame.setLineWrap(true);
