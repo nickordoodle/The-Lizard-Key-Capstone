@@ -67,7 +67,9 @@ public class Room extends GameDictionary.Noun {
     }
 
     public Lock removeLock(String direction) {
-        return locks.remove(direction);
+        Lock theLock = locks.get(direction);
+        theLock.setLocked(false);
+        return theLock;
     }
 
     public void createRoom(String direction, Room newExit) {
