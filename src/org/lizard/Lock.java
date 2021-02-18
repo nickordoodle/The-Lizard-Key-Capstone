@@ -3,6 +3,7 @@ package org.lizard;
 public class Lock {
     GameDictionary.Noun noun;
     String description;
+    boolean locked = false;
     Command event;
 
     public Lock(GameDictionary.Noun noun, String description, Event event) {
@@ -21,5 +22,13 @@ public class Lock {
 
     public Command getCommand() {
         return event;
+    }
+
+    public boolean isLocked() {
+        return locked;
+    }
+
+    public void setLocked(boolean locked) {
+        this.locked = locked;
     }
 }
