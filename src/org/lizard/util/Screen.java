@@ -14,7 +14,7 @@ public class Screen {
 
     public static final int SCREEN_HEIGHT = (int) SCREEN_DIMENSIONS.getHeight();
 
-    public static final int SPECIFIED_WIDTH = 1500;
+    public static final int SPECIFIED_WIDTH = 1600;
 
     public static final int SPECIFIED_HEIGHT = 1060;
 
