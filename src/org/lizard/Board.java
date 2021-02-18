@@ -170,21 +170,27 @@ public class Board {
     public String changeCurrentRoom(String direction) {
         Map<String, Room> exits = currentRoom.getExits();
         Lock lock = currentRoom.getLock(direction);
-        if (lock != null) {
-            if ((currentRoom.getName().equals("treasureRoom") && direction.equals("west")) || currentRoom.getName().equals("river") && direction.equals("east")) {
-                return "You'll die if you try to cross the river like that.";
-            }
-            return "Seems to be locked.";
-        }
+        String result = "";
         if (exits.containsKey(direction)) {
-            currentRoom = exits.get(direction);
-            addToVisitedRooms(currentRoom.getName());
-            return ("You have entered the " + currentRoom.getName() + "\n\n" + currentRoom.getRoomDescription());
-
+            if (lock == null || !lock.isLocked()) {
+                currentRoom = exits.get(direction);
+                addToVisitedRooms(currentRoom.getName());
+                result = "You have entered the " + currentRoom.getName() + "\n\n" + currentRoom.getRoomDescription();
+            } else {
+                if ((currentRoom.getName().equals("treasureRoom") && direction.equals("west")) || currentRoom.getName().equals("river") && direction.equals("east")) {
+                    result = "I know you aren't a magician, but if you were maybe you could use something from your bag of tricks to help you cross the river.";
+                } else if (currentRoom.getName().equals("keyRoom") && direction.equals("east")) {
+                    result = "The door is locked. Maybe you can find something to open it?";
+                } else if (currentRoom.getName().equals("egyptianRoom") && direction.equals("west")) {
+                    result = "Because you in the egyptian room and you are a huge fan of 80s rock band, The Bangles. You try to walk like an Egyptian, but nothing happens. Come back here when you have rid this world of evil.";
+                } else if (currentRoom.getName().equals("egyptianRoom") && direction.equals("east")) {
+                    result = "The door is locked. You feel something sinister on the other side. It sends chills down to your bones.";
+                }
+            }
         } else {
-            return ("That is not an exit.");
+            result = "You can't go that way!";
         }
-
+        return result;
     }
 
     private NodeList XMLParser(String pathName, String tagName) {
@@ -321,12 +327,16 @@ public class Board {
                 String commandInt = itemElement.getElementsByTagName("commandInt").item(0).getTextContent();
 
                 // Create new instance of the lock in its respective room
-                allRooms.get(roomName)
-                        .addLock(commandDirection,
-                                new Lock(allItems.get(lockKey),
-                                        lockMessage,
-                                        new Event(Integer.parseInt(commandInt),
-                                                directions.getDirection(commandDirection))));
+//                allRooms.get(roomName)
+//                        .addLock(commandDirection,
+//                                new Lock(allItems.get(lockKey),
+//                                        lockMessage,
+//                                        new Event(Integer.parseInt(commandInt),
+//                                                directions.getDirection(commandDirection))));
+                Room room = allRooms.get(roomName);
+                Lock newLock = new Lock(allItems.get(lockKey), lockMessage, new Event(Integer.parseInt(commandInt), directions.getDirection(commandDirection)));
+                newLock.setLocked(true);
+                room.addLock(commandDirection, newLock);
             }
         }
     }
