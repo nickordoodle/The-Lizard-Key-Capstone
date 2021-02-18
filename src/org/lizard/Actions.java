@@ -71,6 +71,8 @@ public class Actions {
                     return CheatCode.givePlayerAllKeysBesidesLizardKey(player.getInventory(), board);
                 case 11:
                     return CheatCode.givePlayerSpecificItem(noun, player.getInventory(), board);
+//                case 12:
+//                    return CheatCode.openAllRooms(noun, player.getInventory(), board);
                 case 99:
                     return bossAvailable("west", noun);
                 case 1000:
@@ -365,6 +367,22 @@ public class Actions {
 
             return (requestedItem.getName() + " added to inventory!");
         }
+
+//        static String openAllRooms(Map<String, Room> allRooms, Player.Inventory inv, final Board board) {
+//
+//            try {
+//                // Iterate over the map entries
+//                for (Map.Entry<String, Room> room : allRooms.entrySet()) {
+//                    // Check if it is the requested item
+//                    roomsVisited.add(room);
+//
+//                }
+//            } catch (NullPointerException e) {
+//                return "Oops! Cheat code all rooms didn't work";
+//            }
+//
+//            return ("All rooms marked as visited!");
+//        }
 
 
     }
