@@ -259,7 +259,7 @@ public class Board {
                     allRooms.get(roomName).addItemToRoom(roomItem);
                 } else {
                     GameDictionary.Noun noun;
-                    if (commandDirection == "") {
+                    if (commandDirection.equals("")) {
                         noun = allItems.get(lockKey);
                     } else {
                         noun = directions.getDirection(commandDirection);
@@ -332,22 +332,23 @@ public class Board {
     }
 
     String howToPlayInGame() {
-        return """
-                                
+        return """             
                 HOW TO PLAY:\s
-
-                Look for clues, and don't be afraid to explore!
-                To perform an action, type your command in the text box and hit enter.
+                
+                Welcome to a text-based game, The Lizard Key! 
+                Your path is a dangerous one, there are two enemies lurking in the shadows that you must have the courage to defeat. Only then can you face your biggest opponent Mr.Rex the sole reason you are trapped in this frightful universe. After defeating Mr.Rex get the 'Lizard Key' and unlock your door of salvation in the 'Key Room'. Look for clues, pick up items, and don't be afraid to explore, but most of all stay alive! 
+                
+                To perform an action, type your command in the text field box and hit enter.
 
                 Examples of possible commands are:\s
 
-                'rules' - to see instructions.
-
-                'go east' - to travel east.
-
-                'go north' - to travel north.
+                'go east' - to travel east, or substitute 'east' with west, south, or north to travel in a specified direction.
 
                 'examine room' - to see items and doors in current room.
+                
+                'grab healing brownies' - to get and store them in your inventory for later use.
+                
+                'eat healing brownies' - to eat healing brownies and heal yourself.
 
                 'examine locked chest' - to examine the locked chest (locked chest can be substituted for any item in your current room).
 
@@ -357,36 +358,50 @@ public class Board {
 
                 'drop knife' - to drop a knife (substitute knife for item you wish to drop from your inventory).
 
-                'use skeleton key on east' - some doors or items may be locked. Using the proper key/item on the proper item or direction will\s""";
+                'get skeleton key' - to get and store skeleton key in your inventory to unlock a suitable door.
+
+                'use skeleton key on east' - to unlock a locked door to the east of the Egyptian Room.
+                
+                'use chest key on locked chest' - to unlock locked chest.
+                
+                'use magic cape on west' - to go over the river to the west of Treasure Room and 'use magic cape on east' to go back to Treasure Room.\s""";
 
     }
 
     static String howToPlay() {
-        return "\n" + "\n" + "\n" + "\n" + "\n" + "\n" +
-                "How to Play: \n" +
-                "\n" +
-                "Look for clues, and don't be afraid to explore!\n" +
-                "To perform an action, type your command in the text box and hit enter.\n" +
-                "\n" +
-                "Examples of possible commands are: \n" +
-                "\n" +
-                "'rules' - to see instructions.\n" +
-                "\n" +
-                "'go east' - to travel east.\n" +
-                "\n" +
-                "'go north' - to travel north.\n" +
-                "\n" +
-                "'examine room' - to see items and doors in current room.\n" +
-                "\n" +
-                "'examine locked chest' - to examine the locked chest (locked chest can be substituted for any item in your current room).\n" +
-                "\n" +
-                "'inventory' - to see items in your inventory.\n" +
-                "\n" +
-                "'grab knife' - to grab a knife (substitute knife for item you wish to pick up).\n" +
-                "\n" +
-                "'drop knife' - to drop a knife (substitute knife for item you wish to drop from your inventory).\n" +
-                "\n" +
-                "'use skeleton key on east' - some doors or items may be locked. Using the proper key/item on the proper item or direction will ";
+        return """
+                How to Play:\s
+
+                Welcome to a text-based game, The Lizard Key! 
+                Your path is a dangerous one, there are two enemies lurking in the shadows that you must have the courage to defeat. Only then can you face your biggest opponent Mr.Rex the sole reason you are trapped in this frightful universe. After defeating Mr.Rex get the 'Lizard Key' and unlock your door of salvation in the 'Key Room'. Look for clues, pick up items, and don't be afraid to explore, but most of all stay alive!
+                
+                To perform an action, type your command in the text field box and hit enter.
+
+                Examples of possible commands are:\s
+
+                'go east' - to travel east, or substitute 'east' with west, south, or north to travel in a specified direction.
+
+                'examine room' - to see items and doors in current room.
+                
+                'grab healing brownies' - to get and store healing brownies in your inventory for later use.
+                
+                'eat healing brownies' - to eat healing brownies and heal yourself.
+
+                'examine locked chest' - to examine the locked chest (locked chest can be substituted for any item in your current room).
+
+                'inventory' - to see items in your inventory.
+
+                'grab knife' - to grab a knife and store a knife in your inventory (substitute knife for item you wish to pick up).
+
+                'drop knife' - to drop a knife (substitute knife for item you wish to drop from your inventory).
+                
+                'get skeleton key' - to get and store skeleton key in your inventory to unlock a suitable door.
+
+                'use skeleton key on east' - to unlock a locked door to the east of the Egyptian Room.
+                                
+                'use chest key on locked chest' - to unlock locked chest.
+                                
+                'use magic cape on west' - to go over the river to the west of Treasure Room and 'use magic cape on east' to go back to Treasure Room.\s""";
 
     }
 
@@ -398,7 +413,7 @@ public class Board {
 
                 Like many others before you, you have become a pet to a man named Copernicus Rex Verwirrtheit Theodore, locksmith, creator of worlds, and master of confusion. With no two worlds being the same, Mister Theodore has created each maze uniquely odd and fantastically tumultuous for every mouse searching for its cheese.
                                 
-                It is up to you to find the way out of this prison, for if you do not, you will forever be in an endless loop of rooms that lead to other rooms,the final and single exit a mystery never to be given away freely.""";
+                It is up to you to find the way out of this prison and away from Mister Theodore's grasp, for if you do not, you will forever be in an endless loop of rooms that lead to other rooms,the final and single exit a mystery never to be given away freely.""";
 
     }
 }
