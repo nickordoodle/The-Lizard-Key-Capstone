@@ -36,7 +36,7 @@ public class MyJFrame extends JFrame implements ActionListener {
     JLabel inputFromUser = new JLabel();
     JLabel imageLabel;
     JTextField textField = new JTextField();
-    JButton enterGame, quitGame, helpBtn, musicBtn;
+    JButton enterGame, quitGame, playAgain, helpBtn, musicBtn;
     JSlider volumeSlider;
     JFrame frame;
     JFrame combatWindow;
@@ -95,16 +95,29 @@ public class MyJFrame extends JFrame implements ActionListener {
         quitGame = new JButton("Quit Game");
         quitGame.setBounds(990, 415, 120, 40);
         quitGame.addActionListener(this);
+        quitGame.setBackground(Color.black);
+        quitGame.setForeground(Color.orange);
+
+        //button to play the game again
+        playAgain = new JButton("Play Again");
+        playAgain.setBounds(990, 415, 120, 40);
+        playAgain.addActionListener(this);
+        playAgain.setBackground(Color.black);
+        playAgain.setForeground(Color.orange);
 
         //button to get the help window that shows instructions to the game.
         helpBtn = new JButton("Guidance");
         helpBtn.setBounds(1120, 415, 120, 40);
         helpBtn.addActionListener(this);
+        helpBtn.setBackground(Color.black);
+        helpBtn.setForeground(Color.orange);
 
         //button to get the help window that shows instructions to the game.
-        musicBtn = new JButton("Music");
-        musicBtn.setBounds(1250, 415, 120, 40);
+        musicBtn = new JButton("ON/OFF");
+        musicBtn.setBounds(1400, 415, 120, 40);
         musicBtn.addActionListener(this);
+        musicBtn.setBackground(Color.black);
+        musicBtn.setForeground(Color.orange);
 
         FloatControl gainControl =
                 (FloatControl) Music.clip.getControl(FloatControl.Type.MASTER_GAIN);
@@ -128,7 +141,9 @@ public class MyJFrame extends JFrame implements ActionListener {
 
         // Create a volume panel "container" to hold the slider
         volumePanel = new JPanel();
-        volumePanel.setBounds(1200, 550, 80, 220);
+        volumePanel.setBounds(1400, 550, 80, 250);
+//        volumePanel.setBackground(Color.black);
+//        volumePanel.setForeground(Color.orange);
         volumePanel.add(volumeSlider);
 
         //panel with the game title
@@ -244,13 +259,42 @@ public class MyJFrame extends JFrame implements ActionListener {
         frame.add(imageLabel); //shows correct location but doesn't remove img
 
         frame.setBackground(Color.black);
+        JPanel emptySpace1 = new JPanel();
+        JPanel emptySpace2 = new JPanel();
+        JPanel emptySpace3 = new JPanel();
+        emptySpace1.setBackground(Color.black);
+        emptySpace2.setBackground(Color.black);
+        emptySpace3.setBackground(Color.black);
 
-        // Add the remaining elements to the view/frame
-        frame.add(helpBtn);
-        frame.add(quitGame);
-        frame.add(musicBtn);
-        frame.add(volumePanel);
-        titlePanel.setBounds(50, 50, 450, 80);
+        JLabel musicControlLabel = new JLabel("Music Controls");
+        musicControlLabel.setBackground(Color.black);
+        musicControlLabel.setForeground(Color.white);
+        musicControlLabel.setFont(new Font("Comic Sans", Font.PLAIN, 16));
+
+        JMenuBar menu = new JMenuBar();
+        menu.setLayout(new GridLayout(0,1));
+        menu.setBounds(1400,130,150,360);
+        menu.setBackground(Color.black);
+
+        menu.add(helpBtn);
+        menu.add(emptySpace1);
+
+        menu.add(quitGame);
+        menu.add(emptySpace2);
+
+        menu.add(playAgain);
+        menu.add(emptySpace3);
+        menu.add(musicControlLabel);
+
+        frame.add(menu);
+
+        JMenuBar mPanel = new JMenuBar();
+        mPanel.setLayout(new GridLayout(1,2));
+        mPanel.setBounds(1400,500,150,300);
+        mPanel.add(musicBtn);
+        mPanel.add(volumePanel);
+        frame.add(mPanel);
+        titlePanel.setBounds(50, 50, 400, 300);
         frame.add(titlePanel);
         gameScreen(board.introduction());
     }
