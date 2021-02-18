@@ -39,23 +39,20 @@ public class MapView extends JPanel {
                     roomName = "";
                 } else {
                     // Set discovered/visited rooms that player is not currently in
-                    g.setColor(Color.BLUE);
+                    g.setColor(Color.WHITE);
                     g.fillRect(column * size + 350, row * size + 430, size, size);
-                    try {
-                        BufferedImage image = ImageIO.read(new File("./four-colored-door-room.jpeg"));
-                        g.drawImage(image, column * size + 350, row * size + 430, size, size, null);
-
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+//                    try {
+//                        BufferedImage image = ImageIO.read(new File("./four-colored-door-room.jpeg"));
+//                        g.drawImage(image, column * size + 350, row * size + 430, size, size, null);
+//
+//                    } catch (IOException e) {
+//                        e.printStackTrace();
+//                    }
 
                     roomName = rooms[column][row];
 
                 }
 
-                // Draw orange outline for all boxes
-                g.setColor(Color.orange);
-                g.drawRect(column * size + 350, row * size + 430, size, size);
                 String joined = null;
                 if (rooms[column][row] != null) {
                     String[] nameSplit = rooms[column][row].split(" ");
@@ -75,8 +72,8 @@ public class MapView extends JPanel {
                     if (!((column == 3 || column == 4 || column == 2) && row == 4)) {
 
                         try {
-                            BufferedImage image = ImageIO.read(new File("./person.jpeg"));
-                            g.drawImage(image, column * size + 350, row * size + 430, size, size, null);
+                            BufferedImage image = ImageIO.read(new File("./person-v2.png"));
+                            g.drawImage(image, column * size + 380, row * size + 450, size-20, size-50, null);
 
                         } catch (IOException e) {
                             e.printStackTrace();
@@ -86,29 +83,49 @@ public class MapView extends JPanel {
 
                     // Set the text to black for current room for better contrast
                     setBoxText(g, column, row, roomName, Color.BLACK);
+                    setBoxText(g, column, row, roomName, Color.BLACK);
 
                 } else {
                     // Set the text to white for visited rooms besides your current room for better contrast
-                    setBoxText(g, column, row, roomName, Color.WHITE);
-
-
+                    setBoxText(g, column, row, roomName, Color.BLACK);
                 }
 
 
+                try {
+                    BufferedImage image = ImageIO.read(new File("./four-walls-aerial-view-v6.png"));
+                    g.drawImage(image, column * size + 350, row * size + 430, size, size, null);
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         }
-
     }
 
-    private void setBoxText(Graphics g, int i, int j, String current, Color color) {
+    private void setBoxText(Graphics g, int numRows, int numCols, String current, Color color) {
         g.setColor(color);
-        Font font = new Font("Arial", Font.BOLD, 10);
+        Font font = new Font("Arial", Font.BOLD, 14);
         g.setFont(font);
         FontMetrics fm = g.getFontMetrics();
-        int x = ((size - fm.stringWidth(current)) / 2);
-        int y = ((size - fm.getHeight()) / 2) + fm.getAscent();
+        int offsetX = ((size - fm.stringWidth(current)) / 2);
+        int offsetY = ((size - fm.getHeight()) / 2) + fm.getAscent();
 
-        g.drawString(current, i * size + x + 350, j * size + (size / 2) + 430);
+        try {
+            String[] parsedWords = current.split(" ");
+            // The offset to adjust for every word
+            int heightOffset = 0;
+            for(int i = 0; i < parsedWords.length; i++){
+                g.drawString(
+                        parsedWords[i],
+                        numRows * size + 380,
+                        numCols * size + (size / 2) + 420 + heightOffset);
+                heightOffset += 15;
+            }
+
+        } catch (ArrayIndexOutOfBoundsException e) {
+            e.printStackTrace();
+        }
+
     }
 
 }
