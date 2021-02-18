@@ -1,6 +1,7 @@
 package org.lizard;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Actions {
     private final Board board;
@@ -73,6 +74,8 @@ public class Actions {
                     return CheatCode.givePlayerSpecificItem(noun, player.getInventory(), board);
 //                case 12:
 //                    return CheatCode.openAllRooms(noun, player.getInventory(), board);
+                case 13:
+                    return CheatCode.givePlayerAllItemsExceptLizardKey(player.getInventory(), board);
                 case 99:
                     return bossAvailable("west", noun);
                 case 1000:
@@ -367,6 +370,22 @@ public class Actions {
 
             return (requestedItem.getName() + " added to inventory!");
         }
+
+        static String givePlayerAllItemsExceptLizardKey(Player.Inventory inv, final Board board) {
+
+            try {
+                Map<String, Item> itemsMap = board.getAllItems();
+                List<Item> items = new ArrayList<>(itemsMap.values());
+                items.removeIf(item -> item.getName().equalsIgnoreCase("lizard key"));
+                items.forEach(inv::add);
+
+            } catch (NullPointerException e) {
+                return "Oops! Cheat code get all items didn't work";
+            }
+
+            return ("All items added to inventory!");
+        }
+
 
 //        static String openAllRooms(Map<String, Room> allRooms, Player.Inventory inv, final Board board) {
 //
