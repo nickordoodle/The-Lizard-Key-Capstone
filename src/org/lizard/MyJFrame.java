@@ -11,12 +11,14 @@ import org.lizard.util.Screen;
 import javax.imageio.ImageIO;
 import javax.sound.sampled.*;
 import javax.swing.*;
+import javax.swing.text.NumberFormatter;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.text.NumberFormat;
 
 public class MyJFrame extends JFrame implements ActionListener {
 
@@ -36,15 +38,15 @@ public class MyJFrame extends JFrame implements ActionListener {
     JLabel inputFromUser = new JLabel();
     JLabel imageLabel;
     JTextField textField = new JTextField();
-    JButton enterGame, quitGame, playAgain, helpBtn, musicBtn;
+    JButton enterGameBtn, quitGameBtn, playAgainBtn, helpBtn, musicBtn;
     JSlider volumeSlider;
     JFrame frame;
     JFrame combatWindow;
     JPanel titlePanel, volumePanel;
-    JTextArea mainStoryText, instructionsTxt, inventoryText;
+    JTextArea mainStoryText, instructionsText, inventoryText;
     JPanel instructionsPanel, storyPanel, mapPanel, inventoryPanel;
     JPanel inputPanel;
-    JTextField numInput;
+    JFormattedTextField numInput;
     BufferedImage img;
 
     boolean calledOnce = false;
@@ -78,32 +80,32 @@ public class MyJFrame extends JFrame implements ActionListener {
         frame.setBackground(Color.BLACK);
 
         //button to play the game
-        enterGame = new JButton("Enter Game");
+        enterGameBtn = new JButton("Enter Game");
 
         int buttonWidth = 200;
         int buttonHeight = 60;
 
         // Set the button's properties
-        enterGame.setBounds(
+        enterGameBtn.setBounds(
                 Screen.getLeftXCoordinateForElement(buttonWidth),
                 Screen.getTopYCoordinateForElement(buttonHeight),
                 buttonWidth,
                 buttonHeight);
-        enterGame.addActionListener(this);
+        enterGameBtn.addActionListener(this);
 
         //button to quit the game
-        quitGame = new JButton("Quit Game");
-        quitGame.setBounds(990, 415, 120, 40);
-        quitGame.addActionListener(this);
-        quitGame.setBackground(Color.black);
-        quitGame.setForeground(Color.orange);
+        quitGameBtn = new JButton("Quit Game");
+        quitGameBtn.setBounds(990, 415, 120, 40);
+        quitGameBtn.addActionListener(this);
+        quitGameBtn.setBackground(Color.black);
+        quitGameBtn.setForeground(Color.orange);
 
         //button to play the game again
-        playAgain = new JButton("Play Again");
-        playAgain.setBounds(990, 415, 120, 40);
-        playAgain.addActionListener(this);
-        playAgain.setBackground(Color.black);
-        playAgain.setForeground(Color.orange);
+        playAgainBtn = new JButton("Play Again");
+        playAgainBtn.setBounds(990, 415, 120, 40);
+        playAgainBtn.addActionListener(this);
+        playAgainBtn.setBackground(Color.black);
+        playAgainBtn.setForeground(Color.orange);
 
         //button to get the help window that shows instructions to the game.
         helpBtn = new JButton("Guidance");
@@ -158,7 +160,7 @@ public class MyJFrame extends JFrame implements ActionListener {
 
         // Add components to the frame
         frame.add(titlePanel);
-        frame.add(enterGame);
+        frame.add(enterGameBtn);
 
         // Make the frame visible to the player
         frame.setVisible(true);
@@ -206,18 +208,18 @@ public class MyJFrame extends JFrame implements ActionListener {
         instructionsPanel.setLayout(new BorderLayout());
 
         //instructions text
-        instructionsTxt = new JTextArea();
-        instructionsTxt.setText(board.howToPlayInGame());
-        instructionsTxt.setMargin(new Insets(20, 20, 20, 20));
-        instructionsTxt.setLineWrap(true);
-        instructionsTxt.setWrapStyleWord(true);
-        instructionsTxt.setForeground(Color.white);
-        instructionsTxt.setFont(new Font("Comic Sans", Font.BOLD, 15));
-        instructionsTxt.setEditable(false);
-        instructionsTxt.setBackground(Color.darkGray);
+        instructionsText = new JTextArea();
+        instructionsText.setText(board.howToPlayInGame());
+        instructionsText.setMargin(new Insets(20, 20, 20, 20));
+        instructionsText.setLineWrap(true);
+        instructionsText.setWrapStyleWord(true);
+        instructionsText.setForeground(Color.white);
+        instructionsText.setFont(new Font("Comic Sans", Font.BOLD, 15));
+        instructionsText.setEditable(false);
+        instructionsText.setBackground(Color.darkGray);
 
         //makes story text scrollable
-        JScrollPane scrollPane = new JScrollPane(instructionsTxt);
+        JScrollPane scrollPane = new JScrollPane(instructionsText);
         scrollPane.setPreferredSize(new Dimension(720, 500));
         scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 
@@ -280,10 +282,10 @@ public class MyJFrame extends JFrame implements ActionListener {
         menu.add(helpBtn);
         menu.add(emptySpace1);
 
-        menu.add(quitGame);
+        menu.add(quitGameBtn);
         menu.add(emptySpace2);
 
-        menu.add(playAgain);
+        menu.add(playAgainBtn);
         menu.add(emptySpace3);
         menu.add(musicControlLabel);
 
@@ -302,16 +304,21 @@ public class MyJFrame extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == quitGame) {
+        if (e.getSource() == quitGameBtn) {
             frame.dispose();
             System.exit(0);
         }
         if (e.getSource() == helpBtn) {
             createHelpWindow();
         }
+        if (e.getSource() == playAgainBtn) {
+            // Start the game over
+            restartGame();
+        }
         if (e.getSource() == musicBtn) {
             // Check if music is already running
             if (Music.isRunning()) {
+                // Stop music if it was running
                 Music.stop();
             } else {
                 // Otherwise, play music form the specified track
@@ -319,7 +326,7 @@ public class MyJFrame extends JFrame implements ActionListener {
             }
 
         }
-        if (e.getSource() == enterGame) {
+        if (e.getSource() == enterGameBtn) {
 
 
             createGameView();
@@ -338,10 +345,9 @@ public class MyJFrame extends JFrame implements ActionListener {
             Command command = parser.parse(result);
             String response = actions.execute(command);
             mainStoryText.setText(response);
-            String inventoryAsString = player.getInventory().getItemNames().toString();
-            inventoryAsString = inventoryAsString.replace("[", "");
-            inventoryAsString = inventoryAsString.replace("]", "");
-            inventoryText.setText(inventoryAsString);
+
+            // Create and set fields for the inventory
+            createInventoryDisplay();
 
             //this code removed map and adds a new one based on the navigation from user input.
             frame.remove(mapPanel);
@@ -358,17 +364,11 @@ public class MyJFrame extends JFrame implements ActionListener {
             }
 
             if (board.getCurrentRoom().getEnemy() != null && !board.getCurrentRoom().getEnemy().enemyName.equalsIgnoreCase("Copernicus Rex Verwirrtheit Theodore")) {
-//                frame.remove(inputPanel);
-//                frame.repaint();
-//                frame.revalidate();
-
                 displayCombat();
             }
 
             if (response.equalsIgnoreCase("The sculpture, as you now know, was just Copernicus Rex Verwirrtheit Theodore. The same red liquid from the floor streams from his eyes.") && !bossDead) {
-//
                 displayCombat();
-//                bossDead = true;
             }
             textField.setText("");
         }
@@ -378,7 +378,7 @@ public class MyJFrame extends JFrame implements ActionListener {
             frame.repaint();
             frame.revalidate();
 
-            rpsGame.setText(combat.playerTakesTurn(Integer.parseInt(numInput.getText())));
+            rpsGame.setText(combat.playerTakesTurn(numInput.getText()));
             if (combat.checkGameEndingStatus().equalsIgnoreCase("Enemy won")) {
                 combatWindow.dispose();
                 gameOverScreen();
@@ -413,6 +413,21 @@ public class MyJFrame extends JFrame implements ActionListener {
             }
             numInput.setText("");
         }
+    }
+
+    private void createInventoryDisplay() {
+        String inventoryAsString = player.getInventory().getItemNames().toString();
+        inventoryAsString = inventoryAsString.replace("[", "");
+        inventoryAsString = inventoryAsString.replace("]", "");
+        inventoryText.setText(inventoryAsString);
+    }
+
+    // Restarts the game to the initial splash screen.
+    // Completely disposes the current game and its resources
+    // Reentry point is all the way back to main methof
+    private void restartGame() {
+        frame.dispose();
+        Main.main(null);
     }
 
     private void gameScreen(String initialPrint) {
@@ -542,7 +557,7 @@ public class MyJFrame extends JFrame implements ActionListener {
         rpsGame.setBackground(Color.black);
         rpsGame.setEditable(false);
 
-        numInput = new JTextField();
+        numInput = new JFormattedTextField();
         numInput.setPreferredSize(new Dimension(500, 50));
         numInput.setBackground(Color.white);
 
