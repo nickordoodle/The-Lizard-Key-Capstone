@@ -36,7 +36,7 @@ public class Combat {
         int randEnemy = rand.nextInt(3) + 1;
         int playerNumberAnswer = -1;
         // validate player entered correct input
-        if(!isValidCombatInput(playerInputDecision)){
+        if (!isValidCombatInput(playerInputDecision)) {
             return ("You entered an invalid answer. " +
                     "\nPlease choose 1, 2, or 3" +
                     " for ROCK, PAPER, or SCISSORS");
@@ -110,7 +110,7 @@ public class Combat {
         try {
             int numInputFromString = Integer.parseInt(input);
             // Check for valid input which is the integer range 1-3 inclusive
-            if (numInputFromString < 1 || numInputFromString > 3){
+            if (numInputFromString < 1 || numInputFromString > 3) {
                 return false;
             }
             return true;

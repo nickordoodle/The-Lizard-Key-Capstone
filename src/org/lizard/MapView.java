@@ -67,7 +67,7 @@ public class MapView extends JPanel {
                             g.setColor(Color.WHITE);
                             g.fillRect(column * size + 350, row * size + 430, size, size);
                             BufferedImage image = ImageIO.read(new File("./person-v2.png"));
-                            g.drawImage(image, column * size + 370, row * size + 440, size, size-25, null);
+                            g.drawImage(image, column * size + 370, row * size + 440, size, size - 25, null);
 
                         } catch (IOException e) {
                             e.printStackTrace();
@@ -107,7 +107,7 @@ public class MapView extends JPanel {
             String[] parsedWords = current.split(" ");
             // The offset to adjust for every word
             int heightOffset = 0;
-            for(int i = 0; i < parsedWords.length; i++){
+            for (int i = 0; i < parsedWords.length; i++) {
                 g.drawString(
                         parsedWords[i],
                         numRows * size + 375,

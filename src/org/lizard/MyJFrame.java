@@ -273,8 +273,8 @@ public class MyJFrame extends JFrame implements ActionListener {
         musicControlLabel.setFont(new Font("Comic Sans", Font.PLAIN, 16));
 
         JMenuBar menu = new JMenuBar();
-        menu.setLayout(new GridLayout(0,1));
-        menu.setBounds(1400,130,150,360);
+        menu.setLayout(new GridLayout(0, 1));
+        menu.setBounds(1400, 130, 150, 360);
         menu.setBackground(Color.black);
 
         menu.add(helpBtn);
@@ -290,8 +290,8 @@ public class MyJFrame extends JFrame implements ActionListener {
         frame.add(menu);
 
         JMenuBar mPanel = new JMenuBar();
-        mPanel.setLayout(new GridLayout(1,2));
-        mPanel.setBounds(1400,500,150,300);
+        mPanel.setLayout(new GridLayout(1, 2));
+        mPanel.setBounds(1400, 500, 150, 300);
         mPanel.add(musicBtn);
         mPanel.add(volumePanel);
         frame.add(mPanel);
@@ -417,9 +417,11 @@ public class MyJFrame extends JFrame implements ActionListener {
     }
 
     private void setInventoryText() {
-        String inventoryAsString = player.getInventory().getItemNames().toString();
+        // Adds a space to adjust the first item each time
+        String inventoryAsString = " " + player.getInventory().getItemNames().toString();
         inventoryAsString = inventoryAsString.replace("[", "");
         inventoryAsString = inventoryAsString.replace("]", "");
+        inventoryAsString = inventoryAsString.replace(",", "\n");
         inventoryText.setText(inventoryAsString);
     }
 
@@ -427,7 +429,6 @@ public class MyJFrame extends JFrame implements ActionListener {
         int hp = player.getPlayerHP();
         hpText.setText(String.valueOf(hp));
     }
-
 
 
     // Restarts the game to the initial splash screen.
@@ -480,7 +481,7 @@ public class MyJFrame extends JFrame implements ActionListener {
         invPanelHeader.setForeground(Color.WHITE);
         inventoryPanel.add(invPanelHeader);
         inventoryPanel.setBackground(Color.BLACK);
-        inventoryPanel.setBounds(110, 460, 180, 350);
+        inventoryPanel.setBounds(110, 460, 220, 350);
 
         //panel where the input is located.
         inputPanel = new JPanel();
@@ -559,7 +560,7 @@ public class MyJFrame extends JFrame implements ActionListener {
         rpsGame = new JTextArea();
         if (board.totalEnemies < 1) {
             rpsGame.setText("BOSS FIGHT!\n\n"
-                    +"You have finally come face to face with Copernicus Rex Verwirrtheit Theodore!" +
+                    + "You have finally come face to face with Copernicus Rex Verwirrtheit Theodore!" +
                     "This is your chance to defeat your captor, and gain the chance to find the key to your freedom." +
                     "To defeat him, you must win in combat... of rock, paper, scissors.\n" +
                     "\nPlease choose from the following numbers:" +
@@ -568,7 +569,7 @@ public class MyJFrame extends JFrame implements ActionListener {
                     "\n3: SCISSOR");
         } else {
             rpsGame.setText("MONSTER FIGHT!\n\n"
-                    +"You have come face to face with a monster!" +
+                    + "You have come face to face with a monster!" +
                     "To defeat it, you must win in combat... of rock, paper, scissors.\n" +
                     "\nPlease choose from the following numbers:" +
                     "\n1: ROCK" +
@@ -672,11 +673,11 @@ public class MyJFrame extends JFrame implements ActionListener {
 
         JLabel imgLabel = new JLabel();
         imgLabel.setIcon(new ImageIcon("lizardKey.png"));
-        imgLabel.setBounds(20,120,450,600);
+        imgLabel.setBounds(20, 120, 450, 600);
 
         JMenuBar btnBar = new JMenuBar();
-        btnBar.setLayout(new GridLayout(0,1));
-        btnBar.setBounds(400,440,360,100);
+        btnBar.setLayout(new GridLayout(0, 1));
+        btnBar.setBounds(400, 440, 360, 100);
         btnBar.setBackground(Color.black);
         btnBar.add(playAgainBtn);
         btnBar.add(quitGameBtn);
@@ -739,8 +740,8 @@ public class MyJFrame extends JFrame implements ActionListener {
         gPanel.add(imgLabel);
 
         JMenuBar btnsBar = new JMenuBar();
-        btnsBar.setLayout(new GridLayout(0,1));
-        btnsBar.setBounds(220,530,360,100);
+        btnsBar.setLayout(new GridLayout(0, 1));
+        btnsBar.setBounds(220, 530, 360, 100);
         btnsBar.setBackground(Color.black);
         btnsBar.add(playAgainBtn);
         btnsBar.add(quitGameBtn);

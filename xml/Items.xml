@@ -8,7 +8,9 @@
         <lockMessage></lockMessage>
         <commandInt></commandInt>
         <commandDirection></commandDirection>
-        <description>A box, appearing as any other box of matches you are accustomed to from your world. On the front, the box shows a warning, but the meaning isn't quite clear. The picture shows an all black match lighting a candle, a plus sign, and circular lines that appear to be wind.
+        <description>A box, appearing as any other box of matches you are accustomed to from your world. On the front,
+            the box shows a warning, but the meaning isn't quite clear. The picture shows an all black match lighting a
+            candle, a plus sign, and circular lines that appear to be wind.
         </description>
     </item>
     <item>
@@ -17,7 +19,9 @@
         <canGrab>true</canGrab>
         <roomName>keyRoom</roomName>
         <lockKey>matches</lockKey>
-        <lockMessage>You strike a match, setting the candle aflame. Like a hurricane, wind gusts around you, lifting your feet from the ground. With just a blink, you have moved to a new room, barely catching your footing as the wind disappears.
+        <lockMessage>You strike a match, setting the candle aflame. Like a hurricane, wind gusts around you, lifting
+            your feet from the ground. With just a blink, you have moved to a new room, barely catching your footing as
+            the wind disappears.
         </lockMessage>
         <commandInt>2</commandInt>
         <commandDirection>west</commandDirection>
@@ -32,7 +36,8 @@
         <lockMessage></lockMessage>
         <commandInt></commandInt>
         <commandDirection></commandDirection>
-        <description>Long and heavy, rusted on a lizard's belly. A key of this shape must be used for an escape. Find your own entry, the alternative could be deadly.
+        <description>Long and heavy, rusted on a lizard's belly. A key of this shape must be used for an escape. Find
+            your own entry, the alternative could be deadly.
         </description>
     </item>
     <item>
@@ -68,7 +73,8 @@
         <lockMessage></lockMessage>
         <commandInt></commandInt>
         <commandDirection></commandDirection>
-        <description>A woman in a color block dress points in the direction of the locked chest. Her other hand is placed where her mouth would be on her headless body.
+        <description>A woman in a color block dress points in the direction of the locked chest. Her other hand is
+            placed where her mouth would be on her headless body.
         </description>
     </item>
     <item>
@@ -80,7 +86,9 @@
         <lockMessage></lockMessage>
         <commandInt></commandInt>
         <commandDirection></commandDirection>
-        <description>Smoke swirls through the air from the end of a pipe that, like the female portrait, floats where the mouth would be if the man in the portrait wasn't headless. The well dressed man is otherwise holding a book titled "Surviving the Library".
+        <description>Smoke swirls through the air from the end of a pipe that, like the female portrait, floats where
+            the mouth would be if the man in the portrait wasn't headless. The well dressed man is otherwise holding a
+            book titled "Surviving the Library".
         </description>
     </item>
     <item>
@@ -92,7 +100,9 @@
         <lockMessage></lockMessage>
         <commandInt></commandInt>
         <commandDirection></commandDirection>
-        <description>A guillotine stands tall with a sharp blade at the top is at the ready to drop on an already headless man in dirty rags. Headless figures crowd around the guillotine in a town square, all of them pointing out in your direction.
+        <description>A guillotine stands tall with a sharp blade at the top is at the ready to drop on an already
+            headless man in dirty rags. Headless figures crowd around the guillotine in a town square, all of them
+            pointing out in your direction.
         </description>
     </item>
     <item>
@@ -116,7 +126,8 @@
         <lockMessage></lockMessage>
         <commandInt></commandInt>
         <commandDirection></commandDirection>
-        <description>At the pommel is a chest with chains and a lock. The point appears to be freshly cut with sharp teeth.
+        <description>At the pommel is a chest with chains and a lock. The point appears to be freshly cut with sharp
+            teeth.
         </description>
     </item>
     <item>
@@ -129,7 +140,8 @@
         <lockMessage>You hear whispering coming from the west. better go see what it is.</lockMessage>
         <commandInt>2424</commandInt>
         <commandDirection></commandDirection>
-        <description>Clunky and large, a metal chest with weird symbols rests on top of the table. An ancient, copper lock keeps the chest closed.
+        <description>Clunky and large, a metal chest with weird symbols rests on top of the table. An ancient, copper
+            lock keeps the chest closed.
         </description>
     </item>
     <item>
@@ -141,7 +153,8 @@
         <lockMessage></lockMessage>
         <commandInt></commandInt>
         <commandDirection></commandDirection>
-        <description>The face is pressed in as if someone had smashed the doll on the floor. With what is left of the mouth, you swear that you saw it smirk at you.
+        <description>The face is pressed in as if someone had smashed the doll on the floor. With what is left of the
+            mouth, you swear that you saw it smirk at you.
         </description>
     </item>
     <item>
@@ -177,7 +190,8 @@
         <lockMessage></lockMessage>
         <commandInt></commandInt>
         <commandDirection></commandDirection>
-        <description>Rusted metal and a warn handle isn't the most ideal aspects in a potential weapon, but it's better than nothing.
+        <description>Rusted metal and a warn handle isn't the most ideal aspects in a potential weapon, but it's better
+            than nothing.
         </description>
     </item>
     <item>
@@ -189,7 +203,8 @@
         <lockMessage></lockMessage>
         <commandInt></commandInt>
         <commandDirection></commandDirection>
-        <description>Rather boring and old with a busted light on the front, seeming rather useless in an attempt to escape this world.
+        <description>Rather boring and old with a busted light on the front, seeming rather useless in an attempt to
+            escape this world.
         </description>
     </item>
     <item>
@@ -201,7 +216,9 @@
         <lockMessage></lockMessage>
         <commandInt></commandInt>
         <commandDirection></commandDirection>
-        <description>Modeled after a plague doctors mask, a long nose stems out the front of the mask, holding a metal canister at the end. Large glass, circular to form windows around the wearers eyes are shattered beyond further use.
+        <description>Modeled after a plague doctors mask, a long nose stems out the front of the mask, holding a metal
+            canister at the end. Large glass, circular to form windows around the wearers eyes are shattered beyond
+            further use.
         </description>
     </item>
     <item>
@@ -213,7 +230,8 @@
         <lockMessage></lockMessage>
         <commandInt></commandInt>
         <commandDirection></commandDirection>
-        <description>Shimmering with hundreds of diamonds, the tiara glimmers at every angle. While an item as such could be very valuable, it isn't much help in your escape.
+        <description>Shimmering with hundreds of diamonds, the tiara glimmers at every angle. While an item as such
+            could be very valuable, it isn't much help in your escape.
         </description>
     </item>
     <item>
@@ -225,7 +243,8 @@
         <lockMessage></lockMessage>
         <commandInt></commandInt>
         <commandDirection></commandDirection>
-        <description>Mesmerizing to view, the blue of the sapphire reflects onto your skin. While an item as such could be very valuable, it isn't much help in your escape.
+        <description>Mesmerizing to view, the blue of the sapphire reflects onto your skin. While an item as such could
+            be very valuable, it isn't much help in your escape.
         </description>
     </item>
     <item>
@@ -237,7 +256,9 @@
         <lockMessage></lockMessage>
         <commandInt></commandInt>
         <commandDirection></commandDirection>
-        <description>With gold shining high in the sky, a bird cannot soar if it cannot fly. A stream that flows is a life to grow, a stream not of water may death undergo. Unlocking a secret is not a forfeit, go forward with the lizard to be rewarded.
+        <description>With gold shining high in the sky, a bird cannot soar if it cannot fly. A stream that flows is a
+            life to grow, a stream not of water may death undergo. Unlocking a secret is not a forfeit, go forward with
+            the lizard to be rewarded.
         </description>
     </item>
     <item>
@@ -261,7 +282,8 @@
         <lockMessage></lockMessage>
         <commandInt></commandInt>
         <commandDirection></commandDirection>
-        <description>A young boy in overalls plays in a sandbox with action figures. Just beyond the fence of the yard, the outline of a man can be seen, his face covered in shadow.
+        <description>A young boy in overalls plays in a sandbox with action figures. Just beyond the fence of the yard,
+            the outline of a man can be seen, his face covered in shadow.
         </description>
     </item>
     <item>
@@ -273,7 +295,9 @@
         <lockMessage></lockMessage>
         <commandInt></commandInt>
         <commandDirection></commandDirection>
-        <description>The sculpture, as you now know, was just Copernicus Rex Verwirrtheit Theodore. The same red liquid from the floor streams from his eyes.</description>
+        <description>The sculpture, as you now know, was just Copernicus Rex Verwirrtheit Theodore. The same red liquid
+            from the floor streams from his eyes.
+        </description>
     </item>
     <item>
         <id>23</id>

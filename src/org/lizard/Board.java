@@ -345,9 +345,9 @@ public class Board {
         return """             
                 Welcome to a text-based game, The Lizard Key! 
                 Your path is a dangerous one, there are two enemies lurking in the shadows that you must have the courage to defeat. Only then can you face your biggest opponent Mr.Rex the sole reason you are trapped in this frightful universe. After defeating Mr.Rex get the 'Lizard Key' and unlock your door of salvation in the 'Key Room'. Look for clues, pick up items, and don't be afraid to explore, but most of all stay alive! 
-                
+                                
                 HOW TO PLAY:\s
-                
+                                
                 To perform an action, type your command in the text field box and hit enter.
 
                 Examples of possible commands are:\s
@@ -355,9 +355,9 @@ public class Board {
                 'go east' - to travel east, or substitute 'east' with west, south, or north to travel in a specified direction.
 
                 'examine room' - to see items and doors in current room.
-                
+                                
                 'grab healing brownies' - to get and store them in your inventory for later use.
-                
+                                
                 'eat healing brownies' - to eat healing brownies and heal yourself.
 
                 'examine locked chest' - to examine the locked chest (locked chest can be substituted for any item in your current room).
@@ -371,9 +371,9 @@ public class Board {
                 'get skeleton key' - to get and store skeleton key in your inventory to unlock a suitable door.
 
                 'use skeleton key on east' - to unlock a locked door to the east of the Egyptian Room.
-                
+                                
                 'use chest key on locked chest' - to unlock locked chest.
-                
+                                
                 'use magic cape on west' - to go over the river to the west of Treasure Room and 'use magic cape on east' to go back to Treasure Room.\s""";
 
     }
@@ -382,9 +382,9 @@ public class Board {
         return """
                 Welcome to a text-based game, The Lizard Key! 
                 Your path is a dangerous one, there are two enemies lurking in the shadows that you must have the courage to defeat. Only then can you face your biggest opponent Mr.Rex the sole reason you are trapped in this frightful universe. After defeating Mr.Rex get the 'Lizard Key' and unlock your door of salvation in the 'Key Room'. Look for clues, pick up items, and don't be afraid to explore, but most of all stay alive!
-                
+                                
                 How to Play:\s
-                
+                                
                 To perform an action, type your command in the text field box and hit enter.
 
                 Examples of possible commands are:\s
@@ -392,9 +392,9 @@ public class Board {
                 'go east' - to travel east, or substitute 'east' with west, south, or north to travel in a specified direction.
 
                 'examine room' - to see items and doors in current room.
-                
+                                
                 'grab healing brownies' - to get and store healing brownies in your inventory for later use.
-                
+                                
                 'eat healing brownies' - to eat healing brownies and heal yourself.
 
                 'examine locked chest' - to examine the locked chest (locked chest can be substituted for any item in your current room).
@@ -404,7 +404,7 @@ public class Board {
                 'grab knife' - to grab a knife and store a knife in your inventory (substitute knife for item you wish to pick up).
 
                 'drop knife' - to drop a knife (substitute knife for item you wish to drop from your inventory).
-                
+                                
                 'get skeleton key' - to get and store skeleton key in your inventory to unlock a suitable door.
 
                 'use skeleton key on east' - to unlock a locked door to the east of the Egyptian Room.
