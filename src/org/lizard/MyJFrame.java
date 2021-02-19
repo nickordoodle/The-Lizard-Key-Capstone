@@ -624,7 +624,6 @@ public class MyJFrame extends JFrame implements ActionListener {
     }
 
     public void winScreen() {
-        gameOverScreen();
         JFrame winScreen = new JFrame(); //initiate help window
         Container winContainer;
         JLabel victoryTitle;
@@ -635,6 +634,7 @@ public class MyJFrame extends JFrame implements ActionListener {
 //        winScreen.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         winScreen.setSize(800, 790);
         winScreen.setLocation(560, 160);
+        winScreen.setTitle("Victory");
         winScreen.setVisible(true);
         winScreen.setLayout(null); //disables default layout
 
@@ -701,6 +701,7 @@ public class MyJFrame extends JFrame implements ActionListener {
         gameOverScreen.setVisible(true); //makes window appear on screen
         gameOverScreen.setLayout(null);
         gameOverScreen.setBackground(Color.black);
+        gameOverScreen.setTitle("Game Over");
         gameOverScreen.setLocation(560, 160);
 
         container = gameOverScreen.getContentPane();
@@ -711,7 +712,6 @@ public class MyJFrame extends JFrame implements ActionListener {
         textPanel.setBackground(Color.decode("#191919"));
         textPanel.setBounds(160, 60, 500, 150);
         textPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
-
 
         //game over text
         gameOverText = new JTextArea("\n\nYou could not escape Mr.Rex's clutches and will be forever stuck in this nightmare. " +
