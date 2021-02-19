@@ -309,11 +309,13 @@ public class MyJFrame extends JFrame implements ActionListener {
             createHelpWindow();
         }
         if (e.getSource() == playAgainBtn) {
+            // Start the game over
             restartGame();
         }
         if (e.getSource() == musicBtn) {
             // Check if music is already running
             if (Music.isRunning()) {
+                // Stop music if it was running
                 Music.stop();
             } else {
                 // Otherwise, play music form the specified track
@@ -340,10 +342,9 @@ public class MyJFrame extends JFrame implements ActionListener {
             Command command = parser.parse(result);
             String response = actions.execute(command);
             mainStoryText.setText(response);
-            String inventoryAsString = player.getInventory().getItemNames().toString();
-            inventoryAsString = inventoryAsString.replace("[", "");
-            inventoryAsString = inventoryAsString.replace("]", "");
-            inventoryText.setText(inventoryAsString);
+
+            // Create and set fields for the inventory
+            createInventoryDisplay();
 
             //this code removed map and adds a new one based on the navigation from user input.
             frame.remove(mapPanel);
@@ -360,17 +361,11 @@ public class MyJFrame extends JFrame implements ActionListener {
             }
 
             if (board.getCurrentRoom().getEnemy() != null && !board.getCurrentRoom().getEnemy().enemyName.equalsIgnoreCase("Copernicus Rex Verwirrtheit Theodore")) {
-//                frame.remove(inputPanel);
-//                frame.repaint();
-//                frame.revalidate();
-
                 displayCombat();
             }
 
             if (response.equalsIgnoreCase("The sculpture, as you now know, was just Copernicus Rex Verwirrtheit Theodore. The same red liquid from the floor streams from his eyes.") && !bossDead) {
-//
                 displayCombat();
-//                bossDead = true;
             }
             textField.setText("");
         }
@@ -417,6 +412,16 @@ public class MyJFrame extends JFrame implements ActionListener {
         }
     }
 
+    private void createInventoryDisplay() {
+        String inventoryAsString = player.getInventory().getItemNames().toString();
+        inventoryAsString = inventoryAsString.replace("[", "");
+        inventoryAsString = inventoryAsString.replace("]", "");
+        inventoryText.setText(inventoryAsString);
+    }
+
+    // Restarts the game to the initial splash screen.
+    // Completely disposes the current game and its resources
+    // Reentry point is all the way back to main methof
     private void restartGame() {
         frame.dispose();
         Main.main(null);
