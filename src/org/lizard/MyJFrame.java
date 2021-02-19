@@ -183,8 +183,8 @@ public class MyJFrame extends JFrame implements ActionListener {
         JLabel guidanceTitle;
 
         //set up help window
-        helpWindow.setSize(800, 600);
-        helpWindow.setLocation(480, 200);
+        helpWindow.setSize(800, 750);
+        helpWindow.setLocation(450, 160);
         helpWindow.setLayout(null); //disables default layout
         helpWindow.setVisible(true); //makes window appear on screen
 
@@ -201,23 +201,23 @@ public class MyJFrame extends JFrame implements ActionListener {
 
         //instructions for the game
         instructionsPanel = new JPanel();
-        instructionsPanel.setBounds(30, 90, 720, 450);
+        instructionsPanel.setBounds(30, 90, 720, 550);
         instructionsPanel.setLayout(new BorderLayout());
 
         //instructions text
         instructionsTxt = new JTextArea();
         instructionsTxt.setText(board.howToPlayInGame());
-        instructionsTxt.setMargin(new Insets(10, 10, 10, 10));
+        instructionsTxt.setMargin(new Insets(20, 20, 20, 20));
         instructionsTxt.setLineWrap(true);
         instructionsTxt.setWrapStyleWord(true);
-        instructionsTxt.setForeground(Color.black);
+        instructionsTxt.setForeground(Color.white);
         instructionsTxt.setFont(new Font("Comic Sans", Font.BOLD, 15));
         instructionsTxt.setEditable(false);
-        instructionsTxt.setBackground(Color.white);
+        instructionsTxt.setBackground(Color.darkGray);
 
         //makes story text scrollable
         JScrollPane scrollPane = new JScrollPane(instructionsTxt);
-        scrollPane.setPreferredSize(new Dimension(720, 400));
+        scrollPane.setPreferredSize(new Dimension(720, 500));
         scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 
         //add scrollable text to the instructions panel then to the main container.
@@ -504,22 +504,26 @@ public class MyJFrame extends JFrame implements ActionListener {
 
         //set up combat window
         combatWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        combatWindow.setSize(800, 600);
+        combatWindow.setSize(800, 750);
         combatWindow.setVisible(true); //makes window appear on screen
-        combatWindow.setLocation(480, 200);
+        combatWindow.setLocation(450, 160);
+        combatWindow.setTitle("Enemy Encounter");
+        combatWindow.setResizable(false);
 
         rpsGame = new JTextArea();
         if (board.totalEnemies < 1) {
-            rpsGame.setText("You have finally come face to face with Copernicus Rex Verwirrtheit Theodore!" +
-                    "This is your chance to finally defeat your captor and gain the flight to the final key to escaping." +
-                    "To defeat him, you must win in combat... or rock, paper, scissors." +
+            rpsGame.setText("BOSS FIGHT!\n"
+                    +"You have finally come face to face with Copernicus Rex Verwirrtheit Theodore!" +
+                    "This is your chance to defeat your captor, and gain the chance to find the key to your freedom." +
+                    "To defeat him, you must win in combat... of rock, paper, scissors.\n" +
                     "\nPlease choose from the following numbers:" +
                     "\n1: ROCK" +
                     "\n2: PAPER" +
                     "\n3: SCISSOR");
         } else {
-            rpsGame.setText("You have come face to face with a monster!" +
-                    "To defeat it, you must win in combat... of rock, paper, scissors." +
+            rpsGame.setText("MONSTER FIGHT!\n"
+                    +"You have come face to face with a monster!" +
+                    "To defeat it, you must win in combat... of rock, paper, scissors.\n" +
                     "\nPlease choose from the following numbers:" +
                     "\n1: ROCK" +
                     "\n2: PAPER" +
@@ -529,13 +533,12 @@ public class MyJFrame extends JFrame implements ActionListener {
 //        rpsGame.setPreferredSize(new Dimension(500, 100));
         rpsGame.setBounds(50, 50, 100, 100);
         rpsGame.setMargin(new Insets(10, 10, 10, 10));
-
         rpsGame.setFont(new Font("Sans Script", Font.BOLD, 15));
         rpsGame.setLineWrap(true);
         rpsGame.setWrapStyleWord(true);
-//        rpsGame.setBorder(BorderFactory.createBevelBorder(1));
-        rpsGame.setForeground(Color.orange);
-        rpsGame.setBackground(Color.darkGray);
+        rpsGame.setBorder(BorderFactory.createBevelBorder(1));
+        rpsGame.setForeground(Color.decode("#ff0000"));
+        rpsGame.setBackground(Color.black);
         rpsGame.setEditable(false);
 
         numInput = new JTextField();
@@ -556,10 +559,10 @@ public class MyJFrame extends JFrame implements ActionListener {
         promptPanel = new JPanel();
         promptPanel.add(promptLabel, BorderLayout.CENTER);
         promptPanel.add(numInput);
-        promptPanel.setBackground(Color.blue);
+        promptPanel.setBackground(Color.black);
 
         JPanel rpgImgPanel = new JPanel();
-        rpgImgPanel.setBackground(Color.blue);
+        rpgImgPanel.setBackground(Color.white);
         rpgImgPanel.setBounds(0, 300, 800, 400);
 
         JLabel imgLabel = new JLabel();

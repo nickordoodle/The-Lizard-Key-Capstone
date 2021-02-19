@@ -343,10 +343,10 @@ public class Board {
 
     String howToPlayInGame() {
         return """             
-                HOW TO PLAY:\s
-                
                 Welcome to a text-based game, The Lizard Key! 
                 Your path is a dangerous one, there are two enemies lurking in the shadows that you must have the courage to defeat. Only then can you face your biggest opponent Mr.Rex the sole reason you are trapped in this frightful universe. After defeating Mr.Rex get the 'Lizard Key' and unlock your door of salvation in the 'Key Room'. Look for clues, pick up items, and don't be afraid to explore, but most of all stay alive! 
+                
+                HOW TO PLAY:\s
                 
                 To perform an action, type your command in the text field box and hit enter.
 
@@ -380,10 +380,10 @@ public class Board {
 
     static String howToPlay() {
         return """
-                How to Play:\s
-
                 Welcome to a text-based game, The Lizard Key! 
                 Your path is a dangerous one, there are two enemies lurking in the shadows that you must have the courage to defeat. Only then can you face your biggest opponent Mr.Rex the sole reason you are trapped in this frightful universe. After defeating Mr.Rex get the 'Lizard Key' and unlock your door of salvation in the 'Key Room'. Look for clues, pick up items, and don't be afraid to explore, but most of all stay alive!
+                
+                How to Play:\s
                 
                 To perform an action, type your command in the text field box and hit enter.
 
