@@ -375,9 +375,11 @@ public class MyJFrame extends JFrame implements ActionListener {
         }
 
         if (e.getSource() == numInput) {
-//            frame.remove(storyPanel);
-//            frame.repaint();
-//            frame.revalidate();
+            frame.remove(storyPanel);
+            frame.remove(inputPanel);
+            frame.repaint();
+            frame.revalidate();
+
 
             rpsGame.setText(combat.playerTakesTurn(numInput.getText()));
             if (combat.checkGameEndingStatus().equalsIgnoreCase("Enemy won")) {
