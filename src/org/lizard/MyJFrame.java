@@ -520,7 +520,7 @@ public class MyJFrame extends JFrame implements ActionListener {
 
         //set up combat window
 //        combatWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        combatWindow.setSize(800, 750);
+        combatWindow.setSize(800, 790);
         combatWindow.setVisible(true); //makes window appear on screen
         combatWindow.setLocation(560, 160);
         combatWindow.setTitle("Enemy Encounter");
@@ -594,6 +594,7 @@ public class MyJFrame extends JFrame implements ActionListener {
     }
 
     public void winScreen() {
+        gameOverScreen();
         JFrame winScreen = new JFrame(); //initiate help window
         Container winContainer;
         JLabel victoryTitle;
@@ -602,7 +603,7 @@ public class MyJFrame extends JFrame implements ActionListener {
 
         //set up win window
 //        winScreen.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        winScreen.setSize(800, 750);
+        winScreen.setSize(800, 790);
         winScreen.setLocation(560, 160);
         winScreen.setVisible(true);
         winScreen.setLayout(null); //disables default layout
@@ -647,12 +648,13 @@ public class MyJFrame extends JFrame implements ActionListener {
         btnBar.setLayout(new GridLayout(0,1));
         btnBar.setBounds(400,440,360,100);
         btnBar.setBackground(Color.black);
-        btnBar.add(playAgain);
-
-        btnBar.add(quitGame);
+        btnBar.add(playAgainBtn);
+        btnBar.add(quitGameBtn);
+        helpBtn.setVisible(false);
 
         winContainer.add(imgLabel);
         winContainer.add(btnBar);
+        frame.disable(); //disables main frame
 
     }
 
@@ -665,11 +667,11 @@ public class MyJFrame extends JFrame implements ActionListener {
 
         //set up game over window
         gameOverScreen.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        gameOverScreen.setSize(800, 600);
+        gameOverScreen.setSize(800, 790);
         gameOverScreen.setVisible(true); //makes window appear on screen
         gameOverScreen.setLayout(null);
         gameOverScreen.setBackground(Color.black);
-        gameOverScreen.setLocation(480, 200);
+        gameOverScreen.setLocation(560, 160);
 
         container = gameOverScreen.getContentPane();
         container.setBackground(Color.decode("#191919"));
@@ -677,7 +679,7 @@ public class MyJFrame extends JFrame implements ActionListener {
         //game over text panel
         textPanel = new JPanel();
         textPanel.setBackground(Color.decode("#191919"));
-        textPanel.setBounds(160, 40, 500, 150);
+        textPanel.setBounds(160, 60, 500, 150);
         textPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
 
 
@@ -697,7 +699,7 @@ public class MyJFrame extends JFrame implements ActionListener {
         //image panel
         gPanel = new JPanel();
         gPanel.setBackground(Color.decode("#191919"));
-        gPanel.setBounds(0, 100, 800, 400);
+        gPanel.setBounds(0, 120, 800, 400);
         container.add(gPanel);
 
         //game over image
@@ -706,6 +708,14 @@ public class MyJFrame extends JFrame implements ActionListener {
         imgLabel.setLayout(new FlowLayout(FlowLayout.CENTER));
         gPanel.add(imgLabel);
 
+        JMenuBar btnsBar = new JMenuBar();
+        btnsBar.setLayout(new GridLayout(0,1));
+        btnsBar.setBounds(220,530,360,100);
+        btnsBar.setBackground(Color.black);
+        btnsBar.add(playAgainBtn);
+        btnsBar.add(quitGameBtn);
+        container.add(btnsBar);
+        frame.disable(); //disables main frame
     }
 
 }
