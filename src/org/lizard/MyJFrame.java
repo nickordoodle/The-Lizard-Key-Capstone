@@ -375,9 +375,9 @@ public class MyJFrame extends JFrame implements ActionListener {
         }
 
         if (e.getSource() == numInput) {
-            frame.remove(storyPanel);
-            frame.repaint();
-            frame.revalidate();
+//            frame.remove(storyPanel);
+//            frame.repaint();
+//            frame.revalidate();
 
             rpsGame.setText(combat.playerTakesTurn(numInput.getText(), hpText));
             if (combat.checkGameEndingStatus().equalsIgnoreCase("Enemy won")) {
@@ -453,7 +453,7 @@ public class MyJFrame extends JFrame implements ActionListener {
 
         //makes story text scrollable
         JScrollPane scrollPane = new JScrollPane(mainStoryText);
-        scrollPane.setPreferredSize(new Dimension(700, 250));
+        scrollPane.setPreferredSize(new Dimension(700, 260));
         scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 
         //input prompt
@@ -466,12 +466,12 @@ public class MyJFrame extends JFrame implements ActionListener {
         textField.setFont(new Font("Consolas", Font.BOLD, 15));
         textField.setForeground(Color.blue);
         textField.setBackground(Color.white);
-        textField.setCaretColor(Color.blue);//text curser color
+        textField.setCaretColor(Color.black);//text curser color
 
         //panel that contains the story text
         storyPanel = new JPanel();
         storyPanel.setBackground(Color.black);
-        storyPanel.setBounds(-100, 130, 1800, 280);
+        storyPanel.setBounds(450, 132, 700, 290);
 
         //panel that contains the player's inventory
         inventoryPanel = new JPanel();
@@ -497,24 +497,24 @@ public class MyJFrame extends JFrame implements ActionListener {
         inventoryText.setEditable(false);
         inventoryText.setBackground(Color.BLACK);
 
-        //makes story text scrollable
+        //makes inventory text scrollable
         JScrollPane scrollInventoryContainer = new JScrollPane(inventoryText);
         scrollInventoryContainer.setPreferredSize(new Dimension(180, 300));
         scrollInventoryContainer.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 
         //panel that contains the player's inventory
         hpPanel = new JPanel();
-        JLabel hpPanelHeader = new JLabel("HP");
-        hpPanelHeader.setFont(new Font("Comic Sans", Font.PLAIN, 20));
+        JLabel hpPanelHeader = new JLabel("Player HP ");
+        hpPanelHeader.setFont(new Font("Comic Sans", Font.PLAIN, 18));
         hpPanelHeader.setForeground(Color.WHITE);
         hpPanel.add(hpPanelHeader);
-        hpPanel.setBackground(Color.BLACK);
-        hpPanel.setBounds(320, 460, 100, 100);
+        hpPanel.setBackground(Color.black);
+        hpPanel.setBounds(990, 415, 200, 40);
 
         //inventory display as text
         hpText = new JTextArea();
         hpText.setText(String.valueOf(player.getPlayerHP()));
-        hpText.setMargin(new Insets(10, 10, 10, 10));
+//        hpText.setMargin(new Insets(10, 10, 10, 10));
         hpText.setLineWrap(true);
         hpText.setWrapStyleWord(true);
         hpText.setForeground(Color.orange);
