@@ -11,12 +11,14 @@ import org.lizard.util.Screen;
 import javax.imageio.ImageIO;
 import javax.sound.sampled.*;
 import javax.swing.*;
+import javax.swing.text.NumberFormatter;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.text.NumberFormat;
 
 public class MyJFrame extends JFrame implements ActionListener {
 
@@ -44,7 +46,7 @@ public class MyJFrame extends JFrame implements ActionListener {
     JTextArea mainStoryText, instructionsText, inventoryText;
     JPanel instructionsPanel, storyPanel, mapPanel, inventoryPanel;
     JPanel inputPanel;
-    JTextField numInput;
+    JFormattedTextField numInput;
     BufferedImage img;
 
     boolean calledOnce = false;
@@ -375,7 +377,7 @@ public class MyJFrame extends JFrame implements ActionListener {
             frame.repaint();
             frame.revalidate();
 
-            rpsGame.setText(combat.playerTakesTurn(Integer.parseInt(numInput.getText())));
+            rpsGame.setText(combat.playerTakesTurn(numInput.getText()));
             if (combat.checkGameEndingStatus().equalsIgnoreCase("Enemy won")) {
                 combatWindow.dispose();
                 gameOverScreen();
@@ -554,7 +556,7 @@ public class MyJFrame extends JFrame implements ActionListener {
         rpsGame.setBackground(Color.black);
         rpsGame.setEditable(false);
 
-        numInput = new JTextField();
+        numInput = new JFormattedTextField();
         numInput.setPreferredSize(new Dimension(500, 50));
         numInput.setBackground(Color.white);
 
