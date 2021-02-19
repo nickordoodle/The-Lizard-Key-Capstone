@@ -36,12 +36,12 @@ public class MyJFrame extends JFrame implements ActionListener {
     JLabel inputFromUser = new JLabel();
     JLabel imageLabel;
     JTextField textField = new JTextField();
-    JButton enterGame, quitGame, playAgain, helpBtn, musicBtn;
+    JButton enterGameBtn, quitGameBtn, playAgainBtn, helpBtn, musicBtn;
     JSlider volumeSlider;
     JFrame frame;
     JFrame combatWindow;
     JPanel titlePanel, volumePanel;
-    JTextArea mainStoryText, instructionsTxt, inventoryText;
+    JTextArea mainStoryText, instructionsText, inventoryText;
     JPanel instructionsPanel, storyPanel, mapPanel, inventoryPanel;
     JPanel inputPanel;
     JTextField numInput;
@@ -78,32 +78,32 @@ public class MyJFrame extends JFrame implements ActionListener {
         frame.setBackground(Color.BLACK);
 
         //button to play the game
-        enterGame = new JButton("Enter Game");
+        enterGameBtn = new JButton("Enter Game");
 
         int buttonWidth = 200;
         int buttonHeight = 60;
 
         // Set the button's properties
-        enterGame.setBounds(
+        enterGameBtn.setBounds(
                 Screen.getLeftXCoordinateForElement(buttonWidth),
                 Screen.getTopYCoordinateForElement(buttonHeight),
                 buttonWidth,
                 buttonHeight);
-        enterGame.addActionListener(this);
+        enterGameBtn.addActionListener(this);
 
         //button to quit the game
-        quitGame = new JButton("Quit Game");
-        quitGame.setBounds(990, 415, 120, 40);
-        quitGame.addActionListener(this);
-        quitGame.setBackground(Color.black);
-        quitGame.setForeground(Color.orange);
+        quitGameBtn = new JButton("Quit Game");
+        quitGameBtn.setBounds(990, 415, 120, 40);
+        quitGameBtn.addActionListener(this);
+        quitGameBtn.setBackground(Color.black);
+        quitGameBtn.setForeground(Color.orange);
 
         //button to play the game again
-        playAgain = new JButton("Play Again");
-        playAgain.setBounds(990, 415, 120, 40);
-        playAgain.addActionListener(this);
-        playAgain.setBackground(Color.black);
-        playAgain.setForeground(Color.orange);
+        playAgainBtn = new JButton("Play Again");
+        playAgainBtn.setBounds(990, 415, 120, 40);
+        playAgainBtn.addActionListener(this);
+        playAgainBtn.setBackground(Color.black);
+        playAgainBtn.setForeground(Color.orange);
 
         //button to get the help window that shows instructions to the game.
         helpBtn = new JButton("Guidance");
@@ -158,7 +158,7 @@ public class MyJFrame extends JFrame implements ActionListener {
 
         // Add components to the frame
         frame.add(titlePanel);
-        frame.add(enterGame);
+        frame.add(enterGameBtn);
 
         // Make the frame visible to the player
         frame.setVisible(true);
@@ -205,18 +205,18 @@ public class MyJFrame extends JFrame implements ActionListener {
         instructionsPanel.setLayout(new BorderLayout());
 
         //instructions text
-        instructionsTxt = new JTextArea();
-        instructionsTxt.setText(board.howToPlayInGame());
-        instructionsTxt.setMargin(new Insets(20, 20, 20, 20));
-        instructionsTxt.setLineWrap(true);
-        instructionsTxt.setWrapStyleWord(true);
-        instructionsTxt.setForeground(Color.white);
-        instructionsTxt.setFont(new Font("Comic Sans", Font.BOLD, 15));
-        instructionsTxt.setEditable(false);
-        instructionsTxt.setBackground(Color.darkGray);
+        instructionsText = new JTextArea();
+        instructionsText.setText(board.howToPlayInGame());
+        instructionsText.setMargin(new Insets(20, 20, 20, 20));
+        instructionsText.setLineWrap(true);
+        instructionsText.setWrapStyleWord(true);
+        instructionsText.setForeground(Color.white);
+        instructionsText.setFont(new Font("Comic Sans", Font.BOLD, 15));
+        instructionsText.setEditable(false);
+        instructionsText.setBackground(Color.darkGray);
 
         //makes story text scrollable
-        JScrollPane scrollPane = new JScrollPane(instructionsTxt);
+        JScrollPane scrollPane = new JScrollPane(instructionsText);
         scrollPane.setPreferredSize(new Dimension(720, 500));
         scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 
@@ -279,10 +279,10 @@ public class MyJFrame extends JFrame implements ActionListener {
         menu.add(helpBtn);
         menu.add(emptySpace1);
 
-        menu.add(quitGame);
+        menu.add(quitGameBtn);
         menu.add(emptySpace2);
 
-        menu.add(playAgain);
+        menu.add(playAgainBtn);
         menu.add(emptySpace3);
         menu.add(musicControlLabel);
 
@@ -301,12 +301,15 @@ public class MyJFrame extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == quitGame) {
+        if (e.getSource() == quitGameBtn) {
             frame.dispose();
             System.exit(0);
         }
         if (e.getSource() == helpBtn) {
             createHelpWindow();
+        }
+        if (e.getSource() == playAgainBtn) {
+            restartGame();
         }
         if (e.getSource() == musicBtn) {
             // Check if music is already running
@@ -318,7 +321,7 @@ public class MyJFrame extends JFrame implements ActionListener {
             }
 
         }
-        if (e.getSource() == enterGame) {
+        if (e.getSource() == enterGameBtn) {
 
 
             createGameView();
@@ -412,6 +415,11 @@ public class MyJFrame extends JFrame implements ActionListener {
             }
             numInput.setText("");
         }
+    }
+
+    private void restartGame() {
+        frame.dispose();
+        Main.main(null);
     }
 
     private void gameScreen(String initialPrint) {
