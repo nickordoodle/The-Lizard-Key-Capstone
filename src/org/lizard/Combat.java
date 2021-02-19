@@ -31,7 +31,7 @@ public class Combat {
     }
 
 
-    public String playerTakesTurn(String playerInputDecision, JTextArea hpTextArea) {
+    public String playerTakesTurn(String playerInputDecision) {
         Random rand = new Random();
         int randEnemy = rand.nextInt(3) + 1;
         int playerNumberAnswer = -1;
@@ -51,7 +51,7 @@ public class Combat {
             } else if (randEnemy == PAPER) {
                 playerHP -= 10;
                 player.playerHP -= 10;
-                hpTextArea.setText(String.valueOf(playerHP));
+//                hpTextArea.setText(String.valueOf(playerHP));
                 return (player.getName() + " got ROCK.\n\n" + enemy.getEnemyName() + " got PAPER." + "\n\n" + enemy.getEnemyName() + " won! \n\n" + player.getName() + "HP: " + playerHP + "\n" + enemy.getEnemyName() + "HP: " + enemyHP);
 
             } else if (randEnemy == SCISS0R) {
@@ -78,7 +78,7 @@ public class Combat {
             } else if (randEnemy == SCISS0R) {
                 playerHP -= 10;
                 player.playerHP -= 10;
-                hpTextArea.setText(String.valueOf(playerHP));
+//                hpTextArea.setText(String.valueOf(playerHP));
 
                 return (player.getName() + " got PAPER.\n\n" + enemy.getEnemyName() + " got SCISSOR.\n\n" + enemy.getEnemyName() + " won! " + "\n\n" + player.getName() + "HP: " + playerHP + "\n" + enemy.getEnemyName() + "HP: " + enemyHP);
             }
@@ -88,7 +88,7 @@ public class Combat {
             if (randEnemy == ROCK) {
                 playerHP -= 10;
                 player.playerHP -= 10;
-                hpTextArea.setText(String.valueOf(playerHP));
+//                hpTextArea.setText(String.valueOf(playerHP));
                 return (player.getName() + " got SCISSOR.\n\n" + enemy.getEnemyName() + " got ROCK.\n\n" + enemy.getEnemyName() + " won!" + "\n\n" + player.getName() + "HP: " + playerHP + "\n" + enemy.getEnemyName() + "HP: " + enemyHP);
             } else if (randEnemy == PAPER) {
                 enemyHP -= 10;

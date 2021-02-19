@@ -33,11 +33,18 @@ public class Player {
         }
 
         public String add(GameDictionary.Noun item) {
-
-            if (item.getName().equalsIgnoreCase("lizard key")) {
+            String newItemName = item.getName();
+            if (newItemName.equalsIgnoreCase("lizard key")) {
                 hasWinningKey = true;
             }
-            inventory.add(item);
+            if(inventory
+                    .stream()
+                    .noneMatch(
+                            currentItem -> (currentItem.getName().equalsIgnoreCase(newItemName)) ||
+                    currentItem.getName().equalsIgnoreCase("sapphire necklace"))
+            ){
+                inventory.add(item);
+            }
             return "Added to inventory";
         }
 

@@ -379,7 +379,7 @@ public class MyJFrame extends JFrame implements ActionListener {
 //            frame.repaint();
 //            frame.revalidate();
 
-            rpsGame.setText(combat.playerTakesTurn(numInput.getText(), hpText));
+            rpsGame.setText(combat.playerTakesTurn(numInput.getText()));
             if (combat.checkGameEndingStatus().equalsIgnoreCase("Enemy won")) {
                 combatWindow.dispose();
                 gameOverScreen();
@@ -412,6 +412,7 @@ public class MyJFrame extends JFrame implements ActionListener {
                 }
 
             }
+            hpText.setText(String.valueOf(player.getPlayerHP()));
             numInput.setText("");
         }
     }
