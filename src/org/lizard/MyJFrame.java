@@ -173,6 +173,7 @@ public class MyJFrame extends JFrame implements ActionListener {
         // Set the game container to a specific and absolute size
         gameFrame.setSize(Screen.SPECIFIED_WIDTH, Screen.SPECIFIED_HEIGHT);
         gameFrame.setResizable(false);
+        gameFrame.setLocationRelativeTo(null);
         gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         return gameFrame;
     }
@@ -184,7 +185,7 @@ public class MyJFrame extends JFrame implements ActionListener {
 
         //set up help window
         helpWindow.setSize(800, 750);
-        helpWindow.setLocation(450, 160);
+        helpWindow.setLocation(560, 160);
         helpWindow.setLayout(null); //disables default layout
         helpWindow.setVisible(true); //makes window appear on screen
 
@@ -503,16 +504,16 @@ public class MyJFrame extends JFrame implements ActionListener {
         combatWindow = new JFrame(); //initiate game over window
 
         //set up combat window
-        combatWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//        combatWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         combatWindow.setSize(800, 750);
         combatWindow.setVisible(true); //makes window appear on screen
-        combatWindow.setLocation(450, 160);
+        combatWindow.setLocation(560, 160);
         combatWindow.setTitle("Enemy Encounter");
         combatWindow.setResizable(false);
 
         rpsGame = new JTextArea();
         if (board.totalEnemies < 1) {
-            rpsGame.setText("BOSS FIGHT!\n"
+            rpsGame.setText("BOSS FIGHT!\n\n"
                     +"You have finally come face to face with Copernicus Rex Verwirrtheit Theodore!" +
                     "This is your chance to defeat your captor, and gain the chance to find the key to your freedom." +
                     "To defeat him, you must win in combat... of rock, paper, scissors.\n" +
@@ -521,7 +522,7 @@ public class MyJFrame extends JFrame implements ActionListener {
                     "\n2: PAPER" +
                     "\n3: SCISSOR");
         } else {
-            rpsGame.setText("MONSTER FIGHT!\n"
+            rpsGame.setText("MONSTER FIGHT!\n\n"
                     +"You have come face to face with a monster!" +
                     "To defeat it, you must win in combat... of rock, paper, scissors.\n" +
                     "\nPlease choose from the following numbers:" +
@@ -585,11 +586,11 @@ public class MyJFrame extends JFrame implements ActionListener {
         JPanel winTextPanel;
 
         //set up win window
-        winScreen.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        winScreen.setSize(800, 600);
-        winScreen.setLocation(480, 200);
+//        winScreen.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        winScreen.setSize(800, 750);
+        winScreen.setLocation(560, 160);
         winScreen.setVisible(true);
-//        winScreen.setLayout(null); //disables default layout
+        winScreen.setLayout(null); //disables default layout
 
         //win window container
         winContainer = winScreen.getContentPane(); //container inside the window with help content
@@ -599,25 +600,25 @@ public class MyJFrame extends JFrame implements ActionListener {
         victoryTitle = new JLabel("Congratulations, you won!!!");
         victoryTitle.setBounds(180, -70, 600, 250);
         victoryTitle.setForeground(Color.orange); //title text color
-        victoryTitle.setFont(new Font("Comic Sans", Font.PLAIN, 36));
+        victoryTitle.setFont(new Font("Comic Sans", Font.BOLD, 36));
         winContainer.add(victoryTitle);
 
         //victory text panel
         winTextPanel = new JPanel();
-        winTextPanel.setBounds(380, 100, 380, 250);
+        winTextPanel.setBounds(400, 120, 360, 280);
         winTextPanel.setBackground(Color.black);
 
         //victory text
         winTextArea = new JTextArea("You use the lizard key on the door to exit." +
-                "\n\nDarkness surrounds your and wind presses against you back as if the ground is being pulled beneath you." +
+                "\n\nDarkness surrounds you and wind presses against your back as if the ground is being pulled beneath you." +
                 "You close your eyes to avoid dizziness, only for the movement around you to stop." +
-                "Upon opening your eyes, you are staring out a small window with people in white scrubs passing in a hall." +
+                "\n\nUpon opening your eyes, you are staring out a small window with people in white scrubs passing in a hall." +
                 "You turn around to see padded walls, only to realize that you have escaped Copernicus Rex Verwirrtheit Theodore for now.");
         winTextArea.setLineWrap(true);
         winTextArea.setWrapStyleWord(true);
         winTextArea.setForeground(Color.white);
-        winTextArea.setBounds(380, 100, 380, 250);
-        winTextArea.setFont(new Font("Comic Sans", Font.BOLD, 15));
+        winTextArea.setBounds(400, 120, 360, 280);
+        winTextArea.setFont(new Font("Comic Sans", Font.PLAIN, 16));
         winTextArea.setEditable(false);
         winTextArea.setBackground(Color.black);
         winTextPanel.add(winTextArea);
@@ -625,8 +626,19 @@ public class MyJFrame extends JFrame implements ActionListener {
 
         JLabel imgLabel = new JLabel();
         imgLabel.setIcon(new ImageIcon("lizardKey.png"));
-        imgLabel.setLayout(new FlowLayout(FlowLayout.CENTER));
+        imgLabel.setBounds(20,120,450,600);
+
+        JMenuBar btnBar = new JMenuBar();
+        btnBar.setLayout(new GridLayout(0,1));
+        btnBar.setBounds(400,440,360,100);
+        btnBar.setBackground(Color.black);
+        btnBar.add(playAgain);
+
+        btnBar.add(quitGame);
+
         winContainer.add(imgLabel);
+        winContainer.add(btnBar);
+
     }
 
     public void gameOverScreen() {
