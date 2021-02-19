@@ -253,10 +253,10 @@ public class MyJFrame extends JFrame implements ActionListener {
         assert img != null;
 
         // Create, set properties and add the lizard image to the view
-        imageLabel = new JLabel(new ImageIcon(img.getScaledInstance(420, 500, Image.SCALE_SMOOTH)));
+        imageLabel = new JLabel(new ImageIcon(img.getScaledInstance(300, 360, Image.SCALE_SMOOTH)));
         imageLabel.setLayout(null);
         imageLabel.setBackground(Color.black);
-        imageLabel.setBounds(30, 260, 420, 500);
+        imageLabel.setBounds(40, 100, 320, 380);
         frame.add(imageLabel); //shows correct location but doesn't remove img
 
         frame.setBackground(Color.black);
@@ -453,11 +453,11 @@ public class MyJFrame extends JFrame implements ActionListener {
         //panel that contains the player's inventory
         inventoryPanel = new JPanel();
         JLabel invPanelHeader = new JLabel("Inventory");
-        invPanelHeader.setFont(new Font("Comic Sans", Font.PLAIN, 22));
+        invPanelHeader.setFont(new Font("Comic Sans", Font.PLAIN, 16));
         invPanelHeader.setForeground(Color.WHITE);
         inventoryPanel.add(invPanelHeader);
         inventoryPanel.setBackground(Color.BLACK);
-        inventoryPanel.setBounds(110, 750, 200, 300);
+        inventoryPanel.setBounds(110, 460, 180, 350);
 
         //panel where the input is located.
         inputPanel = new JPanel();
@@ -469,14 +469,14 @@ public class MyJFrame extends JFrame implements ActionListener {
         inventoryText.setMargin(new Insets(10, 10, 10, 10));
         inventoryText.setLineWrap(true);
         inventoryText.setWrapStyleWord(true);
-        inventoryText.setForeground(Color.WHITE);
-        inventoryText.setFont(new Font("Comic Sans", Font.PLAIN, 18));
+        inventoryText.setForeground(Color.orange);
+        inventoryText.setFont(new Font("Comic Sans", Font.PLAIN, 16));
         inventoryText.setEditable(false);
         inventoryText.setBackground(Color.BLACK);
 
         //makes story text scrollable
         JScrollPane scrollInventoryContainer = new JScrollPane(inventoryText);
-        scrollInventoryContainer.setPreferredSize(new Dimension(200, 200));
+        scrollInventoryContainer.setPreferredSize(new Dimension(180, 300));
         scrollInventoryContainer.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 
         // Add the scroll pane with text to its panel container
