@@ -11,14 +11,12 @@ import org.lizard.util.Screen;
 import javax.imageio.ImageIO;
 import javax.sound.sampled.*;
 import javax.swing.*;
-import javax.swing.text.NumberFormatter;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.text.NumberFormat;
 
 public class MyJFrame extends JFrame implements ActionListener {
 
@@ -43,8 +41,8 @@ public class MyJFrame extends JFrame implements ActionListener {
     JFrame frame;
     JFrame combatWindow;
     JPanel titlePanel, volumePanel;
-    JTextArea mainStoryText, instructionsText, inventoryText;
-    JPanel instructionsPanel, storyPanel, mapPanel, inventoryPanel;
+    JTextArea mainStoryText, instructionsText, inventoryText, hpText;
+    JPanel instructionsPanel, storyPanel, mapPanel, inventoryPanel, hpPanel;
     JPanel inputPanel;
     JFormattedTextField numInput;
     BufferedImage img;
@@ -346,8 +344,11 @@ public class MyJFrame extends JFrame implements ActionListener {
             String response = actions.execute(command);
             mainStoryText.setText(response);
 
+            // Create and set fields for hp
+            setHPText();
+
             // Create and set fields for the inventory
-            createInventoryDisplay();
+            setInventoryText();
 
             //this code removed map and adds a new one based on the navigation from user input.
             frame.remove(mapPanel);
@@ -375,10 +376,12 @@ public class MyJFrame extends JFrame implements ActionListener {
 
         if (e.getSource() == numInput) {
             frame.remove(storyPanel);
+            frame.remove(inputPanel);
             frame.repaint();
             frame.revalidate();
 
-            rpsGame.setText(combat.playerTakesTurn(numInput.getText()));
+
+            rpsGame.setText(combat.playerTakesTurn(numInput.getText(), hpText));
             if (combat.checkGameEndingStatus().equalsIgnoreCase("Enemy won")) {
                 combatWindow.dispose();
                 gameOverScreen();
@@ -415,12 +418,19 @@ public class MyJFrame extends JFrame implements ActionListener {
         }
     }
 
-    private void createInventoryDisplay() {
+    private void setInventoryText() {
         String inventoryAsString = player.getInventory().getItemNames().toString();
         inventoryAsString = inventoryAsString.replace("[", "");
         inventoryAsString = inventoryAsString.replace("]", "");
         inventoryText.setText(inventoryAsString);
     }
+
+    private void setHPText() {
+        int hp = player.getPlayerHP();
+        hpText.setText(String.valueOf(hp));
+    }
+
+
 
     // Restarts the game to the initial splash screen.
     // Completely disposes the current game and its resources
@@ -445,7 +455,7 @@ public class MyJFrame extends JFrame implements ActionListener {
 
         //makes story text scrollable
         JScrollPane scrollPane = new JScrollPane(mainStoryText);
-        scrollPane.setPreferredSize(new Dimension(700, 250));
+        scrollPane.setPreferredSize(new Dimension(700, 260));
         scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 
         //input prompt
@@ -458,17 +468,17 @@ public class MyJFrame extends JFrame implements ActionListener {
         textField.setFont(new Font("Consolas", Font.BOLD, 15));
         textField.setForeground(Color.blue);
         textField.setBackground(Color.white);
-        textField.setCaretColor(Color.blue);//text curser color
+        textField.setCaretColor(Color.black);//text curser color
 
         //panel that contains the story text
         storyPanel = new JPanel();
         storyPanel.setBackground(Color.black);
-        storyPanel.setBounds(-100, 130, 1800, 280);
+        storyPanel.setBounds(450, 132, 700, 290);
 
         //panel that contains the player's inventory
         inventoryPanel = new JPanel();
         JLabel invPanelHeader = new JLabel("Inventory");
-        invPanelHeader.setFont(new Font("Comic Sans", Font.PLAIN, 16));
+        invPanelHeader.setFont(new Font("Comic Sans", Font.PLAIN, 20));
         invPanelHeader.setForeground(Color.WHITE);
         inventoryPanel.add(invPanelHeader);
         inventoryPanel.setBackground(Color.BLACK);
@@ -489,19 +499,41 @@ public class MyJFrame extends JFrame implements ActionListener {
         inventoryText.setEditable(false);
         inventoryText.setBackground(Color.BLACK);
 
-        //makes story text scrollable
+        //makes inventory text scrollable
         JScrollPane scrollInventoryContainer = new JScrollPane(inventoryText);
         scrollInventoryContainer.setPreferredSize(new Dimension(180, 300));
         scrollInventoryContainer.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 
+        //panel that contains the player's inventory
+        hpPanel = new JPanel();
+        JLabel hpPanelHeader = new JLabel("Player HP ");
+        hpPanelHeader.setFont(new Font("Comic Sans", Font.PLAIN, 18));
+        hpPanelHeader.setForeground(Color.WHITE);
+        hpPanel.add(hpPanelHeader);
+        hpPanel.setBackground(Color.black);
+        hpPanel.setBounds(990, 415, 200, 40);
+
+        //inventory display as text
+        hpText = new JTextArea();
+        hpText.setText(String.valueOf(player.getPlayerHP()));
+//        hpText.setMargin(new Insets(10, 10, 10, 10));
+        hpText.setLineWrap(true);
+        hpText.setWrapStyleWord(true);
+        hpText.setForeground(Color.orange);
+        hpText.setFont(new Font("Comic Sans", Font.PLAIN, 18));
+        hpText.setEditable(false);
+        hpText.setBackground(Color.black);
+
         // Add the scroll pane with text to its panel container
         storyPanel.add(scrollPane);
         inventoryPanel.add(scrollInventoryContainer);
+        hpPanel.add(hpText);
         inputPanel.add(inputFromUser);
         inputPanel.add(textField);
 
         frame.add(storyPanel);
         frame.add(inventoryPanel);
+        frame.add(hpPanel);
         frame.add(inputPanel);
 
         if (!calledOnce) {
@@ -594,7 +626,6 @@ public class MyJFrame extends JFrame implements ActionListener {
     }
 
     public void winScreen() {
-        gameOverScreen();
         JFrame winScreen = new JFrame(); //initiate help window
         Container winContainer;
         JLabel victoryTitle;
@@ -605,6 +636,7 @@ public class MyJFrame extends JFrame implements ActionListener {
 //        winScreen.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         winScreen.setSize(800, 790);
         winScreen.setLocation(560, 160);
+        winScreen.setTitle("Victory");
         winScreen.setVisible(true);
         winScreen.setLayout(null); //disables default layout
 
@@ -671,6 +703,7 @@ public class MyJFrame extends JFrame implements ActionListener {
         gameOverScreen.setVisible(true); //makes window appear on screen
         gameOverScreen.setLayout(null);
         gameOverScreen.setBackground(Color.black);
+        gameOverScreen.setTitle("Game Over");
         gameOverScreen.setLocation(560, 160);
 
         container = gameOverScreen.getContentPane();
@@ -681,7 +714,6 @@ public class MyJFrame extends JFrame implements ActionListener {
         textPanel.setBackground(Color.decode("#191919"));
         textPanel.setBounds(160, 60, 500, 150);
         textPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
-
 
         //game over text
         gameOverText = new JTextArea("\n\nYou could not escape Mr.Rex's clutches and will be forever stuck in this nightmare. " +
