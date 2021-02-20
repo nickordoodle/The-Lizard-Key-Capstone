@@ -145,7 +145,8 @@ public class Actions {
             //if it does exist pop it off room item list
             if (grabbedItem != null) {
                 player.getInventory().add(grabbedItem);
-                if (player.getInventory().has(grabbedItem)) {
+                GameDictionary.Noun cape = board.allItems.get("magic cape");
+                if (player.getInventory().has(cape)) {
                     player.setHasMagicCape(true);
                 }
                 return ("You grabbed the " + noun.getName());
