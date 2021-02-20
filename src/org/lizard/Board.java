@@ -21,7 +21,7 @@ public class Board {
 
     public Board() {
         createMap();
-        addToVisitedRooms("keyRoom");
+        addToVisitedRooms("key room");
     }
 
     public Map<String, Item> getAllItems() {
@@ -30,27 +30,27 @@ public class Board {
 
     public void addToVisitedRooms(String roomNombre) {
         switch (roomNombre) {
-            case "floatingRoom":
+            case "floating room":
                 rooms[7][0] = "Floating Room";
                 break;
-            case "landOfTheDead":
+            case "land of the dead":
                 rooms[6][0] = "Land of the Dead";
                 break;
-            case "egyptianRoom":
+            case "egyptian room":
                 rooms[5][0] = "Egyptian Room";
                 break;
-            case "artRoom":
+            case "art room":
                 rooms[4][0] = "Art Room";
                 break;
-            case "engravingCave":
+            case "engraving cave":
                 rooms[7][1] = "Engraving Cave";
                 break;
 
-            case "loudRoom":
+            case "loud room":
                 rooms[6][1] = "Loud Room";
                 break;
 
-            case "swingingStairs":
+            case "swinging stairs":
                 rooms[5][1] = "Swinging Stairs";
                 break;
 
@@ -58,19 +58,19 @@ public class Board {
                 rooms[6][2] = "Library";
                 break;
 
-            case "keyRoom":
+            case "key room":
                 rooms[5][2] = "Key Room";
                 break;
 
-            case "psychWard":
+            case "psych ward":
                 rooms[4][2] = "Psych Ward";
                 break;
 
-            case "coalMine":
+            case "coal mine":
                 rooms[7][3] = "Coal Mine";
                 break;
 
-            case "creakyPath":
+            case "creaky path":
                 rooms[6][3] = "Creaky Path";
                 break;
 
@@ -82,15 +82,15 @@ public class Board {
                 rooms[4][3] = "Closet";
                 break;
 
-            case "riddleRoom":
+            case "riddle room":
                 rooms[3][3] = "Riddle Room";
                 break;
 
-            case "whisperingPassage":
+            case "whispering passage":
                 rooms[2][3] = "Whispering Passage";
                 break;
 
-            case "treasureRoom":
+            case "treasure room":
                 rooms[1][3] = "Treasure Room";
                 break;
 
@@ -102,7 +102,7 @@ public class Board {
                 rooms[1][4] = "Volcano";
                 break;
 
-            case "secretPassage":
+            case "secret passage":
                 rooms[2][4] = "Secret Passage";
                 rooms[3][4] = "Secret Passage";
                 rooms[4][4] = "Secret Passage";
@@ -160,30 +160,34 @@ public class Board {
         addMonstersToBoard();
 
         // Set starting room.
-        this.currentRoom = allRooms.get("keyRoom");
+        this.currentRoom = allRooms.get("key room");
     }
 
     public Room getCurrentRoom() {
         return currentRoom;
     }
 
+    public void setCurrentRoom(Room currentRoom) {
+        this.currentRoom = currentRoom;
+    }
+
     public String changeCurrentRoom(String direction) {
-        Map<String, Room> exits = currentRoom.getExits();
-        Lock lock = currentRoom.getLock(direction);
+        Map<String, Room> exits = getCurrentRoom().getExits();
+        Lock lock = getCurrentRoom().getLock(direction);
         String result = "";
         if (exits.containsKey(direction)) {
             if (lock == null || !lock.isLocked()) {
-                currentRoom = exits.get(direction);
-                addToVisitedRooms(currentRoom.getName());
-                result = "You have entered the " + currentRoom.getName() + "\n\n" + currentRoom.getRoomDescription();
+                setCurrentRoom(exits.get(direction));
+                addToVisitedRooms(getCurrentRoom().getName());
+                result = "You have entered the " + getCurrentRoom().getName() + "\n\n" + getCurrentRoom().getRoomDescription();
             } else {
-                if ((currentRoom.getName().equalsIgnoreCase("treasureRoom") && direction.equalsIgnoreCase("west")) || currentRoom.getName().equalsIgnoreCase("river") && direction.equalsIgnoreCase("east")) {
+                if ((getCurrentRoom().getName().equalsIgnoreCase("Treasure Room") && direction.equalsIgnoreCase("west")) || getCurrentRoom().getName().equalsIgnoreCase("River") && direction.equalsIgnoreCase("east")) {
                     result = "I know you aren't a magician, but if you were maybe you could use something from your bag of tricks to help you cross the river.";
-                } else if (currentRoom.getName().equalsIgnoreCase("keyRoom") && direction.equalsIgnoreCase("east")) {
+                } else if (getCurrentRoom().getName().equalsIgnoreCase("") && direction.equalsIgnoreCase("east")) {
                     result = "The door is locked. Maybe you can find something to open it?";
-                } else if (currentRoom.getName().equalsIgnoreCase("egyptianRoom") && direction.equalsIgnoreCase("west")) {
-                    result = "Because you in the egyptian room and you are a huge fan of 80s rock band, The Bangles. You try to walk like an Egyptian, but nothing happens. Come back here when you have rid this world of evil.";
-                } else if (currentRoom.getName().equalsIgnoreCase("egyptianRoom") && direction.equalsIgnoreCase("east")) {
+                } else if (getCurrentRoom().getName().equalsIgnoreCase("Egyptian Room") && direction.equalsIgnoreCase("west")) {
+                    result = "Because you in the Egyptian Room and you are a huge fan of 80s rock band, The Bangles. You try to walk like an Egyptian, but nothing happens. Come back here when you have rid this world of evil.";
+                } else if (getCurrentRoom().getName().equalsIgnoreCase("Egyptian Room") && direction.equalsIgnoreCase("east")) {
                     result = "The door is locked. You feel something sinister on the other side. It sends chills down to your bones.";
                 }
             }
@@ -191,6 +195,11 @@ public class Board {
             result = "You can't go that way!";
         }
         return result;
+    }
+
+    public String teleportRoom(Room newRoom) {
+        setCurrentRoom(newRoom);
+        return "In the blink of an eye, you use the magic cape to teleport to " + getCurrentRoom().getName() + "." + "\n\n" + getCurrentRoom().getRoomDescription();
     }
 
     private NodeList XMLParser(String pathName, String tagName) {
@@ -225,7 +234,7 @@ public class Board {
             Iterator<Map.Entry<String, String>> iterator2 = entry.getValue().entrySet().iterator();
             while (iterator2.hasNext()) {
                 // entry2.getKey() will return the String direction ("west", "north", etc)
-                // entry2.getValue() will return the String room ("library", "kitchen", etc)
+                // entry2.getValue() will return the String room ("Library", "Kitchen", etc)
                 Map.Entry<String, String> entry2 = iterator2.next();
                 // Get the Room class object from allRooms to create a new exit with the proper room exit
                 allRooms.get(entry.getKey()).createRoom(entry2.getKey(), allRooms.get(entry2.getValue()));
@@ -326,13 +335,6 @@ public class Board {
                 String lockMessage = itemElement.getElementsByTagName("lockMessage").item(0).getTextContent();
                 String commandInt = itemElement.getElementsByTagName("commandInt").item(0).getTextContent();
 
-                // Create new instance of the lock in its respective room
-//                allRooms.get(roomName)
-//                        .addLock(commandDirection,
-//                                new Lock(allItems.get(lockKey),
-//                                        lockMessage,
-//                                        new Event(Integer.parseInt(commandInt),
-//                                                directions.getDirection(commandDirection))));
                 Room room = allRooms.get(roomName);
                 Lock newLock = new Lock(allItems.get(lockKey), lockMessage, new Event(Integer.parseInt(commandInt), directions.getDirection(commandDirection)));
                 newLock.setLocked(true);
