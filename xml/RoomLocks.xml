@@ -2,7 +2,7 @@
     <room>
         <roomName>key room</roomName>
         <path>east</path>
-        <lockKey>library key</lockKey>
+        <lockKey>scholar's key</lockKey>
         <lockMessage>You have Unlocked the library!</lockMessage>
         <commandInt>2</commandInt>
     </room>

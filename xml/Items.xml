@@ -49,7 +49,7 @@
     </item>
     <item>
         <id>5</id>
-        <name>library key</name>
+        <name>scholar's key</name>
         <canGrab>true</canGrab>
         <roomName>key room</roomName>
         <lockKey>none</lockKey>
