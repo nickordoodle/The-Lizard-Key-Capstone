@@ -360,7 +360,7 @@ public class MyJFrame extends JFrame implements ActionListener {
             frame.add(mapPanel);
 
             // Winning condition check - player has winning key
-            if (player.hasWinningKey && board.getCurrentRoom().getName().equalsIgnoreCase("keyRoom")) {
+            if (player.hasWinningKey && board.getCurrentRoom().getName().equalsIgnoreCase("key room")) {
                 winScreen();
             }
 
