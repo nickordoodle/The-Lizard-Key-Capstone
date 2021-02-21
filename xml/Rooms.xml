@@ -6,7 +6,7 @@
             <exit>
                 <path>east</path>
                 <pathName>library</pathName>
-                <lockKey>library key</lockKey>
+                <lockKey>scholar's key</lockKey>
                 <lockMessage>You unlock the door to the library and enter.</lockMessage>
                 <commandInt>2</commandInt>
             </exit>
