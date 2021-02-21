@@ -66,7 +66,7 @@ public class MapView extends JPanel {
                         try {
                             g.setColor(Color.WHITE);
                             g.fillRect(column * size + 350, row * size + 430, size, size);
-                            BufferedImage image = ImageIO.read(new File("./person-v2.png"));
+                            BufferedImage image = ImageIO.read(new File("src/assets/person-v2.png"));
                             g.drawImage(image, column * size + 370, row * size + 440, size, size - 25, null);
 
                         } catch (IOException e) {
@@ -85,7 +85,7 @@ public class MapView extends JPanel {
 
 
                 try {
-                    BufferedImage image = ImageIO.read(new File("./four-walls-aerial-view-v6.png"));
+                    BufferedImage image = ImageIO.read(new File("src/assets/four-walls-aerial-view-v6.png"));
                     g.drawImage(image, column * size + 350, row * size + 430, size, size, null);
 
                 } catch (IOException e) {

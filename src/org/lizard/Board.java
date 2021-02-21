@@ -7,8 +7,10 @@ import org.w3c.dom.NodeList;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import java.awt.*;
 import java.io.File;
 import java.util.*;
+import java.util.List;
 
 public class Board {
     private Room currentRoom;
@@ -112,12 +114,12 @@ public class Board {
 
     private void createMap() {
         // Call XMLParser to gain access to a nodeList of all the rooms in the XML file
-        NodeList nodeList = XMLParser("xml/Rooms.xml", "room");
+        NodeList nodeList = XMLParser("src/assets/xml/Rooms.xml", "room");
         // Create a for loop to go the length of the nodeList
         for (int itr = 0; itr < nodeList.getLength(); itr++) {
             Node node = nodeList.item(itr);
             if (node.getNodeType() == Node.ELEMENT_NODE) {
-                // Create a way to hold the exits for each room before placing them in allExits
+                // Create a way to hold the exits for easch room before placing them in allExits
                 Map<String, String> exits = new HashMap<>();
                 Element eElement = (Element) node;
 
@@ -236,7 +238,7 @@ public class Board {
 
     private void addItemsToRooms() {
 
-        NodeList nodeList = XMLParser("xml/Items.xml", "item");
+        NodeList nodeList = XMLParser("src/assets/xml/Items.xml", "item");
         // Iterate over each item
         for (int itr = 0; itr < nodeList.getLength(); itr++) {
             // Make a node from nodeList at the current index
@@ -280,7 +282,7 @@ public class Board {
 
     private void addMonstersToBoard() {
 
-        NodeList nodeList = XMLParser("xml/Enemies.xml", "enemy");
+        NodeList nodeList = XMLParser("src/assets/xml/Enemies.xml", "enemy");
         // Iterate over each item
         for (int itr = 0; itr < nodeList.getLength(); itr++) {
             // Make a node from nodeList at the current index
@@ -309,7 +311,7 @@ public class Board {
     }
 
     private void addLocksToRooms() {
-        NodeList nodeList = XMLParser("xml/RoomLocks.xml", "room");
+        NodeList nodeList = XMLParser("src/assets/xml/RoomLocks.xml", "room");
         // Iterate over each rooms
         for (int itr = 0; itr < nodeList.getLength(); itr++) {
             // Make a node from nodeList at the current index

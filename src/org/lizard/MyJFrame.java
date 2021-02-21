@@ -17,6 +17,7 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 
 public class MyJFrame extends JFrame implements ActionListener {
 
@@ -26,7 +27,6 @@ public class MyJFrame extends JFrame implements ActionListener {
     Actions actions = new Actions(board, player, this, combat);
     GameDictionary gameDictionary = GameDictionary.getGameDictionary();
     TextParser parser = new TextParser(gameDictionary);
-    String soundName = "princeofdarkness.wav";
     Clip clip = null;
     JTextArea rpsGame;
     JPanel promptPanel;
@@ -61,7 +61,7 @@ public class MyJFrame extends JFrame implements ActionListener {
         //create background image
         BufferedImage img = null;
         try {
-            img = ImageIO.read(new File("bluePuppeteer.png"));
+            img = ImageIO.read(new File("src/assets/bluePuppeteer.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -232,7 +232,7 @@ public class MyJFrame extends JFrame implements ActionListener {
 
         img = null;
         try {
-            img = ImageIO.read(new File("blackPuppeteer.png"));
+            img = ImageIO.read(new File("src/assets/blackPuppeteer.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -246,7 +246,7 @@ public class MyJFrame extends JFrame implements ActionListener {
 
         img = null;
         try {
-            img = ImageIO.read(new File("lizard.png"));
+            img = ImageIO.read(new File("src/assets/lizard.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -616,7 +616,7 @@ public class MyJFrame extends JFrame implements ActionListener {
         rpgImgPanel.setBounds(0, 300, 800, 400);
 
         JLabel imgLabel = new JLabel();
-        imgLabel.setIcon(new ImageIcon("RPS.png"));
+        imgLabel.setIcon(new ImageIcon("src/assets/RPS.png"));
         imgLabel.setLayout(new FlowLayout(FlowLayout.CENTER));
         rpgImgPanel.add(imgLabel);
         combatWindow.add(rpgImgPanel);
@@ -675,7 +675,7 @@ public class MyJFrame extends JFrame implements ActionListener {
         winContainer.add(winTextPanel);
 
         JLabel imgLabel = new JLabel();
-        imgLabel.setIcon(new ImageIcon("lizardKey.png"));
+        imgLabel.setIcon(new ImageIcon("src/assets/lizardKey.png"));
         imgLabel.setBounds(20, 120, 450, 600);
 
         JMenuBar btnBar = new JMenuBar();
@@ -738,7 +738,7 @@ public class MyJFrame extends JFrame implements ActionListener {
 
         //game over image
         JLabel imgLabel = new JLabel();
-        imgLabel.setIcon(new ImageIcon("gameOver.png"));
+        imgLabel.setIcon(new ImageIcon("src/assets/gameOver.png"));
         imgLabel.setLayout(new FlowLayout(FlowLayout.CENTER));
         gPanel.add(imgLabel);
 
