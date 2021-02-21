@@ -151,7 +151,7 @@ public class Actions {
                 }
                 return ("You grabbed the " + noun.getName());
             } else {
-                return ("You can't");
+                return ("You don't see any " + noun.getName());
             }
 
         }
