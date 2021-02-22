@@ -1,27 +1,27 @@
 <rooms>
     <room>
-        <roomName>keyRoom</roomName>
+        <roomName>key room</roomName>
         <path>east</path>
-        <lockKey>library key</lockKey>
+        <lockKey>scholar's key</lockKey>
         <lockMessage>You have Unlocked the library!</lockMessage>
         <commandInt>2</commandInt>
     </room>
     <room>
-        <roomName>treasureRoom</roomName>
+        <roomName>treasure room</roomName>
         <path>west</path>
         <lockKey>magic cape</lockKey>
         <lockMessage>With your magic cape, you carry yourself through the air, west across the river.</lockMessage>
         <commandInt>2</commandInt>
     </room>
     <room>
-        <roomName>egyptianRoom</roomName>
+        <roomName>egyptian room</roomName>
         <path>east</path>
         <lockKey>skeleton key</lockKey>
         <lockMessage>You use the skeleton key to unlock the door to the land of the dead.</lockMessage>
         <commandInt>2</commandInt>
     </room>
     <room>
-        <roomName>egyptianRoom</roomName>
+        <roomName>egyptian room</roomName>
         <path>west</path>
         <lockKey>sculpture</lockKey>
         <lockMessage>With defeating this monster, dark energy starts to spew from the art room.</lockMessage>
