@@ -381,13 +381,9 @@ public class Board {
                 'use skeleton key on east' - to unlock a locked door to the east of the Egyptian Room.
                                 
                 'use chest key on locked chest' - to unlock locked chest.
-<<<<<<< HEAD
-                                
-=======
                 
                 'teleport <room>' - does what it says if you have what it takes to pull it off?
                 
->>>>>>> 35b6cc21098d3a7c68bdc593a39dd055b0f4df5a
                 'use magic cape on west' - to go over the river to the west of Treasure Room and 'use magic cape on east' to go back to Treasure Room.\s""";
 
     }
