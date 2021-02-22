@@ -1,8 +1,8 @@
 package org.lizard.util;
 
 import javax.sound.sampled.*;
-import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.util.List;
 
 public class Music {
@@ -14,18 +14,21 @@ public class Music {
 
 
     private Music() {
-        loadTrack("princeofdarkness.wav");
+        ClassLoader cl = this.getClass().getClassLoader();
+        URL musicResourceURL = cl.getResource("princeofdarkness.wav");
+        loadTrack(musicResourceURL);
     }
 
     private Music(List<String> listOfTracks) {
         //TODO Implement a multi song library
     }
 
-    private static void loadTrack(String fileName) {
+    private static void loadTrack(URL url) {
         AudioInputStream audioInputStream = null;
 
         try {
-            audioInputStream = AudioSystem.getAudioInputStream(new File(fileName).getAbsoluteFile());
+
+            audioInputStream = AudioSystem.getAudioInputStream(url);
 
         } catch (UnsupportedAudioFileException | IOException unsupportedAudioFileException) {
             unsupportedAudioFileException.printStackTrace();

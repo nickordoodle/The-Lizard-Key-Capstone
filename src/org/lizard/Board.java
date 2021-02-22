@@ -7,8 +7,9 @@ import org.w3c.dom.NodeList;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-import java.io.File;
+import java.io.InputStream;
 import java.util.*;
+import java.util.List;
 
 public class Board {
     private Room currentRoom;
@@ -112,12 +113,12 @@ public class Board {
 
     private void createMap() {
         // Call XMLParser to gain access to a nodeList of all the rooms in the XML file
-        NodeList nodeList = XMLParser("xml/Rooms.xml", "room");
+        NodeList nodeList = XMLParser("Rooms.xml", "room");
         // Create a for loop to go the length of the nodeList
         for (int itr = 0; itr < nodeList.getLength(); itr++) {
             Node node = nodeList.item(itr);
             if (node.getNodeType() == Node.ELEMENT_NODE) {
-                // Create a way to hold the exits for each room before placing them in allExits
+                // Create a way to hold the exits for easch room before placing them in allExits
                 Map<String, String> exits = new HashMap<>();
                 Element eElement = (Element) node;
 
@@ -205,16 +206,21 @@ public class Board {
     private NodeList XMLParser(String pathName, String tagName) {
         NodeList nodeList;
         try {
-            // Creating a constructor of file class and parsing an XML file
-            File file = new File(pathName);
+            // Create a class loader to retrieve the resource
+            InputStream resourceInputStream = getClass().getClassLoader().getResourceAsStream(pathName);
+
             // An instance of factory that gives a document builder
             DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
             // An instance of builder to parse the specified xml file
             DocumentBuilder db = dbf.newDocumentBuilder();
-            Document doc = db.parse(file);
+
+            // Parse the stream containing resource data
+            Document doc = db.parse(resourceInputStream);
             doc.getDocumentElement().normalize();
             nodeList = doc.getElementsByTagName(tagName);
+
             return nodeList;
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -245,7 +251,7 @@ public class Board {
 
     private void addItemsToRooms() {
 
-        NodeList nodeList = XMLParser("xml/Items.xml", "item");
+        NodeList nodeList = XMLParser("Items.xml", "item");
         // Iterate over each item
         for (int itr = 0; itr < nodeList.getLength(); itr++) {
             // Make a node from nodeList at the current index
@@ -289,7 +295,7 @@ public class Board {
 
     private void addMonstersToBoard() {
 
-        NodeList nodeList = XMLParser("xml/Enemies.xml", "enemy");
+        NodeList nodeList = XMLParser("Enemies.xml", "enemy");
         // Iterate over each item
         for (int itr = 0; itr < nodeList.getLength(); itr++) {
             // Make a node from nodeList at the current index
@@ -318,7 +324,7 @@ public class Board {
     }
 
     private void addLocksToRooms() {
-        NodeList nodeList = XMLParser("xml/RoomLocks.xml", "room");
+        NodeList nodeList = XMLParser("RoomLocks.xml", "room");
         // Iterate over each rooms
         for (int itr = 0; itr < nodeList.getLength(); itr++) {
             // Make a node from nodeList at the current index
@@ -347,9 +353,9 @@ public class Board {
         return """             
                 Welcome to a text-based game, The Lizard Key! 
                 Your path is a dangerous one, there are two enemies lurking in the shadows that you must have the courage to defeat. Only then can you face your biggest opponent Mr.Rex the sole reason you are trapped in this frightful universe. After defeating Mr.Rex get the 'Lizard Key' and unlock your door of salvation in the 'Key Room'. Look for clues, pick up items, and don't be afraid to explore, but most of all stay alive! 
-                
+                                
                 HOW TO PLAY:\s
-                
+                                
                 To perform an action, type your command in the text field box and hit enter.
 
                 Examples of possible commands are:\s
@@ -357,9 +363,9 @@ public class Board {
                 'go east' - to travel east, or substitute 'east' with west, south, or north to travel in a specified direction.
 
                 'examine room' - to see items and doors in current room.
-                
+                                
                 'grab healing brownies' - to get and store them in your inventory for later use.
-                
+                                
                 'eat healing brownies' - to eat healing brownies and heal yourself.
 
                 'examine locked chest' - to examine the locked chest (locked chest can be substituted for any item in your current room).
@@ -373,11 +379,15 @@ public class Board {
                 'get skeleton key' - to get and store skeleton key in your inventory to unlock a suitable door.
 
                 'use skeleton key on east' - to unlock a locked door to the east of the Egyptian Room.
-                
+                                
                 'use chest key on locked chest' - to unlock locked chest.
+<<<<<<< HEAD
+                                
+=======
                 
                 'teleport <room>' - does what it says if you have what it takes to pull it off?
                 
+>>>>>>> 35b6cc21098d3a7c68bdc593a39dd055b0f4df5a
                 'use magic cape on west' - to go over the river to the west of Treasure Room and 'use magic cape on east' to go back to Treasure Room.\s""";
 
     }
@@ -386,9 +396,9 @@ public class Board {
         return """
                 Welcome to a text-based game, The Lizard Key! 
                 Your path is a dangerous one, there are two enemies lurking in the shadows that you must have the courage to defeat. Only then can you face your biggest opponent Mr.Rex the sole reason you are trapped in this frightful universe. After defeating Mr.Rex get the 'Lizard Key' and unlock your door of salvation in the 'Key Room'. Look for clues, pick up items, and don't be afraid to explore, but most of all stay alive!
-                
+                                
                 How to Play:\s
-                
+                                
                 To perform an action, type your command in the text field box and hit enter.
 
                 Examples of possible commands are:\s
@@ -396,9 +406,9 @@ public class Board {
                 'go east' - to travel east, or substitute 'east' with west, south, or north to travel in a specified direction.
 
                 'examine room' - to see items and doors in current room.
-                
+                                
                 'grab healing brownies' - to get and store healing brownies in your inventory for later use.
-                
+                                
                 'eat healing brownies' - to eat healing brownies and heal yourself.
 
                 'examine locked chest' - to examine the locked chest (locked chest can be substituted for any item in your current room).
@@ -408,7 +418,7 @@ public class Board {
                 'grab knife' - to grab a knife and store a knife in your inventory (substitute knife for item you wish to pick up).
 
                 'drop knife' - to drop a knife (substitute knife for item you wish to drop from your inventory).
-                
+                                
                 'get skeleton key' - to get and store skeleton key in your inventory to unlock a suitable door.
 
                 'use skeleton key on east' - to unlock a locked door to the east of the Egyptian Room.

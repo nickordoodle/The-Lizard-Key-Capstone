@@ -8,6 +8,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Arrays;
 
 public class MapView extends JPanel {
@@ -67,8 +68,11 @@ public class MapView extends JPanel {
                         try {
                             g.setColor(Color.WHITE);
                             g.fillRect(column * size + 350, row * size + 430, size, size);
-                            BufferedImage image = ImageIO.read(new File("./person-v2.png"));
-                            g.drawImage(image, column * size + 370, row * size + 440, size, size-25, null);
+
+                            InputStream resourceInputStream = getClass().getClassLoader().getResourceAsStream("person-v2.png");
+
+                            BufferedImage image = ImageIO.read(resourceInputStream);
+                            g.drawImage(image, column * size + 370, row * size + 440, size, size - 25, null);
 
                         } catch (IOException e) {
                             e.printStackTrace();
@@ -86,7 +90,9 @@ public class MapView extends JPanel {
 
 
                 try {
-                    BufferedImage image = ImageIO.read(new File("./four-walls-aerial-view-v6.png"));
+                    InputStream resourceInputStream = getClass().getClassLoader().getResourceAsStream("four-walls-aerial-view-v6.png");
+
+                    BufferedImage image = ImageIO.read(resourceInputStream);
                     g.drawImage(image, column * size + 350, row * size + 430, size, size, null);
 
                 } catch (IOException e) {
@@ -108,7 +114,7 @@ public class MapView extends JPanel {
             String[] parsedWords = current.split(" ");
             // The offset to adjust for every word
             int heightOffset = 0;
-            for(int i = 0; i < parsedWords.length; i++){
+            for (int i = 0; i < parsedWords.length; i++) {
                 g.drawString(
                         parsedWords[i],
                         numRows * size + 375,
