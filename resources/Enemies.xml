@@ -2,11 +2,11 @@
     <enemy>
         <name>Copernicus Rex Verwirrtheit Theodore</name>
         <hp>100</hp>
-        <roomName>artRoom</roomName>
+        <roomName>art room</roomName>
     </enemy>
     <enemy>
         <name>Zombies</name>
         <hp>60</hp>
-        <roomName>landOfTheDead</roomName>
+        <roomName>land of the dead</roomName>
     </enemy>
 </enemies>

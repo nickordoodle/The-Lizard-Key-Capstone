@@ -8,6 +8,7 @@ public class Player {
     Inventory inventory = new Inventory();
     private String name;
     boolean hasWinningKey = false;
+    boolean hasMagicCape = false;
 
 
     int playerHP = 250;
@@ -86,6 +87,13 @@ public class Player {
 
     }
 
+    public boolean isHasMagicCape() {
+        return hasMagicCape;
+    }
+
+    public void setHasMagicCape(boolean hasMagicCape) {
+        this.hasMagicCape = hasMagicCape;
+    }
 
     public int getPlayerHP() {
         return playerHP;

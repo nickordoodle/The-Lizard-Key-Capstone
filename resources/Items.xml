@@ -17,7 +17,7 @@
         <id>2</id>
         <name>candle</name>
         <canGrab>true</canGrab>
-        <roomName>keyRoom</roomName>
+        <roomName>key room</roomName>
         <lockKey>matches</lockKey>
         <lockMessage>You strike a match, setting the candle aflame. Like a hurricane, wind gusts around you, lifting
             your feet from the ground. With just a blink, you have moved to a new room, barely catching your footing as
@@ -44,7 +44,7 @@
         <id>4</id>
         <name>skeleton key</name>
         <canGrab>true</canGrab>
-        <roomName>keyRoom</roomName>
+        <roomName>key room</roomName>
         <lockKey>none</lockKey>
         <lockMessage></lockMessage>
         <commandInt></commandInt>
@@ -54,9 +54,9 @@
     </item>
     <item>
         <id>5</id>
-        <name>library key</name>
+        <name>scholar's key</name>
         <canGrab>true</canGrab>
-        <roomName>keyRoom</roomName>
+        <roomName>key room</roomName>
         <lockKey>none</lockKey>
         <lockMessage></lockMessage>
         <commandInt></commandInt>
@@ -121,7 +121,7 @@
         <id>23</id>
         <name>chest key</name>
         <canGrab>true</canGrab>
-        <roomName>coalMine</roomName>
+        <roomName>coal mine</roomName>
         <lockKey>none</lockKey>
         <lockMessage></lockMessage>
         <commandInt></commandInt>
@@ -148,7 +148,7 @@
         <id>11</id>
         <name>doll</name>
         <canGrab>false</canGrab>
-        <roomName>psychWard</roomName>
+        <roomName>psych ward</roomName>
         <lockKey>none</lockKey>
         <lockMessage></lockMessage>
         <commandInt></commandInt>
@@ -173,7 +173,7 @@
         <id>13</id>
         <name>rope</name>
         <canGrab>false</canGrab>
-        <roomName>creakyPath</roomName>
+        <roomName>creaky path</roomName>
         <lockKey>none</lockKey>
         <lockMessage></lockMessage>
         <commandInt></commandInt>
@@ -185,7 +185,7 @@
         <id>14</id>
         <name>pickaxe</name>
         <canGrab>true</canGrab>
-        <roomName>coalMine</roomName>
+        <roomName>coal mine</roomName>
         <lockKey>none</lockKey>
         <lockMessage></lockMessage>
         <commandInt></commandInt>
@@ -198,7 +198,7 @@
         <id>15</id>
         <name>brown miners hat</name>
         <canGrab>false</canGrab>
-        <roomName>coalMine</roomName>
+        <roomName>coal mine</roomName>
         <lockKey>none</lockKey>
         <lockMessage></lockMessage>
         <commandInt></commandInt>
@@ -211,7 +211,7 @@
         <id>16</id>
         <name>gas mask</name>
         <canGrab>false</canGrab>
-        <roomName>coalMine</roomName>
+        <roomName>coal mine</roomName>
         <lockKey>none</lockKey>
         <lockMessage></lockMessage>
         <commandInt></commandInt>
@@ -225,7 +225,7 @@
         <id>17</id>
         <name>diamond tiara</name>
         <canGrab>false</canGrab>
-        <roomName>treasureRoom</roomName>
+        <roomName>treasure room</roomName>
         <lockKey>none</lockKey>
         <lockMessage></lockMessage>
         <commandInt></commandInt>
@@ -238,7 +238,7 @@
         <id>18</id>
         <name>sapphire necklace</name>
         <canGrab>false</canGrab>
-        <roomName>treasureRoom</roomName>
+        <roomName>treasure room</roomName>
         <lockKey>none</lockKey>
         <lockMessage></lockMessage>
         <commandInt></commandInt>
@@ -251,7 +251,7 @@
         <id>19</id>
         <name>riddle</name>
         <canGrab>false</canGrab>
-        <roomName>riddleRoom</roomName>
+        <roomName>riddle room</roomName>
         <lockKey>none</lockKey>
         <lockMessage></lockMessage>
         <commandInt></commandInt>
@@ -265,7 +265,7 @@
         <id>20</id>
         <name>flowers</name>
         <canGrab>false</canGrab>
-        <roomName>whisperingPassage</roomName>
+        <roomName>whispering passage</roomName>
         <lockKey>none</lockKey>
         <lockMessage></lockMessage>
         <commandInt></commandInt>
@@ -277,7 +277,7 @@
         <id>21</id>
         <name>photograph</name>
         <canGrab>false</canGrab>
-        <roomName>whisperingPassage</roomName>
+        <roomName>whispering passage</roomName>
         <lockKey>none</lockKey>
         <lockMessage></lockMessage>
         <commandInt></commandInt>
@@ -290,7 +290,7 @@
         <id>22</id>
         <name>sculpture</name>
         <canGrab>false</canGrab>
-        <roomName>artRoom</roomName>
+        <roomName>art room</roomName>
         <lockKey>none</lockKey>
         <lockMessage></lockMessage>
         <commandInt></commandInt>
@@ -303,7 +303,7 @@
         <id>23</id>
         <name>tombstone</name>
         <canGrab>false</canGrab>
-        <roomName>engravingCave</roomName>
+        <roomName>engraving cave</roomName>
         <lockKey>none</lockKey>
         <lockMessage></lockMessage>
         <commandInt></commandInt>

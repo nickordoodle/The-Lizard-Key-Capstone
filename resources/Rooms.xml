@@ -1,18 +1,18 @@
 <rooms>
     <room>
         <id>1</id>
-        <roomName>keyRoom</roomName>
+        <roomName>key room</roomName>
         <roomExits>
             <exit>
                 <path>east</path>
                 <pathName>library</pathName>
-                <lockKey>library key</lockKey>
+                <lockKey>scholar's key</lockKey>
                 <lockMessage>You unlock the door to the library and enter.</lockMessage>
                 <commandInt>2</commandInt>
             </exit>
             <exit>
                 <path>north</path>
-                <pathName>swingingStairs</pathName>
+                <pathName>swinging stairs</pathName>
             </exit>
             <exit>
                 <path>south</path>
@@ -20,7 +20,7 @@
             </exit>
             <exit>
                 <path>west</path>
-                <pathName>psychWard</pathName>
+                <pathName>psych ward</pathName>
             </exit>
         </roomExits>
         <roomDescription>Four bare walls keep you as a prisoner to an overly bright room with no windows. Shelves with
@@ -36,15 +36,15 @@
         <roomExits>
             <exit>
                 <path>north</path>
-                <pathName>loudRoom</pathName>
+                <pathName>loud room</pathName>
             </exit>
             <exit>
                 <path>south</path>
-                <pathName>creakyPath</pathName>
+                <pathName>creaky path</pathName>
             </exit>
             <exit>
                 <path>west</path>
-                <pathName>keyRoom</pathName>
+                <pathName>key room</pathName>
             </exit>
         </roomExits>
         <roomDescription>An overly large room with cobwebbed filled shelves, over sized portraits with headless bodies,
@@ -55,11 +55,11 @@
     </room>
     <room>
         <id>3</id>
-        <roomName>loudRoom</roomName>
+        <roomName>loud room</roomName>
         <roomExits>
             <exit>
                 <path>east</path>
-                <pathName>engravingCave</pathName>
+                <pathName>engraving cave</pathName>
             </exit>
             <exit>
                 <path>south</path>
@@ -72,11 +72,11 @@
     </room>
     <room>
         <id>4</id>
-        <roomName>psychWard</roomName>
+        <roomName>psych ward</roomName>
         <roomExits>
             <exit>
                 <path>east</path>
-                <pathName>keyRoom</pathName>
+                <pathName>key room</pathName>
             </exit>
             <exit>
                 <path>south</path>
@@ -95,7 +95,7 @@
         <roomExits>
             <exit>
                 <path>north</path>
-                <pathName>keyRoom</pathName>
+                <pathName>key room</pathName>
             </exit>
         </roomExits>
         <roomDescription>Like darts, knives hang from the vaulted ceiling in varying sizes. Across the white marble
@@ -105,7 +105,7 @@
     </room>
     <room>
         <id>6</id>
-        <roomName>creakyPath</roomName>
+        <roomName>creaky path</roomName>
         <roomExits>
             <exit>
                 <path>north</path>
@@ -113,7 +113,7 @@
             </exit>
             <exit>
                 <path>east</path>
-                <pathName>coalMine</pathName>
+                <pathName>coal mine</pathName>
             </exit>
         </roomExits>
         <roomDescription>Above a bed of rocks with crashing waters, a wooden bridge cries in the wind. Bundled in a
@@ -122,11 +122,11 @@
     </room>
     <room>
         <id>7</id>
-        <roomName>coalMine</roomName>
+        <roomName>coal mine</roomName>
         <roomExits>
             <exit>
                 <path>west</path>
-                <pathName>creakyPath</pathName>
+                <pathName>creaky path</pathName>
             </exit>
         </roomExits>
         <roomDescription>Dimly lit lamps, covered in soot, line the walls of the mine down a path cut short by tumbled
@@ -135,7 +135,7 @@
     </room>
     <room>
         <id>8</id>
-        <roomName>secretPassage</roomName>
+        <roomName>secret passage</roomName>
         <roomExits>
             <exit>
                 <path>north</path>
@@ -151,7 +151,7 @@
         <roomExits>
             <exit>
                 <path>east</path>
-                <pathName>secretPassage</pathName>
+                <pathName>secret passage</pathName>
             </exit>
         </roomExits>
         <roomDescription>Spewing lava from it's top, a volcano destroys everything near it. A random, small door stands
@@ -160,7 +160,7 @@
     </room>
     <room>
         <id>10</id>
-        <roomName>treasureRoom</roomName>
+        <roomName>treasure room</roomName>
         <roomExits>
             <exit>
                 <path>west</path>
@@ -182,7 +182,7 @@
     </room>
     <room>
         <id>11</id>
-        <roomName>riddleRoom</roomName>
+        <roomName>riddle room</roomName>
         <roomExits>
             <exit>
                 <path>east</path>
@@ -190,7 +190,7 @@
             </exit>
             <exit>
                 <path>west</path>
-                <pathName>whisperingPassage</pathName>
+                <pathName>whispering passage</pathName>
             </exit>
         </roomExits>
         <roomDescription>The empty room bares a tulip filled wallpaper with a single portion ripped away to reveal a
@@ -199,11 +199,11 @@
     </room>
     <room>
         <id>12</id>
-        <roomName>whisperingPassage</roomName>
+        <roomName>whispering passage</roomName>
         <roomExits>
             <exit>
                 <path>west</path>
-                <pathName>treasureRoom</pathName>
+                <pathName>treasure room</pathName>
             </exit>
         </roomExits>
         <roomDescription>With each step you take down the cobblestone path, a footstep behind you can be heard. Whispers
@@ -217,11 +217,11 @@
         <roomExits>
             <exit>
                 <path>north</path>
-                <pathName>psychWard</pathName>
+                <pathName>psych ward</pathName>
             </exit>
             <exit>
                 <path>west</path>
-                <pathName>riddleRoom</pathName>
+                <pathName>riddle room</pathName>
             </exit>
         </roomExits>
         <roomDescription>A single light dimly guides you through a small space. Packed tight with clothes from eras that
@@ -231,15 +231,15 @@
     </room>
     <room>
         <id>14</id>
-        <roomName>swingingStairs</roomName>
+        <roomName>swinging stairs</roomName>
         <roomExits>
             <exit>
                 <path>north</path>
-                <pathName>egyptianRoom</pathName>
+                <pathName>egyptian room</pathName>
             </exit>
             <exit>
                 <path>south</path>
-                <pathName>keyRoom</pathName>
+                <pathName>key room</pathName>
             </exit>
         </roomExits>
         <roomDescription>From left to right, staircases move around you, loud and reckless, clashing against walls like
@@ -248,25 +248,25 @@
     </room>
     <room>
         <id>15</id>
-        <roomName>egyptianRoom</roomName>
+        <roomName>egyptian room</roomName>
         <roomExits>
             <exit>
                 <path>east</path>
-                <pathName>landOfTheDead</pathName>
+                <pathName>land of the dead</pathName>
                 <lockKey>skeleton key</lockKey>
                 <lockMessage>You use the skeleton key to unlock the door to the land of the dead.</lockMessage>
                 <commandInt>2</commandInt>
             </exit>
             <exit>
                 <path>west</path>
-                <pathName>artRoom</pathName>
+                <pathName>art room</pathName>
                 <lockKey>sculpture</lockKey>
                 <lockMessage>With defeating this monster, dark energy starts to spew from the art room.</lockMessage>
                 <commandInt>2</commandInt>
             </exit>
             <exit>
                 <path>south</path>
-                <pathName>swingingStairs</pathName>
+                <pathName>swinging stairs</pathName>
             </exit>
         </roomExits>
         <roomDescription>As you step through the door, sand brushes across your face, forcing your eyes to veer to
@@ -276,11 +276,11 @@
     </room>
     <room>
         <id>16</id>
-        <roomName>landOfTheDead</roomName>
+        <roomName>land of the dead</roomName>
         <roomExits>
             <exit>
                 <path>west</path>
-                <pathName>egyptianRoom</pathName>
+                <pathName>egyptian room</pathName>
             </exit>
         </roomExits>
         <roomDescription>With every step, your feet slush through murky water. Willow branches hang low above you,
@@ -290,11 +290,11 @@
     </room>
     <room>
         <id>17</id>
-        <roomName>artRoom</roomName>
+        <roomName>art room</roomName>
         <roomExits>
             <exit>
                 <path>east</path>
-                <pathName>egyptianRoom</pathName>
+                <pathName>egyptian room</pathName>
             </exit>
         </roomExits>
         <roomDescription>Fumes of alcohol fill the air as moisture drips down the paintings on easels, almost as if the
@@ -304,15 +304,15 @@
     </room>
     <room>
         <id>18</id>
-        <roomName>engravingCave</roomName>
+        <roomName>engraving cave</roomName>
         <roomExits>
             <exit>
                 <path>north</path>
-                <pathName>floatingRoom</pathName>
+                <pathName>floating room</pathName>
             </exit>
             <exit>
                 <path>west</path>
-                <pathName>loudRoom</pathName>
+                <pathName>loud room</pathName>
             </exit>
         </roomExits>
         <roomDescription>Musty air carries you through a tombstone filled cave, scratches covering the walls, random but
@@ -321,11 +321,11 @@
     </room>
     <room>
         <id>19</id>
-        <roomName>floatingRoom</roomName>
+        <roomName>floating room</roomName>
         <roomExits>
             <exit>
                 <path>west</path>
-                <pathName>landOfTheDead</pathName>
+                <pathName>land of the dead</pathName>
             </exit>
         </roomExits>
         <roomDescription>Heavy as a boulder, standing on a feather, your foot triggers a pressure plate on the floor.
@@ -338,7 +338,7 @@
         <roomExits>
             <exit>
                 <path>east</path>
-                <pathName>treasureRoom</pathName>
+                <pathName>treasure room</pathName>
                 <lockKey>magic cape</lockKey>
                 <lockMessage>With your magic cape, you carry yourself through the air, east across the river.
                 </lockMessage>

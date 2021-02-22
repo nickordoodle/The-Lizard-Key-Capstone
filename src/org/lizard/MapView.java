@@ -51,17 +51,18 @@ public class MapView extends JPanel {
                     String[] nameSplit = rooms[column][row].split(" ");
 
                     for (int v = 0; v < nameSplit.length; v++) {
-                        if (v == 0) {
-                            nameSplit[v] = String.valueOf(nameSplit[v].charAt(0)).toLowerCase() + nameSplit[v].substring(1);
-                        } else {
-                            nameSplit[v] = String.valueOf(nameSplit[v].charAt(0)).toUpperCase() + nameSplit[v].substring(1);
-                        }
+                        nameSplit[v] = nameSplit[v].toLowerCase();
+//                        if (v == 0) {
+//                            nameSplit[v] = String.valueOf(nameSplit[v].charAt(0)).toLowerCase() + nameSplit[v].substring(1);
+//                        } else {
+//                            nameSplit[v] = String.valueOf(nameSplit[v].charAt(0)).toUpperCase() + nameSplit[v].substring(1);
+//                        }
                     }
-                    joined = String.join("", Arrays.asList(nameSplit));
+                    joined = String.join(" ", Arrays.asList(nameSplit));
                 }
 
                 // Draws the current room of the player
-                if (rooms[column][row] != null && joined != null && joined.equals(currentRoom)) {
+                if (rooms[column][row] != null && joined != null && joined.equalsIgnoreCase(currentRoom)) {
                     if (!((column == 3 || column == 4 || column == 2) && row == 4)) {
 
                         try {
