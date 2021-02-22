@@ -7,8 +7,7 @@ import org.w3c.dom.NodeList;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-import java.awt.*;
-import java.io.File;
+import java.io.InputStream;
 import java.util.*;
 import java.util.List;
 
@@ -114,7 +113,7 @@ public class Board {
 
     private void createMap() {
         // Call XMLParser to gain access to a nodeList of all the rooms in the XML file
-        NodeList nodeList = XMLParser("src/assets/xml/Rooms.xml", "room");
+        NodeList nodeList = XMLParser("Rooms.xml", "room");
         // Create a for loop to go the length of the nodeList
         for (int itr = 0; itr < nodeList.getLength(); itr++) {
             Node node = nodeList.item(itr);
@@ -198,16 +197,21 @@ public class Board {
     private NodeList XMLParser(String pathName, String tagName) {
         NodeList nodeList;
         try {
-            // Creating a constructor of file class and parsing an XML file
-            File file = new File(pathName);
+            // Create a class loader to retrieve the resource
+            InputStream resourceInputStream = getClass().getClassLoader().getResourceAsStream(pathName);
+
             // An instance of factory that gives a document builder
             DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
             // An instance of builder to parse the specified xml file
             DocumentBuilder db = dbf.newDocumentBuilder();
-            Document doc = db.parse(file);
+
+            // Parse the stream containing resource data
+            Document doc = db.parse(resourceInputStream);
             doc.getDocumentElement().normalize();
             nodeList = doc.getElementsByTagName(tagName);
+
             return nodeList;
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -238,7 +242,7 @@ public class Board {
 
     private void addItemsToRooms() {
 
-        NodeList nodeList = XMLParser("src/assets/xml/Items.xml", "item");
+        NodeList nodeList = XMLParser("Items.xml", "item");
         // Iterate over each item
         for (int itr = 0; itr < nodeList.getLength(); itr++) {
             // Make a node from nodeList at the current index
@@ -282,7 +286,7 @@ public class Board {
 
     private void addMonstersToBoard() {
 
-        NodeList nodeList = XMLParser("src/assets/xml/Enemies.xml", "enemy");
+        NodeList nodeList = XMLParser("Enemies.xml", "enemy");
         // Iterate over each item
         for (int itr = 0; itr < nodeList.getLength(); itr++) {
             // Make a node from nodeList at the current index
@@ -311,7 +315,7 @@ public class Board {
     }
 
     private void addLocksToRooms() {
-        NodeList nodeList = XMLParser("src/assets/xml/RoomLocks.xml", "room");
+        NodeList nodeList = XMLParser("RoomLocks.xml", "room");
         // Iterate over each rooms
         for (int itr = 0; itr < nodeList.getLength(); itr++) {
             // Make a node from nodeList at the current index

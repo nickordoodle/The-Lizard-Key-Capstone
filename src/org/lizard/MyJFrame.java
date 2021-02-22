@@ -15,7 +15,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -61,7 +60,10 @@ public class MyJFrame extends JFrame implements ActionListener {
         //create background image
         BufferedImage img = null;
         try {
-            img = ImageIO.read(new File("src/assets/bluePuppeteer.png"));
+
+            InputStream inputImageStream = getClass().getClassLoader().getResourceAsStream("bluePuppeteer.png");
+            assert inputImageStream != null;
+            img = ImageIO.read(inputImageStream);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -232,7 +234,11 @@ public class MyJFrame extends JFrame implements ActionListener {
 
         img = null;
         try {
-            img = ImageIO.read(new File("src/assets/blackPuppeteer.png"));
+
+            InputStream inputImageStream = getClass().getClassLoader().getResourceAsStream("blackPuppeteer.png");
+            assert inputImageStream != null;
+
+            img = ImageIO.read(inputImageStream);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -246,7 +252,10 @@ public class MyJFrame extends JFrame implements ActionListener {
 
         img = null;
         try {
-            img = ImageIO.read(new File("src/assets/lizard.png"));
+
+            InputStream inputImageStream = getClass().getClassLoader().getResourceAsStream("lizard.png");
+            assert inputImageStream != null;
+            img = ImageIO.read(inputImageStream);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -616,7 +625,16 @@ public class MyJFrame extends JFrame implements ActionListener {
         rpgImgPanel.setBounds(0, 300, 800, 400);
 
         JLabel imgLabel = new JLabel();
-        imgLabel.setIcon(new ImageIcon("src/assets/RPS.png"));
+        try {
+            InputStream inputImageStream = getClass().getClassLoader().getResourceAsStream("RPS.png");
+            img = ImageIO.read(inputImageStream);
+
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+
+        imgLabel.setIcon(new ImageIcon(img));
+
         imgLabel.setLayout(new FlowLayout(FlowLayout.CENTER));
         rpgImgPanel.add(imgLabel);
         combatWindow.add(rpgImgPanel);
@@ -675,7 +693,15 @@ public class MyJFrame extends JFrame implements ActionListener {
         winContainer.add(winTextPanel);
 
         JLabel imgLabel = new JLabel();
-        imgLabel.setIcon(new ImageIcon("src/assets/lizardKey.png"));
+        try {
+            InputStream inputImageStream = getClass().getClassLoader().getResourceAsStream("lizardKey.png");
+            img = ImageIO.read(inputImageStream);
+
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+
+        imgLabel.setIcon(new ImageIcon(img));
         imgLabel.setBounds(20, 120, 450, 600);
 
         JMenuBar btnBar = new JMenuBar();
@@ -736,9 +762,17 @@ public class MyJFrame extends JFrame implements ActionListener {
         gPanel.setBounds(0, 120, 800, 400);
         container.add(gPanel);
 
-        //game over image
+
         JLabel imgLabel = new JLabel();
-        imgLabel.setIcon(new ImageIcon("src/assets/gameOver.png"));
+        try {
+            InputStream inputImageStream = getClass().getClassLoader().getResourceAsStream("gameOver.png");
+            img = ImageIO.read(inputImageStream);
+
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+
+        imgLabel.setIcon(new ImageIcon(img));
         imgLabel.setLayout(new FlowLayout(FlowLayout.CENTER));
         gPanel.add(imgLabel);
 

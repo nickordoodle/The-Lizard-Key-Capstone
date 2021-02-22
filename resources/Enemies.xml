@@ -1,0 +1,12 @@
+<enemies>
+    <enemy>
+        <name>Copernicus Rex Verwirrtheit Theodore</name>
+        <hp>100</hp>
+        <roomName>artRoom</roomName>
+    </enemy>
+    <enemy>
+        <name>Zombies</name>
+        <hp>60</hp>
+        <roomName>landOfTheDead</roomName>
+    </enemy>
+</enemies>

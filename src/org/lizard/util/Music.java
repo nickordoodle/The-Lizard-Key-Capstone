@@ -1,7 +1,6 @@
 package org.lizard.util;
 
 import javax.sound.sampled.*;
-import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
@@ -16,8 +15,7 @@ public class Music {
 
     private Music() {
         ClassLoader cl = this.getClass().getClassLoader();
-        URL musicResourceURL = cl.getResource("assets/princeofdarkness.wav");
-//        URL musicResourceURL = cl.getResource("src/assets/princeofdarkness.wav");
+        URL musicResourceURL = cl.getResource("princeofdarkness.wav");
         loadTrack(musicResourceURL);
     }
 
