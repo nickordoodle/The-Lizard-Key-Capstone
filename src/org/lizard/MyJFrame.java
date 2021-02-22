@@ -98,27 +98,39 @@ public class MyJFrame extends JFrame implements ActionListener {
         quitGameBtn.addActionListener(this);
         quitGameBtn.setBackground(Color.black);
         quitGameBtn.setForeground(Color.orange);
+        quitGameBtn.setBackground(Color.decode("#191919"));
+        quitGameBtn.setForeground(Color.orange);
+        quitGameBtn.setOpaque(true);
+        quitGameBtn.setBorderPainted(false);
 
         //button to play the game again
         playAgainBtn = new JButton("Play Again");
         playAgainBtn.setBounds(990, 415, 120, 40);
         playAgainBtn.addActionListener(this);
-        playAgainBtn.setBackground(Color.black);
+        playAgainBtn.setBackground(Color.decode("#191919"));
         playAgainBtn.setForeground(Color.orange);
+        playAgainBtn.setOpaque(true);
+        playAgainBtn.setBorderPainted(false);
 
         //button to get the help window that shows instructions to the game.
         helpBtn = new JButton("Guidance");
         helpBtn.setBounds(1120, 415, 120, 40);
         helpBtn.addActionListener(this);
-        helpBtn.setBackground(Color.black);
+        helpBtn.setBackground(Color.decode("#191919"));
         helpBtn.setForeground(Color.orange);
+        helpBtn.setOpaque(true);
+        helpBtn.setBorderPainted(false);
 
         //button to get the help window that shows instructions to the game.
         musicBtn = new JButton("ON/OFF");
+        musicBtn.setFont(new Font("Comic Sans", Font.BOLD, 7));
+        musicBtn.setToolTipText("Turn music on and off");
         musicBtn.setBounds(1400, 415, 120, 40);
         musicBtn.addActionListener(this);
-        musicBtn.setBackground(Color.black);
+        musicBtn.setBackground(Color.decode("#191919"));
         musicBtn.setForeground(Color.orange);
+        musicBtn.setOpaque(true);
+        musicBtn.setBorderPainted(false);
 
         FloatControl gainControl =
                 (FloatControl) Music.clip.getControl(FloatControl.Type.MASTER_GAIN);
@@ -274,9 +286,10 @@ public class MyJFrame extends JFrame implements ActionListener {
         emptySpace3.setBackground(Color.black);
 
         JLabel musicControlLabel = new JLabel("Music Controls");
-        musicControlLabel.setBackground(Color.black);
-        musicControlLabel.setForeground(Color.white);
         musicControlLabel.setFont(new Font("Comic Sans", Font.PLAIN, 16));
+        musicControlLabel.setBackground(Color.decode("#191919"));
+        musicControlLabel.setForeground(Color.white);
+        musicControlLabel.setOpaque(true);
 
         JMenuBar menu = new JMenuBar();
         menu.setLayout(new GridLayout(0, 1));
