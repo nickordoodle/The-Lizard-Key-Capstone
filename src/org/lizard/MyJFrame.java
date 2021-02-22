@@ -334,8 +334,6 @@ public class MyJFrame extends JFrame implements ActionListener {
 
         }
         if (e.getSource() == enterGameBtn) {
-
-
             createGameView();
 
             mapPanel = new MapView(board.rooms, board.getCurrentRoom().getName());
@@ -357,7 +355,7 @@ public class MyJFrame extends JFrame implements ActionListener {
             // Create and set fields for hp
             setHPText();
 
-            frame.remove(inventoryText);
+            frame.remove(inventoryText); //updates inventory text each time textField is called.
             frame.repaint();
             frame.revalidate();
             // Create and set fields for the inventory
