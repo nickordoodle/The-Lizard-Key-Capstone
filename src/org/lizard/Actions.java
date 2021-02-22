@@ -1,6 +1,7 @@
 package org.lizard;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Actions {
     private final Board board;
@@ -71,6 +72,12 @@ public class Actions {
                     return CheatCode.givePlayerAllKeysBesidesLizardKey(player.getInventory(), board);
                 case 11:
                     return CheatCode.givePlayerSpecificItem(noun, player.getInventory(), board);
+//                case 12:
+//                    return CheatCode.openAllRooms(noun, player.getInventory(), board);
+                case 13:
+                    return CheatCode.givePlayerAllItemsExceptLizardKey(player.getInventory(), board);
+                case 21:
+                    return teleport(noun);
                 case 99:
                     return bossAvailable("west", noun);
                 case 1000:
@@ -82,11 +89,29 @@ public class Actions {
         return null;
     }
 
+    private String teleport(GameDictionary.Noun noun) {
+        String result = "";
+        Room newRoom = (Room) noun;
+        if (player.isHasMagicCape()) {
+            for (Room r : roomsVisited) {
+                if (newRoom.getName().equalsIgnoreCase(r.getName())) {
+                    result = board.teleportRoom(newRoom);
+                    break;
+                } else {
+                    result = "You can't teleport places you haven't been!";
+                }
+            }
+        } else {
+            result = "You don't have what it takes to do that!";
+        }
+        return result;
+    }
+
     // Attempts to move in a certain given direction
     private String move(GameDictionary.Noun direction) {
         if (direction instanceof Directions.Direction) {
-            // Winning condition and text if located in key room with lizard key
-            if (player.hasWinningKey && board.getCurrentRoom().getName().equals("keyRoom")) {
+            // Winning condition and text if located in  with lizard key
+            if (player.hasWinningKey && board.getCurrentRoom().getName().equalsIgnoreCase("key room")) {
                 return "You use the lizard key on the door to exit.\n" +
                         "Darkness surrounds you and wind presses against your back as if the ground is being pulled beneath you.\n" +
                         "You close your eyes to avoid sickness, only for the movement around you to stop.\n" +
@@ -120,9 +145,13 @@ public class Actions {
             //if it does exist pop it off room item list
             if (grabbedItem != null) {
                 player.getInventory().add(grabbedItem);
+                GameDictionary.Noun cape = board.allItems.get("magic cape");
+                if (player.getInventory().has(cape)) {
+                    player.setHasMagicCape(true);
+                }
                 return ("You grabbed the " + noun.getName());
             } else {
-                return ("You can't");
+                return ("You don't see any " + noun.getName());
             }
 
         }
@@ -174,9 +203,9 @@ public class Actions {
     }
 
     public String bossAvailable(String direction, GameDictionary.Noun noun) {
-        Lock lock = board.allRooms.get("egyptianRoom").getLock(direction);
+        Lock lock = board.allRooms.get("egyptian room").getLock(direction);
         if (lock != null && lock.getNoun().equals(noun)) {
-            board.allRooms.get("egyptianRoom").removeLock(direction);
+            board.allRooms.get("egyptian room").removeLock(direction);
             return lock.printDescription();
         } else {
             return "What did you think that would even accomplish?";
@@ -187,11 +216,11 @@ public class Actions {
         Room currentRoom = board.getCurrentRoom();
         Map<String, String> displayRooms = new HashMap<>();
 
-        // If Rex/Boss was defeated, add the magic room to artRoom
+        // If Rex/Boss was defeated, add the magic room to art room
         if (board.totalEnemies < -1 && !capeAdded) {
             Item magicCape = board.allItems.get("magic cape");
-            // Add magic cape to artRoom and remove it from river
-            board.allRooms.get("artRoom").addItemToRoom(magicCape);
+            // Add magic cape to art room and remove it from river
+            board.allRooms.get("art room").addItemToRoom(magicCape);
             board.allRooms.get("river").removeItemFromRoom(magicCape);
             // Set cape added to true so only one cape gets added
             capeAdded = true;
@@ -222,10 +251,10 @@ public class Actions {
                     return "Your not in the " + noun.getName();
                 }
             }
-            if (noun.getName().equals("inventory")) {
+            if (noun.getName().equalsIgnoreCase("inventory")) {
                 return player.getInventory().getDescription();
             }
-            if (noun.getName().equals("items")) { //examine items
+            if (noun.getName().equalsIgnoreCase("items")) { //examine items
                 return ("Items present in the " + currentRoom.getName() + " are: " + currentRoom.printItemsInRoom());
             } else if (currentRoom.has(noun) || player.getInventory().has(noun)) { //examine candle
                 return noun.getDescription();
@@ -292,11 +321,11 @@ public class Actions {
 //    }
 
     // Unleashes the demon/enemy and places the demon
-    // in the whisperingPassage room
+    // in the whispering passage room
     private String demonUnleashed() {
         Enemy demon = new Enemy("Demon");
         demon.setEnemyHP(30);
-        board.allRooms.get("whisperingPassage").setEnemy(demon);
+        board.allRooms.get("whispering passage").setEnemy(demon);
         return "You hear whispers, loud whispers coming from the west.";
     }
 
@@ -304,7 +333,7 @@ public class Actions {
     // Increases the players health unless the player tries
     // to use healing brownies
     private String consumeHealingItem(GameDictionary.Noun noun) {
-        if (!noun.getName().equals("healing brownies")) {
+        if (!noun.getName().equalsIgnoreCase("healing brownies")) {
             return "You can't eat that!";
         }
         player.playerHP += 100;
@@ -333,7 +362,7 @@ public class Actions {
                 Item currItem = item.getValue();
                 // Check if the item is a key but not the winning key
                 if (currItem.getName().contains("key")
-                        && !currItem.getName().equals("lizard key")) {
+                        && !currItem.getName().equalsIgnoreCase("lizard key")) {
                     // Add to the player's inventory
                     inv.add(currItem);
                 }
@@ -365,6 +394,38 @@ public class Actions {
 
             return (requestedItem.getName() + " added to inventory!");
         }
+
+        static String givePlayerAllItemsExceptLizardKey(Player.Inventory inv, final Board board) {
+
+            try {
+                Map<String, Item> itemsMap = board.getAllItems();
+                List<Item> items = new ArrayList<>(itemsMap.values());
+                items.removeIf(item -> item.getName().equalsIgnoreCase("lizard key"));
+                items.forEach(inv::add);
+
+            } catch (NullPointerException e) {
+                return "Oops! Cheat code get all items didn't work";
+            }
+
+            return ("All items added to inventory!");
+        }
+
+
+//        static String openAllRooms(Map<String, Room> allRooms, Player.Inventory inv, final Board board) {
+//
+//            try {
+//                // Iterate over the map entries
+//                for (Map.Entry<String, Room> room : allRooms.entrySet()) {
+//                    // Check if it is the requested item
+//                    roomsVisited.add(room);
+//
+//                }
+//            } catch (NullPointerException e) {
+//                return "Oops! Cheat code all rooms didn't work";
+//            }
+//
+//            return ("All rooms marked as visited!");
+//        }
 
 
     }

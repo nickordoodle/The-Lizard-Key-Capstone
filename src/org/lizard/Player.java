@@ -2,11 +2,13 @@ package org.lizard;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Player {
     Inventory inventory = new Inventory();
     private String name;
     boolean hasWinningKey = false;
+    boolean hasMagicCape = false;
 
 
     int playerHP = 250;
@@ -32,17 +34,33 @@ public class Player {
         }
 
         public String add(GameDictionary.Noun item) {
-
-            if (item.getName().equals("lizard key")) {
+            String newItemName = item.getName();
+            if (newItemName.equalsIgnoreCase("lizard key")) {
                 hasWinningKey = true;
             }
-            inventory.add(item);
+            if(inventory
+                    .stream()
+                    .noneMatch(
+                            currentItem -> (currentItem.getName().equalsIgnoreCase(newItemName)) ||
+                    currentItem.getName().equalsIgnoreCase("sapphire necklace"))
+            ){
+                inventory.add(item);
+            }
             return "Added to inventory";
         }
 
         public List<GameDictionary.Noun> getItems() {
             return inventory;
         }
+
+        // Returns a list of all item names that the player has in inventory
+        public List<String> getItemNames() {
+            return inventory
+                    .stream()
+                    .map(GameDictionary.Noun::getName)
+                    .collect(Collectors.toList());
+        }
+
 
         public GameDictionary.Noun drop(GameDictionary.Noun item) {
             int index = inventory.indexOf(item);
@@ -60,7 +78,7 @@ public class Player {
         public String getDescription() {
             StringBuilder inventoryDescription = new StringBuilder();
             inventory.forEach(item -> inventoryDescription.append(item.getName()).append("\n"));
-            return inventoryDescription.toString().equals("") ? "You have nothing in your inventory" : inventoryDescription.toString();
+            return inventoryDescription.toString().equalsIgnoreCase("") ? "You have nothing in your inventory" : inventoryDescription.toString();
         }
 
         public void consumeItem(GameDictionary.Noun item) {
@@ -69,6 +87,13 @@ public class Player {
 
     }
 
+    public boolean isHasMagicCape() {
+        return hasMagicCape;
+    }
+
+    public void setHasMagicCape(boolean hasMagicCape) {
+        this.hasMagicCape = hasMagicCape;
+    }
 
     public int getPlayerHP() {
         return playerHP;

@@ -7,8 +7,9 @@ import org.w3c.dom.NodeList;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-import java.io.File;
+import java.io.InputStream;
 import java.util.*;
+import java.util.List;
 
 public class Board {
     private Room currentRoom;
@@ -21,7 +22,7 @@ public class Board {
 
     public Board() {
         createMap();
-        addToVisitedRooms("keyRoom");
+        addToVisitedRooms("key room");
     }
 
     public Map<String, Item> getAllItems() {
@@ -30,27 +31,27 @@ public class Board {
 
     public void addToVisitedRooms(String roomNombre) {
         switch (roomNombre) {
-            case "floatingRoom":
+            case "floating room":
                 rooms[7][0] = "Floating Room";
                 break;
-            case "landOfTheDead":
+            case "land of the dead":
                 rooms[6][0] = "Land of the Dead";
                 break;
-            case "egyptianRoom":
+            case "egyptian room":
                 rooms[5][0] = "Egyptian Room";
                 break;
-            case "artRoom":
+            case "art room":
                 rooms[4][0] = "Art Room";
                 break;
-            case "engravingCave":
+            case "engraving cave":
                 rooms[7][1] = "Engraving Cave";
                 break;
 
-            case "loudRoom":
+            case "loud room":
                 rooms[6][1] = "Loud Room";
                 break;
 
-            case "swingingStairs":
+            case "swinging stairs":
                 rooms[5][1] = "Swinging Stairs";
                 break;
 
@@ -58,19 +59,19 @@ public class Board {
                 rooms[6][2] = "Library";
                 break;
 
-            case "keyRoom":
+            case "key room":
                 rooms[5][2] = "Key Room";
                 break;
 
-            case "psychWard":
+            case "psych ward":
                 rooms[4][2] = "Psych Ward";
                 break;
 
-            case "coalMine":
+            case "coal mine":
                 rooms[7][3] = "Coal Mine";
                 break;
 
-            case "creakyPath":
+            case "creaky path":
                 rooms[6][3] = "Creaky Path";
                 break;
 
@@ -82,15 +83,15 @@ public class Board {
                 rooms[4][3] = "Closet";
                 break;
 
-            case "riddleRoom":
+            case "riddle room":
                 rooms[3][3] = "Riddle Room";
                 break;
 
-            case "whisperingPassage":
+            case "whispering passage":
                 rooms[2][3] = "Whispering Passage";
                 break;
 
-            case "treasureRoom":
+            case "treasure room":
                 rooms[1][3] = "Treasure Room";
                 break;
 
@@ -102,7 +103,7 @@ public class Board {
                 rooms[1][4] = "Volcano";
                 break;
 
-            case "secretPassage":
+            case "secret passage":
                 rooms[2][4] = "Secret Passage";
                 rooms[3][4] = "Secret Passage";
                 rooms[4][4] = "Secret Passage";
@@ -112,12 +113,12 @@ public class Board {
 
     private void createMap() {
         // Call XMLParser to gain access to a nodeList of all the rooms in the XML file
-        NodeList nodeList = XMLParser("xml/Rooms.xml", "room");
+        NodeList nodeList = XMLParser("Rooms.xml", "room");
         // Create a for loop to go the length of the nodeList
         for (int itr = 0; itr < nodeList.getLength(); itr++) {
             Node node = nodeList.item(itr);
             if (node.getNodeType() == Node.ELEMENT_NODE) {
-                // Create a way to hold the exits for each room before placing them in allExits
+                // Create a way to hold the exits for easch room before placing them in allExits
                 Map<String, String> exits = new HashMap<>();
                 Element eElement = (Element) node;
 
@@ -160,46 +161,66 @@ public class Board {
         addMonstersToBoard();
 
         // Set starting room.
-        this.currentRoom = allRooms.get("keyRoom");
+        this.currentRoom = allRooms.get("key room");
     }
 
     public Room getCurrentRoom() {
         return currentRoom;
     }
 
+    public void setCurrentRoom(Room currentRoom) {
+        this.currentRoom = currentRoom;
+    }
+
     public String changeCurrentRoom(String direction) {
-        Map<String, Room> exits = currentRoom.getExits();
-        Lock lock = currentRoom.getLock(direction);
-        if (lock != null) {
-            if ((currentRoom.getName().equals("treasureRoom") && direction.equals("west")) || currentRoom.getName().equals("river") && direction.equals("east")) {
-                return "You'll die if you try to cross the river like that.";
-            }
-            return "Seems to be locked.";
-        }
+        Map<String, Room> exits = getCurrentRoom().getExits();
+        Lock lock = getCurrentRoom().getLock(direction);
+        String result = "";
         if (exits.containsKey(direction)) {
-            currentRoom = exits.get(direction);
-            addToVisitedRooms(currentRoom.getName());
-            return ("You have entered the " + currentRoom.getName() + "\n\n" + currentRoom.getRoomDescription());
-
+            if (lock == null || !lock.isLocked()) {
+                setCurrentRoom(exits.get(direction));
+                addToVisitedRooms(getCurrentRoom().getName());
+                result = "You have entered the " + getCurrentRoom().getName() + "\n\n" + getCurrentRoom().getRoomDescription();
+            } else {
+                if ((getCurrentRoom().getName().equalsIgnoreCase("Treasure Room") && direction.equalsIgnoreCase("west")) || getCurrentRoom().getName().equalsIgnoreCase("River") && direction.equalsIgnoreCase("east")) {
+                    result = "I know you aren't a magician, but if you were maybe you could use something from your bag of tricks to help you cross the river.";
+                } else if (getCurrentRoom().getName().equalsIgnoreCase("key room") && direction.equalsIgnoreCase("east")) {
+                    result = "The door is locked. Maybe you can find something to open it?";
+                } else if (getCurrentRoom().getName().equalsIgnoreCase("Egyptian Room") && direction.equalsIgnoreCase("west")) {
+                    result = "Because you in the Egyptian Room and you are a huge fan of 80s rock band, The Bangles. You try to walk like an Egyptian, but nothing happens. Come back here when you have rid this world of evil.";
+                } else if (getCurrentRoom().getName().equalsIgnoreCase("Egyptian Room") && direction.equalsIgnoreCase("east")) {
+                    result = "The door is locked. You feel something sinister on the other side. It sends chills down to your bones.";
+                }
+            }
         } else {
-            return ("That is not an exit.");
+            result = "You can't go that way!";
         }
+        return result;
+    }
 
+    public String teleportRoom(Room newRoom) {
+        setCurrentRoom(newRoom);
+        return "In the blink of an eye, you use the magic cape to teleport to " + getCurrentRoom().getName() + "." + "\n\n" + getCurrentRoom().getRoomDescription();
     }
 
     private NodeList XMLParser(String pathName, String tagName) {
         NodeList nodeList;
         try {
-            // Creating a constructor of file class and parsing an XML file
-            File file = new File(pathName);
+            // Create a class loader to retrieve the resource
+            InputStream resourceInputStream = getClass().getClassLoader().getResourceAsStream(pathName);
+
             // An instance of factory that gives a document builder
             DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
             // An instance of builder to parse the specified xml file
             DocumentBuilder db = dbf.newDocumentBuilder();
-            Document doc = db.parse(file);
+
+            // Parse the stream containing resource data
+            Document doc = db.parse(resourceInputStream);
             doc.getDocumentElement().normalize();
             nodeList = doc.getElementsByTagName(tagName);
+
             return nodeList;
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -219,7 +240,7 @@ public class Board {
             Iterator<Map.Entry<String, String>> iterator2 = entry.getValue().entrySet().iterator();
             while (iterator2.hasNext()) {
                 // entry2.getKey() will return the String direction ("west", "north", etc)
-                // entry2.getValue() will return the String room ("library", "kitchen", etc)
+                // entry2.getValue() will return the String room ("Library", "Kitchen", etc)
                 Map.Entry<String, String> entry2 = iterator2.next();
                 // Get the Room class object from allRooms to create a new exit with the proper room exit
                 allRooms.get(entry.getKey()).createRoom(entry2.getKey(), allRooms.get(entry2.getValue()));
@@ -230,7 +251,7 @@ public class Board {
 
     private void addItemsToRooms() {
 
-        NodeList nodeList = XMLParser("xml/Items.xml", "item");
+        NodeList nodeList = XMLParser("Items.xml", "item");
         // Iterate over each item
         for (int itr = 0; itr < nodeList.getLength(); itr++) {
             // Make a node from nodeList at the current index
@@ -252,14 +273,14 @@ public class Board {
                 String canGrab = itemElement.getElementsByTagName("canGrab").item(0).getTextContent();
 
                 // Create new instance of the item
-                if (lockKey.equals("none")) {
+                if (lockKey.equalsIgnoreCase("none")) {
                     Item roomItem = new Item(itemName, itemDescription, Boolean.parseBoolean(canGrab));
                     allItems.put(itemName, roomItem);
                     // Add newly created item to its respective room
                     allRooms.get(roomName).addItemToRoom(roomItem);
                 } else {
                     GameDictionary.Noun noun;
-                    if (commandDirection == "") {
+                    if (commandDirection.equalsIgnoreCase("")) {
                         noun = allItems.get(lockKey);
                     } else {
                         noun = directions.getDirection(commandDirection);
@@ -274,7 +295,7 @@ public class Board {
 
     private void addMonstersToBoard() {
 
-        NodeList nodeList = XMLParser("xml/Enemies.xml", "enemy");
+        NodeList nodeList = XMLParser("Enemies.xml", "enemy");
         // Iterate over each item
         for (int itr = 0; itr < nodeList.getLength(); itr++) {
             // Make a node from nodeList at the current index
@@ -303,7 +324,7 @@ public class Board {
     }
 
     private void addLocksToRooms() {
-        NodeList nodeList = XMLParser("xml/RoomLocks.xml", "room");
+        NodeList nodeList = XMLParser("RoomLocks.xml", "room");
         // Iterate over each rooms
         for (int itr = 0; itr < nodeList.getLength(); itr++) {
             // Make a node from nodeList at the current index
@@ -320,73 +341,89 @@ public class Board {
                 String lockMessage = itemElement.getElementsByTagName("lockMessage").item(0).getTextContent();
                 String commandInt = itemElement.getElementsByTagName("commandInt").item(0).getTextContent();
 
-                // Create new instance of the lock in its respective room
-                allRooms.get(roomName)
-                        .addLock(commandDirection,
-                                new Lock(allItems.get(lockKey),
-                                        lockMessage,
-                                        new Event(Integer.parseInt(commandInt),
-                                                directions.getDirection(commandDirection))));
+                Room room = allRooms.get(roomName);
+                Lock newLock = new Lock(allItems.get(lockKey), lockMessage, new Event(Integer.parseInt(commandInt), directions.getDirection(commandDirection)));
+                newLock.setLocked(true);
+                room.addLock(commandDirection, newLock);
             }
         }
     }
 
     String howToPlayInGame() {
-        return """
+        return """             
+                Welcome to a text-based game, The Lizard Key! 
+                Your path is a dangerous one, there are two enemies lurking in the shadows that you must have the courage to defeat. Only then can you face your biggest opponent Mr.Rex the sole reason you are trapped in this frightful universe. After defeating Mr.Rex get the 'Lizard Key' and unlock your door of salvation in the 'Key Room'. Look for clues, pick up items, and don't be afraid to explore, but most of all stay alive!
                                 
-                HOW TO PLAY:\s
-
-                Look for clues, and don't be afraid to explore!
-                To perform an action, type your command in the text box and hit enter.
+                How to Play:\s
+                                
+                To perform an action, type your command in the text field box and hit enter.
 
                 Examples of possible commands are:\s
 
-                'rules' - to see instructions.
-
-                'go east' - to travel east.
-
-                'go north' - to travel north.
+                'go east' - to travel east, or substitute 'east' with west, south, or north to travel in a specified direction.
 
                 'examine room' - to see items and doors in current room.
+                                
+                'grab healing brownies' - to get and store healing brownies in your inventory for later use.
+                                
+                'eat healing brownies' - to eat healing brownies and heal yourself.
 
                 'examine locked chest' - to examine the locked chest (locked chest can be substituted for any item in your current room).
 
                 'inventory' - to see items in your inventory.
 
-                'grab knife' - to grab a knife (substitute knife for item you wish to pick up).
+                'grab knife' - to grab a knife and store a knife in your inventory (substitute knife for item you wish to pick up).
 
                 'drop knife' - to drop a knife (substitute knife for item you wish to drop from your inventory).
+                                
+                'get skeleton key' - to get and store skeleton key in your inventory to unlock a suitable door.
 
-                'use skeleton key on east' - some doors or items may be locked. Using the proper key/item on the proper item or direction will\s""";
+                'use skeleton key on east' - to unlock a locked door to the east of the Egyptian Room.
+                                
+                'use chest key on locked chest' - to unlock locked chest.
+                                
+                'teleport <room>' - does what it says if you have what it takes to pull it off?
+                                
+                'use magic cape on west' - to go over the river to the west of Treasure Room and 'use magic cape on east' to go back to Treasure Room.\s""";
 
     }
 
     static String howToPlay() {
-        return "\n" + "\n" + "\n" + "\n" + "\n" + "\n" +
-                "How to Play: \n" +
-                "\n" +
-                "Look for clues, and don't be afraid to explore!\n" +
-                "To perform an action, type your command in the text box and hit enter.\n" +
-                "\n" +
-                "Examples of possible commands are: \n" +
-                "\n" +
-                "'rules' - to see instructions.\n" +
-                "\n" +
-                "'go east' - to travel east.\n" +
-                "\n" +
-                "'go north' - to travel north.\n" +
-                "\n" +
-                "'examine room' - to see items and doors in current room.\n" +
-                "\n" +
-                "'examine locked chest' - to examine the locked chest (locked chest can be substituted for any item in your current room).\n" +
-                "\n" +
-                "'inventory' - to see items in your inventory.\n" +
-                "\n" +
-                "'grab knife' - to grab a knife (substitute knife for item you wish to pick up).\n" +
-                "\n" +
-                "'drop knife' - to drop a knife (substitute knife for item you wish to drop from your inventory).\n" +
-                "\n" +
-                "'use skeleton key on east' - some doors or items may be locked. Using the proper key/item on the proper item or direction will ";
+        return """
+                Welcome to a text-based game, The Lizard Key! 
+                Your path is a dangerous one, there are two enemies lurking in the shadows that you must have the courage to defeat. Only then can you face your biggest opponent Mr.Rex the sole reason you are trapped in this frightful universe. After defeating Mr.Rex get the 'Lizard Key' and unlock your door of salvation in the 'Key Room'. Look for clues, pick up items, and don't be afraid to explore, but most of all stay alive!
+                                
+                How to Play:\s
+                                
+                To perform an action, type your command in the text field box and hit enter.
+
+                Examples of possible commands are:\s
+
+                'go east' - to travel east, or substitute 'east' with west, south, or north to travel in a specified direction.
+
+                'examine room' - to see items and doors in current room.
+                                
+                'grab healing brownies' - to get and store healing brownies in your inventory for later use.
+                                
+                'eat healing brownies' - to eat healing brownies and heal yourself.
+
+                'examine locked chest' - to examine the locked chest (locked chest can be substituted for any item in your current room).
+
+                'inventory' - to see items in your inventory.
+
+                'grab knife' - to grab a knife and store a knife in your inventory (substitute knife for item you wish to pick up).
+
+                'drop knife' - to drop a knife (substitute knife for item you wish to drop from your inventory).
+                                
+                'get skeleton key' - to get and store skeleton key in your inventory to unlock a suitable door.
+
+                'use skeleton key on east' - to unlock a locked door to the east of the Egyptian Room.
+                                
+                'use chest key on locked chest' - to unlock locked chest.
+                                
+                'teleport <room>' - does what it says if you have what it takes to pull it off?
+                                
+                'use magic cape on west' - to go over the river to the west of Treasure Room and 'use magic cape on east' to go back to Treasure Room.\s""";
 
     }
 
@@ -398,7 +435,7 @@ public class Board {
 
                 Like many others before you, you have become a pet to a man named Copernicus Rex Verwirrtheit Theodore, locksmith, creator of worlds, and master of confusion. With no two worlds being the same, Mister Theodore has created each maze uniquely odd and fantastically tumultuous for every mouse searching for its cheese.
                                 
-                It is up to you to find the way out of this prison, for if you do not, you will forever be in an endless loop of rooms that lead to other rooms,the final and single exit a mystery never to be given away freely.""";
+                It is up to you to find the way out of this prison and away from Mister Theodore's grasp, for if you do not, you will forever be in an endless loop of rooms that lead to other rooms,the final and single exit a mystery never to be given away freely.""";
 
     }
 }

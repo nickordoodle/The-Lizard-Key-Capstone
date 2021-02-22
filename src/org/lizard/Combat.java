@@ -1,5 +1,6 @@
 package org.lizard;
 
+import javax.swing.*;
 import java.util.Random;
 
 public class Combat {
@@ -30,17 +31,27 @@ public class Combat {
     }
 
 
-    public String playerTakesTurn(int randPlayer) {
+    public String playerTakesTurn(String playerInputDecision) {
         Random rand = new Random();
         int randEnemy = rand.nextInt(3) + 1;
+        int playerNumberAnswer = -1;
+        // validate player entered correct input
+        if (!isValidCombatInput(playerInputDecision)) {
+            return ("You entered an invalid answer. " +
+                    "\nPlease choose 1, 2, or 3" +
+                    " for ROCK, PAPER, or SCISSORS");
+        }
 
-        if (randPlayer == ROCK) {
+        playerNumberAnswer = Integer.parseInt(playerInputDecision);
+
+        if (playerNumberAnswer == ROCK) {
 
             if (randEnemy == ROCK) {
                 return (player.getName() + " got ROCK.\n\n" + enemy.getEnemyName() + " got ROCK.\n\nIt's a tie!" + "\n\n" + player.getName() + "HP: " + playerHP + "\n" + enemy.getEnemyName() + "HP: " + enemyHP);
             } else if (randEnemy == PAPER) {
                 playerHP -= 10;
                 player.playerHP -= 10;
+//                hpTextArea.setText(String.valueOf(playerHP));
                 return (player.getName() + " got ROCK.\n\n" + enemy.getEnemyName() + " got PAPER." + "\n\n" + enemy.getEnemyName() + " won! \n\n" + player.getName() + "HP: " + playerHP + "\n" + enemy.getEnemyName() + "HP: " + enemyHP);
 
             } else if (randEnemy == SCISS0R) {
@@ -52,7 +63,7 @@ public class Combat {
                 return (player.getName() + " got ROCK.\n\n" + enemy.getEnemyName() + " got SCISSOR." + "\n\n" + player.getName() + " won!" + player.getName() + "HP: " + playerHP + "\n" + enemy.getEnemyName() + "HP: " + enemyHP);
             }
 
-        } else if (randPlayer == PAPER) {
+        } else if (playerNumberAnswer == PAPER) {
 
             if (randEnemy == ROCK) {
                 enemyHP -= 10;
@@ -67,16 +78,17 @@ public class Combat {
             } else if (randEnemy == SCISS0R) {
                 playerHP -= 10;
                 player.playerHP -= 10;
+//                hpTextArea.setText(String.valueOf(playerHP));
 
                 return (player.getName() + " got PAPER.\n\n" + enemy.getEnemyName() + " got SCISSOR.\n\n" + enemy.getEnemyName() + " won! " + "\n\n" + player.getName() + "HP: " + playerHP + "\n" + enemy.getEnemyName() + "HP: " + enemyHP);
             }
 
-        } else if (randPlayer == SCISS0R) {
+        } else if (playerNumberAnswer == SCISS0R) {
 
             if (randEnemy == ROCK) {
                 playerHP -= 10;
                 player.playerHP -= 10;
-
+//                hpTextArea.setText(String.valueOf(playerHP));
                 return (player.getName() + " got SCISSOR.\n\n" + enemy.getEnemyName() + " got ROCK.\n\n" + enemy.getEnemyName() + " won!" + "\n\n" + player.getName() + "HP: " + playerHP + "\n" + enemy.getEnemyName() + "HP: " + enemyHP);
             } else if (randEnemy == PAPER) {
                 enemyHP -= 10;
@@ -92,6 +104,21 @@ public class Combat {
         }
 
         return null;
+    }
+
+    public boolean isValidCombatInput(String input) {
+        try {
+            int numInputFromString = Integer.parseInt(input);
+            // Check for valid input which is the integer range 1-3 inclusive
+            if (numInputFromString < 1 || numInputFromString > 3) {
+                return false;
+            }
+            return true;
+        } catch (NumberFormatException exception) {
+            // This exception will be caught if the string cannot
+            // be converted to an integer
+            return false;
+        }
     }
 
     public void startCombat(Player player, Room battleRoom, Board board) {
