@@ -352,9 +352,6 @@ public class MyJFrame extends JFrame implements ActionListener {
             // Create and set fields for hp
             setHPText();
 
-            frame.remove(inventoryText); //updates inventory text each time textField is called.
-            frame.repaint();
-            frame.revalidate();
             // Create and set fields for the inventory
             setInventoryText();
 
@@ -386,7 +383,7 @@ public class MyJFrame extends JFrame implements ActionListener {
             frame.remove(storyPanel);
             frame.remove(inputPanel);
             frame.remove(hpPanel);
-            frame.remove(inventoryText);
+            frame.remove(inventoryPanel);
             frame.repaint();
             frame.revalidate();
 
@@ -732,7 +729,6 @@ public class MyJFrame extends JFrame implements ActionListener {
         gameOverScreen.setVisible(true); //makes window appear on screen
         gameOverScreen.setLayout(null);
         gameOverScreen.setBackground(Color.black);
-        gameOverScreen.setTitle("Game Over");
         gameOverScreen.setLocation(560, 160);
 
         container = gameOverScreen.getContentPane();

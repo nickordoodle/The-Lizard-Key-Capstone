@@ -184,7 +184,7 @@ public class Board {
             } else {
                 if ((getCurrentRoom().getName().equalsIgnoreCase("Treasure Room") && direction.equalsIgnoreCase("west")) || getCurrentRoom().getName().equalsIgnoreCase("River") && direction.equalsIgnoreCase("east")) {
                     result = "I know you aren't a magician, but if you were maybe you could use something from your bag of tricks to help you cross the river.";
-                } else if (getCurrentRoom().getName().equalsIgnoreCase("") && direction.equalsIgnoreCase("east")) {
+                } else if (getCurrentRoom().getName().equalsIgnoreCase("key room") && direction.equalsIgnoreCase("east")) {
                     result = "The door is locked. Maybe you can find something to open it?";
                 } else if (getCurrentRoom().getName().equalsIgnoreCase("Egyptian Room") && direction.equalsIgnoreCase("west")) {
                     result = "Because you in the Egyptian Room and you are a huge fan of 80s rock band, The Bangles. You try to walk like an Egyptian, but nothing happens. Come back here when you have rid this world of evil.";
