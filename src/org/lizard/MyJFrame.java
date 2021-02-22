@@ -1,5 +1,4 @@
 
-//MOST UPDATED
 
 package org.lizard;
 
@@ -144,8 +143,6 @@ public class MyJFrame extends JFrame implements ActionListener {
         // Create a volume panel "container" to hold the slider
         volumePanel = new JPanel();
         volumePanel.setBounds(1400, 550, 80, 250);
-//        volumePanel.setBackground(Color.black);
-//        volumePanel.setForeground(Color.orange);
         volumePanel.add(volumeSlider);
 
         //panel with the game title
@@ -493,7 +490,7 @@ public class MyJFrame extends JFrame implements ActionListener {
         //panel that contains the player's inventory
         inventoryPanel = new JPanel();
         JLabel invPanelHeader = new JLabel("Inventory");
-        invPanelHeader.setFont(new Font("Comic Sans", Font.PLAIN, 20));
+        invPanelHeader.setFont(new Font("Comic Sans", Font.PLAIN, 17));
         invPanelHeader.setForeground(Color.WHITE);
         inventoryPanel.add(invPanelHeader);
         inventoryPanel.setBackground(Color.BLACK);
