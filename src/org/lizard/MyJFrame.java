@@ -334,8 +334,6 @@ public class MyJFrame extends JFrame implements ActionListener {
 
         }
         if (e.getSource() == enterGameBtn) {
-
-
             createGameView();
 
             mapPanel = new MapView(board.rooms, board.getCurrentRoom().getName());
@@ -348,6 +346,7 @@ public class MyJFrame extends JFrame implements ActionListener {
         }
 
         if (e.getSource() == textField) {
+
             result = textField.getText().toLowerCase();
             Command command = parser.parse(result);
             String response = actions.execute(command);
@@ -356,6 +355,9 @@ public class MyJFrame extends JFrame implements ActionListener {
             // Create and set fields for hp
             setHPText();
 
+            frame.remove(inventoryText); //updates inventory text each time textField is called.
+            frame.repaint();
+            frame.revalidate();
             // Create and set fields for the inventory
             setInventoryText();
 
@@ -386,11 +388,13 @@ public class MyJFrame extends JFrame implements ActionListener {
         if (e.getSource() == numInput) {
             frame.remove(storyPanel);
             frame.remove(inputPanel);
+            frame.remove(hpPanel);
+            frame.remove(inventoryText);
             frame.repaint();
             frame.revalidate();
 
-
             rpsGame.setText(combat.playerTakesTurn(numInput.getText()));
+
             if (combat.checkGameEndingStatus().equalsIgnoreCase("Enemy won")) {
                 combatWindow.dispose();
                 gameOverScreen();
@@ -629,7 +633,7 @@ public class MyJFrame extends JFrame implements ActionListener {
             InputStream inputImageStream = getClass().getClassLoader().getResourceAsStream("RPS.png");
             img = ImageIO.read(inputImageStream);
 
-        } catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
 
@@ -697,7 +701,7 @@ public class MyJFrame extends JFrame implements ActionListener {
             InputStream inputImageStream = getClass().getClassLoader().getResourceAsStream("lizardKey.png");
             img = ImageIO.read(inputImageStream);
 
-        } catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
 
@@ -768,7 +772,7 @@ public class MyJFrame extends JFrame implements ActionListener {
             InputStream inputImageStream = getClass().getClassLoader().getResourceAsStream("gameOver.png");
             img = ImageIO.read(inputImageStream);
 
-        } catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
 

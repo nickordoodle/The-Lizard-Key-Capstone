@@ -352,9 +352,9 @@ public class Board {
     String howToPlayInGame() {
         return """             
                 Welcome to a text-based game, The Lizard Key! 
-                Your path is a dangerous one, there are two enemies lurking in the shadows that you must have the courage to defeat. Only then can you face your biggest opponent Mr.Rex the sole reason you are trapped in this frightful universe. After defeating Mr.Rex get the 'Lizard Key' and unlock your door of salvation in the 'Key Room'. Look for clues, pick up items, and don't be afraid to explore, but most of all stay alive! 
+                Your path is a dangerous one, there are two enemies lurking in the shadows that you must have the courage to defeat. Only then can you face your biggest opponent Mr.Rex the sole reason you are trapped in this frightful universe. After defeating Mr.Rex get the 'Lizard Key' and unlock your door of salvation in the 'Key Room'. Look for clues, pick up items, and don't be afraid to explore, but most of all stay alive!
                                 
-                HOW TO PLAY:\s
+                How to Play:\s
                                 
                 To perform an action, type your command in the text field box and hit enter.
 
@@ -364,7 +364,7 @@ public class Board {
 
                 'examine room' - to see items and doors in current room.
                                 
-                'grab healing brownies' - to get and store them in your inventory for later use.
+                'grab healing brownies' - to get and store healing brownies in your inventory for later use.
                                 
                 'eat healing brownies' - to eat healing brownies and heal yourself.
 
@@ -372,18 +372,18 @@ public class Board {
 
                 'inventory' - to see items in your inventory.
 
-                'grab knife' - to grab a knife (substitute knife for item you wish to pick up).
+                'grab knife' - to grab a knife and store a knife in your inventory (substitute knife for item you wish to pick up).
 
                 'drop knife' - to drop a knife (substitute knife for item you wish to drop from your inventory).
-
+                                
                 'get skeleton key' - to get and store skeleton key in your inventory to unlock a suitable door.
 
                 'use skeleton key on east' - to unlock a locked door to the east of the Egyptian Room.
                                 
                 'use chest key on locked chest' - to unlock locked chest.
-                
+                                
                 'teleport <room>' - does what it says if you have what it takes to pull it off?
-                
+                                
                 'use magic cape on west' - to go over the river to the west of Treasure Room and 'use magic cape on east' to go back to Treasure Room.\s""";
 
     }
@@ -420,7 +420,7 @@ public class Board {
                 'use skeleton key on east' - to unlock a locked door to the east of the Egyptian Room.
                                 
                 'use chest key on locked chest' - to unlock locked chest.
-                
+                                
                 'teleport <room>' - does what it says if you have what it takes to pull it off?
                                 
                 'use magic cape on west' - to go over the river to the west of Treasure Room and 'use magic cape on east' to go back to Treasure Room.\s""";
